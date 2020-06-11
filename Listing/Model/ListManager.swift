@@ -38,4 +38,13 @@ class ListManager {
         itemsInList[index] = item
     }
     
+    func deleteItem(at index: Int) {
+        itemsInList.remove(at: index)
+    }
+    
+    func moveItem(_ item: Item, from startIndex: Int, to endIndex: Int) {
+        deleteItem(at: startIndex)
+        itemsInList.insert(item, at: endIndex)
+    }
+
 }

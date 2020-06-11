@@ -12,12 +12,14 @@ class ListViewController: UIViewController {
     
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet var dataService: ListTableViewDataService!
+    @IBOutlet weak var addButton: UIButton!
     
     var listManager = ListManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
 
         listTableView.dataSource = dataService
         listTableView.delegate = dataService
@@ -27,7 +29,10 @@ class ListViewController: UIViewController {
         dataService.listManager?.addItem(Item(title: "Learn Swift"))
         dataService.listManager?.addItem(Item(title: "Do Somethign"))
         
+        addButton.layer.cornerRadius = addButton.frame.size.width / 1.5
+        
         listTableView.reloadData()
+        listTableView.isEditing = true
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -42,7 +47,7 @@ class ListViewController: UIViewController {
     }
     
     @IBAction func unwindToListViewController(segue: UIStoryboardSegue) {
-        print("Unwind is Called: \(segue.identifier ?? "")")
+
         guard segue.identifier == "saveItemSegue" else { return }
         
         let edittingVC = segue.source as! EdittingViewController
