@@ -18,12 +18,10 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        navigationController?.navigationBar.isHidden = true
 
         listTableView.dataSource = dataService
         listTableView.delegate = dataService
         
-
         dataService.listManager = listManager
 
         dataService.listManager?.addItem(Item(title: "Learn Swift"))
@@ -31,7 +29,39 @@ class ListViewController: UIViewController {
         
         listTableView.reloadData()
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetailsVC" {
+            guard let edittingVC = segue.destination as? EdittingViewController else { return }
+            let indexPath = listTableView.indexPathForSelectedRow!
 
+            edittingVC.itemToEdit = listManager.itemAtIndex(indexPath.row)
+            edittingVC.itemToEditIndexPath = indexPath
+        }
+
+    }
+    
+    @IBAction func unwindToListViewController(segue: UIStoryboardSegue) {
+        print("Unwind is Called: \(segue.identifier ?? "")")
+        guard segue.identifier == "saveItemSegue" else { return }
+        
+        let edittingVC = segue.source as! EdittingViewController
+        guard let edittingItem = edittingVC.itemToEdit else { return }
+        
+        if edittingVC.itemToEditIndexPath != nil {
+                print("Editing Item: \(edittingItem.title)")
+                let edittingIndexPath = edittingVC.itemToEditIndexPath!
+
+                listManager.changeItem(edittingItem, at: edittingIndexPath.row)
+
+                listTableView.reloadData()
+            }
+        else {
+                listManager.addItem(edittingItem)
+                
+                listTableView.reloadData()
+            }
+    }
 
 }
 

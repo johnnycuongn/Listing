@@ -10,21 +10,49 @@ import UIKit
 
 class EdittingViewController: UIViewController {
 
+
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    
+    var itemToEdit: Item? = nil
+    var itemToEditIndexPath: IndexPath? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        if let itemToEdit = itemToEdit {
+            updateLabelForItemToEdit(itemToEdit)
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+//    @IBAction func textDidBegin(_ sender: Any) {
+//        guard let title = titleTextField?.text else { fatalError() }
+//        if itemToEdit == nil {
+//            newItem = Item(title: title, description: descriptionTextView.text)
+//        }
+//        else {
+//            itemToEdit = Item(title: title, description: descriptionTextView.text)
+//        }
+//    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+         // TODO:
+        
+        if segue.identifier == "saveItemSegue" {
+            let title = titleTextField.text ?? "Empty"
+            let description = descriptionTextView.text ?? ""
+            self.itemToEdit = Item(title: title, description: description)
+            }
     }
-    */
+    
+    
+    
+    func updateLabelForItemToEdit(_ item: Item) {
+        titleTextField?.text = item.title
+        descriptionTextView?.text = item.description
+    }
+    
 
 }

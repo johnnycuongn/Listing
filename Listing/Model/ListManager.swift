@@ -33,6 +33,9 @@ class ListManager {
     func addItem(_ item: Item) {
         itemsInList.append(item)
     }
-
+    
+    func changeItem(_ item: Item,at index: Int) {
+        itemsInList[index] = item
+    }
     
 }
