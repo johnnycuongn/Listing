@@ -87,7 +87,7 @@
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cy1-10-P9z">
                                         <rect key="frame" x="0.0" y="38" width="404" height="573.66666666666663"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" textLabel="BnF-GY-ucw" rowHeight="43.666667938232422" style="IBUITableViewCellStyleDefault" id="yAE-GD-dfl" customClass="ItemCell" customModule="Listing" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="404" height="43.666667938232422"/>
@@ -105,6 +105,7 @@
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
                                                     <outlet property="titleLabel" destination="BnF-GY-ucw" id="DEP-am-Tu5"/>
                                                 </connections>

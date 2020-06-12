@@ -20,40 +20,16 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let listManager = listManager else { fatalError() }
-        
         return listManager.listCount
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
-        
         guard let listManager = listManager else { fatalError() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
         
         cell.config(item: listManager.itemAtIndex(indexPath.row))
         
         return cell
-        
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let listManager = self.listManager else {
-            fatalError()
-        }
-        
-        listManager.deleteItem(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .fade)
-    }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        switch editingStyle {
-        case .delete:
-             guard let listManager = self.listManager else { fatalError() }
-            
-            listManager.deleteItem(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        default: break
-        }
     }
     
     
@@ -76,6 +52,32 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
             return .delete
         }
     }
+    
+        
+    //    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    //        switch editingStyle {
+    //        case .delete:
+    //             guard let listManager = self.listManager else { fatalError() }
+    //
+    //            listManager.deleteItem(at: indexPath.row)
+    //            tableView.deleteRows(at: [indexPath], with: .fade)
+    //        default: break
+    //        }
+    //    }
+    
+    
+    // MARK: - Delegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let listManager = self.listManager else { fatalError() }
+        
+        listManager.deleteItem(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+    }
+    
+
+    
+
     
     
     

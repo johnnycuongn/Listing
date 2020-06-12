@@ -47,8 +47,6 @@ class EdittingViewController: UIViewController {
             }
     }
     
-    
-    
     func updateLabelForItemToEdit(_ item: Item) {
         titleTextField?.text = item.title
         descriptionTextView?.text = item.description

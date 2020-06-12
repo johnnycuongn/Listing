@@ -11,6 +11,4 @@ import Foundation
 struct Item {
     var title: String
     var description: String?
-    
-    
 }

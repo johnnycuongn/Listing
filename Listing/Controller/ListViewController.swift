@@ -22,26 +22,22 @@ class ListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        
 
+        //// Delegate and datasource
         listTableView.dataSource = dataService
         listTableView.delegate = dataService
-        
         dataService.listManager = listManager
-
-        dataService.listManager?.addItem(Item(title: "Learn Swift"))
-        dataService.listManager?.addItem(Item(title: "Do Somethign"))
         
-        addButton.layer.cornerRadius = addButton.frame.size.width / 1.5
-        
-        listTableView.reloadData()
+        ////Table View
         listTableView.isEditing = true
-        
         listTableView.allowsSelectionDuringEditing = true
         
+        ////View
+        addButton.layer.cornerRadius = addButton.frame.size.width / 2
         inputItemView.isHidden = true
     }
+    
+    // MARK: - Actions
     
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
@@ -50,8 +46,9 @@ class ListViewController: UIViewController {
         inputItemView.isHidden = !inputItemView.isHidden
         
         inputItemTextField.becomeFirstResponder()
-    
     }
+    
+    // MARK: - Input Item Actions
     
     @IBAction func textFieldEdittingChanged(_ sender: Any) {
         addItemButton.isHidden = !inputItemTextField.hasText
@@ -71,6 +68,8 @@ class ListViewController: UIViewController {
     }
     
     
+    
+    // MARK: - Old Segues Code to EditVC
 //    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        if segue.identifier == "toDetailsVC" {
 //            guard let edittingVC = segue.destination as? EdittingViewController else { return }
