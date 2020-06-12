@@ -9,11 +9,12 @@
 import UIKit
 import Foundation
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, UITextFieldDelegate {
     
     /// - Systems
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet var dataService: ListTableViewDataService!
+    @IBOutlet var inputTextFieldHandler: InputItemTextFieldHander!
     /// - Time Labels
     @IBOutlet weak var hourLeftLabel: UILabel!
     @IBOutlet weak var minuteLeftLabel: UILabel!
@@ -35,7 +36,10 @@ class ListViewController: UIViewController {
         //// Delegate and datasource
         listTableView.dataSource = dataService
         listTableView.delegate = dataService
-        dataService.listManager = listManager
+        dataService.listManager = self.listManager
+        
+        self.inputItemTextField.delegate = self
+//        textFieldHandler.listManager = self.listManager
         
         ////Table View
         listTableView.isEditing = true
@@ -67,11 +71,12 @@ class ListViewController: UIViewController {
     }
     
     @IBAction func addItemButton(_ sender: UIButton) {
-        guard let titleEntered = inputItemTextField.text else { fatalError() }
-        listManager.addItemAtFirst(Item(title: titleEntered))
-        listTableView.reloadData()
-        
-        inputItemTextField.text = ""
+        addNewItem(from: inputItemTextField)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        addNewItem(from: inputItemTextField)
+        return true
     }
     
     @IBAction func closeTextField(_ sender: Any) {
@@ -90,6 +95,16 @@ class ListViewController: UIViewController {
             let timeLeft = timeUntilTomorrow.convertToHourMinutes()
             self.hourLeftLabel.text = "\(timeLeft.hour)"
             self.minuteLeftLabel.text = "\(timeLeft.minutes)"
+    }
+    
+    func addNewItem(from textField: UITextField) {
+        guard let titleEntered = textField.text else { fatalError() }
+        
+        listManager.addItemAtFirst(Item(title: titleEntered))
+        listTableView.reloadData()
+        
+        inputItemTextField.text = ""
+        
     }
     
     
