@@ -11,20 +11,12 @@ import Foundation
 class ListManager {
     
     private var itemsInList: [Item] = [
-        Item(title: "Finish planing requirement"),
-        Item(title: "Architecture Prerequisites")
+        Item(title: "Tap to Delete")
     ]
     
     var listCount: Int {
         return itemsInList.count
     }
-    
-    var sampleData: [Item] = {
-        return [
-            Item(title: "Finish planing requirement"),
-            Item(title: "Architecture Prerequisites")
-        ]
-    }()
     
     func itemAtIndex(_ index: Int) -> Item {
         return itemsInList[index]
@@ -38,7 +30,7 @@ class ListManager {
         itemsInList.insert(item, at: 0)
     }
     
-    func changeItem(_ item: Item,at index: Int) {
+    func replaceItem(with item: Item,at index: Int) {
         itemsInList[index] = item
     }
     

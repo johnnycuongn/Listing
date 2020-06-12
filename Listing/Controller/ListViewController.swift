@@ -7,19 +7,28 @@
 //
 
 import UIKit
+import Foundation
 
 class ListViewController: UIViewController {
     
+    /// - Systems
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet var dataService: ListTableViewDataService!
+    /// - Time Labels
+    @IBOutlet weak var hourLeftLabel: UILabel!
+    @IBOutlet weak var minuteLeftLabel: UILabel!
+    /// - Buttons Outlets
     @IBOutlet weak var addButton: UIButton!
-    
+    /// - Input Item Outlets
     @IBOutlet weak var addItemButton: UIButton!
     @IBOutlet weak var inputItemTextField: UITextField!
     @IBOutlet weak var inputItemView: UIStackView!
     
+    /// - Variables
     var listManager = ListManager()
 
+    //MARK: -
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,6 +44,9 @@ class ListViewController: UIViewController {
         ////View
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
         inputItemView.isHidden = true
+        
+        ////Timer
+        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ListViewController.updateTimeLabel), userInfo: nil, repeats: true)
     }
     
     // MARK: - Actions
@@ -65,6 +77,19 @@ class ListViewController: UIViewController {
     @IBAction func closeTextField(_ sender: Any) {
         inputItemView.isHidden = true
         inputItemTextField.resignFirstResponder()
+    }
+    
+    
+    // MARK: - Convenience methods
+    
+    @objc func updateTimeLabel() {
+        let today = Date() ; let tomorrow = Date(timeIntervalSinceNow: 86400)
+        let startOfTomorrow = Calendar.current.startOfDay(for: tomorrow)
+        let timeUntilTomorrow = today.distance(to: startOfTomorrow)
+
+            let timeLeft = timeUntilTomorrow.convertToHourMinutes()
+            self.hourLeftLabel.text = "\(timeLeft.hour)"
+            self.minuteLeftLabel.text = "\(timeLeft.minutes)"
     }
     
     

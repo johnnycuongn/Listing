@@ -18,6 +18,7 @@
 		4056244E2491E2FB0083B800 /* ListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056244D2491E2FB0083B800 /* ListManager.swift */; };
 		405624522491E4CC0083B800 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624512491E4CC0083B800 /* ItemCell.swift */; };
 		405624542491E6E80083B800 /* EdittingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624532491E6E80083B800 /* EdittingViewController.swift */; };
+		40C8E27224938B2A00416B58 /* TimeIntervalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		4056244D2491E2FB0083B800 /* ListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListManager.swift; sourceTree = "<group>"; };
 		405624512491E4CC0083B800 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 		405624532491E6E80083B800 /* EdittingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdittingViewController.swift; sourceTree = "<group>"; };
+		40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtentions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				405624472491DD820083B800 /* Model */,
 				4056244A2491E1390083B800 /* Data Service */,
 				405624502491E4990083B800 /* Controller */,
+				40C8E27024938AFE00416B58 /* Extensions */,
 				405624252491D8920083B800 /* AppDelegate.swift */,
 				405624272491D8920083B800 /* SceneDelegate.swift */,
 				4056242B2491D8920083B800 /* Main.storyboard */,
@@ -141,6 +144,14 @@
 				405624532491E6E80083B800 /* EdittingViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		40C8E27024938AFE00416B58 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,6 +259,7 @@
 				4056244E2491E2FB0083B800 /* ListManager.swift in Sources */,
 				4056242A2491D8920083B800 /* ListViewController.swift in Sources */,
 				405624262491D8920083B800 /* AppDelegate.swift in Sources */,
+				40C8E27224938B2A00416B58 /* TimeIntervalExtentions.swift in Sources */,
 				405624522491E4CC0083B800 /* ItemCell.swift in Sources */,
 				405624282491D8920083B800 /* SceneDelegate.swift in Sources */,
 				405624542491E6E80083B800 /* EdittingViewController.swift in Sources */,
