@@ -133,29 +133,35 @@
                                             </button>
                                         </subviews>
                                     </stackView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cy1-10-P9z">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" estimatedRowHeight="20" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cy1-10-P9z">
                                         <rect key="frame" x="0.0" y="38" width="404" height="573.66666666666663"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" textLabel="BnF-GY-ucw" rowHeight="43.666667938232422" style="IBUITableViewCellStyleDefault" id="yAE-GD-dfl" customClass="ItemCell" customModule="Listing" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="404" height="43.666667938232422"/>
+                                            <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" id="yAE-GD-dfl" customClass="ItemCell" customModule="Listing" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="28" width="404" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yAE-GD-dfl" id="ogE-nb-Xfh">
-                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="43.666667938232422"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="404" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="BnF-GY-ucw">
-                                                            <rect key="frame" x="20" y="0.0" width="364" height="43.666667938232422"/>
-                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zle-nP-2mI">
+                                                            <rect key="frame" x="0.0" y="5" width="399" height="34"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
+                                                            <size key="shadowOffset" width="0.0" height="0.0"/>
                                                         </label>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="Zle-nP-2mI" secondAttribute="bottom" constant="5" id="DQs-dg-Bng"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Zle-nP-2mI" secondAttribute="trailing" constant="5" id="XaE-bO-Yau"/>
+                                                        <constraint firstItem="Zle-nP-2mI" firstAttribute="leading" secondItem="ogE-nb-Xfh" secondAttribute="leading" id="swU-KY-Oq9"/>
+                                                        <constraint firstItem="Zle-nP-2mI" firstAttribute="top" secondItem="ogE-nb-Xfh" secondAttribute="top" constant="5" id="yoZ-Iv-uAL"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <connections>
-                                                    <outlet property="titleLabel" destination="BnF-GY-ucw" id="DEP-am-Tu5"/>
+                                                    <outlet property="titleLabel" destination="Zle-nP-2mI" id="ZOe-Uk-kXD"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
