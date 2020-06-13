@@ -11,7 +11,11 @@ import Foundation
 struct Item: Codable {
     var title: String
     
-    var index: Int
+    var index: Int {
+        didSet {
+            save()
+        }
+    }
     var itemIdentifier: UUID
     
 //    init(title: String, index: Int, itemIdentifier: UUID) {

@@ -43,15 +43,13 @@ public class DataManager {
     static func load<T: Decodable>(from fileName: String, of type: T.Type) -> T {
         do {
             let url = try getDocumentDirectory().appendingPathComponent(fileName, isDirectory: false)
-            print(url)
-           if !FileManager.default.fileExists(atPath: url.path) {
-                fatalError("File not found at path \(url.path)")
-            }
+            if !FileManager.default.fileExists(atPath: url.path) { fatalError("File not found at path \(url.path)") }
+            
+            guard let data = FileManager.default.contents(atPath: url.path) else { fatalError() }
             
             let decoder = JSONDecoder()
-            guard let data = FileManager.default.contents(atPath: url.path) else { fatalError() }
-            print(data)
             let content = try decoder.decode(type, from: data)
+            
             return content
         } catch {
             fatalError(error.localizedDescription)
@@ -61,8 +59,6 @@ public class DataManager {
     static func loadAll<T: Decodable>(from type: T.Type) -> [T] {
           do {
                 let files = try FileManager.default.contentsOfDirectory(atPath: getDocumentDirectory().path)
-            
-//            print(try getDocumentDirectory().path)
                 
                 var modelObjects = [T]()
                 

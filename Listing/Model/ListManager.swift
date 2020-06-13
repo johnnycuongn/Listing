@@ -30,10 +30,9 @@ class ListManager {
 
     func addItemAtFirst(_ item: Item) {
         if listCount == 1 {
-            saveNewItem(ofIndex: 0, by: +1)
+            itemsInList[0].changeIndex(by: 1)
         } else if listCount > 1 {
             for i in 0...listCount-1 {
-//                saveNewItem(ofIndex: i, by: +1)
                 itemsInList[i].changeIndex(by: 1)
             }
         }
@@ -49,7 +48,6 @@ class ListManager {
         if listCount > 1 {
             for i in 0...listCount - 1 {
                 if itemsInList[i].index > index {
-//                    saveNewItem(ofIndex: i, by: -1)
                     itemsInList[i].changeIndex(by: -1)
                 }
             }
@@ -61,33 +59,17 @@ class ListManager {
     func moveItem(from startIndex: Int, to endIndex: Int) {
         guard startIndex != endIndex else { return }
         
-        var item = itemAtIndex(startIndex)
-//        var holerItem = item
-//        item.delete()
-//        holerItem.index = endIndex
-//        let newItem = holerItem
-//        newItem.save()
+        var item = itemsInList[startIndex]
         item.index = endIndex
         
-        deleteItem(at: startIndex)
-        
+        itemsInList.remove(at: startIndex)
+
         for i in 0...listCount - 1 {
             if itemsInList[i].index >= endIndex {
-//                saveNewItem(ofIndex: i, by: +1)
                 itemsInList[i].changeIndex(by: 1)
             }
         }
-        
         itemsInList.insert(item, at: endIndex)
-    }
-    
-    func saveNewItem(ofIndex i: Int, by value: Int) {
-        let oldItem = itemsInList[i]
-        var newItem = oldItem
-        newItem.changeIndex(by: value)
-        newItem.save()
-        replaceItem(with: newItem, at: i)
-        oldItem.delete()
     }
 
 }

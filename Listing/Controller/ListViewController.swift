@@ -56,10 +56,10 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     }
     
     func loadData() {
-//        listManager.itemsInList = DataManager.loadAll(from: Item.self).sorted { (item1, item2) -> Bool in
-//            item1.index < item2.index
-//            }
-//        
+        listManager.itemsInList = DataManager.loadAll(from: Item.self).sorted { (item1, item2) -> Bool in
+            item1.index < item2.index
+            }
+        
         listTableView.reloadData()
     }
     
