@@ -43,13 +43,12 @@ class EdittingViewController: UIViewController {
         if segue.identifier == "saveItemSegue" {
             let title = titleTextField.text ?? "Empty"
             let description = descriptionTextView.text ?? ""
-            self.itemToEdit = Item(title: title, description: description)
+//            self.itemToEdit = Item(title: title)
             }
     }
     
     func updateLabelForItemToEdit(_ item: Item) {
         titleTextField?.text = item.title
-        descriptionTextView?.text = item.description
     }
     
 

@@ -45,12 +45,22 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         listTableView.isEditing = true
         listTableView.allowsSelectionDuringEditing = true
         
+        loadData()
+        
         ////View
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
         inputItemView.isHidden = true
         
         ////Timer
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ListViewController.updateTimeLabel), userInfo: nil, repeats: true)
+    }
+    
+    func loadData() {
+//        listManager.itemsInList = DataManager.loadAll(from: Item.self).sorted { (item1, item2) -> Bool in
+//            item1.index < item2.index
+//            }
+//        
+        listTableView.reloadData()
     }
     
     // MARK: - Actions
@@ -82,6 +92,8 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     @IBAction func closeTextField(_ sender: Any) {
         inputItemView.isHidden = true
         inputItemTextField.resignFirstResponder()
+        
+        print(listManager.newList)
     }
     
     
@@ -100,7 +112,9 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     func addNewItem(from textField: UITextField) {
         guard let titleEntered = textField.text else { fatalError() }
         
-        listManager.addItemAtFirst(Item(title: titleEntered))
+        let newItem = Item(title: titleEntered, index: 0, itemIdentifier: UUID())
+//        newItem.save()
+        listManager.addItemAtFirst(newItem)
         listTableView.reloadData()
         
         inputItemTextField.text = ""

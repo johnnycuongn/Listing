@@ -40,9 +40,8 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         guard let listManager = self.listManager else { fatalError() }
         
-        let item = listManager.itemAtIndex(sourceIndexPath.row)
-        
-        listManager.moveItem(item, from: sourceIndexPath.row, to: destinationIndexPath.row)
+        listManager.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        print(listManager.newList)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {

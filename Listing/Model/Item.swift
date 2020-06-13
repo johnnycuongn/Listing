@@ -8,7 +8,28 @@
 
 import Foundation
 
-struct Item {
+struct Item: Codable {
     var title: String
-    var description: String?
+    
+    var index: Int
+    var itemIdentifier: UUID
+    
+//    init(title: String, index: Int, itemIdentifier: UUID) {
+//        self.title = title
+//        self.index = index
+//        self.itemIdentifier = itemIdentifier
+//    }
+    
+    mutating func changeIndex(by number: Int) {
+        self.index += number
+    }
+
+    func save() {
+        DataManager.save(self, with: itemIdentifier.uuidString)
+    }
+    
+    func delete() {
+        DataManager.delete(from: itemIdentifier.uuidString)
+    }
+    
 }
