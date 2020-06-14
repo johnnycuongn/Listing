@@ -9,6 +9,10 @@
 import UIKit
 import Foundation
 
+enum ListVCError: Error {
+    case emptyText
+}
+
 class ListViewController: UIViewController, UITextFieldDelegate {
     
     /// - Systems
@@ -51,23 +55,17 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
         inputItemView.isHidden = true
         
+        view.overrideUserInterfaceStyle = .light
+
         ////Timer
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ListViewController.updateTimeLabel), userInfo: nil, repeats: true)
-    }
-    
-    func loadData() {
-        listManager.itemsInList = DataManager.loadAll(from: Item.self).sorted { (item1, item2) -> Bool in
-            item1.index < item2.index
-            }
-        
-        listTableView.reloadData()
     }
     
     // MARK: - Actions
     
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
-        inputItemTextField.text = ""
+        resetInputTextField()
         addItemButton.isHidden = true
         inputItemView.isHidden = !inputItemView.isHidden
         
@@ -76,29 +74,53 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Input Item Actions
     
-    @IBAction func textFieldEdittingChanged(_ sender: Any) {
-        addItemButton.isHidden = !inputItemTextField.hasText
+    @IBAction func textFieldEdittingDidBegin(_ sender: Any) {
+        inputItemTextField.returnKeyType = .done
     }
     
-    @IBAction func addItemButton(_ sender: UIButton) {
-        addNewItem(from: inputItemTextField)
+    @IBAction func textFieldEdittingChanged(_ sender: Any) {
+        addItemButton.isHidden = !inputItemTextField.hasText
+        inputItemTextField.returnKeyType = inputItemTextField.text == "" ? .done : .default
+        inputItemTextField.reloadInputViews()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        addNewItem(from: inputItemTextField)
+        do { try addNewItem(from: textField) }
+        catch ListVCError.emptyText {
+            if inputItemTextField.returnKeyType == .done {
+                closeKeyboard()
+            }
+        }
+        catch {}
         return true
     }
     
+    @IBAction func addItemButton(_ sender: UIButton) {
+        do { try addNewItem(from: inputItemTextField) }
+        catch ListVCError.emptyText {
+            inputItemTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+        }
+        catch {}
+    }
+
     @IBAction func closeTextField(_ sender: Any) {
-        inputItemView.isHidden = true
-        inputItemTextField.resignFirstResponder()
-        
+        closeKeyboard()
         print(listManager.newList)
     }
     
     
     // MARK: - Convenience methods
     
+    // MARK: Model
+    func loadData() {
+        listManager.itemsInList = DataManager.loadAll(from: Item.self).sorted { (item1, item2) -> Bool in
+            item1.index < item2.index
+            }
+        
+        listTableView.reloadData()
+    }
+    
+    // MARK: View
     @objc func updateTimeLabel() {
         let today = Date() ; let tomorrow = Date(timeIntervalSinceNow: 86400)
         let startOfTomorrow = Calendar.current.startOfDay(for: tomorrow)
@@ -109,15 +131,29 @@ class ListViewController: UIViewController, UITextFieldDelegate {
             self.minuteLeftLabel.text = "\(timeLeft.minutes)"
     }
     
-    func addNewItem(from textField: UITextField) {
-        guard let titleEntered = textField.text else { fatalError() }
+    func closeKeyboard() {
+        inputItemView.isHidden = true
+        inputItemTextField.resignFirstResponder()
+    }
+    
+    // MARK: Action
+    func addNewItem(from textField: UITextField) throws {
+        guard textField.text != "" else {
+            throw ListVCError.emptyText
+        }
         
-        let newItem = Item(title: titleEntered, index: 0, itemIdentifier: UUID())
-//        newItem.save()
+        let newItem = Item(title: textField.text!, index: 0, itemIdentifier: UUID())
         listManager.addItemAtFirst(newItem)
         listTableView.reloadData()
         
+        resetInputTextField()
+    }
+    
+    func resetInputTextField() {
         inputItemTextField.text = ""
+//        inputItemTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+        inputItemTextField.returnKeyType = .done
+        inputItemTextField.reloadInputViews()
         
     }
     
