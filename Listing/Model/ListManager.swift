@@ -28,7 +28,7 @@ class ListManager {
         return itemsInList[index]
     }
 
-    func addItemAtFirst(_ item: Item) {
+    func addItemAtTop(_ item: Item) {
         if listCount == 1 {
             itemsInList[0].changeIndex(by: 1)
         } else if listCount > 1 {
@@ -65,8 +65,14 @@ class ListManager {
         itemsInList.remove(at: startIndex)
 
         for i in 0...listCount - 1 {
-            if itemsInList[i].index >= endIndex {
-                itemsInList[i].changeIndex(by: 1)
+            if endIndex < startIndex {
+                if itemsInList[i].index >= endIndex {
+                    itemsInList[i].changeIndex(by: 1)
+                }
+            } else {
+                if itemsInList[i].index <= endIndex {
+                    itemsInList[i].changeIndex(by: -1)
+                }
             }
         }
         itemsInList.insert(item, at: endIndex)

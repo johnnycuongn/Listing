@@ -19,6 +19,7 @@ public class DataManager {
         guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FileError.pathNotFound
         }
+//        print(url)
         return url
     }
     

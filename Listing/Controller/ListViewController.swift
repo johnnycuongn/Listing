@@ -143,7 +143,7 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         }
         
         let newItem = Item(title: textField.text!, index: 0, itemIdentifier: UUID())
-        listManager.addItemAtFirst(newItem)
+        listManager.addItemAtTop(newItem)
         listTableView.reloadData()
         
         resetInputTextField()
