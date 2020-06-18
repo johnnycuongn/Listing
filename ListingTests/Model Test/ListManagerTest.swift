@@ -20,6 +20,7 @@ class ListManagerTest: XCTestCase {
     override func setUpWithError() throws {
         sut = ListManager()
         sut.deleteItem(at: 0)
+        DataManager.clearAll()
     }
 
     override func tearDownWithError() throws {

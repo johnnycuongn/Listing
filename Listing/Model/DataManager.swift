@@ -19,7 +19,7 @@ public class DataManager {
         guard let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else {
             throw FileError.pathNotFound
         }
-//        print(url)
+        print(url)
         return url
     }
     
@@ -82,6 +82,18 @@ public class DataManager {
             } catch {
                 fatalError(error.localizedDescription)
             }
+        }
+    }
+    
+    static func clearAll() {
+        do {
+            let files = try FileManager.default.contentsOfDirectory(atPath: getDocumentDirectory().path)
+            
+            for fileName in files {
+                delete(from: fileName)
+            }
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
     

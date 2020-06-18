@@ -20,9 +20,11 @@
 		405624542491E6E80083B800 /* EdittingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624532491E6E80083B800 /* EdittingViewController.swift */; };
 		406BDDE3249A375800E9B99C /* ItemStructTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BDDE2249A375800E9B99C /* ItemStructTest.swift */; };
 		406BDDE5249A3C6F00E9B99C /* ListManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BDDE4249A3C6F00E9B99C /* ListManagerTest.swift */; };
+		406BDDE8249A530500E9B99C /* ListViewControllerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BDDE7249A530500E9B99C /* ListViewControllerUnitTest.swift */; };
 		40C8E27224938B2A00416B58 /* TimeIntervalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */; };
 		40C8E27624939D4C00416B58 /* InputItemTextFieldHander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27524939D4C00416B58 /* InputItemTextFieldHander.swift */; };
 		40C8E27824949E5500416B58 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27724949E5500416B58 /* DataManager.swift */; };
+		40FB2C84249B7B2D001CC036 /* ListTableViewDataServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,9 +55,11 @@
 		405624532491E6E80083B800 /* EdittingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdittingViewController.swift; sourceTree = "<group>"; };
 		406BDDE2249A375800E9B99C /* ItemStructTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStructTest.swift; sourceTree = "<group>"; };
 		406BDDE4249A3C6F00E9B99C /* ListManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListManagerTest.swift; sourceTree = "<group>"; };
+		406BDDE7249A530500E9B99C /* ListViewControllerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerUnitTest.swift; sourceTree = "<group>"; };
 		40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtentions.swift; sourceTree = "<group>"; };
 		40C8E27524939D4C00416B58 /* InputItemTextFieldHander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputItemTextFieldHander.swift; sourceTree = "<group>"; };
 		40C8E27724949E5500416B58 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewDataServiceTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 		4056243B2491D8960083B800 /* ListingTests */ = {
 			isa = PBXGroup;
 			children = (
+				40FB2C82249B7963001CC036 /* Data Service Test */,
+				406BDDE6249A4E3200E9B99C /* Controller Test */,
 				406BDDE0249A372E00E9B99C /* Model Test */,
 				4056243E2491D8960083B800 /* Info.plist */,
 			);
@@ -166,6 +172,14 @@
 			path = "Model Test";
 			sourceTree = "<group>";
 		};
+		406BDDE6249A4E3200E9B99C /* Controller Test */ = {
+			isa = PBXGroup;
+			children = (
+				406BDDE7249A530500E9B99C /* ListViewControllerUnitTest.swift */,
+			);
+			path = "Controller Test";
+			sourceTree = "<group>";
+		};
 		40C8E27024938AFE00416B58 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +194,14 @@
 				40C8E27524939D4C00416B58 /* InputItemTextFieldHander.swift */,
 			);
 			path = Delegations;
+			sourceTree = "<group>";
+		};
+		40FB2C82249B7963001CC036 /* Data Service Test */ = {
+			isa = PBXGroup;
+			children = (
+				40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */,
+			);
+			path = "Data Service Test";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +326,8 @@
 			files = (
 				406BDDE3249A375800E9B99C /* ItemStructTest.swift in Sources */,
 				406BDDE5249A3C6F00E9B99C /* ListManagerTest.swift in Sources */,
+				406BDDE8249A530500E9B99C /* ListViewControllerUnitTest.swift in Sources */,
+				40FB2C84249B7B2D001CC036 /* ListTableViewDataServiceTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
