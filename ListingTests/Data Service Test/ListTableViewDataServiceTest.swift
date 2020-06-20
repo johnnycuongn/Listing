@@ -23,7 +23,7 @@ class ListTableViewDataServiceTest: XCTestCase {
 
     override func setUpWithError() throws {
         sut = ListTableViewDataService()
-        sut.listManager = ListManager()
+        sut.listManager = ListOfItemManager()
         
         listViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ListViewControllerID") as! ListViewController
         _ = listViewController.view

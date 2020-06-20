@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ListManager {
+class ListOfItemManager {
     
     var itemsInList: [Item] = [
         Item(title: "Tap to Delete", index: 0, itemIdentifier: UUID())

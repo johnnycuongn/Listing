@@ -10,7 +10,7 @@ import UIKit
 
 class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
-    var listManager: ListManager?
+    var listManager: ListOfItemManager?
 
     // MARK: - Data Source
     

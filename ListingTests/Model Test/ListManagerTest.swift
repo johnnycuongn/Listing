@@ -11,14 +11,14 @@ import XCTest
 
 class ListManagerTest: XCTestCase {
     
-    var sut: ListManager!
+    var sut: ListOfItemManager!
     
     let swift = Item(title: "Swift", index: 0, itemIdentifier: UUID())
     let python = Item(title: "Python", index: 0, itemIdentifier: UUID())
     let java = Item(title: "Java", index: 0, itemIdentifier: UUID())
 
     override func setUpWithError() throws {
-        sut = ListManager()
+        sut = ListOfItemManager()
         sut.deleteItem(at: 0)
         DataManager.clearAll()
     }

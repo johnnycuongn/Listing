@@ -41,20 +41,21 @@ public class DataManager {
         }
     }
     
-    static func load<T: Decodable>(from fileName: String, of type: T.Type) -> T {
+    static func load<T: Decodable>(from fileName: String, of type: T.Type) -> T? {
         do {
             let url = try getDocumentDirectory().appendingPathComponent(fileName, isDirectory: false)
-            if !FileManager.default.fileExists(atPath: url.path) { fatalError("File not found at path \(url.path)") }
+            if !FileManager.default.fileExists(atPath: url.path) { print("File not found at path \(url.path)") }
             
-            guard let data = FileManager.default.contents(atPath: url.path) else { fatalError() }
+            guard let data = FileManager.default.contents(atPath: url.path) else { return nil }
             
             let decoder = JSONDecoder()
-            let content = try decoder.decode(type, from: data)
+            guard let content = try? decoder.decode(type, from: data) else { return nil }
             
             return content
         } catch {
-            fatalError(error.localizedDescription)
+            print(error.localizedDescription)
         }
+            return nil
     }
     
     static func loadAll<T: Decodable>(from type: T.Type) -> [T] {
@@ -64,7 +65,8 @@ public class DataManager {
                 var modelObjects = [T]()
                 
                 for fileName in files {
-                    modelObjects.append(load(from: fileName, of: type))
+                    guard let file = load(from: fileName, of: type) else { continue }
+                    modelObjects.append(file)
                 }
                 
                 return modelObjects
@@ -74,13 +76,13 @@ public class DataManager {
     }
     
     static func delete(from fileName: String) {
-        guard let url = try? getDocumentDirectory().appendingPathComponent(fileName, isDirectory: false) else { fatalError() }
+        guard let url = try? getDocumentDirectory().appendingPathComponent(fileName, isDirectory: false) else { return }
         
         if FileManager.default.fileExists(atPath: url.path) {
             do {
                 try FileManager.default.removeItem(at: url)
             } catch {
-                fatalError(error.localizedDescription)
+                print(error.localizedDescription)
             }
         }
     }
@@ -93,7 +95,7 @@ public class DataManager {
                 delete(from: fileName)
             }
         } catch {
-            fatalError(error.localizedDescription)
+            print(error.localizedDescription)
         }
     }
     

@@ -30,7 +30,7 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var inputItemView: UIStackView!
     
     /// - Variables
-    var listManager = ListManager()
+    var listManager = ListOfItemManager()
 
     //MARK: -
     
