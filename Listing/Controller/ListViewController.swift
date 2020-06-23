@@ -55,7 +55,7 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
         inputItemView.isHidden = true
         
-        view.overrideUserInterfaceStyle = .light
+//        view.overrideUserInterfaceStyle = .light
 
         ////Timer
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ListViewController.updateTimeLabel), userInfo: nil, repeats: true)
