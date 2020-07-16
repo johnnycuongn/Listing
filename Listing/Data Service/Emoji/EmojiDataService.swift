@@ -8,9 +8,11 @@
 
 import UIKit
 
+
 class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewDataSource
 {
     var categories = EmojiProvider.categories
+    
     
     // MARK: - Data source
     
@@ -33,6 +35,15 @@ class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewData
             }
         
         return cell
+    }
+    
+    // MARK: - Delegate
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let sectionData = categories[indexPath.section]
+        let data = sectionData.emojis[indexPath.row]
+    
+        
     }
     
     // MARK: Section Header View

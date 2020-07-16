@@ -13,9 +13,15 @@ enum ListVCError: Error {
     case emptyText
 }
 
+public enum Segues {
+    static let saveEmoji = "saveEmoji"
+}
+
 class ListViewController: UIViewController, UITextFieldDelegate {
     
     /// - Systems
+    @IBOutlet weak var emojiButton: UIButton!
+    
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet var dataService: ListTableViewDataService!
     @IBOutlet var inputTextFieldHandler: InputItemTextFieldHander!
@@ -44,6 +50,8 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         
         self.inputItemTextField.delegate = self
 //        textFieldHandler.listManager = self.listManager
+        
+        
         
         ////Table View
         listTableView.isEditing = true
@@ -171,8 +179,8 @@ class ListViewController: UIViewController, UITextFieldDelegate {
 //
 //    }
     
-//    @IBAction func unwindToListViewController(segue: UIStoryboardSegue) {
-//
+    @IBAction func unwindToListViewController(segue: UIStoryboardSegue) {
+
 //        guard segue.identifier == "saveItemSegue" else { return }
 //
 //        let edittingVC = segue.source as! EdittingViewController
@@ -191,7 +199,20 @@ class ListViewController: UIViewController, UITextFieldDelegate {
 //
 //                listTableView.reloadData()
 //            }
-//    }
+        
+        guard segue.identifier == Segues.saveEmoji else { return }
+        
+        let emojiPageVC = segue.source as! EmojiPageViewController
+        print("From List VC: \(emojiPageVC.selectedEmoji)")
+        guard emojiPageVC.selectedEmoji != nil else { return }
+        
+        emojiButton.setTitle(emojiPageVC.selectedEmoji, for: .normal)
+        
+        print("Button: \(emojiButton.titleLabel?.text)")
+    }
+        
+        
 
 }
+
 

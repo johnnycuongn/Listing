@@ -178,10 +178,10 @@
                                     <constraint firstAttribute="width" constant="30" id="nr4-Tg-KQB"/>
                                 </constraints>
                                 <state key="normal" title="😀">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                 </state>
                                 <connections>
-                                    <segue destination="szs-ul-c3X" kind="showDetail" id="LWH-D6-8I7"/>
+                                    <segue destination="szs-ul-c3X" kind="showDetail" identifier="toEmojiPage" id="LWH-D6-8I7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -212,6 +212,7 @@
                         <outlet property="addButton" destination="C3m-6m-R7X" id="FrO-En-9L9"/>
                         <outlet property="addItemButton" destination="4pn-Am-3eR" id="grG-fA-qGn"/>
                         <outlet property="dataService" destination="lsn-Cu-XgY" id="73z-nb-lC2"/>
+                        <outlet property="emojiButton" destination="WCC-4R-dMH" id="mK8-Xt-2iN"/>
                         <outlet property="hourLeftLabel" destination="8W0-Xd-2K5" id="uWZ-p9-JxB"/>
                         <outlet property="inputItemTextField" destination="FS4-yy-idR" id="KUr-er-Ubt"/>
                         <outlet property="inputItemView" destination="Bdr-m7-VnP" id="fpq-C1-qAO"/>
@@ -267,6 +268,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="iconLbl" destination="QiO-nU-erI" id="eoh-ys-hkv"/>
+                                            <segue destination="2AT-if-FWY" kind="unwind" identifier="saveEmoji" unwindAction="unwindToListViewControllerWithSegue:" id="nMB-k3-IIQ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -308,6 +310,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5h-8L-dm1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="2AT-if-FWY" userLabel="Exit" sceneMemberID="exit"/>
                 <customObject id="aMy-i5-baj" customClass="EmojiDataService" customModule="Listing" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1869.5652173913045" y="-177.71739130434784"/>
