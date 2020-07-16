@@ -41,7 +41,6 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
         guard let listManager = self.listManager else { fatalError() }
         
         listManager.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
-        print(listManager.newList)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {

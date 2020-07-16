@@ -13,12 +13,12 @@ class ListOfItemManager {
     var itemsInList: [Item] = [
         Item(title: "Tap to Delete", index: 0, itemIdentifier: UUID())
     ]
-    
-    var newList: [Item] {
-        return itemsInList.sorted { (item1, item2) -> Bool in
-            item1.index < item2.index
-        }
-    }
+//    
+//    var newList: [Item] {
+//        return itemsInList.sorted { (item1, item2) -> Bool in
+//            item1.index < item2.index
+//        }
+//    }
     
     var listCount: Int {
         return itemsInList.count

@@ -160,7 +160,6 @@ class ListViewController: UIViewController, UITextFieldDelegate {
 
     @IBAction func closeTextField(_ sender: Any) {
         closeKeyboard(with: inputItemTextField)
-        print(listManager.newList)
     }
     
     
