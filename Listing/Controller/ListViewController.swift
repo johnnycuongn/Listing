@@ -22,6 +22,10 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     /// - Systems
     @IBOutlet weak var emojiButton: UIButton!
     
+    @IBOutlet weak var listTitleButton: UIButton!
+    @IBOutlet weak var listTitleTextField: UITextField!
+    
+    
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet var dataService: ListTableViewDataService!
     @IBOutlet var inputTextFieldHandler: InputItemTextFieldHander!
@@ -49,9 +53,9 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         dataService.listManager = self.listManager
         
         self.inputItemTextField.delegate = self
+        self.listTitleTextField.delegate = self
 //        textFieldHandler.listManager = self.listManager
-        
-        
+
         
         ////Table View
         listTableView.isEditing = true
@@ -67,13 +71,25 @@ class ListViewController: UIViewController, UITextFieldDelegate {
 
         ////Timer
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ListViewController.updateTimeLabel), userInfo: nil, repeats: true)
+        
+        
     }
     
     // MARK: - Actions
     
     
+    @IBAction func listTitleButtonTapped(_ sender: Any) {
+        listTitleTextField.text = listTitleButton.titleLabel!.text
+        listTitleTextField.isHidden = false
+        listTitleButton.isHidden = true
+        listTitleButton.setTitle("", for: .normal)
+        listTitleTextField.becomeFirstResponder()
+        listTitleTextField.returnKeyType = .default
+    }
+    
     @IBAction func addButtonTapped(_ sender: UIButton) {
-        resetInputTextField()
+        resetInputTextField(with: inputItemTextField)
+
         addItemButton.isHidden = true
         inputItemView.isHidden = !inputItemView.isHidden
         
@@ -82,26 +98,57 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: - Input Item Actions
     
-    @IBAction func textFieldEdittingDidBegin(_ sender: Any) {
-        inputItemTextField.returnKeyType = .done
+    @IBAction func textFieldEdittingDidBegin(_ sender: UITextField) {
+        if sender == inputItemTextField {
+            inputItemTextField.returnKeyType = .done
+        }
+        if sender == listTitleTextField {
+            listTitleTextField.returnKeyType = .default
+        }
+        
     }
     
-    @IBAction func textFieldEdittingChanged(_ sender: Any) {
-        addItemButton.isHidden = !inputItemTextField.hasText
-        inputItemTextField.returnKeyType = inputItemTextField.text == "" ? .done : .default
-        inputItemTextField.reloadInputViews()
+    @IBAction func textFieldEdittingChanged(_ sender: UITextField) {
+        if sender == inputItemTextField {
+            addItemButton.isHidden = !inputItemTextField.hasText
+            inputItemTextField.returnKeyType = inputItemTextField.text == "" ? .done : .default
+            inputItemTextField.reloadInputViews()
+        }
+        
+        if sender == listTitleTextField {
+//            listTitleTextField.returnKeyType = listTitleTextField.text == "" ? .done : .default
+        }
+
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        do { try addNewItem(from: textField) }
-        catch ListVCError.emptyText {
-            if inputItemTextField.returnKeyType == .done {
-                closeKeyboard()
+        if textField == inputItemTextField {
+            do { try addNewItem(from: textField) }
+            catch ListVCError.emptyText {
+                if inputItemTextField.returnKeyType == .done {
+                    closeKeyboard(with: textField)
+                }
             }
+            catch {}
+
         }
-        catch {}
+        if textField == listTitleTextField {
+            guard listTitleTextField.text != "" else {
+                listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+                return false
+            }
+            listTitleButton.setTitle(listTitleTextField.text, for: .normal)
+            listTitleTextField.isHidden = true
+            listTitleButton.isHidden = false
+           
+            
+            closeKeyboard(with: textField)
+        }
+        
         return true
     }
+    
     
     @IBAction func addItemButton(_ sender: UIButton) {
         do { try addNewItem(from: inputItemTextField) }
@@ -112,7 +159,7 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     }
 
     @IBAction func closeTextField(_ sender: Any) {
-        closeKeyboard()
+        closeKeyboard(with: inputItemTextField)
         print(listManager.newList)
     }
     
@@ -139,9 +186,11 @@ class ListViewController: UIViewController, UITextFieldDelegate {
             self.minuteLeftLabel.text = "\(timeLeft.minutes)"
     }
     
-    func closeKeyboard() {
-        inputItemView.isHidden = true
-        inputItemTextField.resignFirstResponder()
+    func closeKeyboard(with textField: UITextField) {
+        if textField == inputItemTextField {
+            inputItemView.isHidden = true
+        }
+        textField.resignFirstResponder()
     }
     
     // MARK: Action
@@ -154,13 +203,17 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         listManager.addItemAtTop(newItem)
         listTableView.reloadData()
         
-        resetInputTextField()
+        resetInputTextField(with: textField)
     }
     
-    func resetInputTextField() {
-        inputItemTextField.text = ""
+    func resetInputTextField(with textField: UITextField) {
+        if textField == inputItemTextField {
+            inputItemTextField.text = ""
+            inputItemTextField.returnKeyType = .done
+        }
+        
 //        inputItemTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
-        inputItemTextField.returnKeyType = .done
+        
         inputItemTextField.reloadInputViews()
         
     }
