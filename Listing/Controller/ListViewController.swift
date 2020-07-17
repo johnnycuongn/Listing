@@ -45,7 +45,14 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
     @IBOutlet weak var inputItemView: UIStackView!
     
     /// - Variables
-    var listIndex = 0
+    var listIndex = 0 {
+        didSet {
+            dataService.listIndex = listIndex
+            emojiButton.setTitle(currentList.emoji, for: .normal)
+            listTitleButton.setTitle(currentList.title, for: .normal)
+            listTableView.reloadData()
+        }
+    }
     var listsManager = ListsManager()
     
     var currentList: List {
@@ -72,10 +79,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         listsThumbnailCollectionView.dataSource = listsThumbnailCollectionViewDataService
         listsThumbnailCollectionView.delegate = listsThumbnailCollectionViewDataService
         
-        listsThumbnailCollectionViewDataService.listManager = self.listsManager
-        listsThumbnailCollectionViewDataService.listIndex = self.listIndex
-        listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
-        listsThumbnailCollectionViewDataService.thumbnailUpdateService = self
+        updateListsThumbnailCollectionView()
         
         listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*2)
         
@@ -217,6 +221,13 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         }
         
         listTableView.reloadData()
+    }
+    
+    func updateListsThumbnailCollectionView() {
+        listsThumbnailCollectionViewDataService.listManager = self.listsManager
+        listsThumbnailCollectionViewDataService.listIndex = self.listIndex
+        listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
+        listsThumbnailCollectionViewDataService.thumbnailUpdateService = self
     }
     
     // MARK: View

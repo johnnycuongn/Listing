@@ -17,6 +17,7 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     var currentList: List {
         guard listsManager != nil else { fatalError() }
         guard listIndex != nil else { fatalError() }
+        print("Data Service: \(listIndex)")
         return listsManager!.lists[listIndex!]
     }
 
@@ -27,6 +28,7 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return currentList.items.count
     }
     
