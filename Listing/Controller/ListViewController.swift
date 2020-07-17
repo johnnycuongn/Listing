@@ -21,12 +21,6 @@ public enum Segues {
 class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdatable {
     
     /// - Systems
-    @IBOutlet weak var emojiButton: UIButton!
-    
-    @IBOutlet weak var listTitleButton: UIButton!
-    @IBOutlet weak var listTitleTextField: UITextField!
-    
-    
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet var dataService: ListTableViewDataService!
     
@@ -34,23 +28,28 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
     @IBOutlet var listsThumbnailCollectionViewDataService: ListsThumbnailCollectionViewDataService!
     
     @IBOutlet var inputTextFieldHandler: InputItemTextFieldHander!
+    
+    /// - List's Emoji and Title
+    @IBOutlet weak var emojiButton: UIButton!
+    
+    @IBOutlet weak var listTitleButton: UIButton!
+    @IBOutlet weak var listTitleTextField: UITextField!
+    
     /// - Time Labels
     @IBOutlet weak var hourLeftLabel: UILabel!
     @IBOutlet weak var minuteLeftLabel: UILabel!
-    /// - Buttons Outlets
+    /// - View's Buttons Outlets
     @IBOutlet weak var addButton: UIButton!
     /// - Input Item Outlets
     @IBOutlet weak var addItemButton: UIButton!
     @IBOutlet weak var inputItemTextField: UITextField!
     @IBOutlet weak var inputItemView: UIStackView!
     
-    /// - Variables
+    /// - Model Variables
     var listIndex = 0 {
         didSet {
-            dataService.listIndex = listIndex
-            emojiButton.setTitle(currentList.emoji, for: .normal)
-            listTitleButton.setTitle(currentList.title, for: .normal)
-            listTableView.reloadData()
+            listTableViewDataUpdate()
+            listViewUpdate(emoji: currentList.emoji, title: currentList.title)
         }
     }
     var listsManager = ListsManager()
@@ -67,39 +66,34 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         super.viewDidLoad()
         
         ////    Data
-        loadData()
+        loadList()
 
         //// Delegate and datasource
         listTableView.dataSource = dataService
         listTableView.delegate = dataService
         
-        dataService.listsManager = self.listsManager
-        dataService.listIndex = self.listIndex
-        
         listsThumbnailCollectionView.dataSource = listsThumbnailCollectionViewDataService
         listsThumbnailCollectionView.delegate = listsThumbnailCollectionViewDataService
-        
-        updateListsThumbnailCollectionView()
-        
-        listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*2)
-        
+ 
         self.inputItemTextField.delegate = self
         self.listTitleTextField.delegate = self
         
         
-        ////Table View
+         listsThumbnailCollectionViewDataUpdate()
+         listTableViewDataUpdate()
+        
+        ////List Table View
         listTableView.isEditing = true
         listTableView.allowsSelectionDuringEditing = true
         
      
         ////View
+        listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*3-11)
+        
+        listViewUpdate(emoji: currentList.emoji, title: currentList.title)
+        
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
         inputItemView.isHidden = true
-        
-        listTitleButton.setTitle(currentList.title, for: .normal)
-        emojiButton.setTitle(currentList.emoji, for: .normal)
-        
-//        view.overrideUserInterfaceStyle = .light
 
         ////Timer
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ListViewController.updateTimeLabel), userInfo: nil, repeats: true)
@@ -112,9 +106,10 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
     
     @IBAction func listTitleButtonTapped(_ sender: Any) {
         listTitleTextField.text = listTitleButton.titleLabel!.text
-        listTitleTextField.isHidden = false
-        listTitleButton.isHidden = true
+        setHidden(listTitle: true, textField: false)
+        
         listTitleButton.setTitle("", for: .normal)
+        
         listTitleTextField.becomeFirstResponder()
         listTitleTextField.returnKeyType = .default
     }
@@ -172,12 +167,11 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
                 return false
             }
             
-            listTitleButton.setTitle(listTitleTextField.text, for: .normal)
             currentList.title = listTitleTextField.text!
-            listTitleTextField.isHidden = true
-            listTitleButton.isHidden = false
-           
             
+            listViewUpdate(title: listTitleTextField.text)
+            setHidden(listTitle: false, textField: true)
+           
             closeKeyboard(with: textField)
         }
         
@@ -201,7 +195,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
     // MARK: - Convenience methods
     
     // MARK: Model
-    func loadData() {
+    func loadList() {
         
         listsManager.lists = DataManager.loadAll(from: List.self)
         
@@ -223,13 +217,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         listTableView.reloadData()
     }
     
-    func updateListsThumbnailCollectionView() {
-        listsThumbnailCollectionViewDataService.listManager = self.listsManager
-        listsThumbnailCollectionViewDataService.listIndex = self.listIndex
-        listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
-        listsThumbnailCollectionViewDataService.thumbnailUpdateService = self
-    }
-    
     // MARK: View
     @objc func updateTimeLabel() {
         let today = Date() ; let tomorrow = Date(timeIntervalSinceNow: 86400)
@@ -248,7 +235,35 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         textField.resignFirstResponder()
     }
     
-    // MARK: Action
+    func listsThumbnailCollectionViewDataUpdate() {
+        listsThumbnailCollectionViewDataService.listManager = self.listsManager
+        listsThumbnailCollectionViewDataService.listIndex = self.listIndex
+        listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
+        listsThumbnailCollectionViewDataService.thumbnailUpdateService = self
+    }
+    
+    func listTableViewDataUpdate() {
+        dataService.listsManager = self.listsManager
+        dataService.listIndex = self.listIndex
+    }
+    
+    func listViewUpdate(emoji: String? = nil, title: String? = nil) {
+        if emoji != nil {
+            emojiButton.setTitle(emoji, for: .normal) }
+        if title != nil {
+            listTitleButton.setTitle(title, for: .normal) }
+        
+        listTableView.reloadData()
+    }
+    
+    func setHidden(listTitle: Bool, textField: Bool) {
+
+        self.listTitleButton.isHidden = listTitle
+        self.listTitleTextField.isHidden = textField
+        
+    }
+    
+    // MARK: Actions
     func addNewItem(from textField: UITextField) throws {
         guard textField.text != "" else {
             throw ListVCError.emptyText
@@ -256,7 +271,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         
         let newItem = Item(title: textField.text!)
         self.currentList.addItemAtTop(newItem)
-//        listManager.addItemAtTop(newItem)
+
         listTableView.reloadData()
         
         resetInputTextField(with: textField)
@@ -268,47 +283,14 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
             inputItemTextField.returnKeyType = .done
         }
         
-//        inputItemTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
-        
         inputItemTextField.reloadInputViews()
         
     }
     
     
-    
-    // MARK: - Old Segues Code to EditVC
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toDetailsVC" {
-//            guard let edittingVC = segue.destination as? EdittingViewController else { return }
-//            let indexPath = listTableView.indexPathForSelectedRow!
-//
-//            edittingVC.itemToEdit = listManager.itemAtIndex(indexPath.row)
-//            edittingVC.itemToEditIndexPath = indexPath
-//        }
-//
-//    }
+    // MARK: - Segues
     
     @IBAction func unwindToListViewController(segue: UIStoryboardSegue) {
-
-//        guard segue.identifier == "saveItemSegue" else { return }
-//
-//        let edittingVC = segue.source as! EdittingViewController
-//        guard let edittingItem = edittingVC.itemToEdit else { return }
-//
-//        if edittingVC.itemToEditIndexPath != nil {
-//                print("Editing Item: \(edittingItem.title)")
-//                let edittingIndexPath = edittingVC.itemToEditIndexPath!
-//
-//                listManager.changeItem(edittingItem, at: edittingIndexPath.row)
-//
-//                listTableView.reloadData()
-//            }
-//        else {
-//                listManager.addItem(edittingItem)
-//
-//                listTableView.reloadData()
-//            }
-        
         guard segue.identifier == Segues.saveEmoji else { return }
         
         let emojiPageVC = segue.source as! EmojiPageViewController
@@ -334,7 +316,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
                     listIndex = 0
             }
             
-            print("index: \(listIndex)")
             listTableView.reloadData()
 
         }

@@ -17,7 +17,6 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     var currentList: List {
         guard listsManager != nil else { fatalError() }
         guard listIndex != nil else { fatalError() }
-        print("Data Service: \(listIndex)")
         return listsManager!.lists[listIndex!]
     }
 
