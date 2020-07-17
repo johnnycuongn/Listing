@@ -12,7 +12,7 @@ class ListsThumbnailCollectionViewCell: UICollectionViewCell {
     
     static var identifier: String = "ListsThumbnailCell"
     
-    static var size = CGFloat(55)
+    static var width = CGFloat(38)
     
     @IBOutlet weak var emojiThumbnailLabel: UILabel!
     

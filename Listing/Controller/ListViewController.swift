@@ -74,6 +74,10 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         
         listsThumbnailCollectionViewDataService.listManager = self.listsManager
         listsThumbnailCollectionViewDataService.listIndex = self.listIndex
+        listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
+        listsThumbnailCollectionViewDataService.thumbnailUpdateService = self
+        
+        listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*2)
         
         self.inputItemTextField.delegate = self
         self.listTitleTextField.delegate = self
@@ -201,10 +205,15 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
             listsManager.lists = [
             List(emoji: "💼", title: "Welcome", items: [
                 Item(title: "Tap to Delete")
+            ]),
+            List(emoji: "🤥", title: "Welcome Second", items: [
+                Item(title: "Tap To Delete Now")
             ])
             ]
             
-            listsManager.lists[0].saveList()
+            for index in 0...listsManager.lists.count-1 {
+                listsManager.lists[index].saveList()
+            }
         }
         
         listTableView.reloadData()
@@ -303,16 +312,18 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
 
     
     func updateThumbnail(from offset: Double) {
+        
+        let cellWidth = Double(ListsThumbnailCollectionViewCell.width)
                      
-            if Int(offset/55) <= listsManager.lists.count-1 && offset > 0 {
-                    listIndex = Int(offset/55)
-            } else if Int(offset/55) >= listsManager.lists.count {
+            if Int(offset/cellWidth) <= listsManager.lists.count-1 && offset > 0 {
+                    listIndex = Int(offset/cellWidth)
+            } else if Int(offset/cellWidth) >= listsManager.lists.count {
                     listIndex = listsManager.lists.count-1
-            } else if Int(offset/55) <= 0 {
+            } else if Int(offset/cellWidth) <= 0 {
                     listIndex = 0
             }
             
-    //        print("index: \(listIndex)")
+            print("index: \(listIndex)")
             listTableView.reloadData()
 
         }

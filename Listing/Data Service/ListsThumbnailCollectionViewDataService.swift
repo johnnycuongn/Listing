@@ -19,6 +19,7 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
         
     var thumbnailUpdateService: ThumbnailUpdatable?
 
+    var collectionView: UICollectionView!
 
         // MARK: UICollectionViewDataSource
 
@@ -34,22 +35,20 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListsThumbnailCollectionViewCell.identifier, for: indexPath) as! ListsThumbnailCollectionViewCell
-        print("IndexPath: \(indexPath.row)")
-        
+  
         if indexPath.row == listManager!.lists.count {
             cell.configure(with: "+")
         }
         else if indexPath.row < listManager!.lists.count {
-            print("CellConfigure: \(listManager!.lists[indexPath.row].emoji)")
             cell.configure(with: listManager!.lists[indexPath.row].emoji)
         }
         
         return cell
     }
         
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        thumbnailUpdateService?.updateThumbnail(from:)
-//    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        thumbnailUpdateService?.updateThumbnail(from: Double(collectionView.contentOffset.x))
+    }
 
         // MARK: UICollectionViewDelegate
 
