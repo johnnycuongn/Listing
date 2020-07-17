@@ -40,32 +40,45 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var inputItemView: UIStackView!
     
     /// - Variables
-    var listManager = ListOfItemManager()
+    var listIndex = 0
+    var listsManager = ListsManager()
+    
+    var currentList: List {
+        get {
+            return listsManager.lists[listIndex]
+        }
+    }
 
     //MARK: -
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ////    Data
+        loadData()
 
         //// Delegate and datasource
         listTableView.dataSource = dataService
         listTableView.delegate = dataService
-        dataService.listManager = self.listManager
+        
+        dataService.listsManager = self.listsManager
+        dataService.listIndex = self.listIndex
         
         self.inputItemTextField.delegate = self
         self.listTitleTextField.delegate = self
-//        textFieldHandler.listManager = self.listManager
-
+        
         
         ////Table View
         listTableView.isEditing = true
         listTableView.allowsSelectionDuringEditing = true
         
-        loadData()
-        
+     
         ////View
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
         inputItemView.isHidden = true
+        
+        listTitleButton.setTitle(currentList.title, for: .normal)
+        emojiButton.setTitle(currentList.emoji, for: .normal)
         
 //        view.overrideUserInterfaceStyle = .light
 
@@ -116,7 +129,6 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         }
         
         if sender == listTitleTextField {
-//            listTitleTextField.returnKeyType = listTitleTextField.text == "" ? .done : .default
         }
 
         
@@ -124,7 +136,9 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == inputItemTextField {
-            do { try addNewItem(from: textField) }
+            do {
+                try addNewItem(from: textField)
+            }
             catch ListVCError.emptyText {
                 if inputItemTextField.returnKeyType == .done {
                     closeKeyboard(with: textField)
@@ -138,7 +152,9 @@ class ListViewController: UIViewController, UITextFieldDelegate {
                 listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
                 return false
             }
+            
             listTitleButton.setTitle(listTitleTextField.text, for: .normal)
+            currentList.title = listTitleTextField.text!
             listTitleTextField.isHidden = true
             listTitleButton.isHidden = false
            
@@ -167,9 +183,18 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     
     // MARK: Model
     func loadData() {
-        listManager.itemsInList = DataManager.loadAll(from: Item.self).sorted { (item1, item2) -> Bool in
-            item1.index < item2.index
-            }
+        
+        listsManager.lists = DataManager.loadAll(from: List.self)
+        
+        if listsManager.lists.isEmpty {
+            listsManager.lists = [
+            List(emoji: "💼", title: "Welcome", items: [
+                Item(title: "Tap to Delete")
+            ])
+            ]
+            
+            listsManager.lists[0].saveList()
+        }
         
         listTableView.reloadData()
     }
@@ -198,8 +223,9 @@ class ListViewController: UIViewController, UITextFieldDelegate {
             throw ListVCError.emptyText
         }
         
-        let newItem = Item(title: textField.text!, index: 0, itemIdentifier: UUID())
-        listManager.addItemAtTop(newItem)
+        let newItem = Item(title: textField.text!)
+        self.currentList.addItemAtTop(newItem)
+//        listManager.addItemAtTop(newItem)
         listTableView.reloadData()
         
         resetInputTextField(with: textField)
@@ -255,12 +281,13 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         guard segue.identifier == Segues.saveEmoji else { return }
         
         let emojiPageVC = segue.source as! EmojiPageViewController
-        print("From List VC: \(emojiPageVC.selectedEmoji)")
+ 
         guard emojiPageVC.selectedEmoji != nil else { return }
         
+        self.currentList.emoji = emojiPageVC.selectedEmoji!
         emojiButton.setTitle(emojiPageVC.selectedEmoji, for: .normal)
         
-        print("Button: \(emojiButton.titleLabel?.text)")
+        
     }
         
         

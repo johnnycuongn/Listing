@@ -11,12 +11,12 @@ import Foundation
 struct Item: Codable {
     var title: String
     
-    var index: Int {
-        didSet {
-            save()
-        }
-    }
-    var itemIdentifier: UUID
+//    var index: Int {
+//        didSet {
+//            save()
+//        }
+//    }
+//    var itemIdentifier: UUID
     
 //    init(title: String, index: Int, itemIdentifier: UUID) {
 //        self.title = title
@@ -24,16 +24,18 @@ struct Item: Codable {
 //        self.itemIdentifier = itemIdentifier
 //    }
     
-    mutating func changeIndex(by number: Int) {
-        self.index += number
-    }
+//    mutating func changeIndex(by number: Int) {
+//        self.index += number
+//    }
 
     func save() {
-        DataManager.save(self, with: itemIdentifier.uuidString)
+//        DataManager.save(self, with: itemIdentifier.uuidString)
+        DataManager.save(self, with: "\(title)")
     }
     
     func delete() {
-        DataManager.delete(from: itemIdentifier.uuidString)
+//        DataManager.delete(from: itemIdentifier.uuidString)
+        DataManager.delete(from: "\(title)")
     }
     
 }

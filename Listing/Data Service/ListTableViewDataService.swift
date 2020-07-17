@@ -10,7 +10,15 @@ import UIKit
 
 class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
-    var listManager: ListOfItemManager?
+    
+    var listsManager: ListsManager?
+    var listIndex: Int?
+    
+    var currentList: List {
+        guard listsManager != nil else { fatalError() }
+        guard listIndex != nil else { fatalError() }
+        return listsManager!.lists[listIndex!]
+    }
 
     // MARK: - Data Source
     
@@ -19,15 +27,14 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let listManager = listManager else { fatalError() }
-        return listManager.listCount
+        return currentList.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let listManager = listManager else { fatalError() }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
         
-        cell.config(item: listManager.itemAtIndex(indexPath.row))
+        let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
+    
+        cell.config(item: currentList.items[indexPath.row])
         
         return cell
     }
@@ -38,9 +45,9 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard let listManager = self.listManager else { fatalError() }
         
-        listManager.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        currentList.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
@@ -67,9 +74,9 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     // MARK: - Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let listManager = self.listManager else { fatalError() }
+
+        currentList.deleteItem(at: indexPath.row)
         
-        listManager.deleteItem(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
