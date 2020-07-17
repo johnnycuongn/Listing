@@ -18,6 +18,12 @@ class ListsThumbnailCollectionViewCell: UICollectionViewCell {
     
     func configure(with emoji: String) {
         self.emojiThumbnailLabel.text = emoji
+        
+        updateCellAppearance()
+    }
+    
+    func updateCellAppearance() {
+        contentView.layer.cornerRadius = 18
     }
     
 }

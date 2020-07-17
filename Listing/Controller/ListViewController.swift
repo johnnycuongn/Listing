@@ -88,7 +88,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         
      
         ////View
-        listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*3-11)
+        listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*3-12)
         
         listViewUpdate(emoji: currentList.emoji, title: currentList.title)
         

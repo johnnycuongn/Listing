@@ -192,8 +192,8 @@
                                     <segue destination="szs-ul-c3X" kind="showDetail" identifier="toEmojiPage" id="LWH-D6-8I7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLe-zp-v14">
-                                <rect key="frame" x="5" y="686" width="25" height="25"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NLe-zp-v14">
+                                <rect key="frame" x="5" y="686.66666666666663" width="25" height="25"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="25" id="cty-5r-gBr"/>
                                     <constraint firstAttribute="height" constant="25" id="mfx-2e-Un6"/>
@@ -238,6 +238,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
+                                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
                                                 <constraint firstItem="ZDj-ue-EyN" firstAttribute="leading" secondItem="AUC-tq-1HD" secondAttribute="leading" id="0U9-xH-FMX"/>
                                                 <constraint firstAttribute="bottom" secondItem="ZDj-ue-EyN" secondAttribute="bottom" id="65Z-dW-anN"/>
@@ -245,7 +246,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="ZDj-ue-EyN" secondAttribute="trailing" id="bUB-y6-ab8"/>
                                             </constraints>
                                         </collectionViewCellContentView>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="emojiThumbnailLabel" destination="ZDj-ue-EyN" id="Say-y6-IVl"/>
                                         </connections>
@@ -263,6 +264,7 @@
                             <constraint firstItem="H4f-qh-ZUI" firstAttribute="height" secondItem="C3m-6m-R7X" secondAttribute="height" multiplier="0.8" id="BNO-ui-8H7"/>
                             <constraint firstItem="0gu-jm-5lt" firstAttribute="leading" secondItem="WCC-4R-dMH" secondAttribute="trailing" constant="10" id="C6q-CT-pVY"/>
                             <constraint firstItem="AyM-20-4zJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="6uX-mM-CX9" secondAttribute="trailing" constant="10" id="CPr-qd-UTu"/>
+                            <constraint firstItem="NLe-zp-v14" firstAttribute="centerY" secondItem="H4f-qh-ZUI" secondAttribute="centerY" id="EJd-9g-kcn"/>
                             <constraint firstItem="C3m-6m-R7X" firstAttribute="leading" secondItem="H4f-qh-ZUI" secondAttribute="trailing" constant="36" id="Iy4-N2-sKJ"/>
                             <constraint firstItem="Rfm-TX-PFh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="KGa-Ks-Gsy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rfm-TX-PFh" secondAttribute="trailing" constant="5" id="NTf-O0-gCw"/>
