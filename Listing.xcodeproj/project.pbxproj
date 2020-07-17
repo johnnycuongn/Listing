@@ -19,6 +19,8 @@
 		405624542491E6E80083B800 /* EdittingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624532491E6E80083B800 /* EdittingViewController.swift */; };
 		4064A62D24C0AE7E00C1BE21 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064A62C24C0AE7E00C1BE21 /* List.swift */; };
 		4064A62F24C0B1CE00C1BE21 /* ListsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064A62E24C0B1CE00C1BE21 /* ListsManager.swift */; };
+		4064A63324C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064A63224C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift */; };
+		4064A63524C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064A63424C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift */; };
 		406BDDE3249A375800E9B99C /* ItemStructTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BDDE2249A375800E9B99C /* ItemStructTest.swift */; };
 		406BDDE5249A3C6F00E9B99C /* ListManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BDDE4249A3C6F00E9B99C /* ListManagerTest.swift */; };
 		406BDDE8249A530500E9B99C /* ListViewControllerUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 406BDDE7249A530500E9B99C /* ListViewControllerUnitTest.swift */; };
@@ -63,6 +65,8 @@
 		405624532491E6E80083B800 /* EdittingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdittingViewController.swift; sourceTree = "<group>"; };
 		4064A62C24C0AE7E00C1BE21 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		4064A62E24C0B1CE00C1BE21 /* ListsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsManager.swift; sourceTree = "<group>"; };
+		4064A63224C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
+		4064A63424C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsThumbnailCollectionViewDataService.swift; sourceTree = "<group>"; };
 		406BDDE2249A375800E9B99C /* ItemStructTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemStructTest.swift; sourceTree = "<group>"; };
 		406BDDE4249A3C6F00E9B99C /* ListManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListManagerTest.swift; sourceTree = "<group>"; };
 		406BDDE7249A530500E9B99C /* ListViewControllerUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewControllerUnitTest.swift; sourceTree = "<group>"; };
@@ -161,6 +165,7 @@
 			children = (
 				40AA4E5D24C0402F00D8B215 /* Emoji */,
 				4056244B2491E1890083B800 /* ListTableViewDataService.swift */,
+				4064A63424C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift */,
 			);
 			path = "Data Service";
 			sourceTree = "<group>";
@@ -170,6 +175,7 @@
 			children = (
 				40AA4E6124C0413E00D8B215 /* Emoji */,
 				405624512491E4CC0083B800 /* ItemCell.swift */,
+				4064A63224C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -379,7 +385,9 @@
 				4056242A2491D8920083B800 /* ListViewController.swift in Sources */,
 				405624262491D8920083B800 /* AppDelegate.swift in Sources */,
 				40AA4E5C24C0401500D8B215 /* EmojiPageViewController.swift in Sources */,
+				4064A63324C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift in Sources */,
 				40AA4E5A24C03E7900D8B215 /* EmojiCategory.swift in Sources */,
+				4064A63524C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift in Sources */,
 				40AA4E5824C03E6300D8B215 /* EmojiProvider.swift in Sources */,
 				40C8E27224938B2A00416B58 /* TimeIntervalExtentions.swift in Sources */,
 				40C8E27624939D4C00416B58 /* InputItemTextFieldHander.swift in Sources */,

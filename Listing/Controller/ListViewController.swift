@@ -15,9 +15,10 @@ enum ListVCError: Error {
 
 public enum Segues {
     static let saveEmoji = "saveEmoji"
+    static let listsThumbnail = "ListsThumbnailCollectionView"
 }
 
-class ListViewController: UIViewController, UITextFieldDelegate {
+class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdatable {
     
     /// - Systems
     @IBOutlet weak var emojiButton: UIButton!
@@ -28,6 +29,10 @@ class ListViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet var dataService: ListTableViewDataService!
+    
+    @IBOutlet weak var listsThumbnailCollectionView: UICollectionView!
+    @IBOutlet var listsThumbnailCollectionViewDataService: ListsThumbnailCollectionViewDataService!
+    
     @IBOutlet var inputTextFieldHandler: InputItemTextFieldHander!
     /// - Time Labels
     @IBOutlet weak var hourLeftLabel: UILabel!
@@ -63,6 +68,12 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         
         dataService.listsManager = self.listsManager
         dataService.listIndex = self.listIndex
+        
+        listsThumbnailCollectionView.dataSource = listsThumbnailCollectionViewDataService
+        listsThumbnailCollectionView.delegate = listsThumbnailCollectionViewDataService
+        
+        listsThumbnailCollectionViewDataService.listManager = self.listsManager
+        listsThumbnailCollectionViewDataService.listIndex = self.listIndex
         
         self.inputItemTextField.delegate = self
         self.listTitleTextField.delegate = self
@@ -287,11 +298,25 @@ class ListViewController: UIViewController, UITextFieldDelegate {
         self.currentList.emoji = emojiPageVC.selectedEmoji!
         emojiButton.setTitle(emojiPageVC.selectedEmoji, for: .normal)
         
-        
+        listsThumbnailCollectionView.reloadData()
     }
-        
-        
 
+    
+    func updateThumbnail(from offset: Double) {
+                     
+            if Int(offset/55) <= listsManager.lists.count-1 && offset > 0 {
+                    listIndex = Int(offset/55)
+            } else if Int(offset/55) >= listsManager.lists.count {
+                    listIndex = listsManager.lists.count-1
+            } else if Int(offset/55) <= 0 {
+                    listIndex = 0
+            }
+            
+    //        print("index: \(listIndex)")
+            listTableView.reloadData()
+
+        }
+    
 }
 
 
