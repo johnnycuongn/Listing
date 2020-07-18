@@ -8,8 +8,10 @@
 
 import UIKit
 
-public protocol ThumbnailUpdatable {
-    func updateThumbnail(from offset: Double)
+public protocol ListUpdatable {
+    func updateList(from offset: Double)
+    
+    func addNewList()
 }
 
 class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
@@ -17,18 +19,18 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
     var listManager: ListsManager?
     var listIndex: Int?
         
-    var thumbnailUpdateService: ThumbnailUpdatable?
+    var listUpdateService: ListUpdatable?
 
     var collectionView: UICollectionView!
 
         // MARK: UICollectionViewDataSource
-
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
+        print("DataService: \(listIndex)")
         guard listManager != nil else { return 0 }
             return listManager!.lists.count+1
     }
@@ -47,10 +49,19 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
     }
         
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        thumbnailUpdateService?.updateThumbnail(from: Double(collectionView.contentOffset.x))
+        listUpdateService?.updateList(from: Double(collectionView.contentOffset.x))
     }
 
-        // MARK: UICollectionViewDelegate
+    // MARK: UICollectionViewDelegate
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.row == listManager!.lists.count {
+            listUpdateService?.addNewList()
+        } else {
+            self.collectionView.scrollToItem(at: IndexPath(row: indexPath.row+1, section: 0), at: .right, animated: true)
+        }
+    }
 
         /*
         // Uncomment this method to specify if the specified item should be highlighted during tracking

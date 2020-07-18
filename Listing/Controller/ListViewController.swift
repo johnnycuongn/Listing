@@ -15,10 +15,9 @@ enum ListVCError: Error {
 
 public enum Segues {
     static let saveEmoji = "saveEmoji"
-    static let listsThumbnail = "ListsThumbnailCollectionView"
 }
 
-class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdatable {
+class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     
     /// - Systems
     @IBOutlet weak var listTableView: UITableView!
@@ -105,6 +104,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
     
     
     @IBAction func listTitleButtonTapped(_ sender: Any) {
+        
         listTitleTextField.text = listTitleButton.titleLabel!.text
         setHidden(listTitle: true, textField: false)
         
@@ -123,7 +123,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         inputItemTextField.becomeFirstResponder()
     }
     
-    // MARK: - Input Item Actions
+    // MARK: - Text Field
     
     @IBAction func textFieldEdittingDidBegin(_ sender: UITextField) {
         if sender == inputItemTextField {
@@ -171,6 +171,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
             
             listViewUpdate(title: listTitleTextField.text)
             setHidden(listTitle: false, textField: true)
+            
+            listsThumbnailCollectionViewDataUpdate()
            
             closeKeyboard(with: textField)
         }
@@ -239,12 +241,20 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
         listsThumbnailCollectionViewDataService.listManager = self.listsManager
         listsThumbnailCollectionViewDataService.listIndex = self.listIndex
         listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
-        listsThumbnailCollectionViewDataService.thumbnailUpdateService = self
+        
+        listsThumbnailCollectionViewDataService.listUpdateService = self
+        
+        listsThumbnailCollectionView.selectItem(at: IndexPath(row: listIndex+1, section: 0), animated: true, scrollPosition: .right)
+        
+        listsThumbnailCollectionView.reloadData()
     }
     
     func listTableViewDataUpdate() {
         dataService.listsManager = self.listsManager
+        print("Table View Update: \(listIndex) \(currentList.emoji)")
         dataService.listIndex = self.listIndex
+        
+        listTableView.reloadData()
     }
     
     func listViewUpdate(emoji: String? = nil, title: String? = nil) {
@@ -304,10 +314,10 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
     }
 
     
-    func updateThumbnail(from offset: Double) {
+    func updateList(from offset: Double) {
         
         let cellWidth = Double(ListsThumbnailCollectionViewCell.width)
-                     
+        
             if Int(offset/cellWidth) <= listsManager.lists.count-1 && offset > 0 {
                     listIndex = Int(offset/cellWidth)
             } else if Int(offset/cellWidth) >= listsManager.lists.count {
@@ -315,10 +325,23 @@ class ListViewController: UIViewController, UITextFieldDelegate, ThumbnailUpdata
             } else if Int(offset/cellWidth) <= 0 {
                     listIndex = 0
             }
-            
-            listTableView.reloadData()
+        
+    }
+    
+    func addNewList() {
 
-        }
+        let newList = List(emoji: "😐", title: "New List", items: [])
+        listsManager.addList(newList)
+        listIndex = listsManager.lists.count-1
+        
+        listTitleTextField.text = ""
+        listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+
+        setHidden(listTitle: true, textField: false)
+
+        listTitleTextField.becomeFirstResponder()
+        listTitleTextField.returnKeyType = .default
+    }
     
 }
 

@@ -12,4 +12,9 @@ class ListsManager {
     
     var lists: [List] = []
     
+    func addList(_ list: List) {
+        lists.append(list)
+        lists[lists.count-1].saveList()
+    }
+    
 }
