@@ -8,12 +8,18 @@
 
 import UIKit
 
+protocol ListsDeletable {
+    func delete(list cell: ListsTableViewCell)
+}
+
 class ListsTableViewCell: UITableViewCell {
     
     static var identifier = "ListCell"
 
     @IBOutlet weak var emojiButton: UIButton!
     @IBOutlet weak var listTitleLabel: UILabel!
+    
+    var listsDeleteService: ListsDeletable?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,5 +34,10 @@ class ListsTableViewCell: UITableViewCell {
         self.emojiButton.setTitle(withEmoji, for: .normal)
         self.listTitleLabel.text = title
     }
+    
+    @IBAction func deleteListTapped(_ sender: UIButton) {
+        listsDeleteService?.delete(list: self)
+    }
+    
 
 }

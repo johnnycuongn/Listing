@@ -18,9 +18,22 @@ class ListsManager {
         updateIndexForLists()
     }
     
+    func deleteList(at index: Int) {
+        lists.remove(at: index).deleteList()
+        updateIndexForLists()
+    }
+    
+    func moveList(from startIndex: Int, to endIndex: Int) {
+        let movedList = lists.remove(at: startIndex)
+        lists.insert(movedList, at: endIndex)
+        updateIndexForLists()
+    }
+    
     func updateIndexForLists() {
-        for i in 0...lists.count-1 {
-            lists[i].index = i
+        if lists.count > 0 {
+            for i in 0...lists.count-1 {
+                lists[i].index = i
+            }
         }
     }
 

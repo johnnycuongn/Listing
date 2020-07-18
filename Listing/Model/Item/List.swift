@@ -66,7 +66,7 @@ class List: Codable {
     }
 
     func deleteList() {
-        DataManager.save(self, with: "\(title)")
+        DataManager.delete(from: "\(title)")
     }
 
 }

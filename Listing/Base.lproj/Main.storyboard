@@ -203,7 +203,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="OFW-Wf-AR3" kind="show" identifier="toListsTableView" id="F8C-Uw-Lfg"/>
+                                    <segue destination="s7Y-ml-M98" kind="show" identifier="toListsTableView" id="F8C-Uw-Lfg"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GbA-B1-Wbb">
@@ -340,20 +340,32 @@
                                             <state key="normal" title="😀"/>
                                         </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yhU-Gg-Ecl">
-                                            <rect key="frame" x="35" y="11" width="359" height="28"/>
+                                            <rect key="frame" x="35" y="11" width="349" height="28"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="18"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bCJ-72-xkO">
+                                            <rect key="frame" x="384" y="0.0" width="30" height="50"/>
+                                            <state key="normal" title="x">
+                                                <color key="titleColor" red="0.67278711930000001" green="0.38069545090000001" blue="0.37840723679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="deleteListTapped:" destination="uc0-Gg-fPM" eventType="touchUpInside" id="DNf-R4-dFn"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="yhU-Gg-Ecl" secondAttribute="bottom" id="1mq-HY-Pff"/>
+                                        <constraint firstItem="bCJ-72-xkO" firstAttribute="leading" secondItem="yhU-Gg-Ecl" secondAttribute="trailing" id="1o3-Vj-5hn"/>
                                         <constraint firstItem="yhU-Gg-Ecl" firstAttribute="leading" secondItem="AWP-i4-n7J" secondAttribute="trailing" constant="5" id="57s-TK-ydc"/>
+                                        <constraint firstAttribute="trailing" secondItem="bCJ-72-xkO" secondAttribute="trailing" id="CuQ-Vs-I4J"/>
                                         <constraint firstItem="yhU-Gg-Ecl" firstAttribute="centerY" secondItem="6bi-cR-JrQ" secondAttribute="centerY" id="KoT-cr-IEb"/>
                                         <constraint firstItem="yhU-Gg-Ecl" firstAttribute="height" secondItem="AWP-i4-n7J" secondAttribute="height" multiplier="0.711111" id="Okz-Qy-Ekj"/>
                                         <constraint firstItem="AWP-i4-n7J" firstAttribute="leading" secondItem="6bi-cR-JrQ" secondAttribute="leading" id="TXJ-Nn-bEv"/>
+                                        <constraint firstAttribute="bottom" secondItem="bCJ-72-xkO" secondAttribute="bottom" id="dmZ-G8-JCr"/>
                                         <constraint firstItem="AWP-i4-n7J" firstAttribute="centerY" secondItem="6bi-cR-JrQ" secondAttribute="centerY" id="hhb-kA-Uwu"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="yhU-Gg-Ecl" secondAttribute="trailing" id="wp7-tI-xVo"/>
+                                        <constraint firstItem="bCJ-72-xkO" firstAttribute="top" secondItem="6bi-cR-JrQ" secondAttribute="top" id="lGR-GT-qSo"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
@@ -369,12 +381,26 @@
                         </connections>
                     </tableView>
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="PcR-9f-xjw">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="hqQ-S4-n3n">
+                            <color key="tintColor" red="0.86331969500000005" green="0.86331969500000005" blue="0.86331969500000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="closeButtonTapped:" destination="OFW-Wf-AR3" id="Nxe-4r-SgR"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gv2-yb-1Ky">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="addListButtonTapped:" destination="OFW-Wf-AR3" id="pgO-VR-TI8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="awE-0M-sAN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="t3e-gd-INb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="783" y="885"/>
+            <point key="canvasLocation" x="1689.8550724637682" y="884.51086956521749"/>
         </scene>
         <!--Emoji Page View Controller-->
         <scene sceneID="D1B-zh-5hN">
@@ -463,6 +489,25 @@
                 <customObject id="aMy-i5-baj" customClass="EmojiDataService" customModule="Listing" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1869.5652173913045" y="-177.71739130434784"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="K8n-FY-xuZ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="s7Y-ml-M98" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="hk7-fd-7bL"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zTE-lw-gw1">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="OFW-Wf-AR3" kind="relationship" relationship="rootViewController" id="vpE-Qj-pOn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wam-zO-dlO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="782.60869565217399" y="884.51086956521749"/>
         </scene>
     </scenes>
 </document>

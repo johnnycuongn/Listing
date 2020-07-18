@@ -326,11 +326,16 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         
         if segue.identifier == Segues.selectedList {
             let listsTableVC = segue.source as! ListsTableViewController
-            
-            guard let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow else { return }
+
+            guard let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow else {
+                listsThumbnailCollectionViewDataUpdate()
+                return
+            }
             
             self.listIndex = selectedIndexPath.row
             listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listIndex+1, section: 0), at: .right, animated: true)
+            
+            listsThumbnailCollectionViewDataUpdate()
             
         }
         
@@ -338,12 +343,24 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Segues.toListsTableView {
-            guard let listsTableVC = segue.destination as? ListsTableViewController else {
+            guard let navigationVC = segue.destination as? UINavigationController else {
+                fatalError()
+            }
+            
+            guard let listsTableVC = navigationVC.viewControllers[0] as? ListsTableViewController else {
                 fatalError()
             }
             
             listsTableVC.listsManager = self.listsManager
-            
+        }
+        
+        if segue.identifier == Segues.selectedList {
+            guard let navigationVC = segue.destination as? UINavigationController else {
+                fatalError()
+            }
+            guard let listsTableVC = navigationVC.viewControllers[0] as? ListsTableViewController else {
+                fatalError()
+            }
         }
     }
     

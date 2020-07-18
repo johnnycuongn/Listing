@@ -41,6 +41,7 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
             cell.configure(with: "+")
         }
         else if indexPath.row < listManager!.lists.count {
+            print("Cell Configure \(indexPath.row) : \(listManager!.lists[indexPath.row].emoji)")
             cell.configure(with: listManager!.lists[indexPath.row].emoji)
         }
         
