@@ -28,19 +28,20 @@ class List: Codable {
         }
     }
     
-    init(emoji: String, title: String, items: [Item]) {
+    var index: Int {
+        didSet {
+            saveList()
+        }
+    }
+    
+    init(emoji: String, title: String, items: [Item], index: Int) {
         self.emoji = emoji
         self.title = title
         self.items = items
-    }
-    
-    func saveList() {
-        DataManager.save(self, with: "\(title)")
+        self.index = index
     }
 
-    func deleteList() {
-        DataManager.save(self, with: "\(title)")
-    }
+    // MARK: Function
     
     func addItemAtTop(_ item: Item) {
         items.insert(item, at: 0)
@@ -56,6 +57,16 @@ class List: Codable {
         var movedItem = items.remove(at: startIndex)
         items.insert(movedItem, at: endIndex)
         
+    }
+    
+    // MARK: Save data
+    
+    func saveList() {
+        DataManager.save(self, with: "\(title)")
+    }
+
+    func deleteList() {
+        DataManager.save(self, with: "\(title)")
     }
 
 }

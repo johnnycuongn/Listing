@@ -199,16 +199,18 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     // MARK: Model
     func loadList() {
         
-        listsManager.lists = DataManager.loadAll(from: List.self)
+        listsManager.lists = DataManager.loadAll(from: List.self).sorted {
+            $0.index < $1.index
+        }
         
         if listsManager.lists.isEmpty {
             listsManager.lists = [
             List(emoji: "💼", title: "Welcome", items: [
                 Item(title: "Tap to Delete")
-            ]),
+            ], index: 0),
             List(emoji: "🤥", title: "Welcome Second", items: [
                 Item(title: "Tap To Delete Now")
-            ])
+            ], index: 1)
             ]
             
             for index in 0...listsManager.lists.count-1 {
@@ -216,7 +218,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
             }
         }
         
-        listTableView.reloadData()
+        listTableViewDataUpdate()
+        listsThumbnailCollectionViewDataUpdate()
     }
     
     // MARK: View
@@ -330,7 +333,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     
     func addNewList() {
 
-        let newList = List(emoji: "😐", title: "New List", items: [])
+        let newList = List(emoji: "😐", title: "New List", items: [], index: listsManager.lists.count)
         listsManager.addList(newList)
         listIndex = listsManager.lists.count-1
         
