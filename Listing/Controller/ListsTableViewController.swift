@@ -53,10 +53,19 @@ class ListsTableViewController: UITableViewController, ListsDeletable {
             return
         }
         
-        self.listsManager!.deleteList(at: indexPath.row)
-           
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        let alert = UIAlertController(title: "List Deletion", message: "Are you sure to delete this list?", preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
+            self.listsManager!.deleteList(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+        
     }
+    
     
     // MARK: - Delegate
     
@@ -87,13 +96,10 @@ class ListsTableViewController: UITableViewController, ListsDeletable {
     
     @IBAction func addListButtonTapped(_ sender: Any) {
     }
-    
-    
-    
+
     
 //     MARK: - Navigation
 
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Segues.selectedList {
             let listVC = segue.destination as! ListViewController
