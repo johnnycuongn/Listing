@@ -15,6 +15,7 @@ enum ListVCError: Error {
 
 public enum Segues {
     static let saveEmoji = "saveEmoji"
+    static let toListsTableView = "toListsTableView"
 }
 
 class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
@@ -58,6 +59,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
             return listsManager.lists[listIndex]
         }
     }
+    
+    var isCreatingList: Bool = false
 
     //MARK: -
     
@@ -174,8 +177,11 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
             
             listsThumbnailCollectionViewDataUpdate()
             
-            listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listsManager.lists.count, section: 0), at: .right, animated: true)
-           
+            if isCreatingList == true {
+                listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listsManager.lists.count, section: 0), at: .right, animated: true)
+            }
+            
+            isCreatingList = false
             closeKeyboard(with: textField)
         }
         
@@ -207,12 +213,17 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         
         if listsManager.lists.isEmpty {
             listsManager.lists = [
-            List(emoji: "💼", title: "Welcome", items: [
-                Item(title: "Tap to Delete")
-            ], index: 0),
-            List(emoji: "🤥", title: "Welcome Second", items: [
-                Item(title: "Tap To Delete Now")
-            ], index: 1)
+            List(emoji: "📆", title: "Welcome", items: [
+                Item(title: "Tap here to Delete"),
+                Item(title: "Tap list name to change"),
+                Item(title: "Tap emoji to change")
+                ]
+                , index: 0),
+            List(emoji: "🛒", title: "Groceries", items: [
+                Item(title: "2 Tomatos"),
+                Item(title: "Chicken Breast")
+                ]
+                , index: 1)
             ]
             
             for index in 0...listsManager.lists.count-1 {
@@ -314,7 +325,19 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         
         listsThumbnailCollectionView.reloadData()
     }
-
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Segues.toListsTableView {
+            guard let listsTableVC = segue.destination as? ListsTableViewController else {
+                fatalError()
+            }
+            
+            listsTableVC.listsManager = self.listsManager
+            
+        }
+    }
+    
+    // MARK: - Configure Lists
     
     func updateList(from offset: Double) {
         
@@ -331,6 +354,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     }
     
     func addNewList() {
+        isCreatingList = true
 
         let newList = List(emoji: "😐", title: "New List", items: [], index: listsManager.lists.count)
         listsManager.addList(newList)
