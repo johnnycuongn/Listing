@@ -16,7 +16,6 @@
 		405624492491DDA00083B800 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624482491DDA00083B800 /* Item.swift */; };
 		4056244C2491E1890083B800 /* ListTableViewDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4056244B2491E1890083B800 /* ListTableViewDataService.swift */; };
 		405624522491E4CC0083B800 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624512491E4CC0083B800 /* ItemCell.swift */; };
-		405624542491E6E80083B800 /* EdittingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624532491E6E80083B800 /* EdittingViewController.swift */; };
 		4064A62D24C0AE7E00C1BE21 /* List.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064A62C24C0AE7E00C1BE21 /* List.swift */; };
 		4064A62F24C0B1CE00C1BE21 /* ListsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064A62E24C0B1CE00C1BE21 /* ListsManager.swift */; };
 		4064A63324C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4064A63224C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift */; };
@@ -35,7 +34,6 @@
 		40AA4E6324C0414F00D8B215 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA4E6224C0414F00D8B215 /* EmojiCollectionViewCell.swift */; };
 		40AA4E6524C041CF00D8B215 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA4E6424C041CF00D8B215 /* SectionHeaderView.swift */; };
 		40C8E27224938B2A00416B58 /* TimeIntervalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */; };
-		40C8E27624939D4C00416B58 /* InputItemTextFieldHander.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27524939D4C00416B58 /* InputItemTextFieldHander.swift */; };
 		40C8E27824949E5500416B58 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27724949E5500416B58 /* DataManager.swift */; };
 		40FB2C84249B7B2D001CC036 /* ListTableViewDataServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */; };
 /* End PBXBuildFile section */
@@ -64,7 +62,6 @@
 		405624482491DDA00083B800 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4056244B2491E1890083B800 /* ListTableViewDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewDataService.swift; sourceTree = "<group>"; };
 		405624512491E4CC0083B800 /* ItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
-		405624532491E6E80083B800 /* EdittingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdittingViewController.swift; sourceTree = "<group>"; };
 		4064A62C24C0AE7E00C1BE21 /* List.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List.swift; sourceTree = "<group>"; };
 		4064A62E24C0B1CE00C1BE21 /* ListsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsManager.swift; sourceTree = "<group>"; };
 		4064A63224C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsThumbnailCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -83,7 +80,6 @@
 		40AA4E6224C0414F00D8B215 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		40AA4E6424C041CF00D8B215 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtentions.swift; sourceTree = "<group>"; };
-		40C8E27524939D4C00416B58 /* InputItemTextFieldHander.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputItemTextFieldHander.swift; sourceTree = "<group>"; };
 		40C8E27724949E5500416B58 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewDataServiceTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -191,7 +187,6 @@
 				40AA4E5E24C0403600D8B215 /* Emoji */,
 				405624292491D8920083B800 /* ListViewController.swift */,
 				4084636524C2BC5A0091E236 /* ListsTableViewController.swift */,
-				405624532491E6E80083B800 /* EdittingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -270,7 +265,6 @@
 		40C8E27324939D2C00416B58 /* Delegations */ = {
 			isa = PBXGroup;
 			children = (
-				40C8E27524939D4C00416B58 /* InputItemTextFieldHander.swift */,
 			);
 			path = Delegations;
 			sourceTree = "<group>";
@@ -397,14 +391,12 @@
 				4064A63524C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift in Sources */,
 				40AA4E5824C03E6300D8B215 /* EmojiProvider.swift in Sources */,
 				40C8E27224938B2A00416B58 /* TimeIntervalExtentions.swift in Sources */,
-				40C8E27624939D4C00416B58 /* InputItemTextFieldHander.swift in Sources */,
 				40AA4E5624C03E3A00D8B215 /* Emoji.swift in Sources */,
 				4064A62F24C0B1CE00C1BE21 /* ListsManager.swift in Sources */,
 				405624522491E4CC0083B800 /* ItemCell.swift in Sources */,
 				405624282491D8920083B800 /* SceneDelegate.swift in Sources */,
 				40AA4E6524C041CF00D8B215 /* SectionHeaderView.swift in Sources */,
 				40C8E27824949E5500416B58 /* DataManager.swift in Sources */,
-				405624542491E6E80083B800 /* EdittingViewController.swift in Sources */,
 				40AA4E6324C0414F00D8B215 /* EmojiCollectionViewCell.swift in Sources */,
 				4064A62D24C0AE7E00C1BE21 /* List.swift in Sources */,
 				4056244C2491E1890083B800 /* ListTableViewDataService.swift in Sources */,
