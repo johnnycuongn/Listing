@@ -328,14 +328,18 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
             let listsTableVC = segue.source as! ListsTableViewController
 
             guard let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow else {
+                listTableViewDataUpdate()
                 listsThumbnailCollectionViewDataUpdate()
                 return
             }
             
             self.listIndex = selectedIndexPath.row
+            print("listIndex: \(listIndex)")
+            print("currentListDisplayed: \(currentList)")
             listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listIndex+1, section: 0), at: .right, animated: true)
             
             listsThumbnailCollectionViewDataUpdate()
+            listTableViewDataUpdate()
             
         }
         

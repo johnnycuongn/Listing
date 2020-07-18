@@ -41,7 +41,7 @@ class ListsTableViewController: UITableViewController, ListsDeletable {
         let cell = tableView.dequeueReusableCell(withIdentifier: ListsTableViewCell.identifier, for: indexPath) as! ListsTableViewCell
         
         let list = listsManager!.lists[indexPath.row]
-        print(list.title)
+
         cell.listsDeleteService = self
         cell.configure(withEmoji: list.emoji, title: list.title)
 
