@@ -15,6 +15,7 @@ enum ListVCError: Error {
 
 public enum Segues {
     static let saveEmoji = "saveEmoji"
+    static let selectedList = "selectedFromListsTableView"
     static let toListsTableView = "toListsTableView"
 }
 
@@ -26,8 +27,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     
     @IBOutlet weak var listsThumbnailCollectionView: UICollectionView!
     @IBOutlet var listsThumbnailCollectionViewDataService: ListsThumbnailCollectionViewDataService!
-    
-    @IBOutlet var inputTextFieldHandler: InputItemTextFieldHander!
     
     /// - List's Emoji and Title
     @IBOutlet weak var emojiButton: UIButton!
@@ -314,16 +313,27 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     // MARK: - Segues
     
     @IBAction func unwindToListViewController(segue: UIStoryboardSegue) {
-        guard segue.identifier == Segues.saveEmoji else { return }
+        if segue.identifier == Segues.saveEmoji {
+            let emojiPageVC = segue.source as! EmojiPageViewController
+     
+            guard emojiPageVC.selectedEmoji != nil else { return }
+            
+            self.currentList.emoji = emojiPageVC.selectedEmoji!
+            emojiButton.setTitle(emojiPageVC.selectedEmoji, for: .normal)
+            
+            listsThumbnailCollectionView.reloadData()
+        }
         
-        let emojiPageVC = segue.source as! EmojiPageViewController
- 
-        guard emojiPageVC.selectedEmoji != nil else { return }
+        if segue.identifier == Segues.selectedList {
+            let listsTableVC = segue.source as! ListsTableViewController
+            
+            guard let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow else { return }
+            
+            self.listIndex = selectedIndexPath.row
+            listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listIndex+1, section: 0), at: .right, animated: true)
+            
+        }
         
-        self.currentList.emoji = emojiPageVC.selectedEmoji!
-        emojiButton.setTitle(emojiPageVC.selectedEmoji, for: .normal)
-        
-        listsThumbnailCollectionView.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

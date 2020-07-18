@@ -301,7 +301,6 @@
                         <outlet property="hourLeftLabel" destination="8W0-Xd-2K5" id="uWZ-p9-JxB"/>
                         <outlet property="inputItemTextField" destination="FS4-yy-idR" id="KUr-er-Ubt"/>
                         <outlet property="inputItemView" destination="Bdr-m7-VnP" id="fpq-C1-qAO"/>
-                        <outlet property="inputTextFieldHandler" destination="gMZ-6D-71n" id="vnE-qN-Rp0"/>
                         <outlet property="listTableView" destination="cy1-10-P9z" id="wHF-6J-3i1"/>
                         <outlet property="listTitleButton" destination="6uX-mM-CX9" id="5bb-Cm-a4F"/>
                         <outlet property="listTitleTextField" destination="0gu-jm-5lt" id="1Jx-yO-eXQ"/>
@@ -312,7 +311,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
                 <customObject id="lsn-Cu-XgY" customClass="ListTableViewDataService" customModule="Listing" customModuleProvider="target"/>
-                <customObject id="gMZ-6D-71n" customClass="InputItemTextFieldHander" customModule="Listing" customModuleProvider="target"/>
                 <customObject id="jnq-vK-aS5" customClass="ListsThumbnailCollectionViewDataService" customModule="Listing" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1044.9275362318842" y="129.61956521739131"/>
@@ -361,6 +359,7 @@
                                 <connections>
                                     <outlet property="emojiButton" destination="AWP-i4-n7J" id="E1y-1X-3rY"/>
                                     <outlet property="listTitleLabel" destination="yhU-Gg-Ecl" id="pzR-OS-EMo"/>
+                                    <segue destination="t3e-gd-INb" kind="unwind" identifier="selectedFromListsTableView" unwindAction="unwindToListViewControllerWithSegue:" id="319-Y0-4Bl"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -373,8 +372,9 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="awE-0M-sAN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="t3e-gd-INb" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="824.63768115942037" y="834.78260869565224"/>
+            <point key="canvasLocation" x="783" y="885"/>
         </scene>
         <!--Emoji Page View Controller-->
         <scene sceneID="D1B-zh-5hN">
@@ -463,90 +463,6 @@
                 <customObject id="aMy-i5-baj" customClass="EmojiDataService" customModule="Listing" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="1869.5652173913045" y="-177.71739130434784"/>
-        </scene>
-        <!--Editting View Controller-->
-        <scene sceneID="KLO-N3-xcH">
-            <objects>
-                <viewController id="4Ic-mj-ja7" customClass="EdittingViewController" customModule="Listing" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="X65-6R-FHD">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DdR-qK-VvI">
-                                <rect key="frame" x="20" y="70" width="374" height="34"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w6f-he-X6F">
-                                        <rect key="frame" x="0.0" y="0.0" width="38" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nwP-YD-gaY">
-                                        <rect key="frame" x="48" y="0.0" width="326" height="34"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                            </stackView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hbB-xt-8JT">
-                                <rect key="frame" x="20" y="184" width="374" height="483"/>
-                                <color key="backgroundColor" white="0.89108875574109581" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aXE-PE-AyG">
-                                <rect key="frame" x="20" y="134" width="93" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="Zb0-GI-70D"/>
-                                    <constraint firstAttribute="width" constant="93" id="gHk-YC-bgf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2m9-j9-470">
-                                <rect key="frame" x="346" y="20" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save"/>
-                                <connections>
-                                    <segue destination="8Ov-dt-2Rq" kind="unwind" identifier="saveItemSegue" unwindAction="unwindToListViewControllerWithSegue:" id="HcW-TN-SOk"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WUj-qU-zXm">
-                                <rect key="frame" x="20" y="20" width="48" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancel"/>
-                                <connections>
-                                    <segue destination="8Ov-dt-2Rq" kind="unwind" unwindAction="unwindToListViewControllerWithSegue:" id="SLk-Sd-BTj"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <constraints>
-                            <constraint firstItem="hbB-xt-8JT" firstAttribute="leading" secondItem="Ajw-z5-E9x" secondAttribute="leading" constant="20" id="4ca-zN-PSl"/>
-                            <constraint firstItem="aXE-PE-AyG" firstAttribute="top" secondItem="DdR-qK-VvI" secondAttribute="bottom" constant="30" id="5Av-Yw-86m"/>
-                            <constraint firstItem="Ajw-z5-E9x" firstAttribute="bottom" secondItem="hbB-xt-8JT" secondAttribute="bottom" constant="20" id="6g7-CY-920"/>
-                            <constraint firstItem="Ajw-z5-E9x" firstAttribute="trailing" secondItem="hbB-xt-8JT" secondAttribute="trailing" constant="20" id="6lt-P9-885"/>
-                            <constraint firstItem="hbB-xt-8JT" firstAttribute="top" secondItem="aXE-PE-AyG" secondAttribute="bottom" constant="29" id="CEX-GR-hcK"/>
-                            <constraint firstItem="DdR-qK-VvI" firstAttribute="leading" secondItem="Ajw-z5-E9x" secondAttribute="leading" constant="20" id="FUX-LK-68a"/>
-                            <constraint firstItem="Ajw-z5-E9x" firstAttribute="trailing" secondItem="DdR-qK-VvI" secondAttribute="trailing" constant="20" id="G0Q-EW-XZE"/>
-                            <constraint firstItem="aXE-PE-AyG" firstAttribute="leading" secondItem="Ajw-z5-E9x" secondAttribute="leading" constant="20" id="v1f-xb-rJ9"/>
-                            <constraint firstItem="DdR-qK-VvI" firstAttribute="top" secondItem="Ajw-z5-E9x" secondAttribute="top" constant="70" id="yPD-EE-mqA"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="Ajw-z5-E9x"/>
-                    </view>
-                    <toolbarItems/>
-                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
-                    <connections>
-                        <outlet property="descriptionTextView" destination="hbB-xt-8JT" id="God-Wj-LDz"/>
-                        <outlet property="titleTextField" destination="nwP-YD-gaY" id="lM7-qg-zis"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="0OF-b1-vlK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="8Ov-dt-2Rq" userLabel="Exit" sceneMemberID="exit"/>
-            </objects>
-            <point key="canvasLocation" x="3707.2463768115945" y="435.32608695652175"/>
         </scene>
     </scenes>
 </document>
