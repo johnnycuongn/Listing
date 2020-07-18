@@ -30,7 +30,6 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        print("DataService: \(listIndex)")
         guard listManager != nil else { return 0 }
             return listManager!.lists.count+1
     }

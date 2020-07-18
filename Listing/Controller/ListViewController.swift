@@ -173,6 +173,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
             setHidden(listTitle: false, textField: true)
             
             listsThumbnailCollectionViewDataUpdate()
+            
+            listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listsManager.lists.count, section: 0), at: .right, animated: true)
            
             closeKeyboard(with: textField)
         }
@@ -246,15 +248,12 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
         
         listsThumbnailCollectionViewDataService.listUpdateService = self
-        
-        listsThumbnailCollectionView.selectItem(at: IndexPath(row: listIndex+1, section: 0), animated: true, scrollPosition: .right)
-        
+       
         listsThumbnailCollectionView.reloadData()
     }
     
     func listTableViewDataUpdate() {
         dataService.listsManager = self.listsManager
-        print("Table View Update: \(listIndex) \(currentList.emoji)")
         dataService.listIndex = self.listIndex
         
         listTableView.reloadData()
