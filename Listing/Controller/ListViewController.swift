@@ -283,8 +283,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
             emojiButton.setTitle(emoji, for: .normal) }
         if title != nil {
             listTitleButton.setTitle(title, for: .normal) }
-        
-        listTableView.reloadData()
+
     }
     
     func setHidden(listTitle: Bool, textField: Bool) {
@@ -302,8 +301,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
         
         let newItem = Item(title: textField.text!)
         self.currentList.addItemAtTop(newItem)
-
-        listTableView.reloadData()
+        listTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
         
         resetInputTextField(with: textField)
     }
@@ -413,7 +411,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
     
     func isTablePullDowned(_ value: Bool) {
         if value == true {
-            print(listTableView.contentOffset.y)
             if listTableView.contentOffset.y < -40 {
                 self.addButtonTapped(addButton)
             }
