@@ -8,11 +8,16 @@
 
 import UIKit
 
+public protocol PullDownToAddable {
+    func isTablePullDowned(_ value: Bool)
+}
+
 class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     
     var listsManager: ListsManager?
     var listIndex: Int?
+    var pullDownService: PullDownToAddable!
     
     var currentList: List {
         guard listsManager != nil else { fatalError() }
@@ -69,6 +74,11 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
         
         tableView.deleteRows(at: [indexPath], with: .fade)
     }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        pullDownService.isTablePullDowned(true)
+    }
+
     
 
     

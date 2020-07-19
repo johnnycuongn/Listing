@@ -19,7 +19,7 @@ public enum Segues {
     static let toListsTableView = "toListsTableView"
 }
 
-class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
+class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, PullDownToAddable {
     
     /// - Systems
     @IBOutlet weak var listTableView: UITableView!
@@ -261,6 +261,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
        func listTableViewDataUpdate() {
            dataService.listsManager = self.listsManager
            dataService.listIndex = self.listIndex
+        
+            dataService.pullDownService = self
            
            listTableView.reloadData()
        }
@@ -407,6 +409,15 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
 
         listTitleTextField.becomeFirstResponder()
         listTitleTextField.returnKeyType = .default
+    }
+    
+    func isTablePullDowned(_ value: Bool) {
+        if value == true {
+            print(listTableView.contentOffset.y)
+            if listTableView.contentOffset.y < -40 {
+                self.addButtonTapped(addButton)
+            }
+        }
     }
     
 }
