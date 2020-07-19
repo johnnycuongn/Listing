@@ -19,11 +19,10 @@ class ListsTableViewController: UITableViewController, ListsDeletable {
         tableView.isEditing = true
         tableView.allowsSelectionDuringEditing = true
         
-        isModalInPresentation = true
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        self.performSegue(withIdentifier: Segues.selectedList, sender: nil)
     }
 
     // MARK: - Table view data source
@@ -91,7 +90,7 @@ class ListsTableViewController: UITableViewController, ListsDeletable {
     // MARK: - Bar Buttons Action
     
     @IBAction func closeButtonTapped(_ sender: Any) {
-        self.performSegue(withIdentifier: Segues.selectedList, sender: nil)
+        
     }
     
     @IBAction func addListButtonTapped(_ sender: Any) {

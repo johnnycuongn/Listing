@@ -382,12 +382,6 @@
                     </tableView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="PcR-9f-xjw">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="hqQ-S4-n3n">
-                            <color key="tintColor" red="0.86331969500000005" green="0.86331969500000005" blue="0.86331969500000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <connections>
-                                <action selector="closeButtonTapped:" destination="OFW-Wf-AR3" id="Nxe-4r-SgR"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Gv2-yb-1Ky">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>

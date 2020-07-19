@@ -48,6 +48,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     var listIndex = 0 {
         didSet {
             listTableViewDataUpdate()
+            print("CurrentList: \(currentList.emoji)")
             listViewUpdate(emoji: currentList.emoji, title: currentList.title)
         }
     }
@@ -55,6 +56,9 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     
     var currentList: List {
         get {
+            if listsManager.lists.count == 0 {
+                listsManager.addList(List(emoji: "📝", title: "Empty List", items: [], index: 0))
+            }
             return listsManager.lists[listIndex]
         }
     }
@@ -212,8 +216,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         
         if listsManager.lists.isEmpty {
             listsManager.lists = [
-            List(emoji: "📆", title: "Welcome", items: [
-                Item(title: "Tap here to Delete"),
+            List(emoji: "📆", title: "ToDo", items: [
+                Item(title: "Tap here to delete"),
                 Item(title: "Tap list name to change"),
                 Item(title: "Tap emoji to change")
                 ]
@@ -222,7 +226,10 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
                 Item(title: "2 Tomatos"),
                 Item(title: "Chicken Breast")
                 ]
-                , index: 1)
+                , index: 1),
+            List(emoji: "💻", title: "Software Engineer", items: [
+                Item(title: "Design Pattern")
+            ], index: 2)
             ]
             
             for index in 0...listsManager.lists.count-1 {
@@ -264,6 +271,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     
     func listTableViewDataUpdate() {
         dataService.listsManager = self.listsManager
+        print("Passing Index: \(listIndex): \(currentList.emoji)")
+        
         dataService.listIndex = self.listIndex
         
         listTableView.reloadData()
@@ -328,14 +337,17 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
             let listsTableVC = segue.source as! ListsTableViewController
 
             guard let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow else {
+//                if listIndex == listsManager.lists.count {
+                    self.listIndex = 0
+     
+                print("isListManagerUpdate: \(listsManager.lists.count)")
                 listTableViewDataUpdate()
                 listsThumbnailCollectionViewDataUpdate()
                 return
             }
             
             self.listIndex = selectedIndexPath.row
-            print("listIndex: \(listIndex)")
-            print("currentListDisplayed: \(currentList)")
+            
             listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listIndex+1, section: 0), at: .right, animated: true)
             
             listsThumbnailCollectionViewDataUpdate()

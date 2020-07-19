@@ -17,6 +17,7 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     var currentList: List {
         guard listsManager != nil else { fatalError() }
         guard listIndex != nil else { fatalError() }
+        print("Data Service-current list count: \(listsManager!.lists.count) : listIndex: \(listIndex)")
         return listsManager!.lists[listIndex!]
     }
 
@@ -27,14 +28,14 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return currentList.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
-    
+
+        
         cell.config(item: currentList.items[indexPath.row])
         
         return cell
