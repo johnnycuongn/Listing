@@ -12,9 +12,12 @@ class ListsTableViewController: UITableViewController, ListsDeletable {
 
     var listsManager: ListsManager?
     
+    var hasDeleted: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        hasDeleted = false
         
         tableView.isEditing = true
         tableView.allowsSelectionDuringEditing = true
@@ -56,6 +59,8 @@ class ListsTableViewController: UITableViewController, ListsDeletable {
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
             self.listsManager!.deleteList(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            self.hasDeleted = true
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         

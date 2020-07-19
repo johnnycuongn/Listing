@@ -47,9 +47,16 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     /// - Model Variables
     var listIndex = 0 {
         didSet {
-            listTableViewDataUpdate()
-            print("CurrentList: \(currentList.emoji)")
-            listViewUpdate(emoji: currentList.emoji, title: currentList.title)
+            /// Stop listTableView load too much when list thumbnail is scrolling
+            if (listsThumbnailCollectionView.isDragging || listsThumbnailCollectionView.isDecelerating) {
+                if listIndex != oldValue {
+                    listTableViewDataUpdate()
+                    listViewUpdate(emoji: currentList.emoji, title: currentList.title)
+                }
+            } else {
+                listTableViewDataUpdate()
+                listViewUpdate(emoji: currentList.emoji, title: currentList.title)
+            }
         }
     }
     var listsManager = ListsManager()
@@ -83,9 +90,8 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         self.inputItemTextField.delegate = self
         self.listTitleTextField.delegate = self
         
-        
-         listsThumbnailCollectionViewDataUpdate()
-         listTableViewDataUpdate()
+//         listsThumbnailCollectionViewDataUpdate()
+//         listTableViewDataUpdate()
         
         ////List Table View
         listTableView.isEditing = true
@@ -262,6 +268,9 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     func listsThumbnailCollectionViewDataUpdate() {
         listsThumbnailCollectionViewDataService.listManager = self.listsManager
         listsThumbnailCollectionViewDataService.listIndex = self.listIndex
+        
+        print("Passing Index: \(listIndex): \(currentList.emoji)")
+        
         listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
         
         listsThumbnailCollectionViewDataService.listUpdateService = self
@@ -271,8 +280,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     
     func listTableViewDataUpdate() {
         dataService.listsManager = self.listsManager
-        print("Passing Index: \(listIndex): \(currentList.emoji)")
-        
         dataService.listIndex = self.listIndex
         
         listTableView.reloadData()
@@ -335,26 +342,17 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         
         if segue.identifier == Segues.selectedList {
             let listsTableVC = segue.source as! ListsTableViewController
-
-            guard let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow else {
-//                if listIndex == listsManager.lists.count {
-                    self.listIndex = 0
-     
-                print("isListManagerUpdate: \(listsManager.lists.count)")
-                listTableViewDataUpdate()
-                listsThumbnailCollectionViewDataUpdate()
-                return
+            
+            if let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow {
+                self.listIndex = selectedIndexPath.row
+            } else if listsTableVC.hasDeleted {
+                self.listIndex = 0
             }
-            
-            self.listIndex = selectedIndexPath.row
-            
             listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listIndex+1, section: 0), at: .right, animated: true)
-            
+          
+//            listTableViewDataUpdate()
             listsThumbnailCollectionViewDataUpdate()
-            listTableViewDataUpdate()
-            
         }
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
