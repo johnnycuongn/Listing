@@ -112,7 +112,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         
     }
     
-    // MARK: - Actions
+    // MARK: - Buttons Action
     
     
     @IBAction func listTitleButtonTapped(_ sender: Any) {
@@ -213,7 +213,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
     
     // MARK: - Convenience methods
     
-    // MARK: Model
+    // MARK: Model & Data
     func loadList() {
         
         listsManager.lists = DataManager.loadAll(from: List.self).sorted {
@@ -247,6 +247,24 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         listsThumbnailCollectionViewDataUpdate()
     }
     
+    func listsThumbnailCollectionViewDataUpdate() {
+           listsThumbnailCollectionViewDataService.listManager = self.listsManager
+           listsThumbnailCollectionViewDataService.listIndex = self.listIndex
+           
+           listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
+           
+           listsThumbnailCollectionViewDataService.listUpdateService = self
+          
+           listsThumbnailCollectionView.reloadData()
+       }
+       
+       func listTableViewDataUpdate() {
+           dataService.listsManager = self.listsManager
+           dataService.listIndex = self.listIndex
+           
+           listTableView.reloadData()
+       }
+    
     // MARK: View
     @objc func updateTimeLabel() {
         let today = Date() ; let tomorrow = Date(timeIntervalSinceNow: 86400)
@@ -256,33 +274,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
             let timeLeft = timeUntilTomorrow.convertToHourMinutes()
             self.hourLeftLabel.text = "\(timeLeft.hour)"
             self.minuteLeftLabel.text = "\(timeLeft.minutes)"
-    }
-    
-    func closeKeyboard(with textField: UITextField) {
-        if textField == inputItemTextField {
-            inputItemView.isHidden = true
-        }
-        textField.resignFirstResponder()
-    }
-    
-    func listsThumbnailCollectionViewDataUpdate() {
-        listsThumbnailCollectionViewDataService.listManager = self.listsManager
-        listsThumbnailCollectionViewDataService.listIndex = self.listIndex
-        
-        print("Passing Index: \(listIndex): \(currentList.emoji)")
-        
-        listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
-        
-        listsThumbnailCollectionViewDataService.listUpdateService = self
-       
-        listsThumbnailCollectionView.reloadData()
-    }
-    
-    func listTableViewDataUpdate() {
-        dataService.listsManager = self.listsManager
-        dataService.listIndex = self.listIndex
-        
-        listTableView.reloadData()
     }
     
     func listViewUpdate(emoji: String? = nil, title: String? = nil) {
@@ -315,6 +306,15 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         resetInputTextField(with: textField)
     }
     
+    // MARK: Text Field
+    
+    func closeKeyboard(with textField: UITextField) {
+        if textField == inputItemTextField {
+            inputItemView.isHidden = true
+        }
+        textField.resignFirstResponder()
+    }
+    
     func resetInputTextField(with textField: UITextField) {
         if textField == inputItemTextField {
             inputItemTextField.text = ""
@@ -322,7 +322,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         }
         
         inputItemTextField.reloadInputViews()
-        
     }
     
     
@@ -378,7 +377,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable {
         }
     }
     
-    // MARK: - Configure Lists
+    // MARK: - Configure List Display
     
     func updateList(from offset: Double) {
         
