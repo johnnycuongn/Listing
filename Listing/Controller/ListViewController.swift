@@ -197,6 +197,19 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
         return true
     }
     
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+            if textField == listTitleTextField {
+                let currentText = textField.text ?? ""
+            guard let stringRange = Range(range, in: currentText) else {
+                return false
+            }
+                let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
+                return updatedText.count < 36
+        }
+        
+        return true
+    }
+    
     
     @IBAction func addItemButton(_ sender: UIButton) {
         do { try addNewItem(from: inputItemTextField) }
