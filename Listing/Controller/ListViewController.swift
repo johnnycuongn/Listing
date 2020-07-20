@@ -19,7 +19,7 @@ public enum Segues {
     static let toListsTableView = "toListsTableView"
 }
 
-class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, PullDownToAddable {
+class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, PullDownToAddable, UITextFieldDelegate {
     
     /// - Systems
     @IBOutlet weak var listTableView: UITableView!
@@ -40,8 +40,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
     /// - View's Buttons Outlets
     @IBOutlet weak var addButton: UIButton!
     /// - Input Item Outlets
-    @IBOutlet weak var addItemButton: UIButton!
-    @IBOutlet weak var inputItemTextField: UITextField!
+    @IBOutlet weak var inputItemTextView: UITextView!
     @IBOutlet weak var inputItemView: UIStackView!
     
     /// - Model Variables
@@ -87,7 +86,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
         listsThumbnailCollectionView.dataSource = listsThumbnailCollectionViewDataService
         listsThumbnailCollectionView.delegate = listsThumbnailCollectionViewDataService
  
-        self.inputItemTextField.delegate = self
+        self.inputItemTextView.delegate = self
         self.listTitleTextField.delegate = self
         
 //         listsThumbnailCollectionViewDataUpdate()
@@ -101,10 +100,14 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
         ////View
         listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*3-12)
         
+        listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
+        
         listViewUpdate(emoji: currentList.emoji, title: currentList.title)
         
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
         inputItemView.isHidden = true
+        
+        inputItemTextView.autocapitalizationType = .none
 
         ////Timer
         Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ListViewController.updateTimeLabel), userInfo: nil, repeats: true)
@@ -127,20 +130,61 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
     }
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
-        resetInputTextField(with: inputItemTextField)
-
-        addItemButton.isHidden = true
+        
+        resetToPlaceHolder()
         inputItemView.isHidden = !inputItemView.isHidden
         
-        inputItemTextField.becomeFirstResponder()
+        inputItemTextView.becomeFirstResponder()
+    }
+    
+    // MARK: - Text View
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+
+            let currentText:String = textView.text
+            let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
+            
+            if updatedText.isEmpty {
+                resetToPlaceHolder()
+            }
+
+             else if textView.textColor == UIColor.lightGray && !text.isEmpty {
+                textView.textColor = UIColor.white
+                textView.text = text
+                    if (text == "\n") && textView.text == "\n" {
+                        textView.resignFirstResponder()
+                        inputItemView.isHidden = true
+                        return false
+                    }
+                textView.returnKeyType = .default
+                textView.reloadInputViews()
+            }
+                
+            else {
+                if text == "\n" && textView.text != "" {
+                    do {
+                        try addNewItem(from: textView)
+                            resetToPlaceHolder()
+                    } catch {
+                    }
+                    return false
+                }
+                return true
+            }
+            return false
+        }
+    
+    func textViewDidChangeSelection(_ textView: UITextView) {
+        if self.view.window != nil {
+            if textView.textColor == UIColor.lightGray {
+                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
+            }
+        }
     }
     
     // MARK: - Text Field
     
     @IBAction func textFieldEdittingDidBegin(_ sender: UITextField) {
-        if sender == inputItemTextField {
-            inputItemTextField.returnKeyType = .done
-        }
         if sender == listTitleTextField {
             listTitleTextField.returnKeyType = .default
         }
@@ -148,12 +192,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
     }
     
     @IBAction func textFieldEdittingChanged(_ sender: UITextField) {
-        if sender == inputItemTextField {
-            addItemButton.isHidden = !inputItemTextField.hasText
-            inputItemTextField.returnKeyType = inputItemTextField.text == "" ? .done : .default
-            inputItemTextField.reloadInputViews()
-        }
-        
         if sender == listTitleTextField {
         }
 
@@ -161,18 +199,6 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == inputItemTextField {
-            do {
-                try addNewItem(from: textField)
-            }
-            catch ListVCError.emptyText {
-                if inputItemTextField.returnKeyType == .done {
-                    closeKeyboard(with: textField)
-                }
-            }
-            catch {}
-
-        }
         if textField == listTitleTextField {
             guard listTitleTextField.text != "" else {
                 listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
@@ -191,7 +217,7 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
             }
             
             isCreatingList = false
-            closeKeyboard(with: textField)
+            textField.resignFirstResponder()
         }
         
         return true
@@ -209,18 +235,10 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
         
         return true
     }
-    
-    
-    @IBAction func addItemButton(_ sender: UIButton) {
-        do { try addNewItem(from: inputItemTextField) }
-        catch ListVCError.emptyText {
-            inputItemTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
-        }
-        catch {}
-    }
 
     @IBAction func closeTextField(_ sender: Any) {
-        closeKeyboard(with: inputItemTextField)
+        inputItemView.isHidden = true
+        inputItemTextView.resignFirstResponder()
     }
     
     
@@ -307,34 +325,26 @@ class ListViewController: UIViewController, UITextFieldDelegate, ListUpdatable, 
     }
     
     // MARK: Actions
-    func addNewItem(from textField: UITextField) throws {
-        guard textField.text != "" else {
+    func addNewItem(from textView: UITextView) throws {
+        guard textView.text != "" else {
             throw ListVCError.emptyText
         }
         
-        let newItem = Item(title: textField.text!)
+        let newItem = Item(title: textView.text!)
         self.currentList.addItemAtTop(newItem)
         listTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
-        
-        resetInputTextField(with: textField)
     }
     
     // MARK: Text Field
     
-    func closeKeyboard(with textField: UITextField) {
-        if textField == inputItemTextField {
-            inputItemView.isHidden = true
-        }
-        textField.resignFirstResponder()
-    }
+    func resetToPlaceHolder() {
+        inputItemTextView.text = "Enter your item"
+        inputItemTextView.textColor = UIColor.lightGray
     
-    func resetInputTextField(with textField: UITextField) {
-        if textField == inputItemTextField {
-            inputItemTextField.text = ""
-            inputItemTextField.returnKeyType = .done
-        }
+        inputItemTextView.selectedTextRange = inputItemTextView.textRange(from: inputItemTextView.beginningOfDocument, to: inputItemTextView.beginningOfDocument)
         
-        inputItemTextField.reloadInputViews()
+        inputItemTextView.returnKeyType = .done
+        inputItemTextView.reloadInputViews()
     }
     
     
