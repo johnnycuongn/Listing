@@ -24,6 +24,8 @@ class ListsThumbnailCollectionViewCell: UICollectionViewCell {
     
     func updateCellAppearance() {
         contentView.layer.cornerRadius = 18
+        contentView.layer.borderWidth = 0.1
+        contentView.layer.borderColor = UIColor.gray.cgColor
     }
     
 }

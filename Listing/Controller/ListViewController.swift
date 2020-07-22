@@ -49,12 +49,13 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
             /// Stop listTableView load too much when list thumbnail is scrolling
             if (listsThumbnailCollectionView.isDragging || listsThumbnailCollectionView.isDecelerating) {
                 if listIndex != oldValue {
-                    listTableViewDataUpdate()
                     listViewUpdate(emoji: currentList.emoji, title: currentList.title)
+                    listTableViewDataUpdate()
                 }
             } else {
-                listTableViewDataUpdate()
                 listViewUpdate(emoji: currentList.emoji, title: currentList.title)
+                listTableViewDataUpdate()
+                
             }
         }
     }
@@ -70,6 +71,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
     }
     
     var isCreatingList: Bool = false
+    var isKeyboardShowing: Bool = false
 
     //MARK: -
     
@@ -135,6 +137,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
         inputItemView.isHidden = !inputItemView.isHidden
         
         inputItemTextView.becomeFirstResponder()
+        isKeyboardShowing = true
     }
     
     // MARK: - Text View
@@ -153,6 +156,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
                 textView.text = text
                     if (text == "\n") && textView.text == "\n" {
                         textView.resignFirstResponder()
+                        isKeyboardShowing = false
                         inputItemView.isHidden = true
                         return false
                     }
@@ -186,6 +190,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
     
     @IBAction func textFieldEdittingDidBegin(_ sender: UITextField) {
         if sender == listTitleTextField {
+            isKeyboardShowing = true
             listTitleTextField.returnKeyType = .default
         }
         
@@ -217,6 +222,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
             }
             
             isCreatingList = false
+            isKeyboardShowing = false
             textField.resignFirstResponder()
         }
         
@@ -230,13 +236,14 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
                 return false
             }
                 let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-                return updatedText.count < 36
+                return updatedText.count < 20
         }
         
         return true
     }
 
     @IBAction func closeTextField(_ sender: Any) {
+        isKeyboardShowing = false
         inputItemView.isHidden = true
         inputItemTextView.resignFirstResponder()
     }
@@ -256,17 +263,14 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
             List(emoji: "📆", title: "ToDo", items: [
                 Item(title: "Tap here to delete"),
                 Item(title: "Tap list name to change"),
-                Item(title: "Tap emoji to change")
+                Item(title: "Pull down to add")
                 ]
                 , index: 0),
             List(emoji: "🛒", title: "Groceries", items: [
                 Item(title: "2 Tomatos"),
                 Item(title: "Chicken Breast")
                 ]
-                , index: 1),
-            List(emoji: "💻", title: "Software Engineer", items: [
-                Item(title: "Design Pattern")
-            ], index: 2)
+                , index: 1)
             ]
             
             for index in 0...listsManager.lists.count-1 {
@@ -366,8 +370,10 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
             let listsTableVC = segue.source as! ListsTableViewController
             
             if let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow {
+                print("Did Select")
                 self.listIndex = selectedIndexPath.row
             } else if listsTableVC.hasDeleted {
+                print("Did Delete")
                 self.listIndex = 0
             }
             listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listIndex+1, section: 0), at: .right, animated: true)
@@ -419,7 +425,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
     func addNewList() {
         isCreatingList = true
 
-        let newList = List(emoji: "😐", title: "New List", items: [], index: listsManager.lists.count)
+        let newList = List(emoji: "📝", title: "New List", items: [], index: listsManager.lists.count)
         listsManager.addList(newList)
         listIndex = listsManager.lists.count-1
         
@@ -434,7 +440,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
     
     func isTablePullDowned(_ value: Bool) {
         if value == true {
-            if listTableView.contentOffset.y < -40 {
+            if listTableView.contentOffset.y < -40 && !isKeyboardShowing {
                 self.addButtonTapped(addButton)
             }
         }

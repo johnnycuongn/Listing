@@ -146,7 +146,6 @@
 				40FB2C82249B7963001CC036 /* Data Service Test */,
 				406BDDE6249A4E3200E9B99C /* Controller Test */,
 				406BDDE0249A372E00E9B99C /* Model Test */,
-				4056243E2491D8960083B800 /* Info.plist */,
 			);
 			path = ListingTests;
 			sourceTree = "<group>";
@@ -186,6 +185,7 @@
 			children = (
 				40AA4E5E24C0403600D8B215 /* Emoji */,
 				405624292491D8920083B800 /* ListViewController.swift */,
+				4056243E2491D8960083B800 /* Info.plist */,
 				4084636524C2BC5A0091E236 /* ListsTableViewController.swift */,
 			);
 			path = Controller;
