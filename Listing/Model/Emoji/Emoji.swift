@@ -42,39 +42,15 @@ struct Emoji: Codable {
 //        self.unicodeVersion = try valueContainer.decode(Double.self, forKey: CodingKeys.unicodeVersion)
 //        self.iosVersion = try valueContainer.decode(Double.self, forKey: .iosVersion)
     }
-}
-
-struct EmojiCategory {
-
-    var name: String
-    var emojis: [String]
     
-}
-
-extension Character {
-    /// A simple emoji is one scalar and presented to the user as an Emoji
-    var isSimpleEmoji: Bool {
-        guard let firstScalar = unicodeScalars.first else { return false }
-        return firstScalar.properties.isEmoji && firstScalar.value > 0x238C
+    init(emoji: String, description: String, category: String, aliases: [String], tags: [String]) {
+        self.emoji = emoji
+        self.description = description
+        self.category = category
+        self.aliases = aliases
+        self.tags = tags
     }
-
-    /// Checks if the scalars will be merged into an emoji
-    var isCombinedIntoEmoji: Bool { unicodeScalars.count > 1 && unicodeScalars.first?.properties.isEmoji ?? false }
-
-    var isEmoji: Bool { isSimpleEmoji || isCombinedIntoEmoji }
 }
 
-public extension String {
-    var isSingleEmoji: Bool { count == 1 && containsEmoji }
 
-    var containsEmoji: Bool { contains { $0.isEmoji } }
-
-    var containsOnlyEmoji: Bool { !isEmpty && !contains { !$0.isEmoji } }
-
-    var emojiString: String { emojis.map { String($0) }.reduce("", +) }
-
-    var emojis: [Character] { filter { $0.isEmoji } }
-
-    var emojiScalars: [UnicodeScalar] { filter { $0.isEmoji }.flatMap { $0.unicodeScalars } }
-}
 

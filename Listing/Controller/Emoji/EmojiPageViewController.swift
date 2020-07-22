@@ -39,7 +39,7 @@ class EmojiPageViewController: UIViewController {
             
             print(data)
             
-            self.selectedEmoji = data
+            self.selectedEmoji = data.emoji
         }
     }
     

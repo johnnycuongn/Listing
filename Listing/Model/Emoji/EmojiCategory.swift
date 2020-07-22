@@ -8,28 +8,32 @@
 
 import Foundation
 
+struct EmojiCategory {
+    var name: String
+    var emojis: [Emoji]
+}
+
 extension EmojiProvider {
     
         static var categories: [EmojiCategory] {
             
-            var result = [EmojiCategory]()
+            var emojiCategoryResult: [EmojiCategory] = suggestedEmojiCategory
             
             for category in EmojiProvider.categoryTypes {
                 let newCategory = EmojiCategory(name: category, emojis: [])
-                result.append(newCategory)
+                emojiCategoryResult.append(newCategory)
             }
             
             for emoji in EmojiProvider.emojis {
-                for index in 0...result.count-1 {
-                    if emoji.category == result[index].name {
-                        result[index].emojis.append(emoji.emoji)
+                for index in 0...emojiCategoryResult.count-1 {
+                    if emoji.category == emojiCategoryResult[index].name {
+                        emojiCategoryResult[index].emojis.append(emoji)
                     }
                 }
                 /// Count for each category
             }
-            
-//            print(result)
-            return result
+
+            return emojiCategoryResult
         }
         
         static var categoryTypes: [String] {
@@ -43,6 +47,5 @@ extension EmojiProvider {
             
             return result
         }
-    
 }
 

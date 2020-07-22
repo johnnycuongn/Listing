@@ -21,7 +21,11 @@ class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return categories[section].emojis.count
+//        if section == 0 {
+//            return 0
+//        } else {
+            return categories[section].emojis.count
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -30,8 +34,8 @@ class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewData
             
         let sectionData = categories[indexPath.section]
         let data = sectionData.emojis[indexPath.row]
-            if data.isSingleEmoji {
-                cell.configure(with: data)
+        if data.emoji.isSingleEmoji {
+            cell.configure(with: data.emoji)
             }
         
         return cell
