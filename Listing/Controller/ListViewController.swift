@@ -236,7 +236,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
                 return false
             }
                 let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-                return updatedText.count < 20
+                return updatedText.count < 25
         }
         
         return true
@@ -263,7 +263,6 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
             List(emoji: "📆", title: "ToDo", items: [
                 Item(title: "Tap here to delete"),
                 Item(title: "Tap list name to change"),
-                Item(title: "Pull down to add")
                 ]
                 , index: 0),
             List(emoji: "🛒", title: "Groceries", items: [
