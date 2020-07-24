@@ -35,7 +35,6 @@
 		40AA4E6024C0405900D8B215 /* EmojiDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA4E5F24C0405900D8B215 /* EmojiDataService.swift */; };
 		40AA4E6324C0414F00D8B215 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA4E6224C0414F00D8B215 /* EmojiCollectionViewCell.swift */; };
 		40AA4E6524C041CF00D8B215 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA4E6424C041CF00D8B215 /* SectionHeaderView.swift */; };
-		40C8E27224938B2A00416B58 /* TimeIntervalExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */; };
 		40C8E27824949E5500416B58 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27724949E5500416B58 /* DataManager.swift */; };
 		40FB2C84249B7B2D001CC036 /* ListTableViewDataServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */; };
 /* End PBXBuildFile section */
@@ -83,7 +82,6 @@
 		40AA4E5F24C0405900D8B215 /* EmojiDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiDataService.swift; sourceTree = "<group>"; };
 		40AA4E6224C0414F00D8B215 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		40AA4E6424C041CF00D8B215 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
-		40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalExtentions.swift; sourceTree = "<group>"; };
 		40C8E27724949E5500416B58 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewDataServiceTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -263,7 +261,6 @@
 		40C8E27024938AFE00416B58 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				40C8E27124938B2A00416B58 /* TimeIntervalExtentions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -397,7 +394,6 @@
 				4064A63524C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift in Sources */,
 				4053872724C8806A00647756 /* EmojiSuggestion.swift in Sources */,
 				40AA4E5824C03E6300D8B215 /* EmojiProvider.swift in Sources */,
-				40C8E27224938B2A00416B58 /* TimeIntervalExtentions.swift in Sources */,
 				40AA4E5624C03E3A00D8B215 /* Emoji.swift in Sources */,
 				4064A62F24C0B1CE00C1BE21 /* ListsManager.swift in Sources */,
 				405624522491E4CC0083B800 /* ItemCell.swift in Sources */,

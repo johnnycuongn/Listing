@@ -110,12 +110,9 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
         inputItemView.isHidden = true
         
         inputItemTextView.autocapitalizationType = .none
-
-        ////Timer
-        Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(ListViewController.updateTimeLabel), userInfo: nil, repeats: true)
-        
-        
     }
+        
+        
     
     // MARK: - Buttons Action
     
@@ -206,7 +203,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == listTitleTextField {
             guard listTitleTextField.text != "" else {
-                listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+                listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
                 return false
             }
             
@@ -302,15 +299,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
        }
     
     // MARK: View
-    @objc func updateTimeLabel() {
-        let today = Date() ; let tomorrow = Date(timeIntervalSinceNow: 86400)
-        let startOfTomorrow = Calendar.current.startOfDay(for: tomorrow)
-        let timeUntilTomorrow = today.distance(to: startOfTomorrow)
 
-            let timeLeft = timeUntilTomorrow.convertToHourMinutes()
-            self.hourLeftLabel.text = "\(timeLeft.hour)"
-            self.minuteLeftLabel.text = "\(timeLeft.minutes)"
-    }
     
     func listViewUpdate(emoji: String? = nil, title: String? = nil) {
         if emoji != nil {
@@ -429,7 +418,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
         listIndex = listsManager.lists.count-1
         
         listTitleTextField.text = ""
-        listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your item", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+        listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
 
         setHidden(listTitle: true, textField: false)
 
