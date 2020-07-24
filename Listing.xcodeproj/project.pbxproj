@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4036E44024CB27BD00F88D96 /* ListsCollectionViewDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036E43F24CB27BD00F88D96 /* ListsCollectionViewDataService.swift */; };
+		4036E44224CB27FC00F88D96 /* ListsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036E44124CB27FC00F88D96 /* ListsCollectionViewCell.swift */; };
+		4036E44424CB282E00F88D96 /* ListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036E44324CB282E00F88D96 /* ListsViewController.swift */; };
 		4053872524C87F8000647756 /* EmojiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4053872424C87F8000647756 /* EmojiExtension.swift */; };
 		4053872724C8806A00647756 /* EmojiSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4053872624C8806A00647756 /* EmojiSuggestion.swift */; };
 		405624262491D8920083B800 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624252491D8920083B800 /* AppDelegate.swift */; };
@@ -50,6 +53,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4036E43F24CB27BD00F88D96 /* ListsCollectionViewDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsCollectionViewDataService.swift; sourceTree = "<group>"; };
+		4036E44124CB27FC00F88D96 /* ListsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsCollectionViewCell.swift; sourceTree = "<group>"; };
+		4036E44324CB282E00F88D96 /* ListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListsViewController.swift; sourceTree = "<group>"; };
 		4053872424C87F8000647756 /* EmojiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiExtension.swift; sourceTree = "<group>"; };
 		4053872624C8806A00647756 /* EmojiSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSuggestion.swift; sourceTree = "<group>"; };
 		405624222491D8920083B800 /* Listing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Listing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -167,6 +173,7 @@
 				40AA4E5D24C0402F00D8B215 /* Emoji */,
 				4056244B2491E1890083B800 /* ListTableViewDataService.swift */,
 				4064A63424C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift */,
+				4036E43F24CB27BD00F88D96 /* ListsCollectionViewDataService.swift */,
 			);
 			path = "Data Service";
 			sourceTree = "<group>";
@@ -178,6 +185,7 @@
 				405624512491E4CC0083B800 /* ItemCell.swift */,
 				4064A63224C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift */,
 				4084636324C2BC490091E236 /* ListsTableViewCell.swift */,
+				4036E44124CB27FC00F88D96 /* ListsCollectionViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -189,6 +197,7 @@
 				405624292491D8920083B800 /* ListViewController.swift */,
 				4056243E2491D8960083B800 /* Info.plist */,
 				4084636524C2BC5A0091E236 /* ListsTableViewController.swift */,
+				4036E44324CB282E00F88D96 /* ListsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -389,6 +398,7 @@
 				4056242A2491D8920083B800 /* ListViewController.swift in Sources */,
 				405624262491D8920083B800 /* AppDelegate.swift in Sources */,
 				40AA4E5C24C0401500D8B215 /* EmojiPageViewController.swift in Sources */,
+				4036E44224CB27FC00F88D96 /* ListsCollectionViewCell.swift in Sources */,
 				4064A63324C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift in Sources */,
 				40AA4E5A24C03E7900D8B215 /* EmojiCategory.swift in Sources */,
 				4064A63524C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift in Sources */,
@@ -401,10 +411,12 @@
 				40AA4E6524C041CF00D8B215 /* SectionHeaderView.swift in Sources */,
 				4053872524C87F8000647756 /* EmojiExtension.swift in Sources */,
 				40C8E27824949E5500416B58 /* DataManager.swift in Sources */,
+				4036E44424CB282E00F88D96 /* ListsViewController.swift in Sources */,
 				40AA4E6324C0414F00D8B215 /* EmojiCollectionViewCell.swift in Sources */,
 				4064A62D24C0AE7E00C1BE21 /* List.swift in Sources */,
 				4056244C2491E1890083B800 /* ListTableViewDataService.swift in Sources */,
 				4084636624C2BC5A0091E236 /* ListsTableViewController.swift in Sources */,
+				4036E44024CB27BD00F88D96 /* ListsCollectionViewDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

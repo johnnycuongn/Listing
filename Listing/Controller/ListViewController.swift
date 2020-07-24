@@ -15,8 +15,10 @@ enum ListVCError: Error {
 
 public enum Segues {
     static let saveEmoji = "saveEmoji"
-    static let selectedList = "selectedFromListsTableView"
-    static let toListsTableView = "toListsTableView"
+//    static let selectedList = "selectedFromListsTableView"
+    static let selectedList = "selectedFromListsCollectionView"
+//    static let toListsTableView = "toListsTableView"
+    static let toListsVC = "toListViewController"
 }
 
 class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, PullDownToAddable, UITextFieldDelegate {
@@ -355,42 +357,57 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
         }
         
         if segue.identifier == Segues.selectedList {
-            let listsTableVC = segue.source as! ListsTableViewController
+//            let listsTableVC = segue.source as! ListsTableViewController
+//
+//            if let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow {
+//                print("Did Select")
+//                self.listIndex = selectedIndexPath.row
+//            } else if listsTableVC.hasDeleted {
+//                print("Did Delete")
+//                self.listIndex = 0
+//            }
+
             
-            if let selectedIndexPath = listsTableVC.tableView.indexPathForSelectedRow {
-                print("Did Select")
+            let listsVC = segue.source as! ListsViewController
+            
+            if let selectedIndexPath = listsVC.listsCollectionView.indexPathsForSelectedItems?.first {
+                print("Selected: \(selectedIndexPath)")
                 self.listIndex = selectedIndexPath.row
-            } else if listsTableVC.hasDeleted {
-                print("Did Delete")
+            } else if listsVC.hasDeleted {
                 self.listIndex = 0
             }
             listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listIndex+1, section: 0), at: .right, animated: true)
-          
 //            listTableViewDataUpdate()
             listsThumbnailCollectionViewDataUpdate()
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Segues.toListsTableView {
-            guard let navigationVC = segue.destination as? UINavigationController else {
+//        if segue.identifier == Segues.toListsTableView {
+//            guard let navigationVC = segue.destination as? UINavigationController else {
+//                fatalError()
+//            }
+//
+//            guard let listsTableVC = navigationVC.viewControllers[0] as? ListsTableViewController else {
+//                fatalError()
+//            }
+//
+//            listsTableVC.listsManager = self.listsManager
+//        }
+//
+//        if segue.identifier == Segues.selectedList {
+//            guard let navigationVC = segue.destination as? UINavigationController else {
+//                fatalError()
+//            }
+//            guard let listsTableVC = navigationVC.viewControllers[0] as? ListsTableViewController else {
+//                fatalError()
+//            }
+//        }
+        if segue.identifier == Segues.toListsVC {
+            guard let listsVC = segue.destination as? ListsViewController else  {
                 fatalError()
             }
-            
-            guard let listsTableVC = navigationVC.viewControllers[0] as? ListsTableViewController else {
-                fatalError()
-            }
-            
-            listsTableVC.listsManager = self.listsManager
-        }
-        
-        if segue.identifier == Segues.selectedList {
-            guard let navigationVC = segue.destination as? UINavigationController else {
-                fatalError()
-            }
-            guard let listsTableVC = navigationVC.viewControllers[0] as? ListsTableViewController else {
-                fatalError()
-            }
+            listsVC.listsManager = self.listsManager
         }
     }
     

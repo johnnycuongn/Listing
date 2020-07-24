@@ -8,9 +8,9 @@
 
 import UIKit
 
-protocol ListsDeletable {
-    func delete(list cell: ListsTableViewCell)
-}
+//protocol ListsDeletable {
+//    func delete(list cell: ListsTableViewCell)
+//}
 
 class ListsTableViewCell: UITableViewCell {
     
@@ -19,7 +19,7 @@ class ListsTableViewCell: UITableViewCell {
     @IBOutlet weak var emojiButton: UIButton!
     @IBOutlet weak var listTitleLabel: UILabel!
     
-    var listsDeleteService: ListsDeletable?
+//    var listsDeleteService: ListsDeletable?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -36,7 +36,7 @@ class ListsTableViewCell: UITableViewCell {
     }
     
     @IBAction func deleteListTapped(_ sender: UIButton) {
-        listsDeleteService?.delete(list: self)
+//        listsDeleteService?.delete(list: self)
     }
     
 

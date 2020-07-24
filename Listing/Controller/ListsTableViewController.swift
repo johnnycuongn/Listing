@@ -8,7 +8,8 @@
 
 import UIKit
 
-class ListsTableViewController: UITableViewController, ListsDeletable {
+class ListsTableViewController: UITableViewController {
+    
 
     var listsManager: ListsManager?
     
@@ -44,7 +45,7 @@ class ListsTableViewController: UITableViewController, ListsDeletable {
         
         let list = listsManager!.lists[indexPath.row]
 
-        cell.listsDeleteService = self
+//        cell.listsDeleteService = self
         cell.configure(withEmoji: list.emoji, title: list.title)
 
         return cell
