@@ -45,7 +45,6 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
     @IBOutlet weak var inputItemView: UIStackView!
     
     /// - Undo View
-    @IBOutlet weak var undoView: UIView!
     @IBOutlet weak var undoButton: UIButton!
     
     /// - Model Variables
@@ -100,6 +99,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
         undoButton.layer.cornerRadius = 10
         undoButton.layer.borderWidth = 0.7
         undoButton.layer.borderColor = UIColor.init(named: "Destructive")?.cgColor
+        undoButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
 
         
 //         listsThumbnailCollectionViewDataUpdate()
@@ -486,11 +486,11 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
         if isPresented == false {
             listIndicator.isHidden = false
             self.listsThumbnailCollectionView.isHidden = false
-            self.undoView.isHidden = true
+            undoButton.isHidden = true
         } else {
             listIndicator.isHidden = true
             listsThumbnailCollectionView.isHidden = true
-            undoView.isHidden = false
+            undoButton.isHidden = false
         }
     }
     
