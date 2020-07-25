@@ -21,12 +21,14 @@ public enum Segues {
     static let toListsVC = "toListViewController"
 }
 
-class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, PullDownToAddable, UITextFieldDelegate {
-    
+class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, PullDownToAddable, UITextFieldDelegate, CellUndoable {
+
     /// - Systems
     @IBOutlet weak var listTableView: UITableView!
     @IBOutlet var dataService: ListTableViewDataService!
     
+    
+    @IBOutlet weak var listIndicator: UILabel!
     @IBOutlet weak var listsThumbnailCollectionView: UICollectionView!
     @IBOutlet var listsThumbnailCollectionViewDataService: ListsThumbnailCollectionViewDataService!
     
@@ -36,14 +38,15 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
     @IBOutlet weak var listTitleButton: UIButton!
     @IBOutlet weak var listTitleTextField: UITextField!
     
-    /// - Time Labels
-    @IBOutlet weak var hourLeftLabel: UILabel!
-    @IBOutlet weak var minuteLeftLabel: UILabel!
     /// - View's Buttons Outlets
     @IBOutlet weak var addButton: UIButton!
     /// - Input Item Outlets
     @IBOutlet weak var inputItemTextView: UITextView!
     @IBOutlet weak var inputItemView: UIStackView!
+    
+    /// - Undo View
+    @IBOutlet weak var undoView: UIView!
+    @IBOutlet weak var undoButton: UIButton!
     
     /// - Model Variables
     var listIndex = 0 {
@@ -92,6 +95,12 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
  
         self.inputItemTextView.delegate = self
         self.listTitleTextField.delegate = self
+        
+        undoViewPresented(false)
+        undoButton.layer.cornerRadius = 10
+        undoButton.layer.borderWidth = 0.7
+        undoButton.layer.borderColor = UIColor.init(named: "Destructive")?.cgColor
+
         
 //         listsThumbnailCollectionViewDataUpdate()
 //         listTableViewDataUpdate()
@@ -247,8 +256,25 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
         inputItemTextView.resignFirstResponder()
     }
     
+    @IBAction func undoButtonTapped(_ sender: UIButton) {
+        
+        guard let deletedItem = deletedItem,
+            let deletedItemIndex = deletedItemIndex else {
+            return
+        }
+        
+         self.currentList.items.insert(deletedItem, at: deletedItemIndex.row)
+        self.listTableView.insertRows(at: [deletedItemIndex], with: .fade)
+        
+        self.stopTimer()
+        undoViewPresented(false)
+        
+        
+    }
     
-    // MARK: - Convenience methods
+    
+    
+    // MARK: - Helper Methods
     
     // MARK: Model & Data
     func loadList() {
@@ -296,6 +322,7 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
            dataService.listIndex = self.listIndex
         
             dataService.pullDownService = self
+        dataService.cellUndoable = self
            
            listTableView.reloadData()
        }
@@ -443,6 +470,8 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
         listTitleTextField.returnKeyType = .default
     }
     
+    // MARK: - Delegate
+    
     func isTablePullDowned(_ value: Bool) {
         if value == true {
             if listTableView.contentOffset.y < -40 && !isKeyboardShowing {
@@ -451,6 +480,45 @@ class ListViewController: UIViewController, UITextViewDelegate, ListUpdatable, P
         }
     }
     
+    
+    
+    @objc func undoViewPresented(_ isPresented: Bool = false) {
+        if isPresented == false {
+            listIndicator.isHidden = false
+            self.listsThumbnailCollectionView.isHidden = false
+            self.undoView.isHidden = true
+        } else {
+            listIndicator.isHidden = true
+            listsThumbnailCollectionView.isHidden = true
+            undoView.isHidden = false
+        }
+    }
+    
+    var deletedItemIndex: IndexPath?
+    var deletedItem: Item?
+    func undo(item: Item, with index: IndexPath) -> Bool {
+        
+        undoViewPresented(true)
+        stopTimer()
+        startTimer()
+        
+        self.deletedItem = item
+        self.deletedItemIndex = index
+        return true
+    }
+    
+    // MARK: - Convinience Methods
+    var timer: Timer?
+    
+    func startTimer() {
+        print("Timer Start")
+        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.undoViewPresented), userInfo: nil, repeats: false)
+    }
+    
+    func stopTimer() {
+        self.timer?.invalidate()
+        self.timer = nil
+    }
 }
 
 

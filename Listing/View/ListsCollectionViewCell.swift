@@ -34,8 +34,9 @@ class ListsCollectionViewCell: UICollectionViewCell {
     }
     
     func setUpCellView() {
-        self.contentView.layer.cornerRadius = 5
-        self.contentView.layer.borderWidth = 0.1
+        self.contentView.layer.cornerRadius = 8
+        self.contentView.layer.borderWidth = 0.5
+        self.contentView.layer.borderColor = UIColor.gray.cgColor
     }
     
     

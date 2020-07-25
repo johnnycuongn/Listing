@@ -164,7 +164,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H4f-qh-ZUI">
+                            <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="H4f-qh-ZUI">
                                 <rect key="frame" x="44" y="677" width="264" height="44"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="mTu-JE-B1O">
@@ -203,23 +203,54 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ql6-MC-wit">
+                                <rect key="frame" x="44" y="677" width="264" height="44"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9A3-mm-CdO">
+                                        <rect key="frame" x="158.33333333333334" y="0.0" width="105.66666666666666" height="44"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="tintColor" red="0.83572345889999999" green="0.38069545090000001" blue="0.37840723679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <state key="normal" title="Undo" image="return" catalog="system">
+                                            <color key="titleColor" red="0.67450980392156867" green="0.38039215686274508" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="light"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="undoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ldI-kl-ihv"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="9A3-mm-CdO" firstAttribute="width" secondItem="ql6-MC-wit" secondAttribute="width" multiplier="0.4" id="0R5-WV-yzA"/>
+                                    <constraint firstAttribute="bottom" secondItem="9A3-mm-CdO" secondAttribute="bottom" id="g8d-ms-qZw"/>
+                                    <constraint firstItem="9A3-mm-CdO" firstAttribute="top" secondItem="ql6-MC-wit" secondAttribute="top" id="s26-sn-61t"/>
+                                    <constraint firstAttribute="trailing" secondItem="9A3-mm-CdO" secondAttribute="trailing" id="sZF-5L-d58"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="ql6-MC-wit" firstAttribute="top" secondItem="H4f-qh-ZUI" secondAttribute="top" id="0sd-Q7-IeE"/>
                             <constraint firstItem="GbA-B1-Wbb" firstAttribute="leading" secondItem="H4f-qh-ZUI" secondAttribute="leading" constant="0.29999999999999999" id="3eK-UB-oNb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ngn-Zt-c9f" secondAttribute="trailing" id="476-cc-ibM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C3m-6m-R7X" secondAttribute="trailing" constant="15" id="500-Ad-UAa"/>
                             <constraint firstItem="Rfm-TX-PFh" firstAttribute="top" secondItem="ngn-Zt-c9f" secondAttribute="bottom" constant="6" id="85O-Qj-kR4"/>
                             <constraint firstItem="ngn-Zt-c9f" firstAttribute="top" secondItem="WCC-4R-dMH" secondAttribute="bottom" constant="8" id="9bp-xH-2XR"/>
+                            <constraint firstItem="ql6-MC-wit" firstAttribute="trailing" secondItem="H4f-qh-ZUI" secondAttribute="trailing" id="BBd-cL-Rgt"/>
                             <constraint firstItem="H4f-qh-ZUI" firstAttribute="height" secondItem="C3m-6m-R7X" secondAttribute="height" multiplier="0.8" id="BNO-ui-8H7"/>
                             <constraint firstItem="0gu-jm-5lt" firstAttribute="leading" secondItem="WCC-4R-dMH" secondAttribute="trailing" constant="10" id="C6q-CT-pVY"/>
                             <constraint firstItem="NLe-zp-v14" firstAttribute="centerY" secondItem="H4f-qh-ZUI" secondAttribute="centerY" id="EJd-9g-kcn"/>
+                            <constraint firstItem="ql6-MC-wit" firstAttribute="height" secondItem="H4f-qh-ZUI" secondAttribute="height" id="HCv-N3-hu5"/>
                             <constraint firstItem="C3m-6m-R7X" firstAttribute="leading" secondItem="H4f-qh-ZUI" secondAttribute="trailing" constant="36" id="Iy4-N2-sKJ"/>
                             <constraint firstItem="Rfm-TX-PFh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="KGa-Ks-Gsy"/>
+                            <constraint firstItem="ql6-MC-wit" firstAttribute="leading" secondItem="H4f-qh-ZUI" secondAttribute="leading" id="Lmc-JL-Og7"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rfm-TX-PFh" secondAttribute="trailing" constant="5" id="NTf-O0-gCw"/>
+                            <constraint firstItem="ql6-MC-wit" firstAttribute="width" secondItem="H4f-qh-ZUI" secondAttribute="width" id="Q2R-Sg-wjk"/>
                             <constraint firstItem="H4f-qh-ZUI" firstAttribute="top" secondItem="GbA-B1-Wbb" secondAttribute="bottom" id="Sbt-js-Tsq"/>
                             <constraint firstItem="WCC-4R-dMH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="eat-iD-8vn"/>
                             <constraint firstItem="C3m-6m-R7X" firstAttribute="top" secondItem="Rfm-TX-PFh" secondAttribute="bottom" constant="6" id="f7C-nP-Aqw"/>
+                            <constraint firstItem="ql6-MC-wit" firstAttribute="bottom" secondItem="H4f-qh-ZUI" secondAttribute="bottom" id="f8g-gZ-7cC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="C3m-6m-R7X" secondAttribute="bottom" constant="15" id="fXh-ND-bG7"/>
                             <constraint firstItem="6uX-mM-CX9" firstAttribute="bottom" secondItem="WCC-4R-dMH" secondAttribute="bottom" id="gkg-3M-UvK"/>
                             <constraint firstItem="6uX-mM-CX9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="h88-mD-ubJ"/>
@@ -242,11 +273,14 @@
                         <outlet property="emojiButton" destination="WCC-4R-dMH" id="mK8-Xt-2iN"/>
                         <outlet property="inputItemTextView" destination="lXI-70-2dF" id="nTD-8N-aEw"/>
                         <outlet property="inputItemView" destination="Bdr-m7-VnP" id="fpq-C1-qAO"/>
+                        <outlet property="listIndicator" destination="GbA-B1-Wbb" id="ajI-Bl-UEC"/>
                         <outlet property="listTableView" destination="cy1-10-P9z" id="wHF-6J-3i1"/>
                         <outlet property="listTitleButton" destination="6uX-mM-CX9" id="5bb-Cm-a4F"/>
                         <outlet property="listTitleTextField" destination="0gu-jm-5lt" id="1Jx-yO-eXQ"/>
                         <outlet property="listsThumbnailCollectionView" destination="H4f-qh-ZUI" id="N6C-3i-NZK"/>
                         <outlet property="listsThumbnailCollectionViewDataService" destination="jnq-vK-aS5" id="JXW-hB-aZl"/>
+                        <outlet property="undoButton" destination="9A3-mm-CdO" id="mS2-ek-e2b"/>
+                        <outlet property="undoView" destination="ql6-MC-wit" id="tuE-Rn-K5g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -409,6 +443,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="eb9-Dy-Fkf" secondAttribute="bottom" id="W25-Kk-Fol"/>
                                             </constraints>
                                         </collectionViewCellContentView>
+                                        <color key="tintColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <connections>
                                             <outlet property="emojiButton" destination="fJu-Aw-c6F" id="8mf-k0-JtG"/>
                                             <outlet property="listTitleLabel" destination="Z86-Ps-aPY" id="z6t-mQ-ORh"/>
@@ -549,6 +584,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="return" catalog="system" width="128" height="101"/>
         <image name="text.justify" catalog="system" width="128" height="100"/>
     </resources>
 </document>

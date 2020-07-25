@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol CellUndoable {
+    func undo(item: Item, with index: IndexPath) -> Bool
+}
+
 public protocol PullDownToAddable {
     func isTablePullDowned(_ value: Bool)
 }
@@ -18,6 +22,7 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     var listsManager: ListsManager?
     var listIndex: Int?
     var pullDownService: PullDownToAddable!
+    var cellUndoable: CellUndoable!
     
     var currentList: List {
         guard listsManager != nil else { fatalError() }
@@ -69,10 +74,14 @@ class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDele
     // MARK: - Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        currentList.deleteItem(at: indexPath.row)
+        
+        let deletedIndexPath = indexPath
+        let deletedItem = currentList.items.remove(at: indexPath.row)
         
         tableView.deleteRows(at: [indexPath], with: .fade)
+        cellUndoable.undo(item: deletedItem, with: deletedIndexPath)
+//            self.currentList.deleteItem(at: indexPath.row)
+//            tableView.deleteRows(at: [indexPath], with: .fade)
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
