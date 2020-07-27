@@ -20,10 +20,10 @@ extension EmojiProvider {
             Emoji(emoji: "🏠", description: "house", category: "Travel & Places", aliases: ["house"], tags: [])
         ]),
         EmojiCategory(name: "Personal & Work", emojis: [
+            
             Emoji(emoji: "💭", description: "thought balloon", category: "Smileys & Emotion", aliases: ["thought_balloon"], tags: ["thinking"]),
             Emoji(emoji: "🧭", description: "compass", category: "Travel & Places", aliases: ["compass"], tags: []),
             Emoji(emoji: "💡", description: "light bulb", category: "Objects", aliases: ["bulb"], tags: ["idea", "light"]),
-            
             Emoji(emoji: "📅", description: "calendar", category: "Objects", aliases: ["date"], tags: ["calendar", "schedule"]),
             Emoji(emoji: "📚", description: "books", category: "Objects", aliases: ["books"], tags: ["library"]),
             Emoji(emoji: "📖", description: "open book", category: "Objects", aliases: ["book", "open_book"], tags: []),
@@ -41,29 +41,30 @@ extension EmojiProvider {
             Emoji(emoji: "📎", description: "paperclip", category: "Objects", aliases: ["paperclip"], tags: []),
             Emoji(emoji: "🖇️", description: "linked paperclips", category: "Objects", aliases: ["paperclips"], tags: []),
             Emoji(emoji: "🗑️", description: "wastebasket", category: "Objects", aliases: ["wastebasket"], tags: ["trash"])
-        ]),
-        EmojiCategory(name: "Medicine", emojis: [
-            Emoji(emoji: "🥼", description: "lab coat", category: "Objects", aliases: ["lab_coat"], tags: []),
-            Emoji(emoji: "🔬", description: "microscope", category: "Objects", aliases: ["microscope"], tags: ["science", "laboratory", "investigate"]),
             
-             Emoji(emoji: "⚗️", description: "alembic", category: "Objects", aliases: ["alembic"], tags: []),
-            
-            Emoji(emoji: "🧪", description: "test tube", category: "Objects", aliases: ["test_tube"], tags: []),
-            
-            Emoji(emoji: "🧬", description: "dna", category: "Objects", aliases: ["dna"], tags: []),
-       
-            Emoji(emoji: "💊", description: "pill", category: "Objects", aliases: ["pill"], tags: ["health", "medicine"]),
-          
-            Emoji(emoji: "🩺", description: "stethoscope", category: "Objects", aliases: ["stethoscope"], tags: []),
-                   
-            Emoji(emoji: "💉", description: "syringe", category: "Objects", aliases: ["syringe"], tags: ["health", "hospital", "needle"]),
-            
-            Emoji(emoji: "🩸", description: "drop of blood", category: "Objects", aliases: ["drop_of_blood"], tags: []),
-                   
-            Emoji(emoji: "🩹", description: "adhesive bandage", category: "Objects", aliases: ["adhesive_bandage"], tags: [])
-            
-      
         ])
+//        , EmojiCategory(name: "Medicine", emojis: [
+//            Emoji(emoji: "🥼", description: "lab coat", category: "Objects", aliases: ["lab_coat"], tags: []),
+//            Emoji(emoji: "🔬", description: "microscope", category: "Objects", aliases: ["microscope"], tags: ["science", "laboratory", "investigate"]),
+//
+//             Emoji(emoji: "⚗️", description: "alembic", category: "Objects", aliases: ["alembic"], tags: []),
+//
+//            Emoji(emoji: "🧪", description: "test tube", category: "Objects", aliases: ["test_tube"], tags: []),
+//
+//            Emoji(emoji: "🧬", description: "dna", category: "Objects", aliases: ["dna"], tags: []),
+//
+//            Emoji(emoji: "💊", description: "pill", category: "Objects", aliases: ["pill"], tags: ["health", "medicine"]),
+//
+//            Emoji(emoji: "🩺", description: "stethoscope", category: "Objects", aliases: ["stethoscope"], tags: []),
+//
+//            Emoji(emoji: "💉", description: "syringe", category: "Objects", aliases: ["syringe"], tags: ["health", "hospital", "needle"]),
+//
+//            Emoji(emoji: "🩸", description: "drop of blood", category: "Objects", aliases: ["drop_of_blood"], tags: []),
+//
+//            Emoji(emoji: "🩹", description: "adhesive bandage", category: "Objects", aliases: ["adhesive_bandage"], tags: [])
+//
+//
+//        ])
     ]
     
 }

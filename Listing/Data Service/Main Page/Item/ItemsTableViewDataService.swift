@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CellUndoable {
-    func undo(item: Item, with index: IndexPath) -> Bool
+    func undo(item: Item, with index: IndexPath)
 }
 
 public protocol PullDownToAddable {

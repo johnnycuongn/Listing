@@ -58,7 +58,7 @@ class List: Codable {
     func moveItem(from startIndex: Int, to endIndex: Int) {
         guard startIndex != endIndex else { return }
         
-        var movedItem = items.remove(at: startIndex)
+        let movedItem = items.remove(at: startIndex)
         items.insert(movedItem, at: endIndex)
     }
     

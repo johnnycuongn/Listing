@@ -89,30 +89,17 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
  
         self.inputItemTextView.delegate = self
         self.listTitleTextField.delegate = self
-        
-        undoViewPresented(false)
-        undoButton.layer.cornerRadius = 10
-        undoButton.layer.borderWidth = 0.7
-        undoButton.layer.borderColor = UIColor.init(named: "Destructive")?.cgColor
-        undoButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        
-        view.bringSubviewToFront(undoButton)
-        
+
         ////List Table View
         listTableView.isEditing = true
         listTableView.allowsSelectionDuringEditing = true
         
      
         ////View
-        listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*3-12)
-        
-        listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
+        setUpView()
         
         listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
-        
-        addButton.layer.cornerRadius = addButton.frame.size.width / 2
-        inputItemView.isHidden = true
-        
+    
         inputItemTextView.autocapitalizationType = .none
     }
         
@@ -160,11 +147,7 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         undoViewPresented(false)
     }
     
-    
-    
-    // MARK: - Helper Methods
-    
-    // MARK: Model & Data
+    // MARK: - Set Up
     func loadList() {
         
         listsManager.lists = DataManager.loadAll(from: List.self).sorted {
@@ -192,6 +175,30 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         listsThumbnailCollectionViewDataUpdate()
     }
     
+    func setUpView() {
+        /// Undo Button
+        undoViewPresented(false)
+        undoButton.layer.cornerRadius = 10
+        undoButton.layer.borderWidth = 0.7
+        undoButton.layer.borderColor = UIColor.init(named: "Destructive")?.cgColor
+        undoButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        
+        view.bringSubviewToFront(undoButton)
+        /// List Thumbnail Collection View
+        listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*3-12)
+        listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
+        
+        /// Add Button
+        addButton.layer.cornerRadius = addButton.frame.size.width / 2
+        
+        /// Item Input Itew
+        inputItemView.isHidden = true
+        
+    }
+    
+    // MARK: - Helper Methods
+    
+    // MARK: Reload Instance
     func listsThumbnailCollectionViewDataUpdate() {
            listsThumbnailCollectionViewDataService.listManager = self.listsManager
            listsThumbnailCollectionViewDataService.listIndex = self.listIndex

@@ -33,7 +33,7 @@ class EmojiPageViewController: UIViewController {
                 return
             }
             
-            var categories = EmojiProvider.categories
+            let categories = EmojiProvider.categories
             let sectionData = categories[indexPath.section]
             let data = sectionData.emojis[indexPath.row]
             

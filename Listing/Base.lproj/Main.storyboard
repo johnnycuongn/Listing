@@ -31,8 +31,8 @@
                                     <segue destination="szs-ul-c3X" kind="showDetail" identifier="toEmojiPage" id="LWH-D6-8I7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uX-mM-CX9">
-                                <rect key="frame" x="49" y="54" width="89" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="top" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uX-mM-CX9">
+                                <rect key="frame" x="48" y="54" width="89" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Title is littt">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -41,16 +41,17 @@
                                     <action selector="listTitleButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IuF-5c-dzx"/>
                                 </connections>
                             </button>
-                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gu-jm-5lt">
-                                <rect key="frame" x="49" y="54" width="89" height="30"/>
+                            <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="bottom" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gu-jm-5lt">
+                                <rect key="frame" x="47" y="54" width="89" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ngn-Zt-c9f" userLabel="Line Break">
-                                <rect key="frame" x="0.0" y="92" width="414" height="2"/>
+                            <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ngn-Zt-c9f" userLabel="Line Break">
+                                <rect key="frame" x="0.0" y="92" width="414" height="1.5"/>
                                 <color key="backgroundColor" red="0.34924254440000002" green="0.34924254440000002" blue="0.34924254440000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="g74-TG-P3s"/>
+                                    <constraint firstAttribute="height" constant="1.5" id="g74-TG-P3s"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="C3m-6m-R7X">
@@ -87,7 +88,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Rfm-TX-PFh">
-                                <rect key="frame" x="5" y="100" width="404" height="686"/>
+                                <rect key="frame" x="5" y="99.5" width="404" height="686.5"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Bdr-m7-VnP">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="34"/>
@@ -122,7 +123,7 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cy1-10-P9z">
-                                        <rect key="frame" x="0.0" y="41" width="404" height="645"/>
+                                        <rect key="frame" x="0.0" y="41" width="404" height="645.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" id="yAE-GD-dfl" customClass="ItemCell" customModule="Listing" customModuleProvider="target">
@@ -232,7 +233,7 @@
                             <constraint firstItem="Rfm-TX-PFh" firstAttribute="top" secondItem="ngn-Zt-c9f" secondAttribute="bottom" constant="6" id="85O-Qj-kR4"/>
                             <constraint firstItem="ngn-Zt-c9f" firstAttribute="top" secondItem="WCC-4R-dMH" secondAttribute="bottom" constant="8" id="9bp-xH-2XR"/>
                             <constraint firstItem="H4f-qh-ZUI" firstAttribute="height" secondItem="C3m-6m-R7X" secondAttribute="height" multiplier="0.8" id="BNO-ui-8H7"/>
-                            <constraint firstItem="0gu-jm-5lt" firstAttribute="leading" secondItem="WCC-4R-dMH" secondAttribute="trailing" constant="10" id="C6q-CT-pVY"/>
+                            <constraint firstItem="0gu-jm-5lt" firstAttribute="leading" secondItem="WCC-4R-dMH" secondAttribute="trailing" constant="8" id="C6q-CT-pVY"/>
                             <constraint firstItem="NLe-zp-v14" firstAttribute="centerY" secondItem="H4f-qh-ZUI" secondAttribute="centerY" id="EJd-9g-kcn"/>
                             <constraint firstItem="C3m-6m-R7X" firstAttribute="leading" secondItem="H4f-qh-ZUI" secondAttribute="trailing" constant="36" id="Iy4-N2-sKJ"/>
                             <constraint firstItem="Rfm-TX-PFh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="KGa-Ks-Gsy"/>
@@ -245,7 +246,7 @@
                             <constraint firstItem="6uX-mM-CX9" firstAttribute="bottom" secondItem="WCC-4R-dMH" secondAttribute="bottom" id="gkg-3M-UvK"/>
                             <constraint firstItem="6uX-mM-CX9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="h88-mD-ubJ"/>
                             <constraint firstItem="ngn-Zt-c9f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="huH-OS-Dcn"/>
-                            <constraint firstItem="6uX-mM-CX9" firstAttribute="leading" secondItem="WCC-4R-dMH" secondAttribute="trailing" constant="10" id="i7R-ei-0FA"/>
+                            <constraint firstItem="6uX-mM-CX9" firstAttribute="leading" secondItem="WCC-4R-dMH" secondAttribute="trailing" constant="9" id="i7R-ei-0FA"/>
                             <constraint firstItem="0gu-jm-5lt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="icH-Tg-OES"/>
                             <constraint firstItem="H4f-qh-ZUI" firstAttribute="leading" secondItem="NLe-zp-v14" secondAttribute="trailing" constant="10" id="kO9-Hp-lF3"/>
                             <constraint firstItem="NLe-zp-v14" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="kgs-ic-cMo"/>
