@@ -45,7 +45,6 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
 
-        
         cell.config(item: currentList.items[indexPath.row])
         
         return cell
@@ -87,15 +86,6 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         pullDownService.isTablePullDowned(true)
     }
-
-    
-
-    
-
-    
-    
-    
-    
-    
+ 
 
 }

@@ -23,6 +23,7 @@ class EmojiProvider {
         let fileManager = FileManager.default
         let documentURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("Emojis.json")
         
+        /// Copy Emojis.json from App Bundle to User Local Document
         let baseURL = Bundle.main.url(forResource: "Emojis", withExtension: "json")
         do {
             guard let baseURL = baseURL else { fatalError() }

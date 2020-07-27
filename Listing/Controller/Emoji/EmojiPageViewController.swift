@@ -37,7 +37,9 @@ class EmojiPageViewController: UIViewController {
             let sectionData = categories[indexPath.section]
             let data = sectionData.emojis[indexPath.row]
             
-            print(data)
+            print(data.emoji.isSingleEmoji)
+            print(data.emoji.isOneEmoji)
+            print(data.emoji.containsEmoji)
             
             self.selectedEmoji = data.emoji
         }

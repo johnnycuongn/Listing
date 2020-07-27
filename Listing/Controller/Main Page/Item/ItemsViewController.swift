@@ -13,15 +13,7 @@ enum ListVCError: Error {
     case emptyText
 }
 
-public enum Segues {
-    enum unwind {
-        static let saveEmoji = "saveEmoji"
-        static let selectedList = "selectedFromListsCollectionView"
-    }
-    static let toListsVC = "toListViewController"
-}
-
-class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, PullDownToAddable, UITextFieldDelegate, CellUndoable {
+class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDelegate {
 
     /// - Systems
     @IBOutlet weak var listTableView: UITableView!
@@ -53,11 +45,11 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
             /// Stop listTableView load too much when list thumbnail is scrolling
             if (listsThumbnailCollectionView.isDragging || listsThumbnailCollectionView.isDecelerating) {
                 if listIndex != oldValue {
-                    listViewUpdate(emoji: currentList.emoji, title: currentList.title)
+                    listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
                     listTableViewDataUpdate()
                 }
             } else {
-                listViewUpdate(emoji: currentList.emoji, title: currentList.title)
+                listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
                 listTableViewDataUpdate()
                 
             }
@@ -76,6 +68,9 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
     
     var isCreatingList: Bool = false
     var isKeyboardShowing: Bool = false
+    
+    var deletedItemIndex: IndexPath?
+    var deletedItem: Item?
 
     //MARK: -
     
@@ -102,10 +97,6 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
         undoButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         
         view.bringSubviewToFront(undoButton)
-
-        
-//         listsThumbnailCollectionViewDataUpdate()
-//         listTableViewDataUpdate()
         
         ////List Table View
         listTableView.isEditing = true
@@ -117,7 +108,7 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
         
         listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
         
-        listViewUpdate(emoji: currentList.emoji, title: currentList.title)
+        listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
         
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
         inputItemView.isHidden = true
@@ -131,9 +122,8 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
     
     
     @IBAction func listTitleButtonTapped(_ sender: Any) {
-        
         listTitleTextField.text = listTitleButton.titleLabel!.text
-        setHidden(listTitle: true, textField: false)
+        setHidden(listTitleTextField: false)
         
         listTitleButton.setTitle("", for: .normal)
         
@@ -149,110 +139,8 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
         inputItemTextView.becomeFirstResponder()
         isKeyboardShowing = true
     }
-    
-    // MARK: - Text View
-    
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 
-            let currentText:String = textView.text
-            let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
-            
-            if updatedText.isEmpty {
-                resetToPlaceHolder()
-            }
-
-             else if textView.textColor == UIColor.lightGray && !text.isEmpty {
-                textView.textColor = UIColor.white
-                textView.text = text
-                    if (text == "\n") && textView.text == "\n" {
-                        textView.resignFirstResponder()
-                        isKeyboardShowing = false
-                        inputItemView.isHidden = true
-                        return false
-                    }
-                textView.returnKeyType = .default
-                textView.reloadInputViews()
-            }
-                
-            else {
-                if text == "\n" && textView.text != "" {
-                    do {
-                        try addNewItem(from: textView)
-                            resetToPlaceHolder()
-                    } catch {
-                    }
-                    return false
-                }
-                return true
-            }
-            return false
-        }
-    
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        if self.view.window != nil {
-            if textView.textColor == UIColor.lightGray {
-                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-            }
-        }
-    }
-    
-    // MARK: - Text Field
-    
-    @IBAction func textFieldEdittingDidBegin(_ sender: UITextField) {
-        if sender == listTitleTextField {
-            isKeyboardShowing = true
-            listTitleTextField.returnKeyType = .default
-        }
-        
-    }
-    
-    @IBAction func textFieldEdittingChanged(_ sender: UITextField) {
-        if sender == listTitleTextField {
-        }
-
-        
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if textField == listTitleTextField {
-            guard listTitleTextField.text != "" else {
-                listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
-                return false
-            }
-            
-            currentList.title = listTitleTextField.text!
-            
-            listViewUpdate(title: listTitleTextField.text)
-            setHidden(listTitle: false, textField: true)
-            
-            listsThumbnailCollectionViewDataUpdate()
-            
-            if isCreatingList == true {
-                listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listsManager.lists.count, section: 0), at: .right, animated: true)
-            }
-            
-            isCreatingList = false
-            isKeyboardShowing = false
-            textField.resignFirstResponder()
-        }
-        
-        return true
-    }
-    
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-            if textField == listTitleTextField {
-                let currentText = textField.text ?? ""
-            guard let stringRange = Range(range, in: currentText) else {
-                return false
-            }
-                let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-                return updatedText.count < 25
-        }
-        
-        return true
-    }
-
-    @IBAction func closeTextField(_ sender: Any) {
+    @IBAction func closeItemInputView(_ sender: Any) {
         isKeyboardShowing = false
         inputItemView.isHidden = true
         inputItemTextView.resignFirstResponder()
@@ -270,8 +158,6 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
         
         self.stopTimer()
         undoViewPresented(false)
-        
-        
     }
     
     
@@ -289,7 +175,7 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
             listsManager.lists = [
             List(emoji: "📆", title: "ToDo", items: [
                 Item(title: "Tap here to delete"),
-                Item(title: "Tap list name to change"),
+                Item(title: "Tap list title to change"),
                 ]
                 , index: 0),
             List(emoji: "🛒", title: "Groceries", items: [
@@ -299,9 +185,7 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
                 , index: 1)
             ]
             
-            for index in 0...listsManager.lists.count-1 {
-                listsManager.lists[index].saveList()
-            }
+            listsManager.updateIndexForLists()
         }
         
         listTableViewDataUpdate()
@@ -329,10 +213,20 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
            listTableView.reloadData()
        }
     
+    // MARK: Model Update
+    func addNewItem(from textView: UITextView) throws {
+        guard textView.text != "" else {
+            throw ListVCError.emptyText
+        }
+        
+        let newItem = Item(title: textView.text!)
+        self.currentList.addItem(newItem, from: .top)
+        listTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+    }
+    
     // MARK: View
 
-    
-    func listViewUpdate(emoji: String? = nil, title: String? = nil) {
+    func listTitleViewUpdate(emoji: String? = nil, title: String? = nil) {
         if emoji != nil {
             emojiButton.setTitle(emoji, for: .normal) }
         if title != nil {
@@ -340,117 +234,10 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
 
     }
     
-    func setHidden(listTitle: Bool, textField: Bool) {
-
-        self.listTitleButton.isHidden = listTitle
-        self.listTitleTextField.isHidden = textField
-        
+    func setHidden(listTitleTextField: Bool) {
+        self.listTitleButton.isHidden = !listTitleTextField
+        self.listTitleTextField.isHidden = listTitleTextField
     }
-    
-    // MARK: Actions
-    func addNewItem(from textView: UITextView) throws {
-        guard textView.text != "" else {
-            throw ListVCError.emptyText
-        }
-        
-        let newItem = Item(title: textView.text!)
-        self.currentList.addItemAtTop(newItem)
-        listTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
-    }
-    
-    // MARK: Text Field
-    
-    func resetToPlaceHolder() {
-        inputItemTextView.text = "Enter your item"
-        inputItemTextView.textColor = UIColor.lightGray
-    
-        inputItemTextView.selectedTextRange = inputItemTextView.textRange(from: inputItemTextView.beginningOfDocument, to: inputItemTextView.beginningOfDocument)
-        
-        inputItemTextView.returnKeyType = .done
-        inputItemTextView.reloadInputViews()
-    }
-    
-    
-    // MARK: - Segues
-    
-    @IBAction func unwindToListViewController(segue: UIStoryboardSegue) {
-        if segue.identifier == Segues.unwind.saveEmoji {
-            let emojiPageVC = segue.source as! EmojiPageViewController
-     
-            guard emojiPageVC.selectedEmoji != nil else { return }
-            
-            self.currentList.emoji = emojiPageVC.selectedEmoji!
-            emojiButton.setTitle(emojiPageVC.selectedEmoji, for: .normal)
-            
-            listsThumbnailCollectionView.reloadData()
-        }
-        
-        if segue.identifier == Segues.unwind.selectedList {
-            let listsVC = segue.source as! ListsViewController
-            
-            if let selectedIndexPath = listsVC.listsCollectionView.indexPathsForSelectedItems?.first {
-                print("Selected: \(selectedIndexPath)")
-                self.listIndex = selectedIndexPath.row
-            } else if listsVC.hasDeleted {
-                self.listIndex = 0
-            }
-            listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listIndex+1, section: 0), at: .right, animated: true)
-            listsThumbnailCollectionViewDataUpdate()
-        }
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Segues.toListsVC {
-            guard let listsVC = segue.destination as? ListsViewController else  {
-                fatalError()
-            }
-            listsVC.listsManager = self.listsManager
-        }
-    }
-    
-    // MARK: - Configure List Display
-    
-    func updateList(from offset: Double) {
-        
-        let cellWidth = Double(ListsThumbnailCollectionViewCell.width)
-        
-            if Int(offset/cellWidth) <= listsManager.lists.count-1 && offset > 0 {
-                    listIndex = Int(offset/cellWidth)
-            } else if Int(offset/cellWidth) >= listsManager.lists.count {
-                    listIndex = listsManager.lists.count-1
-            } else if Int(offset/cellWidth) <= 0 {
-                    listIndex = 0
-            }
-        
-    }
-    
-    func addNewList() {
-        isCreatingList = true
-
-        let newList = List(emoji: "📝", title: "New List", items: [], index: listsManager.lists.count)
-        listsManager.addList(newList)
-        listIndex = listsManager.lists.count-1
-        
-        listTitleTextField.text = ""
-        listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
-
-        setHidden(listTitle: true, textField: false)
-
-        listTitleTextField.becomeFirstResponder()
-        listTitleTextField.returnKeyType = .default
-    }
-    
-    // MARK: - Delegate
-    
-    func isTablePullDowned(_ value: Bool) {
-        if value == true {
-            if listTableView.contentOffset.y < -40 && !isKeyboardShowing {
-                self.addButtonTapped(addButton)
-            }
-        }
-    }
-    
-    
     
     @objc func undoViewPresented(_ isPresented: Bool = false) {
         if isPresented == false {
@@ -463,26 +250,14 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
             undoButton.isHidden = false
         }
     }
-    
-    var deletedItemIndex: IndexPath?
-    var deletedItem: Item?
-    func undo(item: Item, with index: IndexPath) -> Bool {
-        
-        undoViewPresented(true)
-        stopTimer()
-        startTimer()
-        
-        self.deletedItem = item
-        self.deletedItemIndex = index
-        return true
-    }
-    
+
     // MARK: - Convinience Methods
     var timer: Timer?
+    var undoTime: Double = 3
     
     func startTimer() {
         print("Timer Start")
-        timer = Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(self.undoViewPresented), userInfo: nil, repeats: false)
+        timer = Timer.scheduledTimer(timeInterval: undoTime, target: self, selector: #selector(self.undoViewPresented), userInfo: nil, repeats: false)
     }
     
     func stopTimer() {
@@ -490,5 +265,6 @@ class ItemsViewController: UIViewController, UITextViewDelegate, ListUpdatable, 
         self.timer = nil
     }
 }
+
 
 

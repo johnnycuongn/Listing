@@ -17,15 +17,11 @@ class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewData
     // MARK: - Data source
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return EmojiProvider.categoryTypes.count
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        if section == 0 {
-//            return 0
-//        } else {
             return categories[section].emojis.count
-//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -44,15 +40,16 @@ class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewData
     // MARK: - Delegate
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
         let sectionData = categories[indexPath.section]
         let data = sectionData.emojis[indexPath.row]
-    
         
     }
     
     // MARK: Section Header View
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
         let sectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: SectionHeaderView.identifier, for: indexPath) as! SectionHeaderView
         
         let category = categories[indexPath.section].name

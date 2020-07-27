@@ -36,6 +36,13 @@
 		40AA4E6324C0414F00D8B215 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA4E6224C0414F00D8B215 /* EmojiCollectionViewCell.swift */; };
 		40AA4E6524C041CF00D8B215 /* SectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40AA4E6424C041CF00D8B215 /* SectionHeaderView.swift */; };
 		40C8E27824949E5500416B58 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C8E27724949E5500416B58 /* DataManager.swift */; };
+		40E0FD8224CF053000A674D1 /* +Segues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8124CF053000A674D1 /* +Segues.swift */; };
+		40E0FD8424CF071200A674D1 /* +ItemInputTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8324CF071200A674D1 /* +ItemInputTextView.swift */; };
+		40E0FD8624CF082800A674D1 /* +ListTitleTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8524CF082800A674D1 /* +ListTitleTextField.swift */; };
+		40E0FD8824CF088100A674D1 /* +Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8724CF088100A674D1 /* +Delegate.swift */; };
+		40E0FD8A24CF151400A674D1 /* +CollectionDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8924CF151400A674D1 /* +CollectionDataSource.swift */; };
+		40E0FD8C24CF160400A674D1 /* +CollectionDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8B24CF160400A674D1 /* +CollectionDelegateFlowLayout.swift */; };
+		40E0FD8E24CF16AB00A674D1 /* +CollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8D24CF16AB00A674D1 /* +CollectionDelegate.swift */; };
 		40FB2C84249B7B2D001CC036 /* ListTableViewDataServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +89,13 @@
 		40AA4E6224C0414F00D8B215 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		40AA4E6424C041CF00D8B215 /* SectionHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionHeaderView.swift; sourceTree = "<group>"; };
 		40C8E27724949E5500416B58 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		40E0FD8124CF053000A674D1 /* +Segues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Segues.swift"; sourceTree = "<group>"; };
+		40E0FD8324CF071200A674D1 /* +ItemInputTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ItemInputTextView.swift"; sourceTree = "<group>"; };
+		40E0FD8524CF082800A674D1 /* +ListTitleTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ListTitleTextField.swift"; sourceTree = "<group>"; };
+		40E0FD8724CF088100A674D1 /* +Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Delegate.swift"; sourceTree = "<group>"; };
+		40E0FD8924CF151400A674D1 /* +CollectionDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CollectionDataSource.swift"; sourceTree = "<group>"; };
+		40E0FD8B24CF160400A674D1 /* +CollectionDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CollectionDelegateFlowLayout.swift"; sourceTree = "<group>"; };
+		40E0FD8D24CF16AB00A674D1 /* +CollectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CollectionDelegate.swift"; sourceTree = "<group>"; };
 		40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewDataServiceTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,14 +138,13 @@
 		405624242491D8920083B800 /* Listing */ = {
 			isa = PBXGroup;
 			children = (
+				405624252491D8920083B800 /* AppDelegate.swift */,
+				405624272491D8920083B800 /* SceneDelegate.swift */,
 				4056244F2491E4930083B800 /* View */,
 				405624472491DD820083B800 /* Model */,
 				4056244A2491E1390083B800 /* Data Service */,
 				405624502491E4990083B800 /* Controller */,
-				40C8E27324939D2C00416B58 /* Delegations */,
 				40C8E27024938AFE00416B58 /* Extensions */,
-				405624252491D8920083B800 /* AppDelegate.swift */,
-				405624272491D8920083B800 /* SceneDelegate.swift */,
 				4056242B2491D8920083B800 /* Main.storyboard */,
 				40AA4E5324C03E0400D8B215 /* Emojis.json */,
 				4056242E2491D8950083B800 /* Assets.xcassets */,
@@ -260,13 +273,6 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
-		40C8E27324939D2C00416B58 /* Delegations */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Delegations;
-			sourceTree = "<group>";
-		};
 		40E0FD7324CEE21A00A674D1 /* Item */ = {
 			isa = PBXGroup;
 			children = (
@@ -320,6 +326,9 @@
 			isa = PBXGroup;
 			children = (
 				4036E44324CB282E00F88D96 /* ListsViewController.swift */,
+				40E0FD8B24CF160400A674D1 /* +CollectionDelegateFlowLayout.swift */,
+				40E0FD8924CF151400A674D1 /* +CollectionDataSource.swift */,
+				40E0FD8D24CF16AB00A674D1 /* +CollectionDelegate.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -328,6 +337,10 @@
 			isa = PBXGroup;
 			children = (
 				405624292491D8920083B800 /* ItemsViewController.swift */,
+				40E0FD8324CF071200A674D1 /* +ItemInputTextView.swift */,
+				40E0FD8524CF082800A674D1 /* +ListTitleTextField.swift */,
+				40E0FD8724CF088100A674D1 /* +Delegate.swift */,
+				40E0FD8124CF053000A674D1 /* +Segues.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -469,16 +482,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40E0FD8424CF071200A674D1 /* +ItemInputTextView.swift in Sources */,
 				40AA4E6024C0405900D8B215 /* EmojiDataService.swift in Sources */,
+				40E0FD8E24CF16AB00A674D1 /* +CollectionDelegate.swift in Sources */,
 				405624492491DDA00083B800 /* Item.swift in Sources */,
 				4056242A2491D8920083B800 /* ItemsViewController.swift in Sources */,
 				405624262491D8920083B800 /* AppDelegate.swift in Sources */,
+				40E0FD8624CF082800A674D1 /* +ListTitleTextField.swift in Sources */,
+				40E0FD8224CF053000A674D1 /* +Segues.swift in Sources */,
 				40AA4E5C24C0401500D8B215 /* EmojiPageViewController.swift in Sources */,
+				40E0FD8824CF088100A674D1 /* +Delegate.swift in Sources */,
 				4036E44224CB27FC00F88D96 /* ListsCollectionViewCell.swift in Sources */,
+				40E0FD8C24CF160400A674D1 /* +CollectionDelegateFlowLayout.swift in Sources */,
 				4064A63324C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift in Sources */,
 				40AA4E5A24C03E7900D8B215 /* EmojiCategory.swift in Sources */,
 				4064A63524C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift in Sources */,
 				4053872724C8806A00647756 /* EmojiSuggestion.swift in Sources */,
+				40E0FD8A24CF151400A674D1 /* +CollectionDataSource.swift in Sources */,
 				40AA4E5824C03E6300D8B215 /* EmojiProvider.swift in Sources */,
 				40AA4E5624C03E3A00D8B215 /* Emoji.swift in Sources */,
 				4064A62F24C0B1CE00C1BE21 /* ListsManager.swift in Sources */,

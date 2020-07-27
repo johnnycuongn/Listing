@@ -17,23 +17,23 @@ extension EmojiProvider {
     
         static var categories: [EmojiCategory] {
             
-            var emojiCategoryResult: [EmojiCategory] = suggestedEmojiCategory
+            var tempEmojiCategory: [EmojiCategory] = suggestedEmojiCategory
             
             for category in EmojiProvider.categoryTypes {
                 let newCategory = EmojiCategory(name: category, emojis: [])
-                emojiCategoryResult.append(newCategory)
+                tempEmojiCategory.append(newCategory)
             }
             
-            for emoji in EmojiProvider.emojis {
-                for index in 0...emojiCategoryResult.count-1 {
-                    if emoji.category == emojiCategoryResult[index].name {
-                        emojiCategoryResult[index].emojis.append(emoji)
+            for emoji in EmojiProvider.emojis where emoji.emoji.isOneEmoji {
+                for index in 0..<tempEmojiCategory.count {
+                    if (emoji.category == tempEmojiCategory[index].name) {
+                        tempEmojiCategory[index].emojis.append(emoji)
                     }
                 }
                 /// Count for each category
             }
 
-            return emojiCategoryResult
+            return tempEmojiCategory
         }
         
         static var categoryTypes: [String] {

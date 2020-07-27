@@ -4371,32 +4371,6 @@
   , "skin_tones": true
   }
 , {
-    "emoji": "🤵‍♂️"
-  , "description": "man in tuxedo"
-  , "category": "People & Body"
-  , "aliases": [
-      "man_in_tuxedo"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  , "skin_tones": true
-  }
-, {
-    "emoji": "🤵‍♀️"
-  , "description": "woman in tuxedo"
-  , "category": "People & Body"
-  , "aliases": [
-      "woman_in_tuxedo"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  , "skin_tones": true
-  }
-, {
     "emoji": "👰"
   , "description": "person with veil"
   , "category": "People & Body"
@@ -4409,33 +4383,6 @@
     ]
   , "unicode_version": "6.0"
   , "ios_version": "6.0"
-  , "skin_tones": true
-  }
-, {
-    "emoji": "👰‍♂️"
-  , "description": "man with veil"
-  , "category": "People & Body"
-  , "aliases": [
-      "man_with_veil"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  , "skin_tones": true
-  }
-, {
-    "emoji": "👰‍♀️"
-  , "description": "woman with veil"
-  , "category": "People & Body"
-  , "aliases": [
-      "woman_with_veil",
-      "bride_with_veil"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   , "skin_tones": true
   }
 , {
@@ -4463,45 +4410,6 @@
     ]
   , "unicode_version": "11.0"
   , "ios_version": "12.1"
-  , "skin_tones": true
-  }
-, {
-    "emoji": "👩‍🍼"
-  , "description": "woman feeding baby"
-  , "category": "People & Body"
-  , "aliases": [
-      "woman_feeding_baby"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  , "skin_tones": true
-  }
-, {
-    "emoji": "👨‍🍼"
-  , "description": "man feeding baby"
-  , "category": "People & Body"
-  , "aliases": [
-      "man_feeding_baby"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  , "skin_tones": true
-  }
-, {
-    "emoji": "🧑‍🍼"
-  , "description": "person feeding baby"
-  , "category": "People & Body"
-  , "aliases": [
-      "person_feeding_baby"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   , "skin_tones": true
   }
 , {
@@ -6776,18 +6684,6 @@
   , "ios_version": "6.0"
   }
 , {
-    "emoji": "🐈‍⬛"
-  , "description": "black cat"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "black_cat"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  }
-, {
     "emoji": "🦁"
   , "description": "lion"
   , "category": "Animals & Nature"
@@ -6895,18 +6791,6 @@
     ]
   , "unicode_version": "9.0"
   , "ios_version": "10.2"
-  }
-, {
-    "emoji": "🦬"
-  , "description": "bison"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "bison"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   }
 , {
     "emoji": "🐮"
@@ -7102,18 +6986,6 @@
   , "ios_version": "6.0"
   }
 , {
-    "emoji": "🦣"
-  , "description": "mammoth"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "mammoth"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  }
-, {
     "emoji": "🦏"
   , "description": "rhinoceros"
   , "category": "Animals & Nature"
@@ -7224,18 +7096,6 @@
   , "ios_version": "9.1"
   }
 , {
-    "emoji": "🦫"
-  , "description": "beaver"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "beaver"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  }
-, {
     "emoji": "🦔"
   , "description": "hedgehog"
   , "category": "Animals & Nature"
@@ -7270,18 +7130,6 @@
     ]
   , "unicode_version": "6.0"
   , "ios_version": "6.0"
-  }
-, {
-    "emoji": "🐻‍❄️"
-  , "description": "polar bear"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "polar_bear"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   }
 , {
     "emoji": "🐨"
@@ -7539,30 +7387,6 @@
   , "ios_version": "10.2"
   }
 , {
-    "emoji": "🦤"
-  , "description": "dodo"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "dodo"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  }
-, {
-    "emoji": "🪶"
-  , "description": "feather"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "feather"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  }
-, {
     "emoji": "🦩"
   , "description": "flamingo"
   , "category": "Animals & Nature"
@@ -7748,18 +7572,6 @@
   , "ios_version": "6.0"
   }
 , {
-    "emoji": "🦭"
-  , "description": "seal"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "seal"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  }
-, {
     "emoji": "🐟"
   , "description": "fish"
   , "category": "Animals & Nature"
@@ -7896,18 +7708,6 @@
   , "ios_version": "6.0"
   }
 , {
-    "emoji": "🪲"
-  , "description": "beetle"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "beetle"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  }
-, {
     "emoji": "🐞"
   , "description": "lady beetle"
   , "category": "Animals & Nature"
@@ -7991,30 +7791,6 @@
     ]
   , "unicode_version": "11.0"
   , "ios_version": "12.1"
-  }
-, {
-    "emoji": "🪰"
-  , "description": "fly"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "fly"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  }
-, {
-    "emoji": "🪱"
-  , "description": "worm"
-  , "category": "Animals & Nature"
-  , "aliases": [
-      "worm"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   }
 , {
     "emoji": "🦠"
@@ -8492,18 +8268,6 @@
   , "ios_version": "6.0"
   }
 , {
-    "emoji": "🫐"
-  , "description": "blueberries"
-  , "category": "Food & Drink"
-  , "aliases": [
-      "blueberries"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  }
-, {
     "emoji": "🥝"
   , "description": "kiwi fruit"
   , "category": "Food & Drink"
@@ -8526,18 +8290,6 @@
     ]
   , "unicode_version": "6.0"
   , "ios_version": "6.0"
-  }
-, {
-    "emoji": "🫒"
-  , "description": "olive"
-  , "category": "Food & Drink"
-  , "aliases": [
-      "olive"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   }
 , {
     "emoji": "🥥"
@@ -8624,18 +8376,6 @@
     ]
   , "unicode_version": "7.0"
   , "ios_version": "9.1"
-  }
-, {
-    "emoji": "🫑"
-  , "description": "bell pepper"
-  , "category": "Food & Drink"
-  , "aliases": [
-      "bell_pepper"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   }
 , {
     "emoji": "🥒"
@@ -8769,18 +8509,6 @@
     ]
   , "unicode_version": "9.0"
   , "ios_version": "10.2"
-  }
-, {
-    "emoji": "🫓"
-  , "description": "flatbread"
-  , "category": "Food & Drink"
-  , "aliases": [
-      "flatbread"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   }
 , {
     "emoji": "🥨"
@@ -9063,18 +8791,6 @@
     ]
   , "unicode_version": "6.0"
   , "ios_version": "6.0"
-  }
-, {
-    "emoji": "🫕"
-  , "description": "fondue"
-  , "category": "Food & Drink"
-  , "aliases": [
-      "fondue"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   }
 , {
     "emoji": "🥣"

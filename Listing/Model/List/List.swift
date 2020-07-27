@@ -8,30 +8,31 @@
 
 import Foundation
 
+enum Direction {
+    case top
+    case bottom
+}
+
 class List: Codable {
     
     var emoji: String {
         didSet {
-            saveList()
-        }
+            saveList() }
     }
     var title: String {
         didSet {
             DataManager.delete(from: "\(oldValue)")
-            DataManager.save(self, with: "\(title)")
-        }
+            DataManager.save(self, with: "\(title)") }
     }
     
     var items: [Item] {
         didSet {
-            saveList()
-        }
+            saveList() }
     }
     
     var index: Int {
         didSet {
-            saveList()
-        }
+            saveList() }
     }
     
     init(emoji: String, title: String, items: [Item], index: Int) {
@@ -43,8 +44,11 @@ class List: Codable {
 
     // MARK: Function
     
-    func addItemAtTop(_ item: Item) {
-        items.insert(item, at: 0)
+    func addItem(_ item: Item, from position: Direction) {
+        if position == .top {
+            items.insert(item, at: 0) }
+        else {
+            items.append(item) }
     }
     
     func deleteItem(at index: Int) {
@@ -56,10 +60,9 @@ class List: Codable {
         
         var movedItem = items.remove(at: startIndex)
         items.insert(movedItem, at: endIndex)
-        
     }
     
-    // MARK: Save data
+    // MARK: Save List
     
     func saveList() {
         DataManager.save(self, with: "\(title)")

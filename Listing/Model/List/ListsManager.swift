@@ -10,30 +10,29 @@ import Foundation
 
 class ListsManager {
     
-    var lists: [List] = []
+    var lists: [List] = [] {
+        didSet {
+            updateIndexForLists() }
+    }
     
     func addList(_ list: List) {
         lists.append(list)
         lists[lists.count-1].saveList()
-        updateIndexForLists()
     }
     
     func deleteList(at index: Int) {
         lists.remove(at: index).deleteList()
-        updateIndexForLists()
     }
     
     func moveList(from startIndex: Int, to endIndex: Int) {
         let movedList = lists.remove(at: startIndex)
         lists.insert(movedList, at: endIndex)
-        updateIndexForLists()
     }
     
     func updateIndexForLists() {
         if lists.count > 0 {
-            for i in 0...lists.count-1 {
-                lists[i].index = i
-            }
+            for i in 0..<lists.count {
+                lists[i].index = i }
         }
     }
 
