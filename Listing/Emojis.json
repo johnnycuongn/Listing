@@ -4454,19 +4454,6 @@
   , "skin_tones": true
   }
 , {
-    "emoji": "🧑‍🎄"
-  , "description": "mx claus"
-  , "category": "People & Body"
-  , "aliases": [
-      "mx_claus"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
-  , "skin_tones": true
-  }
-, {
     "emoji": "🦸"
   , "description": "superhero"
   , "category": "People & Body"
@@ -19187,18 +19174,6 @@
     ]
   , "unicode_version": "6.0"
   , "ios_version": "10.0"
-  }
-, {
-    "emoji": "🏳️‍⚧️"
-  , "description": "transgender flag"
-  , "category": "Flags"
-  , "aliases": [
-      "transgender_flag"
-    ]
-  , "tags": [
-    ]
-  , "unicode_version": "13.0"
-  , "ios_version": "14.0"
   }
 , {
     "emoji": "🏴‍☠️"
