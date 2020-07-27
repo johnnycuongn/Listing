@@ -3,6 +3,7 @@
     <device id="retina5_5" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WCC-4R-dMH">
-                                <rect key="frame" x="9" y="19" width="30" height="30"/>
+                                <rect key="frame" x="9" y="10" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="5vX-4o-fzN"/>
                                     <constraint firstAttribute="width" constant="30" id="nr4-Tg-KQB"/>
@@ -31,7 +32,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6uX-mM-CX9">
-                                <rect key="frame" x="49" y="19" width="89" height="30"/>
+                                <rect key="frame" x="49" y="10" width="89" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Title is littt">
                                     <color key="titleColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -41,12 +42,12 @@
                                 </connections>
                             </button>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0gu-jm-5lt">
-                                <rect key="frame" x="49" y="19" width="89" height="30"/>
+                                <rect key="frame" x="49" y="10" width="89" height="30"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="19"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ngn-Zt-c9f" userLabel="Line Break">
-                                <rect key="frame" x="0.0" y="57" width="414" height="2"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="2"/>
                                 <color key="backgroundColor" red="0.34924254440000002" green="0.34924254440000002" blue="0.34924254440000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="g74-TG-P3s"/>
@@ -70,12 +71,12 @@
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9A3-mm-CdO">
                                 <rect key="frame" x="246" y="677" width="80" height="44"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="i8v-DE-oj3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="tintColor" red="0.83572345889999999" green="0.38069545090000001" blue="0.37840723679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" name="Destructive"/>
                                 <state key="normal" title=" Undo" image="return" catalog="system">
                                     <color key="titleColor" red="0.67450980392156867" green="0.38039215686274508" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -86,7 +87,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Rfm-TX-PFh">
-                                <rect key="frame" x="5" y="65" width="404" height="595"/>
+                                <rect key="frame" x="5" y="56" width="404" height="604"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Bdr-m7-VnP">
                                         <rect key="frame" x="0.0" y="0.0" width="404" height="34"/>
@@ -121,7 +122,7 @@
                                         </subviews>
                                     </stackView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cy1-10-P9z">
-                                        <rect key="frame" x="0.0" y="41" width="404" height="554"/>
+                                        <rect key="frame" x="0.0" y="41" width="404" height="563"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemCell" id="yAE-GD-dfl" customClass="ItemCell" customModule="Listing" customModuleProvider="target">
@@ -242,10 +243,10 @@
                             <constraint firstItem="C3m-6m-R7X" firstAttribute="top" secondItem="Rfm-TX-PFh" secondAttribute="bottom" constant="6" id="f7C-nP-Aqw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="C3m-6m-R7X" secondAttribute="bottom" constant="15" id="fXh-ND-bG7"/>
                             <constraint firstItem="6uX-mM-CX9" firstAttribute="bottom" secondItem="WCC-4R-dMH" secondAttribute="bottom" id="gkg-3M-UvK"/>
-                            <constraint firstItem="6uX-mM-CX9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="h88-mD-ubJ"/>
+                            <constraint firstItem="6uX-mM-CX9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="h88-mD-ubJ"/>
                             <constraint firstItem="ngn-Zt-c9f" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="huH-OS-Dcn"/>
                             <constraint firstItem="6uX-mM-CX9" firstAttribute="leading" secondItem="WCC-4R-dMH" secondAttribute="trailing" constant="10" id="i7R-ei-0FA"/>
-                            <constraint firstItem="0gu-jm-5lt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="19" id="icH-Tg-OES"/>
+                            <constraint firstItem="0gu-jm-5lt" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="icH-Tg-OES"/>
                             <constraint firstItem="H4f-qh-ZUI" firstAttribute="leading" secondItem="NLe-zp-v14" secondAttribute="trailing" constant="10" id="kO9-Hp-lF3"/>
                             <constraint firstItem="NLe-zp-v14" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="kgs-ic-cMo"/>
                             <constraint firstItem="H4f-qh-ZUI" firstAttribute="bottom" secondItem="C3m-6m-R7X" secondAttribute="bottom" id="nzG-rN-KKs"/>
@@ -574,5 +575,8 @@
     <resources>
         <image name="return" catalog="system" width="128" height="101"/>
         <image name="text.justify" catalog="system" width="128" height="100"/>
+        <namedColor name="Destructive">
+            <color red="0.67500001192092896" green="0.37999999523162842" blue="0.37599998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
