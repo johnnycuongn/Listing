@@ -195,9 +195,9 @@
 			children = (
 				40AA4E5E24C0403600D8B215 /* Emoji */,
 				405624292491D8920083B800 /* ListViewController.swift */,
-				4056243E2491D8960083B800 /* Info.plist */,
 				4084636524C2BC5A0091E236 /* ListsTableViewController.swift */,
 				4036E44324CB282E00F88D96 /* ListsViewController.swift */,
+				4056243E2491D8960083B800 /* Info.plist */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
