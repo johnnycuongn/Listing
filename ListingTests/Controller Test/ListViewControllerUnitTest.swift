@@ -11,10 +11,10 @@ import XCTest
 
 class ListViewControllerUnitTest: XCTestCase {
     
-    var sut: ListViewController!
+    var sut: ItemsViewController!
 
     override func setUpWithError() throws {
-        sut = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ListViewControllerID") as? ListViewController
+        sut = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ListViewControllerID") as? ItemsViewController
         _ = sut.view
     }
 
@@ -31,16 +31,16 @@ class ListViewControllerUnitTest: XCTestCase {
     // MARK: - DataSource and Delegate
     func testDataSource_ViewDidLoad_SetTableViewDatasource() {
         XCTAssertNotNil(sut.listTableView.dataSource)
-        XCTAssert(sut.listTableView.dataSource is ListTableViewDataService)
+        XCTAssert(sut.listTableView.dataSource is ItemsTableViewDataService)
     }
     
     func testDelegate_ViewDidLoad_SetTableViewDelegate() {
         XCTAssertNotNil(sut.listTableView.delegate)
-        XCTAssert(sut.listTableView.delegate is ListTableViewDataService)
+        XCTAssert(sut.listTableView.delegate is ItemsTableViewDataService)
     }
     
     func testDataService_ViewDidLoad_SingleDataServiceObject() {
-        XCTAssertEqual(sut.listTableView.dataSource as! ListTableViewDataService, sut.listTableView.delegate as! ListTableViewDataService)
+        XCTAssertEqual(sut.listTableView.dataSource as! ItemsTableViewDataService, sut.listTableView.delegate as! ItemsTableViewDataService)
     }
     
     

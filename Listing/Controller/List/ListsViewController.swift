@@ -26,7 +26,7 @@ class ListsViewController: UIViewController {
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        self.performSegue(withIdentifier: Segues.selectedList, sender: nil)
+        self.performSegue(withIdentifier: Segues.unwind.selectedList, sender: nil)
     }
     
 }
@@ -68,6 +68,15 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, canMoveItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        listsManager!.moveList(from: sourceIndexPath.row, to: destinationIndexPath.row)
+    }
+
+    
     func delete(list cell: ListsCollectionViewCell) {
         guard let indexPath = listsCollectionView.indexPath(for: cell) else {
             return
@@ -85,7 +94,13 @@ extension ListsViewController: UICollectionViewDataSource, UICollectionViewDeleg
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
         self.present(alert, animated: true, completion: nil)
-        
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Segues.unwind.selectedList {
+            let listVC = segue.destination as! ItemsViewController
+        }
+    }
+    
+
 }

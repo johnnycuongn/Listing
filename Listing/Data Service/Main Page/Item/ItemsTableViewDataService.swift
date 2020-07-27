@@ -16,7 +16,7 @@ public protocol PullDownToAddable {
     func isTablePullDowned(_ value: Bool)
 }
 
-class ListTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
+class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     
     var listsManager: ListsManager?

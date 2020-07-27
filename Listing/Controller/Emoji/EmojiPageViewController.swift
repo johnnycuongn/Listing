@@ -28,7 +28,7 @@ class EmojiPageViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
 
-        if segue.identifier == Segues.saveEmoji {
+        if segue.identifier == Segues.unwind.saveEmoji {
             guard let indexPath = emojiCollectionView.indexPathsForSelectedItems?.first else {
                 return
             }

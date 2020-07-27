@@ -11,9 +11,9 @@ import XCTest
 
 class ListTableViewDataServiceTest: XCTestCase {
     
-    var sut: ListTableViewDataService!
+    var sut: ItemsTableViewDataService!
     var listTableView: UITableView!
-    var listViewController: ListViewController!
+    var listViewController: ItemsViewController!
     
     let swift = Item(title: "Swift", index: 0, itemIdentifier: UUID())
     let python = Item(title: "Python", index: 0, itemIdentifier: UUID())
@@ -22,10 +22,10 @@ class ListTableViewDataServiceTest: XCTestCase {
     var listTableViewMock: TableViewMock!
 
     override func setUpWithError() throws {
-        sut = ListTableViewDataService()
+        sut = ItemsTableViewDataService()
         sut.listManager = ListOfItemManager()
         
-        listViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ListViewControllerID") as! ListViewController
+        listViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ListViewControllerID") as! ItemsViewController
         _ = listViewController.view
         
         listTableView = listViewController.listTableView
@@ -111,7 +111,7 @@ class ListTableViewDataServiceTest: XCTestCase {
     class TableViewMock: UITableView {
         var isItemDequeued = false
         
-        class func initMock(datasource: ListTableViewDataService) -> TableViewMock {
+        class func initMock(datasource: ItemsTableViewDataService) -> TableViewMock {
             
             let mock = TableViewMock(frame: CGRect.init(x: 500, y: 500, width: 500, height: 500), style: .plain)
             
