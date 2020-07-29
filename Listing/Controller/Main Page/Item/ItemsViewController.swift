@@ -192,10 +192,19 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         undoButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         
         view.bringSubviewToFront(undoButton)
+        
         /// List Thumbnail Collection View
+        listIndicator.frame.size.width = listsThumbnailWidth
+        
         listsThumbnailCollectionViewLayout.itemSize = CGSize(width: listsThumbnailWidth, height: listsThumbnailWidth)
        listsThumbnailCollectionViewLayout.minimumLineSpacing = 5
-       listsThumbnailCollectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-(listsThumbnailWidth*3))
+        
+       listsThumbnailCollectionViewLayout.sectionInset = UIEdgeInsets(
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: listsThumbnailCollectionView.frame.size.width-(listsThumbnailWidth*3))
+        
         listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
         
         /// Add Button
