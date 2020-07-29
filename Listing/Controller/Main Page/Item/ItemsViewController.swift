@@ -22,6 +22,13 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
     
     @IBOutlet weak var listIndicator: UILabel!
     @IBOutlet weak var listsThumbnailCollectionView: UICollectionView!
+    var listsThumbnailCollectionViewLayout: UICollectionViewFlowLayout {
+        return listsThumbnailCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+    }
+    var listsThumbnailWidth: CGFloat {
+        return listsThumbnailCollectionView.frame.size.height
+    }
+    
     @IBOutlet var listsThumbnailCollectionViewDataService: ListsThumbnailCollectionViewDataService!
     
     /// - List's Emoji and Title
@@ -30,11 +37,12 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
     @IBOutlet weak var listTitleButton: UIButton!
     @IBOutlet weak var listTitleTextField: UITextField!
     
-    /// - View's Buttons Outlets
-    @IBOutlet weak var addButton: UIButton!
     /// - Input Item Outlets
     @IBOutlet weak var inputItemTextView: UITextView!
     @IBOutlet weak var inputItemView: UIStackView!
+    
+    /// - View's Buttons Outlets
+    @IBOutlet weak var addButton: UIButton!
     
     /// - Undo View
     @IBOutlet weak var undoButton: UIButton!
@@ -49,9 +57,9 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
                     listTableViewDataUpdate()
                 }
             } else {
+                print("Load - No Scrolling: \(listIndex)")
                 listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
                 listTableViewDataUpdate()
-                
             }
         }
     }
@@ -185,7 +193,9 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         
         view.bringSubviewToFront(undoButton)
         /// List Thumbnail Collection View
-        listsThumbnailCollectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-ListsThumbnailCollectionViewCell.width*3-12)
+        listsThumbnailCollectionViewLayout.itemSize = CGSize(width: listsThumbnailWidth, height: listsThumbnailWidth)
+       listsThumbnailCollectionViewLayout.minimumLineSpacing = 5
+       listsThumbnailCollectionViewLayout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: listsThumbnailCollectionView.frame.size.width-(listsThumbnailWidth*3))
         listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
         
         /// Add Button
@@ -243,7 +253,7 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
     
     func setHidden(listTitleTextField: Bool) {
         self.listTitleButton.isHidden = !listTitleTextField
-        self.listTitleTextField.isHidden = listTitleTextField
+            self.listTitleTextField.isHidden = listTitleTextField
     }
     
     @objc func undoViewPresented(_ isPresented: Bool = false) {

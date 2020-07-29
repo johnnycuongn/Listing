@@ -12,8 +12,6 @@ class ListsThumbnailCollectionViewCell: UICollectionViewCell {
     
     static var identifier: String = "ListsThumbnailCell"
     
-    static var width = CGFloat(38)
-    
     @IBOutlet weak var emojiThumbnailLabel: UILabel!
     
     func configure(with emoji: String) {

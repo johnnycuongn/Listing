@@ -22,6 +22,14 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
     var listUpdateService: ListUpdatable?
 
     var collectionView: UICollectionView!
+    
+    var layout: UICollectionViewFlowLayout {
+        return self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+    }
+    
+    var frame: CGRect {
+        return collectionView.frame
+    }
 
         // MARK: UICollectionViewDataSource
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -58,7 +66,7 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
         if indexPath.row == listManager!.lists.count {
             listUpdateService?.addNewList()
         } else {
-            self.collectionView.scrollToItem(at: IndexPath(row: indexPath.row+1, section: 0), at: .right, animated: true)
+            self.collectionView.contentOffset.x = frame.size.height*CGFloat(indexPath.row)+layout.minimumLineSpacing*CGFloat(indexPath.row)
         }
     }
 

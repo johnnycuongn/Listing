@@ -12,8 +12,8 @@ import UIKit
 extension ItemsViewController: ListUpdatable {
     func updateList(from offset: Double) {
            
-           let cellWidth = Double(ListsThumbnailCollectionViewCell.width)
-           
+        let cellWidth = Double(listsThumbnailWidth + listsThumbnailCollectionViewLayout.minimumLineSpacing)
+
                if Int(offset/cellWidth) <= listsManager.lists.count-1 && offset > 0 {
                        listIndex = Int(offset/cellWidth)
                } else if Int(offset/cellWidth) >= listsManager.lists.count {

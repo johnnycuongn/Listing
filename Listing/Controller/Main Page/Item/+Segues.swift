@@ -38,12 +38,12 @@ extension ItemsViewController {
             let listsVC = segue.source as! ListsViewController
             
             if let selectedIndexPath = listsVC.listsCollectionView.indexPathsForSelectedItems?.first {
-                print("Selected: \(selectedIndexPath)")
                 self.listIndex = selectedIndexPath.row
             } else if listsVC.hasDeleted {
                 self.listIndex = 0
             }
-            listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listIndex+1, section: 0), at: .right, animated: true)
+
+            self.listsThumbnailCollectionView.contentOffset.x = listsThumbnailWidth*CGFloat(listIndex)+listsThumbnailCollectionViewLayout.minimumLineSpacing*CGFloat(listIndex)
             listsThumbnailCollectionViewDataUpdate()
         }
     }
