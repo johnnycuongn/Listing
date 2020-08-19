@@ -91,6 +91,10 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         listTableView.dataSource = dataService
         listTableView.delegate = dataService
         
+        listTableView.dragInteractionEnabled = true // Enable intra-app drags for iPhone.
+        listTableView.dragDelegate = dataService
+        listTableView.dropDelegate = dataService
+        
         listsThumbnailCollectionView.dataSource = listsThumbnailCollectionViewDataService
         listsThumbnailCollectionView.delegate = listsThumbnailCollectionViewDataService
  
@@ -98,8 +102,8 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         self.listTitleTextField.delegate = self
 
         ////List Table View
-        listTableView.isEditing = true
-        listTableView.allowsSelectionDuringEditing = true
+//        listTableView.isEditing = true
+//        listTableView.allowsSelectionDuringEditing = true
         
      
         ////View

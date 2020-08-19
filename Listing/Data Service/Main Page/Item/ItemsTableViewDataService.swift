@@ -50,6 +50,16 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
         return cell
     }
     
+//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+//        if (tableView.isEditing) {
+//            return .none
+//        } else {
+//            return .delete
+//        }
+//    }
+    
+    
+    // MARK: - Delegate
     
     func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -58,19 +68,7 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
         currentList.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
-        
     }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-        if (tableView.isEditing) {
-            return .none
-        } else {
-            return .delete
-        }
-    }
-    
-    
-    // MARK: - Delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
