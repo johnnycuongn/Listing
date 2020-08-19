@@ -57,7 +57,6 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
                     listTableViewDataUpdate()
                 }
             } else {
-                print("Load - No Scrolling: \(listIndex)")
                 listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
                 listTableViewDataUpdate()
             }

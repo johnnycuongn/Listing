@@ -38,7 +38,13 @@ extension ItemsViewController {
             listsThumbnailCollectionViewDataUpdate()
             
             if isCreatingList == true {
-                listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listsManager.lists.count, section: 0), at: .right, animated: true)
+//                listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listsManager.lists.count, section: 0), at: .right, animated: true)
+                
+                 var layout: UICollectionViewFlowLayout {
+                       return self.listsThumbnailCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+                   }
+                
+                listsThumbnailCollectionView.contentOffset.x = listsThumbnailCollectionView.frame.size.height*CGFloat(listsManager.lists.count-1)+layout.minimumLineSpacing*CGFloat(listsManager.lists.count-1)
             }
             
             isCreatingList = false
