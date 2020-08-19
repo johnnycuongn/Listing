@@ -23,6 +23,10 @@ class ListsViewController: UIViewController {
         
         listsCollectionView.dataSource = self
         listsCollectionView.delegate = self
+        
+        listsCollectionView.dragDelegate = self
+        listsCollectionView.dropDelegate = self
+        listsCollectionView.dragInteractionEnabled = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
