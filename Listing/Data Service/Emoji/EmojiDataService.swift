@@ -89,8 +89,10 @@ class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewData
 extension EmojiDataService: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchEmoji = EmojiProvider.emojis.filter({ (emoji) -> Bool in
-            emoji.description.lowercased().prefix(searchText.count)
-                == searchText.lowercased()
+            
+            let match = emoji.description.range(of: searchText, options: .caseInsensitive)
+            
+            return match != nil
         })
         searching = searchText != "" ? true : false
 
