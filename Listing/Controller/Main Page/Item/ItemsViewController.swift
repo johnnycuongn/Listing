@@ -206,7 +206,7 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
                     top: 0,
                     left: 0,
                     bottom: 0,
-                    right: listsThumbnailCollectionView.frame.size.width-(listsThumbnailWidth*3))
+                    right: listsThumbnailCollectionView.frame.size.width-(listsThumbnailWidth*2)-listsThumbnailCollectionViewLayout.minimumLineSpacing)
         
         listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
         
