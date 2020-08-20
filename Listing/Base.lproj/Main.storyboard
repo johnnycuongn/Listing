@@ -397,7 +397,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="y2Z-tm-Rcb">
-                                <rect key="frame" x="0.0" y="60" width="375" height="587"/>
+                                <rect key="frame" x="0.0" y="56" width="375" height="591"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="L6T-hY-Zwl">
                                     <size key="itemSize" width="38" height="38"/>
@@ -455,12 +455,19 @@
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="scg-6R-Gwu">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="scg-6R-Gwu" firstAttribute="top" secondItem="AzT-r8-XZx" secondAttribute="top" id="9WO-7F-NPf"/>
                             <constraint firstItem="AzT-r8-XZx" firstAttribute="trailing" secondItem="y2Z-tm-Rcb" secondAttribute="trailing" id="GIW-Or-n6e"/>
+                            <constraint firstItem="y2Z-tm-Rcb" firstAttribute="top" secondItem="scg-6R-Gwu" secondAttribute="bottom" id="J6X-vV-AyW"/>
+                            <constraint firstItem="scg-6R-Gwu" firstAttribute="trailing" secondItem="AzT-r8-XZx" secondAttribute="trailing" id="Pth-O5-p63"/>
                             <constraint firstItem="AzT-r8-XZx" firstAttribute="bottom" secondItem="y2Z-tm-Rcb" secondAttribute="bottom" id="YIU-32-moY"/>
-                            <constraint firstItem="y2Z-tm-Rcb" firstAttribute="top" secondItem="AzT-r8-XZx" secondAttribute="top" constant="60" id="ii8-xy-smb"/>
+                            <constraint firstItem="scg-6R-Gwu" firstAttribute="leading" secondItem="AzT-r8-XZx" secondAttribute="leading" id="l1W-OT-ofQ"/>
                             <constraint firstItem="y2Z-tm-Rcb" firstAttribute="leading" secondItem="AzT-r8-XZx" secondAttribute="leading" id="zeu-d0-ZaQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="AzT-r8-XZx"/>
@@ -468,6 +475,7 @@
                     <connections>
                         <outlet property="emojiCollectionView" destination="y2Z-tm-Rcb" id="Rvc-G6-gGt"/>
                         <outlet property="emojiDataService" destination="aMy-i5-baj" id="7cS-Xa-Mk7"/>
+                        <outlet property="emojiSearchBar" destination="scg-6R-Gwu" id="y3p-hA-uBQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r5h-8L-dm1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

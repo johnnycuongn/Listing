@@ -14,6 +14,7 @@ class EmojiPageViewController: UIViewController {
     
     @IBOutlet weak var emojiDataService: EmojiDataService!
     
+    @IBOutlet weak var emojiSearchBar: UISearchBar!
     var selectedEmoji: String?
 
     override func viewDidLoad() {
@@ -21,7 +22,12 @@ class EmojiPageViewController: UIViewController {
         
         emojiCollectionView.delegate = emojiDataService
         emojiCollectionView.dataSource = emojiDataService
-
+    
+        emojiDataService.collectionView = emojiCollectionView
+        emojiDataService.searchBar = emojiSearchBar
+        
+        emojiSearchBar.delegate = emojiDataService
+        
         emojiCollectionView.reloadData()     
     }
     
@@ -36,8 +42,6 @@ class EmojiPageViewController: UIViewController {
             let categories = EmojiProvider.categories
             let sectionData = categories[indexPath.section]
             let data = sectionData.emojis[indexPath.row]
-            
-            print(data)
             
             self.selectedEmoji = data.emoji
         }

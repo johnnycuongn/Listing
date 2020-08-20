@@ -35,6 +35,34 @@ extension EmojiProvider {
 
             return tempEmojiCategory
         }
+    
+    static func categories(for emojis: [Emoji]) -> [EmojiCategory] {
+        var tempEmojiCategory = [EmojiCategory]()
+        
+        var categoryResult = [String]()
+        
+        for emoji in emojis {
+            if !categoryResult.contains(emoji.category) {
+                categoryResult.append(emoji.category)
+            }
+        }
+        
+        for category in categoryResult {
+            let newCategory = EmojiCategory(name: category, emojis: [])
+            tempEmojiCategory.append(newCategory)
+        }
+        
+        for emoji in emojis where emoji.emoji.isOneEmoji {
+            for index in 0..<tempEmojiCategory.count {
+                if (emoji.category == tempEmojiCategory[index].name) {
+                    tempEmojiCategory[index].emojis.append(emoji)
+                }
+            }
+            /// Count for each category
+        }
+
+        return tempEmojiCategory
+    }
         
         static var categoryTypes: [String] {
             var result = [String]()
