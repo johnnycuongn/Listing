@@ -101,7 +101,7 @@
                                                 </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lXI-70-2dF">
-                                                <rect key="frame" x="25" y="0.0" width="295" height="34"/>
+                                                <rect key="frame" x="25" y="0.0" width="340" height="34"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="34" id="koa-ja-cmF"/>
@@ -110,8 +110,8 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="259" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Od2-wu-d96">
-                                                <rect key="frame" x="325" y="0.0" width="40" height="34"/>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="259" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Od2-wu-d96">
+                                                <rect key="frame" x="365" y="0.0" width="40" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="40" id="fyS-vu-9zY"/>
                                                 </constraints>
@@ -266,6 +266,7 @@
                         <outlet property="dataService" destination="lsn-Cu-XgY" id="73z-nb-lC2"/>
                         <outlet property="emojiButton" destination="WCC-4R-dMH" id="mK8-Xt-2iN"/>
                         <outlet property="inputItemTextView" destination="lXI-70-2dF" id="nTD-8N-aEw"/>
+                        <outlet property="inputItemToolbar" destination="owE-gB-Gi4" id="0H1-yZ-wY1"/>
                         <outlet property="inputItemView" destination="Bdr-m7-VnP" id="fpq-C1-qAO"/>
                         <outlet property="listIndicator" destination="GbA-B1-Wbb" id="ajI-Bl-UEC"/>
                         <outlet property="listTableView" destination="cy1-10-P9z" id="wHF-6J-3i1"/>
@@ -273,10 +274,54 @@
                         <outlet property="listTitleTextField" destination="0gu-jm-5lt" id="1Jx-yO-eXQ"/>
                         <outlet property="listsThumbnailCollectionView" destination="H4f-qh-ZUI" id="N6C-3i-NZK"/>
                         <outlet property="listsThumbnailCollectionViewDataService" destination="jnq-vK-aS5" id="JXW-hB-aZl"/>
+                        <outlet property="toolbarAddButton" destination="GBg-Oa-NdM" id="GJp-sZ-IvW"/>
                         <outlet property="undoButton" destination="9A3-mm-CdO" id="mS2-ek-e2b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="owE-gB-Gi4">
+                    <rect key="frame" x="0.0" y="0.0" width="377" height="40"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GBg-Oa-NdM">
+                            <rect key="frame" x="284" y="-10" width="45" height="45"/>
+                            <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="GBg-Oa-NdM" secondAttribute="height" multiplier="1:1" id="YQ4-Ig-GhY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="27"/>
+                            <state key="normal" title="+">
+                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="toolbarAddButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="32s-Xp-629"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="center" horizontalHuggingPriority="259" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nL-ih-36g">
+                            <rect key="frame" x="337" y="5" width="30" height="30"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="7nL-ih-36g" secondAttribute="height" multiplier="1:1" id="Oz3-2P-Ku5"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                            <color key="tintColor" red="0.6999561191" green="0.6999561191" blue="0.6999561191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <state key="normal" image="keyboard.chevron.compact.down" catalog="system">
+                                <color key="titleColor" red="0.67278711930000001" green="0.38069545090000001" blue="0.37840723679999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="closeItemInputView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BYN-wp-woh"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="c9q-4w-f3w" firstAttribute="bottom" secondItem="GBg-Oa-NdM" secondAttribute="bottom" constant="5" id="65u-wB-FcQ"/>
+                        <constraint firstItem="7nL-ih-36g" firstAttribute="top" secondItem="c9q-4w-f3w" secondAttribute="top" constant="5" id="9D0-op-PXc"/>
+                        <constraint firstItem="c9q-4w-f3w" firstAttribute="trailing" secondItem="7nL-ih-36g" secondAttribute="trailing" constant="10" id="CG1-sy-le2"/>
+                        <constraint firstItem="c9q-4w-f3w" firstAttribute="bottom" secondItem="7nL-ih-36g" secondAttribute="bottom" constant="5" id="GZ5-7x-6XR"/>
+                        <constraint firstItem="7nL-ih-36g" firstAttribute="leading" secondItem="GBg-Oa-NdM" secondAttribute="trailing" constant="8" id="adw-J9-35q"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="c9q-4w-f3w"/>
+                </view>
                 <customObject id="lsn-Cu-XgY" customClass="ItemsTableViewDataService" customModule="Listing" customModuleProvider="target"/>
                 <customObject id="jnq-vK-aS5" customClass="ListsThumbnailCollectionViewDataService" customModule="Listing" customModuleProvider="target"/>
             </objects>
@@ -486,6 +531,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="keyboard.chevron.compact.down" catalog="system" width="128" height="91"/>
         <image name="return" catalog="system" width="128" height="101"/>
         <image name="text.justify" catalog="system" width="128" height="100"/>
         <namedColor name="Destructive">

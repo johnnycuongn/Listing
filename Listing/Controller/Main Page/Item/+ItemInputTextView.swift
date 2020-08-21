@@ -17,12 +17,14 @@ extension ItemsViewController {
             let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
             
             if updatedText.isEmpty {
-                resetToPlaceHolder()
+                resetInputTextView()
             }
-
+        // When user start to type
              else if textView.textColor == UIColor.lightGray && !text.isEmpty {
+                toolbarAddButton.isHidden = false
                 textView.textColor = UIColor.white
                 textView.text = text
+                    // When user tapped done (no text)
                     if (text == "\n") && textView.text == "\n" {
                         textView.resignFirstResponder()
                         isKeyboardShowing = false
@@ -37,7 +39,7 @@ extension ItemsViewController {
                 if text == "\n" && textView.text != "" {
                     do {
                         try addNewItem(from: textView)
-                            resetToPlaceHolder()
+                            resetInputTextView()
                     } catch {
                     }
                     return false
@@ -49,21 +51,28 @@ extension ItemsViewController {
     
     
     func textViewDidChangeSelection(_ textView: UITextView) {
-        if self.view.window != nil {
-            if textView.textColor == UIColor.lightGray {
-                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-            }
+        if (self.view.window != nil) && (textView.textColor == UIColor.lightGray) {
+                textView.selectedTextRange = textView.textRange(
+                    from: textView.beginningOfDocument,
+                    to: textView.beginningOfDocument)
         }
     }
     
-    func resetToPlaceHolder() {
+    func resetInputTextView() {
+        // Set placeholder
         inputItemTextView.text = "Enter your item"
         inputItemTextView.textColor = UIColor.lightGray
     
-        inputItemTextView.selectedTextRange = inputItemTextView.textRange(from: inputItemTextView.beginningOfDocument, to: inputItemTextView.beginningOfDocument)
+        inputItemTextView.selectedTextRange = inputItemTextView.textRange(
+            from: inputItemTextView.beginningOfDocument,
+            to: inputItemTextView.beginningOfDocument)
         
+        // Set keyboard attributes
         inputItemTextView.returnKeyType = .done
         inputItemTextView.reloadInputViews()
+        
+        // Toolbar
+        toolbarAddButton.isHidden = true
     }
     
 }

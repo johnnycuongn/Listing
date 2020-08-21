@@ -40,6 +40,9 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
     /// - Input Item Outlets
     @IBOutlet weak var inputItemTextView: UITextView!
     @IBOutlet weak var inputItemView: UIStackView!
+    @IBOutlet var inputItemToolbar: UIView!
+    @IBOutlet weak var toolbarAddButton: UIButton!
+    
     
     /// - View's Buttons Outlets
     @IBOutlet weak var addButton: UIButton!
@@ -99,6 +102,8 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         listsThumbnailCollectionView.delegate = listsThumbnailCollectionViewDataService
  
         self.inputItemTextView.delegate = self
+        inputItemTextView.inputAccessoryView = inputItemToolbar
+        
         self.listTitleTextField.delegate = self
 
         ////List Table View
@@ -131,7 +136,7 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
     
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
-        resetToPlaceHolder()
+        resetInputTextView()
         inputItemView.isHidden = !inputItemView.isHidden
         
         inputItemTextView.becomeFirstResponder()
@@ -143,6 +148,15 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         inputItemView.isHidden = true
         inputItemTextView.resignFirstResponder()
     }
+    
+    @IBAction func toolbarAddButtonTapped(_ sender: UIButton) {
+        do {
+            try addNewItem(from: inputItemTextView)
+                resetInputTextView()
+        } catch {
+        }
+    }
+    
     
     @IBAction func undoButtonTapped(_ sender: UIButton) {
         
@@ -215,6 +229,13 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         
         /// Item Input Itew
         inputItemView.isHidden = true
+        
+        inputItemToolbar.frame.size.width = UIScreen.main.bounds.width
+        inputItemToolbar.frame.size.height = 45
+        
+        toolbarAddButton.layer.cornerRadius = toolbarAddButton.frame.size.height / 2
+        toolbarAddButton.isHidden = true
+        
         
     }
     
