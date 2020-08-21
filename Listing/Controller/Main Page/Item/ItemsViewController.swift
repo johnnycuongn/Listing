@@ -13,7 +13,7 @@ enum ListVCError: Error {
     case emptyText
 }
 
-class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDelegate {
+class ItemsViewController: UIViewController {
 
     /// - Systems
     @IBOutlet weak var listTableView: UITableView!
@@ -87,10 +87,10 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ////    Data
+        //   Data
         loadList()
 
-        //// Delegate and datasource
+        // Delegate and datasource
         listTableView.dataSource = dataService
         listTableView.delegate = dataService
         
@@ -102,19 +102,11 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         listsThumbnailCollectionView.delegate = listsThumbnailCollectionViewDataService
  
         self.inputItemTextView.delegate = self
-        inputItemTextView.inputAccessoryView = inputItemToolbar
         
         self.listTitleTextField.delegate = self
-
-        ////List Table View
-//        listTableView.isEditing = true
-//        listTableView.allowsSelectionDuringEditing = true
         
-     
-        ////View
+        //View
         setUpView()
-        
-        listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
     
         inputItemTextView.autocapitalizationType = .none
     }
@@ -123,7 +115,7 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
     
     // MARK: - Buttons Action
     
-    
+    // MARK: Main
     @IBAction func listTitleButtonTapped(_ sender: Any) {
         listTitleTextField.text = listTitleButton.titleLabel!.text
         setHidden(listTitleTextField: false)
@@ -142,7 +134,8 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         inputItemTextView.becomeFirstResponder()
         isKeyboardShowing = true
     }
-
+    
+    // MARK: Input item Toolbar
     @IBAction func closeItemInputView(_ sender: Any) {
         isKeyboardShowing = false
         inputItemView.isHidden = true
@@ -170,73 +163,6 @@ class ItemsViewController: UIViewController, UITextViewDelegate,  UITextFieldDel
         
         self.stopTimer()
         undoViewPresented(false)
-    }
-    
-    // MARK: - Set Up
-    func loadList() {
-        
-        listsManager.lists = DataManager.loadAll(from: List.self).sorted {
-            $0.index < $1.index
-        }
-        
-        if listsManager.lists.isEmpty {
-            listsManager.lists = [
-            List(emoji: "📆", title: "ToDo", items: [
-                Item(title: "Tap here to delete"),
-                Item(title: "Tap list title to change"),
-                ]
-                , index: 0),
-            List(emoji: "🛒", title: "Groceries", items: [
-                Item(title: "2 Tomatos"),
-                Item(title: "Chicken Breast")
-                ]
-                , index: 1)
-            ]
-            
-            listsManager.updateIndexForLists()
-        }
-        
-        listTableViewDataUpdate()
-        listsThumbnailCollectionViewDataUpdate()
-    }
-    
-    func setUpView() {
-        /// Undo Button
-        undoViewPresented(false)
-        undoButton.layer.cornerRadius = 10
-        undoButton.layer.borderWidth = 0.7
-        undoButton.layer.borderColor = UIColor.init(named: "Destructive")?.cgColor
-        undoButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        
-        view.bringSubviewToFront(undoButton)
-        
-        /// List Thumbnail Collection View
-        listIndicator.frame.size.width = listsThumbnailWidth
-        
-        listsThumbnailCollectionViewLayout.itemSize = CGSize(width: listsThumbnailWidth, height: listsThumbnailWidth)
-       listsThumbnailCollectionViewLayout.minimumLineSpacing = 5
-        
-       listsThumbnailCollectionViewLayout.sectionInset = UIEdgeInsets(
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: listsThumbnailCollectionView.frame.size.width-(listsThumbnailWidth*2)-listsThumbnailCollectionViewLayout.minimumLineSpacing)
-        
-        listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
-        
-        /// Add Button
-        addButton.layer.cornerRadius = addButton.frame.size.width / 2
-        
-        /// Item Input Itew
-        inputItemView.isHidden = true
-        
-        inputItemToolbar.frame.size.width = UIScreen.main.bounds.width
-        inputItemToolbar.frame.size.height = 45
-        
-        toolbarAddButton.layer.cornerRadius = toolbarAddButton.frame.size.height / 2
-        toolbarAddButton.isHidden = true
-        
-        
     }
     
     // MARK: - Helper Methods

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension ItemsViewController {
+extension ItemsViewController: UITextViewDelegate {
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
 

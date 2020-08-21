@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension ItemsViewController {
+extension ItemsViewController: UITextFieldDelegate {
     
     @IBAction func textFieldEdittingDidBegin(_ sender: UITextField) {
         if sender == listTitleTextField {
