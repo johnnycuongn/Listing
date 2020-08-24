@@ -39,4 +39,9 @@ public class MainList: NSManagedObject {
         
         PersistenceService.saveContext()
     }
+    
+    var subListsArray: [SubList] {
+        return subLists!.toArray().sorted {$0.index < $1.index}
+    }
+    
 }

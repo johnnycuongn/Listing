@@ -13,7 +13,7 @@ class ItemManager {
     
     static let context = PersistenceService.context
     
-    static var itemLists: [Item] {
+    static var itemInList: [Item] {
         return fetchItemFromDatabase()
     }
     
@@ -30,18 +30,18 @@ class ItemManager {
     }
     
     static func append(title: String, ofSubList subList: SubList) {
-        Item.create(title: title, index: itemLists.count, ofSubList: subList)
+        Item.create(title: title, index: itemInList.count, ofSubList: subList)
     }
     
     static func remove(at index: Int) {
         // Identify removed Main List
-        let removedItem = self.itemLists[index]
+        let removedItem = self.itemInList[index]
         // Update index for others
-        if itemLists.count > 1 {
-         for i in 0...itemLists.count - 1 {
-            if itemLists[i].index > index {
+        if itemInList.count > 1 {
+         for i in 0...itemInList.count - 1 {
+            if itemInList[i].index > index {
 //                     replaceIndex(at: i, for: i-1)
-                itemLists[i].updateIndex(with: i-1)
+                itemInList[i].updateIndex(with: i-1)
                 }
             }
         }
@@ -52,21 +52,21 @@ class ItemManager {
     }
     
     static func move(from source: IndexPath, to destination: IndexPath) {
-        let movedItem = self.itemLists[source.row]
+        let movedItem = self.itemInList[source.row]
         
         remove(at: source.row)
         insert(movedItem, at: destination.row)
     }
     
     static func insert(_ item: Item, at insertedIndex: Int) {
-        if insertedIndex == itemLists.count {
+        if insertedIndex == itemInList.count {
             append(title: item.title!, ofSubList: item.ofSubList!)
         }
         
         else {
-            for i in stride(from: itemLists.count-1, through: 0, by: -1) {
-            if itemLists[i].index >= insertedIndex {
-                    itemLists[i].updateIndex(with: i+1)
+            for i in stride(from: itemInList.count-1, through: 0, by: -1) {
+            if itemInList[i].index >= insertedIndex {
+                    itemInList[i].updateIndex(with: i+1)
                 }
             }
             
