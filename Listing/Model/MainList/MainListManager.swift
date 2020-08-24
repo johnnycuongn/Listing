@@ -14,10 +14,10 @@ class MainListManager {
     static let context = PersistenceService.context
     
     static var mainLists: [MainList] {
-        return fetchSubListFromDatabase()
+        return fetchMainListFromDatabase()
     }
     
-    static func fetchSubListFromDatabase() -> [MainList] {
+    static func fetchMainListFromDatabase() -> [MainList] {
         var tempMainLists = [MainList]()
         do {
             let request = MainList.fetchRequest() as NSFetchRequest<MainList>

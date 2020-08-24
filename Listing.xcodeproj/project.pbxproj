@@ -20,6 +20,7 @@
 		404F2C1724F3FB0D00FC471A /* SubListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1624F3FB0D00FC471A /* SubListManager.swift */; };
 		404F2C1924F409E600FC471A /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1824F409E600FC471A /* ItemManager.swift */; };
 		404F2C1B24F40A4C00FC471A /* MainListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1A24F40A4C00FC471A /* MainListManager.swift */; };
+		404F2C1D24F412A500FC471A /* +DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1C24F412A500FC471A /* +DragDrop.swift */; };
 		4053872524C87F8000647756 /* EmojiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4053872424C87F8000647756 /* EmojiExtension.swift */; };
 		4053872724C8806A00647756 /* EmojiSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4053872624C8806A00647756 /* EmojiSuggestion.swift */; };
 		405624262491D8920083B800 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624252491D8920083B800 /* AppDelegate.swift */; };
@@ -85,6 +86,7 @@
 		404F2C1624F3FB0D00FC471A /* SubListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubListManager.swift; sourceTree = "<group>"; };
 		404F2C1824F409E600FC471A /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
 		404F2C1A24F40A4C00FC471A /* MainListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListManager.swift; sourceTree = "<group>"; };
+		404F2C1C24F412A500FC471A /* +DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+DragDrop.swift"; sourceTree = "<group>"; };
 		4053872424C87F8000647756 /* EmojiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiExtension.swift; sourceTree = "<group>"; };
 		4053872624C8806A00647756 /* EmojiSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSuggestion.swift; sourceTree = "<group>"; };
 		405624222491D8920083B800 /* Listing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Listing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +165,7 @@
 				404F2C0924F3F97500FC471A /* SubList+CoreDataClass.swift */,
 				404F2C0A24F3F97500FC471A /* SubList+CoreDataProperties.swift */,
 				404F2C1624F3FB0D00FC471A /* SubListManager.swift */,
+				404F2C1C24F412A500FC471A /* +DragDrop.swift */,
 			);
 			path = SubList;
 			sourceTree = "<group>";
@@ -556,6 +559,7 @@
 				40E0FD8224CF053000A674D1 /* +Segues.swift in Sources */,
 				40AA4E5C24C0401500D8B215 /* EmojiPageViewController.swift in Sources */,
 				404F2C1024F3F97500FC471A /* SubList+CoreDataProperties.swift in Sources */,
+				404F2C1D24F412A500FC471A /* +DragDrop.swift in Sources */,
 				40E0FD8824CF088100A674D1 /* +Delegate.swift in Sources */,
 				404F2C0F24F3F97500FC471A /* SubList+CoreDataClass.swift in Sources */,
 				4036E44224CB27FC00F88D96 /* ListsCollectionViewCell.swift in Sources */,

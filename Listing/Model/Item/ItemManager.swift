@@ -14,10 +14,10 @@ class ItemManager {
     static let context = PersistenceService.context
     
     static var itemLists: [Item] {
-        return fetchSubListFromDatabase()
+        return fetchItemFromDatabase()
     }
     
-    static func fetchSubListFromDatabase() -> [Item] {
+    static func fetchItemFromDatabase() -> [Item] {
         var tempSubLists = [Item]()
         do {
             let request = Item.fetchRequest() as NSFetchRequest<Item>

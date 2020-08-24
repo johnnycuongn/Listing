@@ -42,5 +42,14 @@ public class SubList: NSManagedObject {
         PersistenceService.saveContext()
     }
     
+    var itemsArray: [Item] {
+        return items!.toArray().sorted(by: {$0.index < $1.index})
+    }
     
+}
+
+extension NSSet {
+    func toArray<T>() -> [T] {
+        return self.map { $0 as! T }
+    }
 }
