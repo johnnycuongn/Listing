@@ -16,7 +16,9 @@ public protocol ListUpdatable {
 
 class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var listManager: ListsManager?
+    var currentMainList: MainList {
+        return MainListManager.mainLists[0]
+    }
     var listIndex: Int?
         
     var listUpdateService: ListUpdatable?
@@ -38,18 +40,17 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        guard listManager != nil else { return 0 }
-            return listManager!.lists.count+1
+        return currentMainList.subListsArray.count+1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListsThumbnailCollectionViewCell.identifier, for: indexPath) as! ListsThumbnailCollectionViewCell
   
-        if indexPath.row == listManager!.lists.count {
+        if indexPath.row == currentMainList.subListsArray.count {
             cell.configure(with: "+")
         }
-        else if indexPath.row < listManager!.lists.count {
-            cell.configure(with: listManager!.lists[indexPath.row].emoji)
+        else if indexPath.row < currentMainList.subListsArray.count {
+            cell.configure(with: currentMainList.subListsArray[indexPath.row].emoji!)
         }
         cell.configureView(of: frame)
         
@@ -64,7 +65,7 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.row == listManager!.lists.count {
+        if indexPath.row == currentMainList.subListsArray.count {
             listUpdateService?.addNewList()
         } else {
             self.collectionView.contentOffset.x = frame.size.height*CGFloat(indexPath.row)+layout.minimumLineSpacing*CGFloat(indexPath.row)

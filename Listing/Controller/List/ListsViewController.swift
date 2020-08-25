@@ -12,14 +12,23 @@ class ListsViewController: UIViewController {
 
     @IBOutlet weak var listsCollectionView: UICollectionView!
     
-    var listsManager: ListsManager!
+    @IBOutlet weak var mainListTitle: UILabel!
+    
+    var currentMainList: MainList {
+        return MainListManager.mainLists[0]
+    }
     
     var hasDeleted: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Temporary Main List - only one
+//        MainListManager.append(title: "This is main list", emoji: "😀")
+        
         hasDeleted = false
+        
+        mainListTitle.text = currentMainList.title
         
         listsCollectionView.dataSource = self
         listsCollectionView.delegate = self
@@ -48,11 +57,11 @@ extension ListsViewController: ListsDeletable {
             return
         }
         
-        let willDeletedList = listsManager.lists[indexPath.row]
+        let willDeletedList = currentMainList.subListsArray[indexPath.row]
         
         let alert = UIAlertController(title: "\(willDeletedList.emoji) \(willDeletedList.title)", message: "Delete List?", preferredStyle: .alert)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
-            self.listsManager.deleteList(at: indexPath.row)
+            self.currentMainList.deleteSubList(at: indexPath.row)
             self.listsCollectionView.deleteItems(at: [indexPath])
             
             self.hasDeleted = true

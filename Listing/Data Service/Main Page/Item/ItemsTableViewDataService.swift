@@ -19,16 +19,17 @@ public protocol PullDownToAddable {
 class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     
-    var listsManager: ListsManager?
+    var currentMainList: MainList {
+        return MainListManager.mainLists[0]
+    }
     var listIndex: Int?
     var pullDownService: PullDownToAddable!
     var cellUndoable: CellUndoable!
     
-    var currentList: List {
-        guard listsManager != nil else { fatalError() }
+    var currentSubList: SubList {
         guard listIndex != nil else { fatalError() }
         
-        return listsManager!.lists[listIndex!]
+        return currentMainList.subListsArray[listIndex!]
     }
 
     // MARK: - Data Source
@@ -38,14 +39,14 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentList.items.count
+        return currentSubList.itemsArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
 
-        cell.config(item: currentList.items[indexPath.row])
+        cell.config(item: currentSubList.itemsArray[indexPath.row])
         
         return cell
     }
@@ -67,16 +68,20 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         
-        currentList.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        currentSubList.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let deletedIndexPath = indexPath
-        let deletedItem = currentList.items.remove(at: indexPath.row)
-        
+        let deletedItem = currentSubList.itemsArray[deletedIndexPath.row]
+        let deletedItemTitle = deletedItem.title
+    
+        currentSubList.deleteItem(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
-        cellUndoable.undo(item: deletedItem, with: deletedIndexPath)
+        // FIXME:
+//        cellUndoable.undo(item: deletedItem, with: deletedIndexPath)
+       
 //            self.currentList.deleteItem(at: indexPath.row)
 //            tableView.deleteRows(at: [indexPath], with: .fade)
     }

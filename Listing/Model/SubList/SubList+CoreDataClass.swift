@@ -48,7 +48,7 @@ public class SubList: NSManagedObject {
         PersistenceService.saveContext()
     }
     
-    var itemsInList: [Item] {
+    var itemsArray: [Item] {
         return items!.toArray().sorted(by: {$0.index < $1.index})
     }
     

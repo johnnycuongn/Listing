@@ -13,7 +13,7 @@ extension MainList {
         SubList.create(title: title, emoji: emoji, index: subListsArray.count, ofMainList: self)
     }
     
-    func remove(at index: Int) {
+    func deleteSubList(at index: Int) {
         // Identify removed Main List
         let removedSubList = self.subListsArray[index]
         // Update index for others
@@ -32,10 +32,10 @@ extension MainList {
         PersistenceService.saveContext()
     }
     
-    func move(from startIndex: Int, to endIndex: Int) {
+    func moveSubList(from startIndex: Int, to endIndex: Int) {
         let movedSubList = subListsArray[startIndex]
         
-        remove(at: startIndex)
+        deleteSubList(at: startIndex)
         insert(movedSubList, at: endIndex)
     }
     

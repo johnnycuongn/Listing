@@ -30,7 +30,7 @@ extension ItemsViewController {
                 return false
             }
             
-            currentList.title = listTitleTextField.text!
+            currentSubList.updateTitle(with: listTitleTextField.text!)
             
             listTitleViewUpdate(title: listTitleTextField.text)
             setHidden(listTitleTextField: true)
@@ -44,7 +44,7 @@ extension ItemsViewController {
                        return self.listsThumbnailCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
                    }
                 
-                listsThumbnailCollectionView.contentOffset.x = listsThumbnailCollectionView.frame.size.height*CGFloat(listsManager.lists.count-1)+layout.minimumLineSpacing*CGFloat(listsManager.lists.count-1)
+                listsThumbnailCollectionView.contentOffset.x = listsThumbnailCollectionView.frame.size.height*CGFloat(currentMainList.subListsArray.count-1)+layout.minimumLineSpacing*CGFloat(currentMainList.subListsArray.count-1)
             }
             
             isCreatingList = false

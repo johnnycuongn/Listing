@@ -8,23 +8,33 @@
 
 import Foundation
 
+enum Direction {
+    case top
+    case bottom
+}
+
 extension SubList {
     func addItem(_ item: Item) {
         
     }
     
-    func addItem(title: String) {
-        Item.create(title: title, index: itemsInList.count, ofSubList: self)
+    func addItem(title: String, from position: Direction) {
+        switch position {
+        case .top:
+            self.insertItem(title, at: 0)
+        case .bottom:
+            Item.create(title: title, index: itemsArray.count, ofSubList: self)
+        }
     }
     
     func deleteItem(at index: Int) {
-        let removedItem = self.itemsInList[index]
+        let removedItem = self.itemsArray[index]
                 // Update index for others
-        if itemsInList.count > 1 {
-            for i in 0...itemsInList.count - 1 {
-                if itemsInList[i].index > index {
+        if itemsArray.count > 1 {
+            for i in 0...itemsArray.count - 1 {
+                if itemsArray[i].index > index {
         //                     replaceIndex(at: i, for: i-1)
-                itemsInList[i].updateIndex(with: i-1)
+                itemsArray[i].updateIndex(with: i-1)
                 }
             }
         }
@@ -37,25 +47,25 @@ extension SubList {
     
     func moveItem(from startIndex: Int, to endIndex: Int) {
         
-        let movedItem = self.itemsInList[startIndex]
+        let movedItem = self.itemsArray[startIndex]
         
         deleteItem(at: startIndex)
-        insertItem(movedItem, at: endIndex)
+        insertItem(movedItem.title!, at: endIndex)
     }
     
-    func insertItem(_ item: Item, at insertedIndex: Int) {
-        if insertedIndex == itemsInList.count {
-            addItem(title: item.title!)
+    func insertItem(_ title: String, at insertedIndex: Int) {
+        if insertedIndex == itemsArray.count {
+            addItem(title: title, from: .bottom)
         }
         
         else {
-            for i in stride(from: itemsInList.count-1, through: 0, by: -1) {
-            if itemsInList[i].index >= insertedIndex {
-                    itemsInList[i].updateIndex(with: i+1)
+            for i in stride(from: itemsArray.count-1, through: 0, by: -1) {
+            if itemsArray[i].index >= insertedIndex {
+                    itemsArray[i].updateIndex(with: i+1)
                 }
             }
             
-            Item.create(title: item.title!, index: insertedIndex, ofSubList: self)
+            Item.create(title: title, index: insertedIndex, ofSubList: self)
         }
     }
     
