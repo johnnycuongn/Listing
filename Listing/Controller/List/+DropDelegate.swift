@@ -40,7 +40,7 @@ extension ListsViewController: UICollectionViewDropDelegate {
         if let item = coordinator.items.first
             , let sourceIndexPath = item.sourceIndexPath {
             collectionView.performBatchUpdates({
-                self.listsManager.moveList(from: sourceIndexPath.row, to: destinationIndexPath.row)
+                self.currentMainList.moveSubList(from: sourceIndexPath.row, to: destinationIndexPath.row)
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationIndexPath])
             }, completion: nil)

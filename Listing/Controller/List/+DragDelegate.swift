@@ -11,8 +11,8 @@ import UIKit
 
 extension ListsViewController: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        let list = listsManager.lists[indexPath.row].title
-        let itemProvider = NSItemProvider(object: list as NSString)
+        let list = currentMainList.subListsArray[indexPath.row].title
+        let itemProvider = NSItemProvider(object: list! as NSString)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         
         dragItem.localObject = list

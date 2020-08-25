@@ -11,7 +11,7 @@ import UIKit
 
 extension ItemsTableViewDataService: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
-        return currentList.dragItems(for: indexPath)
+        return currentSubList.dragItems(for: indexPath)
     }
     
     

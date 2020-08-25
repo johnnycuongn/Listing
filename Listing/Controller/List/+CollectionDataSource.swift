@@ -16,16 +16,16 @@ extension ListsViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return listsManager.lists.count
+        return currentMainList.subListsArray.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListsCollectionViewCell.identifier, for: indexPath) as! ListsCollectionViewCell
         
-        let list = listsManager.lists[indexPath.row]
+        let subList = currentMainList.subListsArray[indexPath.row]
         
-        cell.configure(emoji: list.emoji, title: list.title)
+        cell.configure(emoji: subList.emoji!, title: subList.title!)
         cell.listsDeletionService = self
         
         return cell
@@ -36,7 +36,7 @@ extension ListsViewController: UICollectionViewDataSource {
      }
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-           listsManager.moveList(from: sourceIndexPath.row, to: destinationIndexPath.row)
+           currentMainList.moveSubList(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
 
 }

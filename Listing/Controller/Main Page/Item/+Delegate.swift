@@ -14,10 +14,10 @@ extension ItemsViewController: ListUpdatable {
            
         let cellWidth = Double(listsThumbnailWidth + listsThumbnailCollectionViewLayout.minimumLineSpacing)
 
-               if Int(offset/cellWidth) <= listsManager.lists.count-1 && offset > 0 {
+               if Int(offset/cellWidth) <= currentMainList.subListsArray.count-1 && offset > 0 {
                        listIndex = Int(offset/cellWidth)
-               } else if Int(offset/cellWidth) >= listsManager.lists.count {
-                       listIndex = listsManager.lists.count-1
+               } else if Int(offset/cellWidth) >= currentMainList.subListsArray.count {
+                       listIndex = currentMainList.subListsArray.count-1
                } else if Int(offset/cellWidth) <= 0 {
                        listIndex = 0
                }
@@ -27,9 +27,10 @@ extension ItemsViewController: ListUpdatable {
        func addNewList() {
            isCreatingList = true
 
-           let newList = List(emoji: "📝", title: "New List", items: [], index: listsManager.lists.count)
-           listsManager.addList(newList)
-           listIndex = listsManager.lists.count-1
+//           let newList = List(emoji: "📝", title: "New List", items: [], index: currentMainList.subListsArray.count)
+        currentMainList.addSubList(title: "New List", emoji: "📝")
+//           currentMainList.addSubList(newList)
+           listIndex = currentMainList.subListsArray.count-1
            
            listTitleTextField.text = ""
            listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
@@ -62,6 +63,9 @@ extension ItemsViewController: CellUndoable {
         
         self.deletedItem = item
         self.deletedItemIndex = index
+        
+        print("ItemsVC: deletedItem: \(deletedItem?.title) - \(deletedItemIndex)")
+        
     }
 
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import CoreData
 
 enum ListVCError: Error {
     case emptyText
@@ -56,23 +57,26 @@ class ItemsViewController: UIViewController {
             /// Stop listTableView load too much when list thumbnail is scrolling
             if (listsThumbnailCollectionView.isDragging || listsThumbnailCollectionView.isDecelerating) {
                 if listIndex != oldValue {
-                    listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
+                    listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
                     listTableViewDataUpdate()
                 }
             } else {
-                listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
+                listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
                 listTableViewDataUpdate()
             }
         }
     }
-    var listsManager = ListsManager()
+    var currentMainList: MainList {
+        return MainListManager.mainLists[0]
+    }
     
-    var currentList: List {
+    var currentSubList: SubList {
         get {
-            if listsManager.lists.count == 0 {
-                listsManager.addList(List(emoji: "📝", title: "Empty List", items: [], index: 0))
+            if currentMainList.subListsArray.count == 0 {
+//                currentMainList.addSubList(List(emoji: "📝", title: "Empty List", items: [], index: 0))
+                currentMainList.addSubList(title: "Empty List", emoji: "📝")
             }
-            return listsManager.lists[listIndex]
+            return currentMainList.subListsArray[listIndex]
         }
     }
     
@@ -86,8 +90,11 @@ class ItemsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //   Data
+        print(NSPersistentContainer.defaultDirectoryURL())
+        if MainListManager.mainLists.isEmpty {
+            MainListManager.append(title: "This is main list", emoji: "😀")
+        }
+        ////    Data
         loadList()
 
         // Delegate and datasource
@@ -107,6 +114,8 @@ class ItemsViewController: UIViewController {
         
         //View
         setUpView()
+        
+        listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
     
         inputItemTextView.autocapitalizationType = .none
     }
@@ -158,18 +167,79 @@ class ItemsViewController: UIViewController {
             return
         }
         
-         self.currentList.items.insert(deletedItem, at: deletedItemIndex.row)
+//         self.currentSubList.itemsArray.insert(deletedItem, at: deletedItemIndex.row)
+        self.currentSubList.insertItem(deletedItem.title!, at: deletedItemIndex.row)
         self.listTableView.insertRows(at: [deletedItemIndex], with: .fade)
         
         self.stopTimer()
         undoViewPresented(false)
     }
     
+    // MARK: - Set Up
+    func loadList() {
+        
+//        currentMainList.subListsArray = DataManager.loadAll(from: List.self).sorted {
+//            $0.index < $1.index
+//        }
+//
+//        if currentMainList.subListsArray.isEmpty {
+//            listsManager.lists = [
+//            List(emoji: "📆", title: "ToDo", items: [
+//                Item(title: "Tap here to delete"),
+//                Item(title: "Tap list title to change"),
+//                ]
+//                , index: 0),
+//            List(emoji: "🛒", title: "Groceries", items: [
+//                Item(title: "2 Tomatos"),
+//                Item(title: "Chicken Breast")
+//                ]
+//                , index: 1)
+//            ]
+//
+//            currentMainList.updateIndexForLists()
+//        }
+        
+        listTableViewDataUpdate()
+        listsThumbnailCollectionViewDataUpdate()
+    }
+    
+    func setUpView() {
+        /// Undo Button
+        undoViewPresented(false)
+        undoButton.layer.cornerRadius = 10
+        undoButton.layer.borderWidth = 0.7
+        undoButton.layer.borderColor = UIColor.init(named: "Destructive")?.cgColor
+        undoButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        
+        view.bringSubviewToFront(undoButton)
+        
+        /// List Thumbnail Collection View
+        listIndicator.frame.size.width = listsThumbnailWidth
+        
+        listsThumbnailCollectionViewLayout.itemSize = CGSize(width: listsThumbnailWidth, height: listsThumbnailWidth)
+       listsThumbnailCollectionViewLayout.minimumLineSpacing = 5
+        
+       listsThumbnailCollectionViewLayout.sectionInset = UIEdgeInsets(
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    right: listsThumbnailCollectionView.frame.size.width-(listsThumbnailWidth*3))
+        
+        listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
+        
+        /// Add Button
+        addButton.layer.cornerRadius = addButton.frame.size.width / 2
+        
+        /// Item Input Itew
+        inputItemView.isHidden = true
+        
+    }
+    
     // MARK: - Helper Methods
     
     // MARK: Reload Instance
     func listsThumbnailCollectionViewDataUpdate() {
-           listsThumbnailCollectionViewDataService.listManager = self.listsManager
+//           listsThumbnailCollectionViewDataService.currentMainList = self.listsManager
            listsThumbnailCollectionViewDataService.listIndex = self.listIndex
            
            listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
@@ -180,7 +250,7 @@ class ItemsViewController: UIViewController {
        }
        
        func listTableViewDataUpdate() {
-           dataService.listsManager = self.listsManager
+//           dataService.currentMainList = self.listsManager
            dataService.listIndex = self.listIndex
         
             dataService.pullDownService = self
@@ -195,8 +265,9 @@ class ItemsViewController: UIViewController {
             throw ListVCError.emptyText
         }
         
-        let newItem = Item(title: textView.text!)
-        self.currentList.addItem(newItem, from: .top)
+//        let newItem = Item(title: textView.text!)
+//        self.currentList.addItem(newItem, from: .top)
+        currentSubList.addItem(title: textView.text!, from: .top)
         listTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
     }
     

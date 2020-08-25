@@ -27,7 +27,8 @@ extension ItemsViewController {
      
             guard emojiPageVC.selectedEmoji != nil else { return }
             
-            self.currentList.emoji = emojiPageVC.selectedEmoji!
+//            self.currentSubList.emoji = emojiPageVC.selectedEmoji!
+            self.currentSubList.updateEmoji(with: emojiPageVC.selectedEmoji!)
             emojiButton.setTitle(emojiPageVC.selectedEmoji, for: .normal)
             
             listsThumbnailCollectionView.reloadData()
@@ -54,7 +55,7 @@ extension ItemsViewController {
             guard let listsVC = segue.destination as? ListsViewController else  {
                 fatalError()
             }
-            listsVC.listsManager = self.listsManager
+//            listsVC.currentMainList = self.listsManager
         }
     }
 }

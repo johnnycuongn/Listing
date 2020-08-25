@@ -12,7 +12,7 @@ import UIKit
 extension ItemsTableViewDataService: UITableViewDropDelegate {
     
     func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
-        return currentList.canHandle(session)
+        return currentSubList.canHandle(session)
     }
     
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
@@ -47,8 +47,7 @@ extension ItemsTableViewDataService: UITableViewDropDelegate {
                    var indexPaths = [IndexPath]()
                    for (index, item) in stringItems.enumerated() {
                        let indexPath = IndexPath(row: destinationIndexPath.row + index, section: destinationIndexPath.section)
-                    let movingItem = Item(title: item)
-                    self.currentList.addItem(movingItem, from: .top)
+                    self.currentSubList.insertItem(item, at: indexPath.row)
                        indexPaths.append(indexPath)
                    }
 
