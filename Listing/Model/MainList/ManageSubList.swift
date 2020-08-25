@@ -35,8 +35,26 @@ extension MainList {
     func moveSubList(from startIndex: Int, to endIndex: Int) {
         let movedSubList = subListsArray[startIndex]
         
-        deleteSubList(at: startIndex)
-        insert(movedSubList, at: endIndex)
+        // When move up frop bottom -> top
+        if endIndex > startIndex {
+            for i in 0...subListsArray.count-1 {
+                if subListsArray[i].index <= endIndex {
+                    subListsArray[i].updateIndex(with: i-1)
+                }
+            }
+        }
+        
+        // When move down from top -> bottm
+        else if endIndex < startIndex {
+            for i in stride(from: subListsArray.count-1, through: 0, by: -1) {
+            if subListsArray[i].index >= endIndex {
+                    subListsArray[i].updateIndex(with: i+1)
+                }
+            }
+        }
+        
+        movedSubList.updateIndex(with: endIndex)
+        PersistenceService.saveContext()
     }
     
     

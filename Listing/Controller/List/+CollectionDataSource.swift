@@ -36,7 +36,10 @@ extension ListsViewController: UICollectionViewDataSource {
      }
     
     func collectionView(_ collectionView: UICollectionView, moveItemAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-           currentMainList.moveSubList(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        guard sourceIndexPath != destinationIndexPath else {
+            return
+        }
+        currentMainList.moveSubList(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
 
 }

@@ -67,7 +67,9 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        
+        guard sourceIndexPath != destinationIndexPath else {
+            return
+        }
         currentSubList.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     

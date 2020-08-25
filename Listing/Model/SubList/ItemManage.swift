@@ -49,8 +49,26 @@ extension SubList {
         
         let movedItem = self.itemsArray[startIndex]
         
-        deleteItem(at: startIndex)
-        insertItem(movedItem.title!, at: endIndex)
+        // When move up frop bottom -> top
+        if endIndex > startIndex {
+            for i in 0...itemsArray.count-1 {
+                if itemsArray[i].index <= endIndex {
+                    itemsArray[i].updateIndex(with: i-1)
+                }
+            }
+        }
+        
+        // When move down from top -> bottm
+        else if endIndex < startIndex {
+            for i in stride(from: itemsArray.count-1, through: 0, by: -1) {
+            if itemsArray[i].index >= endIndex {
+                    itemsArray[i].updateIndex(with: i+1)
+                }
+            }
+            
+        }
+        movedItem.updateIndex(with: endIndex)
+        PersistenceService.saveContext()
     }
     
     func insertItem(_ title: String, at insertedIndex: Int) {

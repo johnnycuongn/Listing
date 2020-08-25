@@ -51,11 +51,29 @@ class MainListManager {
         saveMainList()
     }
     
-    static func move(from source: IndexPath, to destination: IndexPath) {
-        let movedMainList = self.mainLists[source.row]
-    
-        remove(at: source.row)
-        insert(movedMainList, at: destination.row)
+    static func move(from startIndex: IndexPath, to endIndex: IndexPath) {
+        let movedMainList = mainLists[startIndex.row]
+        
+        // When move up frop bottom -> top
+        if endIndex.row > startIndex.row {
+            for i in 0...mainLists.count-1 {
+                if mainLists[i].index <= endIndex.row {
+                    mainLists[i].updateIndex(with: i-1)
+                }
+            }
+        }
+        
+        // When move down from top -> bottm
+        else if endIndex < startIndex {
+            for i in stride(from: mainLists.count-1, through: 0, by: -1) {
+                if mainLists[i].index >= endIndex.row {
+                    mainLists[i].updateIndex(with: i+1)
+                }
+            }
+        }
+        
+        movedMainList.updateIndex(with: endIndex.row)
+        PersistenceService.saveContext()
     }
     
     static func insert(_ mainList: MainList, at insertedIndex: Int) {
