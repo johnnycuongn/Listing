@@ -175,66 +175,6 @@ class ItemsViewController: UIViewController {
         undoViewPresented(false)
     }
     
-    // MARK: - Set Up
-    func loadList() {
-        
-//        currentMainList.subListsArray = DataManager.loadAll(from: List.self).sorted {
-//            $0.index < $1.index
-//        }
-//
-//        if currentMainList.subListsArray.isEmpty {
-//            listsManager.lists = [
-//            List(emoji: "📆", title: "ToDo", items: [
-//                Item(title: "Tap here to delete"),
-//                Item(title: "Tap list title to change"),
-//                ]
-//                , index: 0),
-//            List(emoji: "🛒", title: "Groceries", items: [
-//                Item(title: "2 Tomatos"),
-//                Item(title: "Chicken Breast")
-//                ]
-//                , index: 1)
-//            ]
-//
-//            currentMainList.updateIndexForLists()
-//        }
-        
-        listTableViewDataUpdate()
-        listsThumbnailCollectionViewDataUpdate()
-    }
-    
-    func setUpView() {
-        /// Undo Button
-        undoViewPresented(false)
-        undoButton.layer.cornerRadius = 10
-        undoButton.layer.borderWidth = 0.7
-        undoButton.layer.borderColor = UIColor.init(named: "Destructive")?.cgColor
-        undoButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        
-        view.bringSubviewToFront(undoButton)
-        
-        /// List Thumbnail Collection View
-        listIndicator.frame.size.width = listsThumbnailWidth
-        
-        listsThumbnailCollectionViewLayout.itemSize = CGSize(width: listsThumbnailWidth, height: listsThumbnailWidth)
-       listsThumbnailCollectionViewLayout.minimumLineSpacing = 5
-        
-       listsThumbnailCollectionViewLayout.sectionInset = UIEdgeInsets(
-                    top: 0,
-                    left: 0,
-                    bottom: 0,
-                    right: listsThumbnailCollectionView.frame.size.width-(listsThumbnailWidth*3))
-        
-        listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
-        
-        /// Add Button
-        addButton.layer.cornerRadius = addButton.frame.size.width / 2
-        
-        /// Item Input Itew
-        inputItemView.isHidden = true
-        
-    }
-    
     // MARK: - Helper Methods
     
     // MARK: Reload Instance

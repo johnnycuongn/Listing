@@ -11,35 +11,34 @@ import UIKit
 
 extension ItemsViewController {
     func loadList() {
-           
-        listsManager.lists = DataManager.loadAll(from: List.self).sorted {
-            $0.index < $1.index
-        }
-           
-        if listsManager.lists.isEmpty {
-            listsManager.lists = [
-            List(emoji: "📆", title: "ToDo", items: [
-                Item(title: "Tap here to delete"),
-                Item(title: "Tap list title to change"),
-                ]
-                , index: 0),
-            List(emoji: "🛒", title: "Groceries", items: [
-                Item(title: "2 Tomatos"),
-                Item(title: "Chicken Breast")
-                ]
-                , index: 1)
-            ]
-            
-            listsManager.updateIndexForLists()
-        }
+//
+//        listsManager.lists = DataManager.loadAll(from: List.self).sorted {
+//            $0.index < $1.index
+//        }
+//
+//        if listsManager.lists.isEmpty {
+//            listsManager.lists = [
+//            List(emoji: "📆", title: "ToDo", items: [
+//                Item(title: "Tap here to delete"),
+//                Item(title: "Tap list title to change"),
+//                ]
+//                , index: 0),
+//            List(emoji: "🛒", title: "Groceries", items: [
+//                Item(title: "2 Tomatos"),
+//                Item(title: "Chicken Breast")
+//                ]
+//                , index: 1)
+//            ]
+//
+//            listsManager.updateIndexForLists()
+//        }
            
         listTableViewDataUpdate()
         listsThumbnailCollectionViewDataUpdate()
     }
        
     func setUpView() {
-        listTitleViewUpdate(emoji: currentList.emoji, title: currentList.title)
-        
+        listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
         /// Undo Button
         setUpUndoButtonView()
         

@@ -342,7 +342,7 @@
                                 </items>
                             </navigationBar>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="L4q-f1-1Gf">
-                                <rect key="frame" x="0.0" y="56" width="375" height="591"/>
+                                <rect key="frame" x="0.0" y="106" width="375" height="541"/>
                                 <color key="backgroundColor" red="0.17254901959999999" green="0.17254901959999999" blue="0.18039215689999999" alpha="0.64383561643835618" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yhc-Rk-s3l">
                                     <size key="itemSize" width="150" height="80"/>
@@ -410,15 +410,24 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="08l-Mc-hQI">
+                                <rect key="frame" x="16" y="64" width="42" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.092044733502538056" green="0.092044733502538056" blue="0.092044733502538056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="L4q-f1-1Gf" firstAttribute="leading" secondItem="Bf8-Zg-YNV" secondAttribute="leading" id="1z7-hj-ROK"/>
+                            <constraint firstItem="L4q-f1-1Gf" firstAttribute="top" secondItem="08l-Mc-hQI" secondAttribute="bottom" constant="8" id="9gz-h5-tMb"/>
                             <constraint firstItem="2g9-Qv-U7u" firstAttribute="trailing" secondItem="Bf8-Zg-YNV" secondAttribute="trailing" id="UqG-cG-XCp"/>
                             <constraint firstItem="2g9-Qv-U7u" firstAttribute="leading" secondItem="Bf8-Zg-YNV" secondAttribute="leading" id="h9J-Xo-h4T"/>
                             <constraint firstItem="Bf8-Zg-YNV" firstAttribute="trailing" secondItem="L4q-f1-1Gf" secondAttribute="trailing" id="nNi-wy-fTe"/>
                             <constraint firstItem="2g9-Qv-U7u" firstAttribute="top" secondItem="Bf8-Zg-YNV" secondAttribute="top" id="pW9-d9-XnE"/>
-                            <constraint firstItem="L4q-f1-1Gf" firstAttribute="top" secondItem="2g9-Qv-U7u" secondAttribute="bottom" id="vRf-w6-Ofl"/>
+                            <constraint firstItem="08l-Mc-hQI" firstAttribute="leading" secondItem="Bf8-Zg-YNV" secondAttribute="leading" constant="16" id="sFq-el-tfV"/>
+                            <constraint firstItem="08l-Mc-hQI" firstAttribute="top" secondItem="2g9-Qv-U7u" secondAttribute="bottom" constant="8" id="tYW-nq-qHZ"/>
+                            <constraint firstItem="L4q-f1-1Gf" firstAttribute="top" secondItem="2g9-Qv-U7u" secondAttribute="bottom" constant="50" id="vRf-w6-Ofl"/>
                             <constraint firstItem="Bf8-Zg-YNV" firstAttribute="bottom" secondItem="L4q-f1-1Gf" secondAttribute="bottom" id="yc0-2K-wyL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bf8-Zg-YNV"/>
@@ -426,6 +435,7 @@
                     <navigationItem key="navigationItem" id="2gG-Mf-dFh"/>
                     <connections>
                         <outlet property="listsCollectionView" destination="L4q-f1-1Gf" id="5oS-mD-dpF"/>
+                        <outlet property="mainListTitle" destination="08l-Mc-hQI" id="H7g-Pe-ik3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BcI-Yr-c47" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
