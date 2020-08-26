@@ -56,7 +56,7 @@ class MainListManager {
         
         // When move up frop bottom -> top
         if endIndex.row > startIndex.row {
-            for i in 0...mainLists.count-1 {
+            for i in startIndex.row+1...endIndex.row {
                 if mainLists[i].index <= endIndex.row {
                     mainLists[i].updateIndex(with: i-1)
                 }
@@ -65,7 +65,7 @@ class MainListManager {
         
         // When move down from top -> bottm
         else if endIndex < startIndex {
-            for i in stride(from: mainLists.count-1, through: 0, by: -1) {
+            for i in stride(from: startIndex.row-1, through: endIndex.row, by: -1) {
                 if mainLists[i].index >= endIndex.row {
                     mainLists[i].updateIndex(with: i+1)
                 }

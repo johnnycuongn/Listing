@@ -37,7 +37,7 @@ extension MainList {
         
         // When move up frop bottom -> top
         if endIndex > startIndex {
-            for i in 0...subListsArray.count-1 {
+            for i in startIndex+1...endIndex {
                 if subListsArray[i].index <= endIndex {
                     subListsArray[i].updateIndex(with: i-1)
                 }
@@ -46,7 +46,7 @@ extension MainList {
         
         // When move down from top -> bottm
         else if endIndex < startIndex {
-            for i in stride(from: subListsArray.count-1, through: 0, by: -1) {
+            for i in stride(from: startIndex-1, through: endIndex, by: -1) {
             if subListsArray[i].index >= endIndex {
                     subListsArray[i].updateIndex(with: i+1)
                 }

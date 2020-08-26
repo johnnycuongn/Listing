@@ -51,7 +51,7 @@ extension SubList {
         
         // When move up frop bottom -> top
         if endIndex > startIndex {
-            for i in 0...itemsArray.count-1 {
+            for i in startIndex+1...endIndex {
                 if itemsArray[i].index <= endIndex {
                     itemsArray[i].updateIndex(with: i-1)
                 }
@@ -60,7 +60,7 @@ extension SubList {
         
         // When move down from top -> bottm
         else if endIndex < startIndex {
-            for i in stride(from: itemsArray.count-1, through: 0, by: -1) {
+            for i in stride(from: startIndex-1, through: endIndex, by: -1) {
             if itemsArray[i].index >= endIndex {
                     itemsArray[i].updateIndex(with: i+1)
                 }
