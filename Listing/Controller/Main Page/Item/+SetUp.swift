@@ -39,8 +39,6 @@ extension ItemsViewController {
        
     func setUpView() {
         listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
-        /// Undo Button
-        setUpUndoButtonView()
         
         /// List Thumbnail Collection View
         setUpListThumbnailCollectionView()
@@ -68,15 +66,7 @@ extension ItemsViewController {
          listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
     }
     
-    func setUpUndoButtonView() {
-        undoViewPresented(false)
-        undoButton.layer.cornerRadius = 10
-        undoButton.layer.borderWidth = 0.7
-        undoButton.layer.borderColor = UIColor.init(named: "Destructive")?.cgColor
-        undoButton.contentEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
-        
-        view.bringSubviewToFront(undoButton)
-    }
+ 
     
     func setUpItemInputToolbarView() {
         inputItemTextView.inputAccessoryView = inputItemToolbar

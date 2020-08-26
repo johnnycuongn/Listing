@@ -48,9 +48,6 @@ class ItemsViewController: UIViewController {
     /// - View's Buttons Outlets
     @IBOutlet weak var addButton: UIButton!
     
-    /// - Undo View
-    @IBOutlet weak var undoButton: UIButton!
-    
     /// - Model Variables
     var listIndex = 0 {
         didSet {
@@ -85,6 +82,7 @@ class ItemsViewController: UIViewController {
     
     var deletedItemIndex: IndexPath?
     var deletedItem: Item?
+    var deleteFromDatabase: Bool = false
 
     //MARK: -
     
@@ -159,22 +157,6 @@ class ItemsViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func undoButtonTapped(_ sender: UIButton) {
-        
-        guard let deletedItem = deletedItem,
-            let deletedItemIndex = deletedItemIndex else {
-            return
-        }
-        
-//         self.currentSubList.itemsArray.insert(deletedItem, at: deletedItemIndex.row)
-        self.currentSubList.insertItem(deletedItem.title!, at: deletedItemIndex.row)
-        self.listTableView.insertRows(at: [deletedItemIndex], with: .fade)
-        
-        self.stopTimer()
-        undoViewPresented(false)
-    }
-    
     // MARK: - Helper Methods
     
     // MARK: Reload Instance
@@ -194,7 +176,6 @@ class ItemsViewController: UIViewController {
            dataService.listIndex = self.listIndex
         
             dataService.pullDownService = self
-        dataService.cellUndoable = self
            
            listTableView.reloadData()
        }
@@ -225,32 +206,8 @@ class ItemsViewController: UIViewController {
         self.listTitleButton.isHidden = !listTitleTextField
             self.listTitleTextField.isHidden = listTitleTextField
     }
-    
-    @objc func undoViewPresented(_ isPresented: Bool = false) {
-        if isPresented == false {
-            listIndicator.isHidden = false
-            self.listsThumbnailCollectionView.isHidden = false
-            undoButton.isHidden = true
-        } else {
-            listIndicator.isHidden = true
-            listsThumbnailCollectionView.isHidden = true
-            undoButton.isHidden = false
-        }
-    }
 
-    // MARK: - Convinience Methods
-    var timer: Timer?
-    var undoTime: Double = 3
-    
-    func startTimer() {
-        print("Timer Start")
-        timer = Timer.scheduledTimer(timeInterval: undoTime, target: self, selector: #selector(self.undoViewPresented), userInfo: nil, repeats: false)
-    }
-    
-    func stopTimer() {
-        self.timer?.invalidate()
-        self.timer = nil
-    }
+
 }
 
 

@@ -52,20 +52,3 @@ extension ItemsViewController: PullDownToAddable {
              }
          }
 }
-
-extension ItemsViewController: CellUndoable {
-    
-    func undo(item: Item, with index: IndexPath) {
-        
-        undoViewPresented(true)
-        stopTimer()
-        startTimer()
-        
-        self.deletedItem = item
-        self.deletedItemIndex = index
-        
-        print("ItemsVC: deletedItem: \(deletedItem?.title) - \(deletedItemIndex)")
-        
-    }
-
-}

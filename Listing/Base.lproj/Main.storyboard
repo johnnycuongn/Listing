@@ -3,7 +3,6 @@
     <device id="retina4_7" orientation="portrait" appearance="dark"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -68,23 +67,6 @@
                                 </state>
                                 <connections>
                                     <action selector="addButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Brc-ff-Teh"/>
-                                </connections>
-                            </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="252" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9A3-mm-CdO">
-                                <rect key="frame" x="207" y="608" width="80" height="44"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="i8v-DE-oj3"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="tintColor" name="Destructive"/>
-                                <state key="normal" title=" Undo" image="return" catalog="system">
-                                    <color key="titleColor" red="0.67450980392156867" green="0.38039215686274508" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="small" weight="thin"/>
-                                </state>
-                                <connections>
-                                    <action selector="undoButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ldI-kl-ihv"/>
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="Rfm-TX-PFh">
@@ -228,11 +210,9 @@
                         </subviews>
                         <color key="backgroundColor" red="0.15778853139644666" green="0.15778853139644666" blue="0.15778853139644666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="C3m-6m-R7X" firstAttribute="leading" secondItem="9A3-mm-CdO" secondAttribute="trailing" constant="18" id="3dj-UY-p3r"/>
                             <constraint firstItem="GbA-B1-Wbb" firstAttribute="leading" secondItem="H4f-qh-ZUI" secondAttribute="leading" constant="0.29999999999999999" id="3eK-UB-oNb"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ngn-Zt-c9f" secondAttribute="trailing" id="476-cc-ibM"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="C3m-6m-R7X" secondAttribute="trailing" constant="15" id="500-Ad-UAa"/>
-                            <constraint firstItem="9A3-mm-CdO" firstAttribute="bottom" secondItem="H4f-qh-ZUI" secondAttribute="bottom" id="6di-Ab-2sJ"/>
                             <constraint firstItem="Rfm-TX-PFh" firstAttribute="top" secondItem="ngn-Zt-c9f" secondAttribute="bottom" constant="6" id="85O-Qj-kR4"/>
                             <constraint firstItem="ngn-Zt-c9f" firstAttribute="top" secondItem="WCC-4R-dMH" secondAttribute="bottom" constant="8" id="9bp-xH-2XR"/>
                             <constraint firstItem="H4f-qh-ZUI" firstAttribute="height" secondItem="C3m-6m-R7X" secondAttribute="height" multiplier="0.8" id="BNO-ui-8H7"/>
@@ -240,7 +220,6 @@
                             <constraint firstItem="NLe-zp-v14" firstAttribute="centerY" secondItem="H4f-qh-ZUI" secondAttribute="centerY" id="EJd-9g-kcn"/>
                             <constraint firstItem="C3m-6m-R7X" firstAttribute="leading" secondItem="H4f-qh-ZUI" secondAttribute="trailing" constant="36" id="Iy4-N2-sKJ"/>
                             <constraint firstItem="Rfm-TX-PFh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="5" id="KGa-Ks-Gsy"/>
-                            <constraint firstItem="9A3-mm-CdO" firstAttribute="height" secondItem="C3m-6m-R7X" secondAttribute="height" multiplier="0.8" id="M2i-W4-m9F"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Rfm-TX-PFh" secondAttribute="trailing" constant="5" id="NTf-O0-gCw"/>
                             <constraint firstItem="H4f-qh-ZUI" firstAttribute="top" secondItem="GbA-B1-Wbb" secondAttribute="bottom" constant="1" id="Sbt-js-Tsq"/>
                             <constraint firstItem="WCC-4R-dMH" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="eat-iD-8vn"/>
@@ -275,7 +254,6 @@
                         <outlet property="listsThumbnailCollectionView" destination="H4f-qh-ZUI" id="N6C-3i-NZK"/>
                         <outlet property="listsThumbnailCollectionViewDataService" destination="jnq-vK-aS5" id="JXW-hB-aZl"/>
                         <outlet property="toolbarAddButton" destination="GBg-Oa-NdM" id="GJp-sZ-IvW"/>
-                        <outlet property="undoButton" destination="9A3-mm-CdO" id="mS2-ek-e2b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -542,10 +520,6 @@
     </scenes>
     <resources>
         <image name="keyboard.chevron.compact.down" catalog="system" width="128" height="91"/>
-        <image name="return" catalog="system" width="128" height="101"/>
         <image name="text.justify" catalog="system" width="128" height="100"/>
-        <namedColor name="Destructive">
-            <color red="0.67500001192092896" green="0.37999999523162842" blue="0.37599998712539673" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>
