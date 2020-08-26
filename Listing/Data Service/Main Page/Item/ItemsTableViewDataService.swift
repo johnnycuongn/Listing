@@ -80,9 +80,27 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
                 cell.titleLabel.attributedText = selectedItem.title?.strikeThrough(.add)
             case false:
                 cell.titleLabel.attributedText = selectedItem.title?.strikeThrough(.remove)
+            }
         }
     }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .normal, title: "") { (action, view, boolValue) in
+    
+            view.tintColor = .red
+            
+            self.currentSubList.deleteItem(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+        let trashImage =  UIImage(systemName: "trash")
+        deleteAction.image = trashImage?.withTintColor(AssetsColor.destructive, renderingMode: .alwaysOriginal)
+        deleteAction.backgroundColor = AssetsColor.lightDarkGrey
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
+    
+    
+    
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         pullDownService.isTablePullDowned(true)
