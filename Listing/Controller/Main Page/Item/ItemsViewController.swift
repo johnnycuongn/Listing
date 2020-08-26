@@ -176,8 +176,10 @@ class ItemsViewController: UIViewController {
            dataService.listIndex = self.listIndex
         
             dataService.pullDownService = self
+        DispatchQueue.main.async {
+            self.listTableView.reloadData()
+        }
            
-           listTableView.reloadData()
        }
     
     // MARK: Model Update

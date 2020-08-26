@@ -33,4 +33,10 @@ public class Item: NSManagedObject {
         
         PersistenceService.saveContext()
     }
+    
+    func updateComplete() {
+        self.isCompleted = !isCompleted
+        
+        PersistenceService.saveContext()
+    }
 }

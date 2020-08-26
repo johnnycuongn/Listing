@@ -24,7 +24,14 @@ class ItemCell: UITableViewCell {
     }
     
     func config(item: Item) {
-        self.titleLabel.text = item.title
+        
+        self.titleLabel.attributedText = item.title!.strikeThrough(.remove)
+        
+        
+        if item.isCompleted == true {
+            self.titleLabel.attributedText = item.title!.strikeThrough(.add)
+        }
+        
     }
 
 }

@@ -40,8 +40,10 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
-
-        cell.config(item: currentSubList.itemsArray[indexPath.row])
+        
+        let item = currentSubList.itemsArray[indexPath.row]
+        
+        cell.config(item: item)
         
         return cell
     }
@@ -69,7 +71,17 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+        let selectedItem = currentSubList.itemsArray[indexPath.row]
+        selectedItem.updateComplete()
+        
+        if let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
+            switch selectedItem.isCompleted {
+            case true:
+                cell.titleLabel.attributedText = selectedItem.title?.strikeThrough(.add)
+            case false:
+                cell.titleLabel.attributedText = selectedItem.title?.strikeThrough(.remove)
+        }
+    }
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
