@@ -12,14 +12,19 @@ public protocol PullDownToAddable {
     func isTablePullDowned(_ value: Bool)
 }
 
+protocol DataServiceActionSheetDelegate {
+    func deleteAction(for indexPath: IndexPath)
+}
+
 class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
-    
+    var tableView: UITableView!
     var currentMainList: MainList {
         return MainListManager.mainLists[0]
     }
     var listIndex: Int?
     var pullDownService: PullDownToAddable!
+    var actionSheet: DataServiceActionSheetDelegate!
     
     var currentSubList: SubList {
         guard listIndex != nil else { fatalError() }
@@ -86,11 +91,9 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .normal, title: "") { (action, view, boolValue) in
-    
-            view.tintColor = .red
             
-            self.currentSubList.deleteItem(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .automatic)
+            self.actionSheet.deleteAction(for: indexPath)
+            
         }
         let trashImage =  UIImage(systemName: "trash")
         deleteAction.image = trashImage?.withTintColor(AssetsColor.destructive, renderingMode: .alwaysOriginal)
@@ -99,12 +102,9 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
-    
-    
-    
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         pullDownService.isTablePullDowned(true)
     }
- 
+
 
 }

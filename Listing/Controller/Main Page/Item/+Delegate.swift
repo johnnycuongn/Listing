@@ -52,3 +52,35 @@ extension ItemsViewController: PullDownToAddable {
              }
          }
 }
+
+extension ItemsViewController: DataServiceActionSheetDelegate {
+    func deleteAction(for indexPath: IndexPath) {
+        let deletedItem = currentSubList.itemsArray[indexPath.row]
+        
+        // Action Sheet
+        let actionSheet = UIAlertController(
+            title: nil,
+            message: "'\(deletedItem.title!)' will be deleted permanently",
+            preferredStyle: .actionSheet)
+        
+        // Delete
+        let deleteAction = UIAlertAction(
+            title: "Delete Task",
+            style: .destructive) {
+            (action) in
+                self.currentSubList.deleteItem(at: indexPath.row)
+                self.listTableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+        
+        // Cancel Delete
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        // Present
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    
+}
