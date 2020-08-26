@@ -86,6 +86,15 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
             case false:
                 cell.titleLabel.attributedText = selectedItem.title?.strikeThrough(.remove)
             }
+            
+            UIView.animate(withDuration: 0.1, animations: {
+                cell.transform = cell.transform.scaledBy(x: 1.5, y: 1.5)
+            }, completion: { (success) in
+                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
+                    cell.transform = CGAffineTransform.identity
+                }, completion: nil)
+            })
+            
         }
     }
     

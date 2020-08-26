@@ -55,6 +55,11 @@ extension ItemsViewController: PullDownToAddable {
 
 extension ItemsViewController: DataServiceActionSheetDelegate {
     func deleteAction(for indexPath: IndexPath) {
+        // Reason: Animation might appear too fast
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.listTableView.reloadRows(at: [indexPath], with: .automatic)
+        }
+        
         let deletedItem = currentSubList.itemsArray[indexPath.row]
         
         // Action Sheet
