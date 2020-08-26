@@ -17,12 +17,10 @@
 		404F2C0F24F3F97500FC471A /* SubList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C0924F3F97500FC471A /* SubList+CoreDataClass.swift */; };
 		404F2C1024F3F97500FC471A /* SubList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C0A24F3F97500FC471A /* SubList+CoreDataProperties.swift */; };
 		404F2C1524F3FA5F00FC471A /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1424F3FA5F00FC471A /* PersistenceService.swift */; };
-		404F2C1724F3FB0D00FC471A /* SubListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1624F3FB0D00FC471A /* SubListManager.swift */; };
-		404F2C1924F409E600FC471A /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1824F409E600FC471A /* ItemManager.swift */; };
 		404F2C1B24F40A4C00FC471A /* MainListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1A24F40A4C00FC471A /* MainListManager.swift */; };
 		404F2C1D24F412A500FC471A /* +DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1C24F412A500FC471A /* +DragDrop.swift */; };
-		404F2C1F24F4232E00FC471A /* ItemManage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1E24F4232E00FC471A /* ItemManage.swift */; };
-		404F2C2124F4236900FC471A /* ManageSubList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C2024F4236900FC471A /* ManageSubList.swift */; };
+		404F2C1F24F4232E00FC471A /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1E24F4232E00FC471A /* ItemManager.swift */; };
+		404F2C2124F4236900FC471A /* SubListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C2024F4236900FC471A /* SubListManager.swift */; };
 		4053872524C87F8000647756 /* EmojiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4053872424C87F8000647756 /* EmojiExtension.swift */; };
 		4053872724C8806A00647756 /* EmojiSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4053872624C8806A00647756 /* EmojiSuggestion.swift */; };
 		405624262491D8920083B800 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624252491D8920083B800 /* AppDelegate.swift */; };
@@ -82,12 +80,10 @@
 		404F2C0924F3F97500FC471A /* SubList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		404F2C0A24F3F97500FC471A /* SubList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		404F2C1424F3FA5F00FC471A /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
-		404F2C1624F3FB0D00FC471A /* SubListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubListManager.swift; sourceTree = "<group>"; };
-		404F2C1824F409E600FC471A /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
 		404F2C1A24F40A4C00FC471A /* MainListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListManager.swift; sourceTree = "<group>"; };
 		404F2C1C24F412A500FC471A /* +DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+DragDrop.swift"; sourceTree = "<group>"; };
-		404F2C1E24F4232E00FC471A /* ItemManage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManage.swift; sourceTree = "<group>"; };
-		404F2C2024F4236900FC471A /* ManageSubList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageSubList.swift; sourceTree = "<group>"; };
+		404F2C1E24F4232E00FC471A /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
+		404F2C2024F4236900FC471A /* SubListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubListManager.swift; sourceTree = "<group>"; };
 		4053872424C87F8000647756 /* EmojiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiExtension.swift; sourceTree = "<group>"; };
 		4053872624C8806A00647756 /* EmojiSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSuggestion.swift; sourceTree = "<group>"; };
 		405624222491D8920083B800 /* Listing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Listing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,7 +148,7 @@
 			children = (
 				404F2C0524F3F97500FC471A /* MainList+CoreDataClass.swift */,
 				404F2C0624F3F97500FC471A /* MainList+CoreDataProperties.swift */,
-				404F2C2024F4236900FC471A /* ManageSubList.swift */,
+				404F2C2024F4236900FC471A /* SubListManager.swift */,
 				404F2C1A24F40A4C00FC471A /* MainListManager.swift */,
 			);
 			path = MainList;
@@ -163,8 +159,7 @@
 			children = (
 				404F2C0924F3F97500FC471A /* SubList+CoreDataClass.swift */,
 				404F2C0A24F3F97500FC471A /* SubList+CoreDataProperties.swift */,
-				404F2C1624F3FB0D00FC471A /* SubListManager.swift */,
-				404F2C1E24F4232E00FC471A /* ItemManage.swift */,
+				404F2C1E24F4232E00FC471A /* ItemManager.swift */,
 				404F2C1C24F412A500FC471A /* +DragDrop.swift */,
 			);
 			path = SubList;
@@ -293,7 +288,6 @@
 			children = (
 				404F2C0724F3F97500FC471A /* Item+CoreDataClass.swift */,
 				404F2C0824F3F97500FC471A /* Item+CoreDataProperties.swift */,
-				404F2C1824F409E600FC471A /* ItemManager.swift */,
 			);
 			path = Item;
 			sourceTree = "<group>";
@@ -536,7 +530,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				40E0FD8424CF071200A674D1 /* +ItemInputTextView.swift in Sources */,
-				404F2C1924F409E600FC471A /* ItemManager.swift in Sources */,
 				40AA4E6024C0405900D8B215 /* EmojiDataService.swift in Sources */,
 				404F2C0C24F3F97500FC471A /* MainList+CoreDataProperties.swift in Sources */,
 				404F2C1B24F40A4C00FC471A /* MainListManager.swift in Sources */,
@@ -555,7 +548,7 @@
 				40E0FD8C24CF160400A674D1 /* +CollectionDelegateFlowLayout.swift in Sources */,
 				4064A63324C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift in Sources */,
 				40AA4E5A24C03E7900D8B215 /* EmojiCategory.swift in Sources */,
-				404F2C2124F4236900FC471A /* ManageSubList.swift in Sources */,
+				404F2C2124F4236900FC471A /* SubListManager.swift in Sources */,
 				4064A63524C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift in Sources */,
 				4053872724C8806A00647756 /* EmojiSuggestion.swift in Sources */,
 				40E0FD8A24CF151400A674D1 /* +CollectionDataSource.swift in Sources */,
@@ -569,11 +562,10 @@
 				40A0E0C724EFFDCA0039F19C /* +SetUp.swift in Sources */,
 				40AA4E6524C041CF00D8B215 /* SectionHeaderView.swift in Sources */,
 				4053872524C87F8000647756 /* EmojiExtension.swift in Sources */,
-				404F2C1724F3FB0D00FC471A /* SubListManager.swift in Sources */,
 				404F2C0D24F3F97500FC471A /* Item+CoreDataClass.swift in Sources */,
 				40A0DFE824ED175C0039F19C /* +Drag.swift in Sources */,
 				4036E44424CB282E00F88D96 /* ListsViewController.swift in Sources */,
-				404F2C1F24F4232E00FC471A /* ItemManage.swift in Sources */,
+				404F2C1F24F4232E00FC471A /* ItemManager.swift in Sources */,
 				404F2C0E24F3F97500FC471A /* Item+CoreDataProperties.swift in Sources */,
 				40A0DFF024ED23B30039F19C /* +DropDelegate.swift in Sources */,
 				40A0DFEA24ED17810039F19C /* +Drop.swift in Sources */,
