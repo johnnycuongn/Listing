@@ -525,7 +525,7 @@
         <image name="keyboard.chevron.compact.down" catalog="system" width="128" height="91"/>
         <image name="text.justify" catalog="system" width="128" height="100"/>
         <namedColor name="Light-DarkGrey">
-            <color red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.15700000524520874" green="0.15700000524520874" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

@@ -46,8 +46,9 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "itemCell", for: indexPath) as! ItemCell
         
-        let item = currentSubList.itemsArray[indexPath.row]
+        cell.swipeToDeleteDelegate = self
         
+        let item = currentSubList.itemsArray[indexPath.row]
         cell.config(item: item)
         
         return cell
@@ -76,26 +77,6 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedItem = currentSubList.itemsArray[indexPath.row]
-        selectedItem.updateComplete()
-        
-        if let cell = tableView.cellForRow(at: indexPath) as? ItemCell {
-            switch selectedItem.isCompleted {
-            case true:
-                cell.titleLabel.attributedText = selectedItem.title?.strikeThrough(.add)
-            case false:
-                cell.titleLabel.attributedText = selectedItem.title?.strikeThrough(.remove)
-            }
-            
-            UIView.animate(withDuration: 0.1, animations: {
-                cell.transform = cell.transform.scaledBy(x: 1.5, y: 1.5)
-            }, completion: { (success) in
-                UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5, options: .curveEaseInOut, animations: {
-                    cell.transform = CGAffineTransform.identity
-                }, completion: nil)
-            })
-            
-        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
@@ -114,6 +95,29 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         pullDownService.isTablePullDowned(true)
     }
+}
 
+extension ItemsTableViewDataService: SwipeItemToDeleteDelegate {
+    
+    func isComplete(_ item: ItemCell) -> Bool {
+        guard let indexPath = tableView.indexPath(for: item) else {
+            print("Unable to find item")
+            return false
+        }
+        
+        let selectedItem = currentSubList.itemsArray[indexPath.row]
+        
+        return selectedItem.isCompleted
+        
+    }
 
+    func updateComplete(for item: ItemCell, with isComplete: Bool) {
+        guard let indexPath = tableView.indexPath(for: item) else {
+            print("Unable to find item")
+            return
+        }
+        
+        let selectedItem = currentSubList.itemsArray[indexPath.row]
+        selectedItem.updateComplete(with: isComplete)
+    }
 }
