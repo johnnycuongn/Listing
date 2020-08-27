@@ -21,7 +21,7 @@ extension ItemsViewController: UITextViewDelegate {
             }
         // When user start to type
              else if textView.textColor == UIColor.lightGray && !text.isEmpty {
-                toolbarAddButton.isHidden = false
+                
                 textView.textColor = UIColor.white
                 textView.text = text
                     // When user tapped done (no text)
@@ -72,7 +72,7 @@ extension ItemsViewController: UITextViewDelegate {
         inputItemTextView.reloadInputViews()
         
         // Toolbar
-        toolbarAddButton.isHidden = true
+  
     }
     
 }

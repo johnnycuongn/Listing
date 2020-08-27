@@ -57,13 +57,14 @@ extension ItemCell {
          titleLabel.isUserInteractionEnabled = true
                 
                 
-         if let font = UIFont(name: "System Light", size: 17) {
+         if let font = UIFont(name: "HelveticaNeue-Light", size: 17) {
              let fontAttributes = [NSAttributedString.Key.font: font]
              let myText = titleLabel.text!
              let myWord = "a"
              titleLabelWidth = (myText as NSString).size(withAttributes: fontAttributes).width
              titleLabelWordWidth = (myWord as NSString).size(withAttributes: fontAttributes).width
          } else {
+            print("Fatal")
              titleLabelWordWidth = 9
              titleLabelWidth = CGFloat(9 * titleLabel.text!.count)
          }
@@ -72,10 +73,13 @@ extension ItemCell {
     @objc func handlePanRight(recognizer: UIPanGestureRecognizer) {
         let xTranslation: CGFloat = recognizer.translation(in: self.contentView).x
         var startPoint: CGPoint = CGPoint(x: 0, y: 0)
+        var endPoint: CGPoint = CGPoint(x: 0, y: 0)
+        
               
         switch recognizer.state {
         case .began:
             startPoint = recognizer.location(in: self.contentView)
+            print("start: \(startPoint)")
         case .changed:
             if xTranslation > startPoint.x {
                 if isCompleted == false {
@@ -87,24 +91,31 @@ extension ItemCell {
             }
               
         case .ended:
-                  
+            endPoint = recognizer.location(in: self.contentView)
+
             if xTranslation > startPoint.x {
+                // IF there is no strikethrough
+                // USER adding strikethrough (complete task)
                 if isCompleted == false {
-                    if xTranslation > titleLabelWidth!/2 {
+                    if xTranslation > titleLabelWidth!/2.7
+                    || endPoint.x > contentView.frame.size.width / 2  {
                         titleLabel.attributedText = titleLabel.text?.strikeThrough(.add)
                         isCompleted = true
                     } else {
                         titleLabel.attributedText = titleLabel.text?.strikeThrough(.remove)
                         isCompleted = false
+                    }
                 }
-            }
-            else {
-                if xTranslation < titleLabelWidth!/2 {
-                        titleLabel.attributedText = titleLabel.text?.strikeThrough(.add)
-                        isCompleted = true
-                } else {
+                // IF there is strikethrough
+                // USER removing strikethrough
+                else {
+                    if xTranslation > titleLabelWidth!/2.7
+                    || endPoint.x > contentView.frame.size.width / 2 {
                         titleLabel.attributedText = titleLabel.text?.strikeThrough(.remove)
                         isCompleted = false
+                    } else {
+                        titleLabel.attributedText = titleLabel.text?.strikeThrough(.add)
+                        isCompleted = true
                     }
                 }
             }

@@ -95,6 +95,25 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         pullDownService.isTablePullDowned(true)
     }
+    
+    func setUpPan() {
+        let panRight = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanRight(recognizer:)))
+    }
+    
+    @objc func handlePanRight(recognizer: UIPanGestureRecognizer) {
+        let xTranslation: CGFloat = recognizer.translation(in: self.tableView).x
+        var startPoint: CGPoint = CGPoint(x: 0, y: 0)
+        switch recognizer.state {
+        case .began:
+            startPoint = recognizer.location(in: self.tableView)
+        case .changed:
+            if xTranslation > startPoint.x {
+                
+            }
+        default:
+            break
+        }
+    }
 }
 
 extension ItemsTableViewDataService: SwipeItemToDeleteDelegate {
@@ -119,5 +138,7 @@ extension ItemsTableViewDataService: SwipeItemToDeleteDelegate {
         
         let selectedItem = currentSubList.itemsArray[indexPath.row]
         selectedItem.updateComplete(with: isComplete)
+        
+        tableView.reloadData()
     }
 }

@@ -173,15 +173,11 @@ class ItemsViewController: UIViewController {
        
        func listTableViewDataUpdate() {
 //           dataService.currentMainList = self.listsManager
-           dataService.listIndex = self.listIndex
-        dataService.tableView = listTableView
-        
-            dataService.pullDownService = self
-        dataService.actionSheet = self
+            dataService.listIndex = self.listIndex
     
-        DispatchQueue.main.async {
-            self.listTableView.reloadData()
-        }
+            DispatchQueue.main.async {
+                self.listTableView.reloadData()
+            }
            
        }
     

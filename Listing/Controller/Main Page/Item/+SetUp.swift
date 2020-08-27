@@ -40,6 +40,8 @@ extension ItemsViewController {
     func setUpView() {
         listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
         
+        setUpItemTableViewData()
+        
         /// List Thumbnail Collection View
         setUpListThumbnailCollectionView()
         
@@ -50,6 +52,13 @@ extension ItemsViewController {
         inputItemView.isHidden = true
         setUpItemInputToolbarView()
        }
+    
+    func setUpItemTableViewData() {
+        dataService.tableView = listTableView
+         
+        dataService.pullDownService = self
+        dataService.actionSheet = self
+    }
         
     func setUpListThumbnailCollectionView() {
         listIndicator.frame.size.width = listsThumbnailWidth
