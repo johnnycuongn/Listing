@@ -53,15 +53,7 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
         
         return cell
     }
-    
-//    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
-//        if (tableView.isEditing) {
-//            return .none
-//        } else {
-//            return .delete
-//        }
-//    }
-    
+
     
     // MARK: - Delegate
     
@@ -79,14 +71,18 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        return nil
+    }
+    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .normal, title: "") { (action, view, boolValue) in
             
             self.actionSheet.deleteAction(for: indexPath)
             
         }
-        let trashImage =  UIImage(systemName: "trash")
-        deleteAction.image = trashImage?.withTintColor(AssetsColor.destructive, renderingMode: .alwaysOriginal)
+        let trashImage =  UIImage(systemName: "trash")!
+        deleteAction.image = trashImage.withTintColor(AssetsColor.destructive, renderingMode: .alwaysOriginal)
         deleteAction.backgroundColor = AssetsColor.lightDarkGrey
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
@@ -95,32 +91,16 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         pullDownService.isTablePullDowned(true)
     }
-    
-    func setUpPan() {
-        let panRight = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanRight(recognizer:)))
-    }
-    
-    @objc func handlePanRight(recognizer: UIPanGestureRecognizer) {
-        let xTranslation: CGFloat = recognizer.translation(in: self.tableView).x
-        var startPoint: CGPoint = CGPoint(x: 0, y: 0)
-        switch recognizer.state {
-        case .began:
-            startPoint = recognizer.location(in: self.tableView)
-        case .changed:
-            if xTranslation > startPoint.x {
-                
-            }
-        default:
-            break
-        }
-    }
 }
 
 extension ItemsTableViewDataService: SwipeItemToDeleteDelegate {
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
+    
     func isComplete(_ item: ItemCell) -> Bool {
         guard let indexPath = tableView.indexPath(for: item) else {
-            print("Unable to find item")
             return false
         }
         
@@ -132,7 +112,6 @@ extension ItemsTableViewDataService: SwipeItemToDeleteDelegate {
 
     func updateComplete(for item: ItemCell, with isComplete: Bool) {
         guard let indexPath = tableView.indexPath(for: item) else {
-            print("Unable to find item")
             return
         }
         

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SwipeItemToDeleteDelegate {
+protocol SwipeItemToDeleteDelegate: UIGestureRecognizerDelegate {
     func isComplete(_ item: ItemCell) -> Bool
     func updateComplete(for item: ItemCell, with isComplete: Bool)
 }
@@ -33,6 +33,12 @@ class ItemCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        titleLabel.isUserInteractionEnabled = true
+        selectionStyle = .none
+    }
+    
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
     
     func config(item: Item) {
@@ -52,9 +58,10 @@ class ItemCell: UITableViewCell {
 extension ItemCell {
     func setUpPanRight() {
          let panRight = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanRight(recognizer:)))
-                
+        
+        panRight.delegate = self
+        
          titleLabel.addGestureRecognizer(panRight)
-         titleLabel.isUserInteractionEnabled = true
                 
                 
          if let font = UIFont(name: "HelveticaNeue-Light", size: 17) {
@@ -81,7 +88,7 @@ extension ItemCell {
             startPoint = recognizer.location(in: self.contentView)
             print("start: \(startPoint)")
         case .changed:
-            if xTranslation > startPoint.x {
+            if xTranslation > 0 {
                 if isCompleted == false {
                     titleLabel.attributedText = titleLabel.text!.strikeThrough(.add, translation: xTranslation/titleLabelWordWidth!)
                 }
@@ -93,7 +100,7 @@ extension ItemCell {
         case .ended:
             endPoint = recognizer.location(in: self.contentView)
 
-            if xTranslation > startPoint.x {
+            if xTranslation > 0 {
                 // IF there is no strikethrough
                 // USER adding strikethrough (complete task)
                 if isCompleted == false {
@@ -118,11 +125,12 @@ extension ItemCell {
                         isCompleted = true
                     }
                 }
+            } else {
+                break
             }
             print("isDelete: \(isCompleted)")
         default:
             break
         }
-              
     }
 }

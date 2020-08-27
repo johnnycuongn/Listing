@@ -78,7 +78,10 @@ extension ItemsViewController: DataServiceActionSheetDelegate {
             }
         
         // Cancel Delete
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            self.listTableView.reloadData()
+        })
+  
         
         // Present
         actionSheet.addAction(deleteAction)
