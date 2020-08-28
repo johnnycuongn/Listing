@@ -1,8 +1,8 @@
 //
-//  +SetUp.swift
+//  +SetUpView.swift
 //  Listing
 //
-//  Created by Johnny on 21/8/20.
+//  Created by Johnny on 28/8/20.
 //  Copyright © 2020 Johnny. All rights reserved.
 //
 
@@ -10,42 +10,14 @@ import Foundation
 import UIKit
 
 extension ItemsViewController {
-    func loadList() {
-//
-//        listsManager.lists = DataManager.loadAll(from: List.self).sorted {
-//            $0.index < $1.index
-//        }
-//
-//        if listsManager.lists.isEmpty {
-//            listsManager.lists = [
-//            List(emoji: "📆", title: "ToDo", items: [
-//                Item(title: "Tap here to delete"),
-//                Item(title: "Tap list title to change"),
-//                ]
-//                , index: 0),
-//            List(emoji: "🛒", title: "Groceries", items: [
-//                Item(title: "2 Tomatos"),
-//                Item(title: "Chicken Breast")
-//                ]
-//                , index: 1)
-//            ]
-//
-//            listsManager.updateIndexForLists()
-//        }
-           
-        listTableViewDataUpdate()
-        listsThumbnailCollectionViewDataUpdate()
-    }
-       
+    
     func setUpView() {
         listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
         
-        setUpItemTableViewData()
-        
-        /// List Thumbnail Collection View
+        // List Thumbnail Collection View
         setUpListThumbnailCollectionView()
         
-        /// Add Button
+        // Add Button
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
            
         /// Item Input Itew
@@ -53,13 +25,6 @@ extension ItemsViewController {
         setUpItemInputToolbarView()
        }
     
-    func setUpItemTableViewData() {
-        dataService.tableView = listTableView
-         
-        dataService.pullDownService = self
-        dataService.actionSheet = self
-    }
-        
     func setUpListThumbnailCollectionView() {
         listIndicator.frame.size.width = listsThumbnailWidth
          
@@ -74,8 +39,6 @@ extension ItemsViewController {
          
          listsThumbnailCollectionView.showsHorizontalScrollIndicator = false
     }
-    
- 
     
     func setUpItemInputToolbarView() {
         inputItemTextView.inputAccessoryView = inputItemToolbar

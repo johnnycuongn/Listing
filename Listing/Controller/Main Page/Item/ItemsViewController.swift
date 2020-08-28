@@ -92,22 +92,15 @@ class ItemsViewController: UIViewController {
         if MainListManager.mainLists.isEmpty {
             MainListManager.append(title: "This is main list", emoji: "😀")
         }
-        ////    Data
-        loadList()
-
-        // Delegate and datasource
-        listTableView.dataSource = dataService
-        listTableView.delegate = dataService
+        //  Data
+        loadListIndex()
+        setUpItemTableViewData()
+        setUpListsThumbnailCollectionViewData()
         
-        listTableView.dragInteractionEnabled = true // Enable intra-app drags for iPhone.
-        listTableView.dragDelegate = dataService
-        listTableView.dropDelegate = dataService
-        
-        listsThumbnailCollectionView.dataSource = listsThumbnailCollectionViewDataService
-        listsThumbnailCollectionView.delegate = listsThumbnailCollectionViewDataService
+        listTableView.dragInteractionEnabled = true /// Enable intra-app drags for iPhone.
  
+        // Delegate
         self.inputItemTextView.delegate = self
-        
         self.listTitleTextField.delegate = self
         
         //View
@@ -163,10 +156,6 @@ class ItemsViewController: UIViewController {
     func listsThumbnailCollectionViewDataUpdate() {
 //           listsThumbnailCollectionViewDataService.currentMainList = self.listsManager
            listsThumbnailCollectionViewDataService.listIndex = self.listIndex
-           
-           listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
-           
-           listsThumbnailCollectionViewDataService.listUpdateService = self
           
            listsThumbnailCollectionView.reloadData()
        }

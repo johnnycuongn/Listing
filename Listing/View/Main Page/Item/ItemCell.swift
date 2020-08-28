@@ -21,7 +21,7 @@ class ItemCell: UITableViewCell {
     
     var isCompleted: Bool {
         get {
-            swipeToDeleteDelegate.isComplete(self)
+            return swipeToDeleteDelegate.isComplete(self)
         }
         set {
             swipeToDeleteDelegate.updateComplete(for: self, with: newValue)
@@ -57,11 +57,11 @@ class ItemCell: UITableViewCell {
     // MARK: Pan Recognizer
 extension ItemCell {
     func setUpPanRight() {
-         let panRight = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanRight(recognizer:)))
+        let panRight = UIPanGestureRecognizer(target: self, action: #selector(self.handlePanRight(recognizer:)))
         
         panRight.delegate = self
         
-         titleLabel.addGestureRecognizer(panRight)
+        titleLabel.addGestureRecognizer(panRight)
                 
                 
          if let font = UIFont(name: "HelveticaNeue-Light", size: 17) {
@@ -79,33 +79,25 @@ extension ItemCell {
     
     @objc func handlePanRight(recognizer: UIPanGestureRecognizer) {
         let xTranslation: CGFloat = recognizer.translation(in: self.contentView).x
-        var startPoint: CGPoint = CGPoint(x: 0, y: 0)
         var endPoint: CGPoint = CGPoint(x: 0, y: 0)
         
-              
-        switch recognizer.state {
-        case .began:
-            startPoint = recognizer.location(in: self.contentView)
-            print("start: \(startPoint)")
-        case .changed:
-            if xTranslation > 0 {
+        // USER did swipe right
+        if xTranslation > 0 {
+            switch recognizer.state {
+            case .changed:
                 if isCompleted == false {
                     titleLabel.attributedText = titleLabel.text!.strikeThrough(.add, translation: xTranslation/titleLabelWordWidth!)
                 }
                 else {
                     titleLabel.attributedText = titleLabel.text!.strikeThrough(.remove, translation: xTranslation/titleLabelWordWidth!)
                 }
-            }
-              
-        case .ended:
-            endPoint = recognizer.location(in: self.contentView)
-
-            if xTranslation > 0 {
+            case .ended:
+                endPoint = recognizer.location(in: self.contentView)
                 // IF there is no strikethrough
                 // USER adding strikethrough (complete task)
                 if isCompleted == false {
                     if xTranslation > titleLabelWidth!/2.7
-                    || endPoint.x > contentView.frame.size.width / 2  {
+                    || endPoint.x > contentView.frame.size.width / 1.5  {
                         titleLabel.attributedText = titleLabel.text?.strikeThrough(.add)
                         isCompleted = true
                     } else {
@@ -117,7 +109,7 @@ extension ItemCell {
                 // USER removing strikethrough
                 else {
                     if xTranslation > titleLabelWidth!/2.7
-                    || endPoint.x > contentView.frame.size.width / 2 {
+                    || endPoint.x > contentView.frame.size.width / 1.5 {
                         titleLabel.attributedText = titleLabel.text?.strikeThrough(.remove)
                         isCompleted = false
                     } else {
@@ -125,12 +117,10 @@ extension ItemCell {
                         isCompleted = true
                     }
                 }
-            } else {
+           
+            default:
                 break
             }
-            print("isDelete: \(isCompleted)")
-        default:
-            break
         }
     }
 }
