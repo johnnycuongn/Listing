@@ -56,18 +56,6 @@ extension MainPageViewController: UITableViewDataSource {
         
     }
     
-    // Spacing between rows
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView()
-        headerView.backgroundColor = UIColor.clear
-        return headerView
-    }
-    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard indexPath.row < MainListManager.mainLists.count else {
             return nil
@@ -83,44 +71,19 @@ extension MainPageViewController: UITableViewDataSource {
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
-    func actionSheetForDelete(for indexPath: IndexPath) {
-        let actionSheet = UIAlertController(title: nil, message: "\(MainListManager.mainLists[indexPath.row].title!)", preferredStyle: .actionSheet)
-        
-        let deleteAction = UIAlertAction(
-            title: "Delete",
-            style: .destructive) {
-            (action) in
-                MainListManager.remove(at: indexPath.row)
-                self.mainListsTableView.deleteRows(at: [indexPath], with: .fade)
-                
-                self.tableViewHeight.constant = self.mainListsTableView.contentSize.height
-                
-            }
-        
-        // Cancel Delete
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            self.mainListsTableView.reloadData()
-        })
-        
-        actionSheet.addAction(deleteAction)
-        actionSheet.addAction(cancelAction)
-        
-        self.present(actionSheet, animated: true, completion: nil)
-    }
-    
-    
 }
 
 // MARK: Delegate
 extension MainPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.row < MainListManager.mainLists.count {
-            if selectedIndexPath == nil, let selected = mainListsTableView.indexPathForSelectedRow  {
-                selectedIndexPath = selected
-            }
-            else {
-                selectedIndexPath = nil
-            }
+//            if selectedIndexPath == nil, let selected = mainListsTableView.indexPathForSelectedRow  {
+//                selectedIndexPath = selected
+//            }
+//            else {
+//                selectedIndexPath = nil
+//            }
+            performSegue(withIdentifier: Segues.toItemsVC, sender: nil)
         
             mainListsTableView.reloadData()
         } else if indexPath.row == MainListManager.mainLists.count {
@@ -128,8 +91,35 @@ extension MainPageViewController: UITableViewDelegate {
             tableView.reloadData()
         }
     }
-    
+}
 
+// MARK: Helper
+extension MainPageViewController {
+    
+    func actionSheetForDelete(for indexPath: IndexPath) {
+        let actionSheet = UIAlertController(title: nil, message: "\(MainListManager.mainLists[indexPath.row].title!)", preferredStyle: .actionSheet)
+           
+        let deleteAction = UIAlertAction(
+            title: "Delete",
+            style: .destructive) {
+            (action) in
+                MainListManager.remove(at: indexPath.row)
+                self.mainListsTableView.deleteRows(at: [indexPath], with: .fade)
+                   
+                self.tableViewHeight.constant = self.mainListsTableView.contentSize.height
+                   
+            }
+           
+           // Cancel Delete
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            self.mainListsTableView.reloadData()
+        })
+           
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
+           
+        self.present(actionSheet, animated: true, completion: nil)
+    }
     
     func addNewMainList() {
         let alertView = UIAlertController(title: nil, message: "New List", preferredStyle: .alert)
