@@ -30,6 +30,10 @@ extension ItemsViewController {
         isKeyboardShowing = true
     }
     
+    @IBAction func navigateBackToMain(_ sender: UIButton) {
+        _ = navigationController?.popToRootViewController(animated: true)
+    }
+    
     // MARK: Input item Toolbar
     @IBAction func closeItemInputView(_ sender: Any) {
         isKeyboardShowing = false

@@ -9,11 +9,11 @@
 import UIKit
 
 protocol ListsDeletable {
-    func delete(list cell: ListsCollectionViewCell)
+    func delete(list cell: SubListCollectionViewCell)
 }
 
-class ListsCollectionViewCell: UICollectionViewCell {
-    static var identifier = "ListsCollectionViewCell"
+class SubListCollectionViewCell: UICollectionViewCell {
+    static let identifier = "SubListCollectionViewCell"
     
     @IBOutlet weak var emojiButton: UIButton!
     @IBOutlet weak var listTitleLabel: UILabel!
@@ -26,7 +26,7 @@ class ListsCollectionViewCell: UICollectionViewCell {
     }
     
     
-    func configure(emoji: String, title: String) {
+    func config(emoji: String, title: String) {
         self.emojiButton.setTitle(emoji, for: .normal)
         
         self.listTitleLabel.text = title

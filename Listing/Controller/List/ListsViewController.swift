@@ -12,54 +12,85 @@ class ListsViewController: UIViewController {
 
     @IBOutlet weak var listsCollectionView: UICollectionView!
     
-    @IBOutlet weak var mainListTitle: UILabel!
+    @IBOutlet weak var mainListsTableView: UITableView!
+    
     
     var currentMainList: MainList {
         return MainListManager.mainLists[0]
     }
+    
+    var selectedIndexPath: IndexPath?
     
     var hasDeleted: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Temporary Main List - only one
-//        MainListManager.append(title: "This is main list", emoji: "😀")
-        
         hasDeleted = false
         
-        mainListTitle.text = currentMainList.title
+        mainListsTableView.delegate = self
+        mainListsTableView.dataSource = self
         
-        listsCollectionView.dataSource = self
-        listsCollectionView.delegate = self
-        
-        listsCollectionView.dragDelegate = self
-        listsCollectionView.dropDelegate = self
-        listsCollectionView.dragInteractionEnabled = true
     }
+
+}
+extension ListsViewController: UITableViewDataSource {
     
-    override func viewWillDisappear(_ animated: Bool) {
-        self.performSegue(withIdentifier: Segues.unwind.selectedList, sender: nil)
-    }
-    
-    // MARK: - Segues
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == Segues.unwind.selectedList {
-            let listVC = segue.destination as! ItemsViewController
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if selectedIndexPath == nil {
+            return 60
         }
+        return 300
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        MainListManager.mainLists.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainListTableViewCell.identifier, for: indexPath) as? MainListTableViewCell else {
+            fatalError()
+        }
+        
+        let mainList = MainListManager.mainLists[0]
+        
+        cell.config(with: mainList.title!)
+        cell.indexPath = indexPath
+        
+        cell.expandDelegate = self
+        cell.segueDelegate = self
+        cell.alertPresentDelegate = self
+        
+        return cell
+    }
+    
+    
+}
+
+extension ListsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if selectedIndexPath == nil, let selected = mainListsTableView.indexPathForSelectedRow  {
+            selectedIndexPath = selected
+        }
+        else {
+            selectedIndexPath = nil
+        }
+        
+        mainListsTableView.reloadData()
     }
 }
 
 extension ListsViewController: ListsDeletable {
     
-    func delete(list cell: ListsCollectionViewCell) {
+    func delete(list cell: SubListCollectionViewCell) {
         guard let indexPath = listsCollectionView.indexPath(for: cell) else {
             return
         }
         
         let willDeletedList = currentMainList.subListsArray[indexPath.row]
         
-        let alert = UIAlertController(title: "\(willDeletedList.emoji) \(willDeletedList.title)", message: "Delete List?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "\(willDeletedList.emoji) \(willDeletedList.title!)", message: "Delete List?", preferredStyle: .alert)
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
             self.currentMainList.deleteSubList(at: indexPath.row)
             self.listsCollectionView.deleteItems(at: [indexPath])

@@ -63,8 +63,11 @@ class ItemsViewController: UIViewController {
             }
         }
     }
+    
+    var mainListIndexPath: IndexPath!
+    
     var currentMainList: MainList {
-        return MainListManager.mainLists[0]
+        return MainListManager.mainLists[self.mainListIndexPath.row]
     }
     
     var currentSubList: SubList {

@@ -40,7 +40,6 @@ class MainListManager {
         if mainLists.count > 1 {
          for i in 0...mainLists.count - 1 {
             if mainLists[i].index > index {
-//                     replaceIndex(at: i, for: i-1)
                 mainLists[i].updateIndex(with: i-1)
                 }
             }

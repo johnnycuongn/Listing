@@ -14,7 +14,7 @@ public enum Segues {
         static let saveEmoji = "saveEmoji"
         static let selectedList = "selectedFromListsCollectionView"
     }
-    static let toListsVC = "toListViewController"
+    static let toItemsVC = "toItemsVC"
 }
 
 
@@ -36,7 +36,7 @@ extension ItemsViewController {
         /// When a list from Lists Collection is selected
         if segue.identifier == Segues.unwind.selectedList {
             let listsVC = segue.source as! ListsViewController
-            
+
             if let selectedIndexPath = listsVC.listsCollectionView.indexPathsForSelectedItems?.first {
                 self.listIndex = selectedIndexPath.row
             } else if listsVC.hasDeleted {
@@ -50,10 +50,7 @@ extension ItemsViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         /// Segue to Lists View Controller
-        if segue.identifier == Segues.toListsVC {
-            guard let listsVC = segue.destination as? ListsViewController else  {
-                fatalError()
-            }
+        if segue.identifier == Segues.toItemsVC {
         }
     }
 }
