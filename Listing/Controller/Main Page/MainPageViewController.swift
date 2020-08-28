@@ -8,6 +8,13 @@
 
 import UIKit
 
+struct MainPageStoryBoard {
+    static var tableViewTopAnchor: CGFloat = 60
+    static var largestTableViewHeight: CGFloat {
+        return UIScreen.main.bounds.size.height - tableViewTopAnchor*2
+    }
+}
+
 class MainPageViewController: UIViewController {
     
     @IBOutlet weak var mainListsTableView: UITableView!
@@ -24,6 +31,7 @@ class MainPageViewController: UIViewController {
         
         mainListsTableView.layer.cornerRadius = 25
         mainListsTableView.alwaysBounceVertical = false
+        mainListsTableView.bounces = false
     }
 
 }

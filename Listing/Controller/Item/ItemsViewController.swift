@@ -18,7 +18,7 @@ class ItemsViewController: UIViewController {
 
     /// - Systems
     @IBOutlet weak var itemsTableView: UITableView!
-    @IBOutlet var dataService: ItemsTableViewDataService!
+    @IBOutlet var itemsTableViewDataService: ItemsTableViewDataService!
     
     
     @IBOutlet weak var listIndicator: UILabel!
@@ -67,6 +67,7 @@ class ItemsViewController: UIViewController {
     var mainListIndexPath: IndexPath!
     
     var currentMainList: MainList {
+        print("Passign Index \(mainListIndexPath)")
         return MainListManager.mainLists[self.mainListIndexPath.row]
     }
     
@@ -95,6 +96,7 @@ class ItemsViewController: UIViewController {
             MainListManager.append(title: "This is main list", emoji: "😀")
         }
         
+        print("Did Activate")
         //View
         setUpView()
             
@@ -104,8 +106,12 @@ class ItemsViewController: UIViewController {
         
         //  Data
         loadListIndex()
+        
         setUpItemTableViewData()
         setUpListsThumbnailCollectionViewData()
+        
+        itemsTableView.reloadData()
+        listsThumbnailCollectionView.reloadData()
         
         itemsTableView.dragInteractionEnabled = true /// Enable intra-app drags for iPhone.
  
@@ -126,7 +132,7 @@ class ItemsViewController: UIViewController {
        }
        
        func listTableViewDataUpdate() {
-            dataService.listIndex = self.listIndex
+            itemsTableViewDataService.listIndex = self.listIndex
     
             DispatchQueue.main.async {
                 self.itemsTableView.reloadData()

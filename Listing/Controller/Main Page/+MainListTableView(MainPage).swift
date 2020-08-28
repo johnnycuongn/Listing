@@ -33,10 +33,7 @@ extension MainPageViewController: UITableViewDataSource {
             cell.config(with: "+")
             cell.expandButton.isHidden = true
             cell.settingButton.isHidden = true
-            
-//         self.mainListsTableView.frame.size.height = self.mainListsTableView.contentSize.height
-            self.tableViewHeight.constant = self.mainListsTableView.contentSize.height
-            mainListsTableView.layoutIfNeeded()
+        
         }
         else {
             
@@ -84,11 +81,17 @@ extension MainPageViewController: UITableViewDelegate {
 //                selectedIndexPath = nil
 //            }
             performSegue(withIdentifier: Segues.toItemsVC, sender: nil)
-        
-            mainListsTableView.reloadData()
+
         } else if indexPath.row == MainListManager.mainLists.count {
-            addNewMainList()
-            tableView.reloadData()
+//            addNewMainList()
+            MainListManager.append(title: "New list")
+            tableView.insertRows(at: [IndexPath(row: MainListManager.mainLists.count-1, section: 0)], with: .fade)
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == MainListManager.mainLists.count-1 {
+            adjustTableViewHeight(reload: false)
         }
     }
 }
@@ -105,8 +108,8 @@ extension MainPageViewController {
             (action) in
                 MainListManager.remove(at: indexPath.row)
                 self.mainListsTableView.deleteRows(at: [indexPath], with: .fade)
-                   
-                self.tableViewHeight.constant = self.mainListsTableView.contentSize.height
+                
+                self.adjustTableViewHeight(reload: false)
                    
             }
            
@@ -130,15 +133,16 @@ extension MainPageViewController {
         
         alertView.addAction(
             UIAlertAction(title: "Add", style: .default, handler: { (action) in
-                guard let title = alertView.textFields?.first?.text else {
+                guard let title = alertView.textFields?.first else {
                     return
                 }
                 
-                MainListManager.append(title: title)
-
-                self.tableViewHeight.constant = self.mainListsTableView.contentSize.height
+                MainListManager.append(title: title.text!)
                 
-                self.mainListsTableView.reloadData()
+                self.mainListsTableView.insertRows(at: [IndexPath(row: MainListManager.mainLists.count-1, section: 0)], with: .fade)
+
+                self.adjustTableViewHeight(reload: false)
+                
                 
                 
             }))
@@ -148,4 +152,18 @@ extension MainPageViewController {
         
         self.present(alertView, animated: true, completion: nil)
     }
+    
+    func adjustTableViewHeight(reload: Bool) {
+        if reload {
+            self.mainListsTableView.reloadData()
+        }
+        
+        if self.mainListsTableView.contentSize.height < MainPageStoryBoard.largestTableViewHeight {
+            self.tableViewHeight.constant = self.mainListsTableView.contentSize.height
+            self.mainListsTableView.layoutIfNeeded()
+        } else {
+             self.tableViewHeight.constant = MainPageStoryBoard.largestTableViewHeight
+        }
+    }
+    
 }

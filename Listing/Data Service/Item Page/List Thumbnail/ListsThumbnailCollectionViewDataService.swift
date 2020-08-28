@@ -16,8 +16,9 @@ public protocol ListUpdatable {
 
 class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var currentMainListIndex: Int!
     var currentMainList: MainList {
-        return MainListManager.mainLists[0]
+        return MainListManager.mainLists[currentMainListIndex]
     }
     var listIndex: Int?
         

@@ -19,8 +19,10 @@ protocol DataServiceActionSheetDelegate {
 class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     var tableView: UITableView!
+    
+    var currentMainListIndex: Int!
     var currentMainList: MainList {
-        return MainListManager.mainLists[0]
+        return MainListManager.mainLists[currentMainListIndex]
     }
     var listIndex: Int?
     var pullDownService: PullDownToAddable!

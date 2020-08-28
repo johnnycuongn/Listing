@@ -22,21 +22,24 @@ extension ItemsViewController {
         
         listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
         
+        listsThumbnailCollectionViewDataService.currentMainListIndex = mainListIndexPath.row
+        
         // Delegation
         listsThumbnailCollectionViewDataService.listUpdateService = self
     }
     
     func setUpItemTableViewData() {
-        itemsTableView.dataSource = dataService
-        itemsTableView.delegate = dataService
+        itemsTableView.dataSource = itemsTableViewDataService
+        itemsTableView.delegate = itemsTableViewDataService
         
-        itemsTableView.dragDelegate = dataService
-        itemsTableView.dropDelegate = dataService
+        itemsTableView.dragDelegate = itemsTableViewDataService
+        itemsTableView.dropDelegate = itemsTableViewDataService
         
-        dataService.tableView = itemsTableView
+        itemsTableViewDataService.tableView = itemsTableView
+        itemsTableViewDataService.currentMainListIndex = mainListIndexPath.row
          
         // Delegation
-        dataService.pullDownService = self
-        dataService.actionSheet = self
+        itemsTableViewDataService.pullDownService = self
+        itemsTableViewDataService.actionSheet = self
     }
 }
