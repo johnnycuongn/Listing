@@ -28,7 +28,7 @@ class ListTableViewDataServiceTest: XCTestCase {
         listViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ListViewControllerID") as! ItemsViewController
         _ = listViewController.view
         
-        listTableView = listViewController.listTableView
+        listTableView = listViewController.itemsTableView
         
         listTableView.dataSource = sut
         listTableView.delegate = sut

@@ -34,18 +34,18 @@ extension ItemsViewController {
         }
         
         /// When a list from Lists Collection is selected
-        if segue.identifier == Segues.unwind.selectedList {
-            let listsVC = segue.source as! ListsViewController
-
-            if let selectedIndexPath = listsVC.listsCollectionView.indexPathsForSelectedItems?.first {
-                self.listIndex = selectedIndexPath.row
-            } else if listsVC.hasDeleted {
-                self.listIndex = 0
-            }
-
-            self.listsThumbnailCollectionView.contentOffset.x = listsThumbnailWidth*CGFloat(listIndex)+listsThumbnailCollectionViewLayout.minimumLineSpacing*CGFloat(listIndex)
-            listsThumbnailCollectionViewDataUpdate()
-        }
+//        if segue.identifier == Segues.unwind.selectedList {
+//            let listsVC = segue.source as! ListsViewController
+//
+//            if let selectedIndexPath = listsVC.listsCollectionView.indexPathsForSelectedItems?.first {
+//                self.listIndex = selectedIndexPath.row
+//            } else if listsVC.hasDeleted {
+//                self.listIndex = 0
+//            }
+//
+//            self.listsThumbnailCollectionView.contentOffset.x = listsThumbnailWidth*CGFloat(listIndex)+listsThumbnailCollectionViewLayout.minimumLineSpacing*CGFloat(listIndex)
+//            listsThumbnailCollectionViewDataUpdate()
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

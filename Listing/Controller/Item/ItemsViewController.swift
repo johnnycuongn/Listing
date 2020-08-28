@@ -17,7 +17,7 @@ enum ListVCError: Error {
 class ItemsViewController: UIViewController {
 
     /// - Systems
-    @IBOutlet weak var listTableView: UITableView!
+    @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet var dataService: ItemsTableViewDataService!
     
     
@@ -107,7 +107,7 @@ class ItemsViewController: UIViewController {
         setUpItemTableViewData()
         setUpListsThumbnailCollectionViewData()
         
-        listTableView.dragInteractionEnabled = true /// Enable intra-app drags for iPhone.
+        itemsTableView.dragInteractionEnabled = true /// Enable intra-app drags for iPhone.
  
         // Delegate
         self.inputItemTextView.delegate = self
@@ -129,7 +129,7 @@ class ItemsViewController: UIViewController {
             dataService.listIndex = self.listIndex
     
             DispatchQueue.main.async {
-                self.listTableView.reloadData()
+                self.itemsTableView.reloadData()
             }
            
        }
@@ -141,7 +141,7 @@ class ItemsViewController: UIViewController {
         }
         
         currentSubList.addItem(title: textView.text!, from: .top)
-        listTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
+        itemsTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
     }
     
     // MARK: View Update

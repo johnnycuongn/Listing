@@ -27,13 +27,13 @@ extension ItemsViewController {
     }
     
     func setUpItemTableViewData() {
-        listTableView.dataSource = dataService
-        listTableView.delegate = dataService
+        itemsTableView.dataSource = dataService
+        itemsTableView.delegate = dataService
         
-        listTableView.dragDelegate = dataService
-        listTableView.dropDelegate = dataService
+        itemsTableView.dragDelegate = dataService
+        itemsTableView.dropDelegate = dataService
         
-        dataService.tableView = listTableView
+        dataService.tableView = itemsTableView
          
         // Delegation
         dataService.pullDownService = self

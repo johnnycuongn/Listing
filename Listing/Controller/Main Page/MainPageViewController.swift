@@ -8,25 +8,15 @@
 
 import UIKit
 
-class ListsViewController: UIViewController {
-
-    @IBOutlet weak var listsCollectionView: UICollectionView!
+class MainPageViewController: UIViewController {
     
     @IBOutlet weak var mainListsTableView: UITableView!
-    
-    
-    var currentMainList: MainList {
-        return MainListManager.mainLists[0]
-    }
+
     
     var selectedIndexPath: IndexPath?
     
-    var hasDeleted: Bool = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        hasDeleted = false
         
         mainListsTableView.delegate = self
         mainListsTableView.dataSource = self
@@ -34,7 +24,7 @@ class ListsViewController: UIViewController {
     }
 
 }
-extension ListsViewController: UITableViewDataSource {
+extension MainPageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if selectedIndexPath == nil {
@@ -67,7 +57,7 @@ extension ListsViewController: UITableViewDataSource {
     
 }
 
-extension ListsViewController: UITableViewDelegate {
+extension MainPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         if selectedIndexPath == nil, let selected = mainListsTableView.indexPathForSelectedRow  {
@@ -81,28 +71,3 @@ extension ListsViewController: UITableViewDelegate {
     }
 }
 
-extension ListsViewController: ListsDeletable {
-    
-    func delete(list cell: SubListCollectionViewCell) {
-        guard let indexPath = listsCollectionView.indexPath(for: cell) else {
-            return
-        }
-        
-        let willDeletedList = currentMainList.subListsArray[indexPath.row]
-        
-        let alert = UIAlertController(title: "\(willDeletedList.emoji) \(willDeletedList.title!)", message: "Delete List?", preferredStyle: .alert)
-        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (alertAction) in
-            self.currentMainList.deleteSubList(at: indexPath.row)
-            self.listsCollectionView.deleteItems(at: [indexPath])
-            
-            self.hasDeleted = true
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alert.addAction(deleteAction)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
-
-}

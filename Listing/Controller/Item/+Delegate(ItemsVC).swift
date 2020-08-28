@@ -46,7 +46,7 @@ extension ItemsViewController: ListUpdatable {
 extension ItemsViewController: PullDownToAddable {
     func isTablePullDowned(_ value: Bool) {
              if value == true {
-                 if listTableView.contentOffset.y < -40 && !isKeyboardShowing {
+                 if itemsTableView.contentOffset.y < -40 && !isKeyboardShowing {
                      self.addButtonTapped(addButton)
                  }
              }
@@ -57,7 +57,7 @@ extension ItemsViewController: DataServiceActionSheetDelegate {
     func deleteAction(for indexPath: IndexPath) {
         // Reason: Animation might appear too fast
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-            self.listTableView.reloadRows(at: [indexPath], with: .automatic)
+            self.itemsTableView.reloadRows(at: [indexPath], with: .automatic)
         }
         
         let deletedItem = currentSubList.itemsArray[indexPath.row]
@@ -74,12 +74,12 @@ extension ItemsViewController: DataServiceActionSheetDelegate {
             style: .destructive) {
             (action) in
                 self.currentSubList.deleteItem(at: indexPath.row)
-                self.listTableView.deleteRows(at: [indexPath], with: .automatic)
+                self.itemsTableView.deleteRows(at: [indexPath], with: .automatic)
             }
         
         // Cancel Delete
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-            self.listTableView.reloadData()
+            self.itemsTableView.reloadData()
         })
   
         

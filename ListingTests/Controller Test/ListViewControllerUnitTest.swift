@@ -25,22 +25,22 @@ class ListViewControllerUnitTest: XCTestCase {
     // MARK: - List Table View
     
     func testListVC_TableView_ReturnNotNil() {
-        XCTAssertNotNil(sut.listTableView)
+        XCTAssertNotNil(sut.itemsTableView)
     }
     
     // MARK: - DataSource and Delegate
     func testDataSource_ViewDidLoad_SetTableViewDatasource() {
-        XCTAssertNotNil(sut.listTableView.dataSource)
-        XCTAssert(sut.listTableView.dataSource is ItemsTableViewDataService)
+        XCTAssertNotNil(sut.itemsTableView.dataSource)
+        XCTAssert(sut.itemsTableView.dataSource is ItemsTableViewDataService)
     }
     
     func testDelegate_ViewDidLoad_SetTableViewDelegate() {
-        XCTAssertNotNil(sut.listTableView.delegate)
-        XCTAssert(sut.listTableView.delegate is ItemsTableViewDataService)
+        XCTAssertNotNil(sut.itemsTableView.delegate)
+        XCTAssert(sut.itemsTableView.delegate is ItemsTableViewDataService)
     }
     
     func testDataService_ViewDidLoad_SingleDataServiceObject() {
-        XCTAssertEqual(sut.listTableView.dataSource as! ItemsTableViewDataService, sut.listTableView.delegate as! ItemsTableViewDataService)
+        XCTAssertEqual(sut.itemsTableView.dataSource as! ItemsTableViewDataService, sut.itemsTableView.delegate as! ItemsTableViewDataService)
     }
     
     
