@@ -34,6 +34,9 @@ extension MainPageViewController: UITableViewDataSource {
             cell.expandButton.isHidden = true
             cell.settingButton.isHidden = true
             
+//         self.mainListsTableView.frame.size.height = self.mainListsTableView.contentSize.height
+            self.tableViewHeight.constant = self.mainListsTableView.contentSize.height
+            mainListsTableView.layoutIfNeeded()
         }
         else {
             
@@ -56,7 +59,7 @@ extension MainPageViewController: UITableViewDataSource {
     // Spacing between rows
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 5
+        return 0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -89,6 +92,9 @@ extension MainPageViewController: UITableViewDataSource {
             (action) in
                 MainListManager.remove(at: indexPath.row)
                 self.mainListsTableView.deleteRows(at: [indexPath], with: .fade)
+                
+                self.tableViewHeight.constant = self.mainListsTableView.contentSize.height
+                
             }
         
         // Cancel Delete
@@ -123,6 +129,8 @@ extension MainPageViewController: UITableViewDelegate {
         }
     }
     
+
+    
     func addNewMainList() {
         let alertView = UIAlertController(title: nil, message: "New List", preferredStyle: .alert)
         
@@ -137,8 +145,12 @@ extension MainPageViewController: UITableViewDelegate {
                 }
                 
                 MainListManager.append(title: title)
+
+                self.tableViewHeight.constant = self.mainListsTableView.contentSize.height
                 
                 self.mainListsTableView.reloadData()
+                
+                
             }))
         
         alertView.addAction(

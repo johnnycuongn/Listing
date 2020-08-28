@@ -332,8 +332,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="300" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="YNc-LA-XUh">
-                                <rect key="frame" x="10" y="155" width="394" height="707"/>
+                                <rect key="frame" x="10" y="298" width="394" height="300"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="NrK-mK-Pem"/>
+                                </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainListTableViewCell" id="QAU-Gk-waK" customClass="MainListTableViewCell" customModule="Listing" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="394" height="300"/>
@@ -463,16 +466,17 @@
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="YNc-LA-XUh" firstAttribute="centerX" secondItem="jri-b6-Gyo" secondAttribute="centerX" id="DPW-UH-VJP"/>
                             <constraint firstItem="Bf8-Zg-YNV" firstAttribute="trailing" secondItem="YNc-LA-XUh" secondAttribute="trailing" constant="10" id="ZDT-6p-UEi"/>
                             <constraint firstItem="YNc-LA-XUh" firstAttribute="leading" secondItem="Bf8-Zg-YNV" secondAttribute="leading" constant="10" id="ZJX-Sz-9CA"/>
-                            <constraint firstItem="Bf8-Zg-YNV" firstAttribute="bottom" secondItem="YNc-LA-XUh" secondAttribute="bottom" id="qM8-iN-B1C"/>
-                            <constraint firstItem="YNc-LA-XUh" firstAttribute="top" secondItem="Bf8-Zg-YNV" secondAttribute="top" constant="111" id="zA4-HF-cac"/>
+                            <constraint firstItem="YNc-LA-XUh" firstAttribute="centerY" secondItem="jri-b6-Gyo" secondAttribute="centerY" id="exD-iM-7eb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Bf8-Zg-YNV"/>
                     </view>
                     <navigationItem key="navigationItem" id="2gG-Mf-dFh"/>
                     <connections>
                         <outlet property="mainListsTableView" destination="YNc-LA-XUh" id="Z0N-qG-IuE"/>
+                        <outlet property="tableViewHeight" destination="NrK-mK-Pem" id="9to-es-stx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BcI-Yr-c47" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

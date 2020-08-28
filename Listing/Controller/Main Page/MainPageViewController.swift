@@ -13,6 +13,8 @@ class MainPageViewController: UIViewController {
     @IBOutlet weak var mainListsTableView: UITableView!
 
     var selectedIndexPath: IndexPath?
+
+    @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +22,8 @@ class MainPageViewController: UIViewController {
         mainListsTableView.delegate = self
         mainListsTableView.dataSource = self
         
-        mainListsTableView.layer.cornerRadius = 20
+        mainListsTableView.layer.cornerRadius = 25
+        mainListsTableView.alwaysBounceVertical = false
     }
 
 }
