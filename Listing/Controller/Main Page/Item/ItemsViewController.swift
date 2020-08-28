@@ -70,7 +70,6 @@ class ItemsViewController: UIViewController {
     var currentSubList: SubList {
         get {
             if currentMainList.subListsArray.count == 0 {
-//                currentMainList.addSubList(List(emoji: "📝", title: "Empty List", items: [], index: 0))
                 currentMainList.addSubList(title: "Empty List", emoji: "📝")
             }
             return currentMainList.subListsArray[listIndex]
@@ -92,6 +91,14 @@ class ItemsViewController: UIViewController {
         if MainListManager.mainLists.isEmpty {
             MainListManager.append(title: "This is main list", emoji: "😀")
         }
+        
+        //View
+        setUpView()
+            
+        listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
+        
+        inputItemTextView.autocapitalizationType = .none
+        
         //  Data
         loadListIndex()
         setUpItemTableViewData()
@@ -103,65 +110,19 @@ class ItemsViewController: UIViewController {
         self.inputItemTextView.delegate = self
         self.listTitleTextField.delegate = self
         
-        //View
-        setUpView()
-        
-        listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
     
-        inputItemTextView.autocapitalizationType = .none
     }
         
-        
-    
-    // MARK: - Buttons Action
-    
-    // MARK: Main
-    @IBAction func listTitleButtonTapped(_ sender: Any) {
-        listTitleTextField.text = listTitleButton.titleLabel!.text
-        setHidden(listTitleTextField: false)
-        
-        listTitleButton.setTitle("", for: .normal)
-        
-        listTitleTextField.becomeFirstResponder()
-        listTitleTextField.returnKeyType = .default
-    }
-    
-    @IBAction func addButtonTapped(_ sender: UIButton) {
-        
-        resetInputTextView()
-        inputItemView.isHidden = !inputItemView.isHidden
-        
-        inputItemTextView.becomeFirstResponder()
-        isKeyboardShowing = true
-    }
-    
-    // MARK: Input item Toolbar
-    @IBAction func closeItemInputView(_ sender: Any) {
-        isKeyboardShowing = false
-        inputItemView.isHidden = true
-        inputItemTextView.resignFirstResponder()
-    }
-    
-    @IBAction func toolbarAddButtonTapped(_ sender: UIButton) {
-        do {
-            try addNewItem(from: inputItemTextView)
-                resetInputTextView()
-        } catch {
-        }
-    }
-    
     // MARK: - Helper Methods
     
-    // MARK: Reload Instance
+    // MARK: Reload Index
     func listsThumbnailCollectionViewDataUpdate() {
-//           listsThumbnailCollectionViewDataService.currentMainList = self.listsManager
            listsThumbnailCollectionViewDataService.listIndex = self.listIndex
           
            listsThumbnailCollectionView.reloadData()
        }
        
        func listTableViewDataUpdate() {
-//           dataService.currentMainList = self.listsManager
             dataService.listIndex = self.listIndex
     
             DispatchQueue.main.async {
@@ -176,13 +137,11 @@ class ItemsViewController: UIViewController {
             throw ListVCError.emptyText
         }
         
-//        let newItem = Item(title: textView.text!)
-//        self.currentList.addItem(newItem, from: .top)
         currentSubList.addItem(title: textView.text!, from: .top)
         listTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
     }
     
-    // MARK: View
+    // MARK: View Update
 
     func listTitleViewUpdate(emoji: String? = nil, title: String? = nil) {
         if emoji != nil {

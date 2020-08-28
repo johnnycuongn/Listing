@@ -71,8 +71,6 @@ extension ItemsViewController: UITextViewDelegate {
         inputItemTextView.returnKeyType = .done
         inputItemTextView.reloadInputViews()
         
-        // Toolbar
-  
     }
     
 }

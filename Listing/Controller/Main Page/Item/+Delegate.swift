@@ -13,23 +13,23 @@ extension ItemsViewController: ListUpdatable {
     func updateList(from offset: Double) {
            
         let cellWidth = Double(listsThumbnailWidth + listsThumbnailCollectionViewLayout.minimumLineSpacing)
-
-               if Int(offset/cellWidth) <= currentMainList.subListsArray.count-1 && offset > 0 {
-                       listIndex = Int(offset/cellWidth)
-               } else if Int(offset/cellWidth) >= currentMainList.subListsArray.count {
-                       listIndex = currentMainList.subListsArray.count-1
-               } else if Int(offset/cellWidth) <= 0 {
-                       listIndex = 0
-               }
+        let index = Int((offset/cellWidth).rounded())
+        
+        if index <= currentMainList.subListsArray.count-1 && offset > 0 {
+            listIndex = index
+        } else if index >= currentMainList.subListsArray.count {
+            listIndex = currentMainList.subListsArray.count-1
+        } else if index <= 0 {
+            listIndex = 0
+        }
            
-       }
+    }
        
-       func addNewList() {
-           isCreatingList = true
+    func addNewList() {
+        isCreatingList = true
 
-//           let newList = List(emoji: "📝", title: "New List", items: [], index: currentMainList.subListsArray.count)
         currentMainList.addSubList(title: "New List", emoji: "📝")
-//           currentMainList.addSubList(newList)
+
            listIndex = currentMainList.subListsArray.count-1
            
            listTitleTextField.text = ""
@@ -39,7 +39,7 @@ extension ItemsViewController: ListUpdatable {
 
            listTitleTextField.becomeFirstResponder()
            listTitleTextField.returnKeyType = .default
-       }
+    }
        
 }
 

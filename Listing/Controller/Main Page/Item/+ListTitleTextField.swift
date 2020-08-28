@@ -38,7 +38,6 @@ extension ItemsViewController: UITextFieldDelegate {
             listsThumbnailCollectionViewDataUpdate()
             
             if isCreatingList == true {
-//                listsThumbnailCollectionView.scrollToItem(at: IndexPath(row: listsManager.lists.count, section: 0), at: .right, animated: true)
                 
                  var layout: UICollectionViewFlowLayout {
                        return self.listsThumbnailCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
