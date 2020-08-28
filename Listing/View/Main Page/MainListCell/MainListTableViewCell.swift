@@ -25,6 +25,7 @@ class MainListTableViewCell: UITableViewCell {
     
     @IBOutlet weak var mainListTitle: UILabel!
     @IBOutlet weak var expandButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     
     
     @IBOutlet weak var subListsCollectionView: UICollectionView!
@@ -39,7 +40,8 @@ class MainListTableViewCell: UITableViewCell {
     
     var currentMainList: MainList? {
         guard indexPath != nil else {
-            fatalError()
+//            fatalError()
+            return nil
         }
         return MainListManager.mainLists[indexPath!.row]
     }
@@ -70,6 +72,8 @@ class MainListTableViewCell: UITableViewCell {
     
     func config(with title: String) {
         self.mainListTitle.text = title
+        expandButton.isHidden = false
+        settingButton.isHidden = false
     }
     
     @IBAction func expandTapped(_ sender: UIButton) {

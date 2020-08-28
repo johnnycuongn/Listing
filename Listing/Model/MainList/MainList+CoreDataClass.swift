@@ -22,6 +22,14 @@ public class MainList: NSManagedObject {
         PersistenceService.saveContext()
     }
     
+    static func create(title: String, index: Int) {
+        let createdMainList = MainList(context: PersistenceService.context)
+        createdMainList.title = title
+        createdMainList.index = Int64(index)
+        
+        PersistenceService.saveContext()
+    }
+    
     func updateTitle(with newTitle: String) {
         self.title = newTitle
         

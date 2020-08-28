@@ -29,8 +29,12 @@ class MainListManager {
         return tempMainLists
     }
     
-    static func append(title: String, emoji: String) {
-        MainList.create(title: title, emoji: emoji, index: mainLists.count)
+    static func append(title: String, emoji: String? = nil) {
+        if emoji != nil {
+            MainList.create(title: title, emoji: emoji!, index: mainLists.count)
+        } else {
+            MainList.create(title: title, index: mainLists.count)
+        }
     }
     
     static func remove(at index: Int) {
