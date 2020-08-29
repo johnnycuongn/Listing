@@ -108,11 +108,23 @@ extension EmojiDataService: UISearchBarDelegate {
             
             let descriptionMatch = emoji.description.range(of: searchText, options: .caseInsensitive)
             let aliasesMatch = emoji.aliases.first?.range(of: searchText, options: .caseInsensitive)
+            var tagMatch: Bool = false
+            for tag in emoji.tags {
+                tagMatch = tag.range(of: searchText, options: .caseInsensitive) != nil
+            }
             
-            return descriptionMatch != nil || aliasesMatch != nil
+            return descriptionMatch != nil || aliasesMatch != nil || tagMatch
         })
+        
         searching = searchText != "" ? true : false
-
+        
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload), object: nil)
+        self.perform(#selector(self.reload), with: nil, afterDelay: 0.2)
+        
+        
+    }
+    
+    @objc func reload() {
         collectionView.reloadData()
     }
     
