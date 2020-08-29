@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EmojiSelectDelegate {
+    func selectedEmoji(_ emoji: String)
+}
+
 
 class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewDataSource
 {
@@ -15,11 +19,15 @@ class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewData
     var collectionView: UICollectionView!
     
     var searchBar: UISearchBar!
-        var searching = false
-        var searchEmoji = [Emoji]()
-        var searchCategories: [EmojiCategory] {
-            return EmojiProvider.categories(for: searchEmoji)
-        }
+    var searching = false
+    var searchEmoji = [Emoji]()
+    
+    var searchCategories: [EmojiCategory] {
+        return EmojiProvider.categories(for: searchEmoji)
+    }
+    
+    var selectEmojiDelegate: EmojiSelectDelegate!
+    
     // MARK: - Data source
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -49,9 +57,9 @@ class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewData
             sectionData = categories[indexPath.section]
             emojisData = sectionData.emojis[indexPath.row] }
         
-        if emojisData.emoji.isSingleEmoji {
-            cell.configure(with: emojisData.emoji)
-        }
+
+        cell.configure(with: emojisData.emoji)
+
         
         return cell
     }
@@ -60,9 +68,17 @@ class EmojiDataService: NSObject, UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let sectionData = categories[indexPath.section]
-        let data = sectionData.emojis[indexPath.row]
+        var sectionData: EmojiCategory
+        var emojisData: Emoji
         
+        if searching {
+            sectionData = searchCategories[indexPath.section]
+            emojisData = sectionData.emojis[indexPath.row] }
+        else {
+            sectionData = categories[indexPath.section]
+            emojisData = sectionData.emojis[indexPath.row] }
+        
+        selectEmojiDelegate.selectedEmoji(emojisData.emoji)
     }
     
     // MARK: Section Header View
@@ -90,9 +106,10 @@ extension EmojiDataService: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchEmoji = EmojiProvider.emojis.filter({ (emoji) -> Bool in
             
-            let match = emoji.description.range(of: searchText, options: .caseInsensitive)
+            let descriptionMatch = emoji.description.range(of: searchText, options: .caseInsensitive)
+            let aliasesMatch = emoji.aliases.first?.range(of: searchText, options: .caseInsensitive)
             
-            return match != nil
+            return descriptionMatch != nil || aliasesMatch != nil
         })
         searching = searchText != "" ? true : false
 
@@ -101,6 +118,7 @@ extension EmojiDataService: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.endEditing(true)
+        searching = false
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

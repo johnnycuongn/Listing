@@ -24,7 +24,7 @@ extension EmojiProvider {
                 tempEmojiCategory.append(newCategory)
             }
             
-            for emoji in EmojiProvider.emojis where emoji.emoji.isOneEmoji {
+            for emoji in EmojiProvider.emojis  {
                 for index in 0..<tempEmojiCategory.count {
                     if (emoji.category == tempEmojiCategory[index].name) {
                         tempEmojiCategory[index].emojis.append(emoji)
@@ -52,7 +52,7 @@ extension EmojiProvider {
             tempEmojiCategory.append(newCategory)
         }
         
-        for emoji in emojis where emoji.emoji.isOneEmoji {
+        for emoji in emojis {
             for index in 0..<tempEmojiCategory.count {
                 if (emoji.category == tempEmojiCategory[index].name) {
                     tempEmojiCategory[index].emojis.append(emoji)

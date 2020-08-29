@@ -67,7 +67,6 @@ class ItemsViewController: UIViewController {
     var mainListIndexPath: IndexPath!
     
     var currentMainList: MainList {
-        print("Passign Index \(mainListIndexPath)")
         return MainListManager.mainLists[self.mainListIndexPath.row]
     }
     
@@ -95,8 +94,6 @@ class ItemsViewController: UIViewController {
         if MainListManager.mainLists.isEmpty {
             MainListManager.append(title: "This is main list", emoji: "😀")
         }
-        
-        print("Did Activate")
         //View
         setUpView()
             

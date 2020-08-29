@@ -8,7 +8,8 @@
 
 import UIKit
 
-class EmojiPageViewController: UIViewController {
+class EmojiPageViewController: UIViewController, EmojiSelectDelegate {
+    
 
     @IBOutlet weak var emojiCollectionView: UICollectionView!
     
@@ -24,8 +25,10 @@ class EmojiPageViewController: UIViewController {
         emojiCollectionView.dataSource = emojiDataService
     
         emojiDataService.collectionView = emojiCollectionView
-        emojiDataService.searchBar = emojiSearchBar
+        emojiDataService.selectEmojiDelegate = self
         
+        // Search bar
+        emojiDataService.searchBar = emojiSearchBar
         emojiSearchBar.delegate = emojiDataService
         
         emojiCollectionView.reloadData()     
@@ -34,17 +37,13 @@ class EmojiPageViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
 
-        if segue.identifier == Segues.unwind.saveEmoji {
-            guard let indexPath = emojiCollectionView.indexPathsForSelectedItems?.first else {
-                return
-            }
-            
-            let categories = EmojiProvider.categories
-            let sectionData = categories[indexPath.section]
-            let data = sectionData.emojis[indexPath.row]
-            
-            self.selectedEmoji = data.emoji
-        }
+        if segue.identifier == Segues.unwind.saveEmoji {}
+    }
+    
+    func selectedEmoji(_ emoji: String) {
+        self.selectedEmoji = emoji
+        performSegue(withIdentifier: Segues.unwind.saveEmoji, sender: emoji)
+        
     }
     
     

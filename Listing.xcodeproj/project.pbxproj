@@ -246,9 +246,9 @@
 		4056244F2491E4930083B800 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				40AA4E6124C0413E00D8B215 /* Emoji */,
 				40E0FD7424CEE22F00A674D1 /* Main Page */,
 				40E0FD7D24CF021B00A674D1 /* Item Page */,
-				40AA4E6124C0413E00D8B215 /* Emoji */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -256,9 +256,9 @@
 		405624502491E4990083B800 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				40AA4E5E24C0403600D8B215 /* Emoji */,
 				40E0FD7A24CF019A00A674D1 /* Main Page */,
 				40E0FD7B24CF01A100A674D1 /* Item */,
-				40AA4E5E24C0403600D8B215 /* Emoji */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

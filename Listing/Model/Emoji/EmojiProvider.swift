@@ -11,7 +11,7 @@ import Foundation
 class EmojiProvider {
     
     static var emojis: [Emoji] {
-        return loadData()
+        return loadData().filter( { $0.emoji.isSingleEmoji})
     }
     
     // MARK: Fetch from local documentary

@@ -524,7 +524,7 @@
                                         </collectionViewCellContentView>
                                         <connections>
                                             <outlet property="iconLbl" destination="QiO-nU-erI" id="eoh-ys-hkv"/>
-                                            <segue destination="2AT-if-FWY" kind="unwind" identifier="saveEmoji" unwindAction="unwindToListViewControllerWithSegue:" id="nMB-k3-IIQ"/>
+                                            <segue destination="2AT-if-FWY" kind="unwind" identifier="saveEmoji" unwindAction="unwindToItemsViewControllerWithSegue:" id="nMB-k3-IIQ"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -586,13 +586,13 @@
         <image name="keyboard.chevron.compact.down" catalog="system" width="128" height="91"/>
         <image name="text.justify" catalog="system" width="128" height="100"/>
         <namedColor name="DarkGrey">
-            <color red="0.074509803921568626" green="0.078431372549019607" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.075000002980232239" green="0.078000001609325409" blue="0.093999996781349182" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="DarkGrey-2">
-            <color red="0.090815690104505034" green="0.096268574659911108" blue="0.11569125111973722" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.10000000149011612" green="0.10700000077486038" blue="0.1080000028014183" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="Light-DarkGrey">
-            <color red="0.15686274509803921" green="0.15686274509803921" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.15700000524520874" green="0.15700000524520874" blue="0.15700000524520874" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

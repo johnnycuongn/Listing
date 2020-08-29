@@ -20,7 +20,7 @@ public enum Segues {
 
 extension ItemsViewController {
     
-    @IBAction func unwindToListViewController(segue: UIStoryboardSegue) {
+    @IBAction func unwindToItemsViewController(segue: UIStoryboardSegue) {
         /// When an Emoji is chosen
         if segue.identifier == Segues.unwind.saveEmoji {
             let emojiPageVC = segue.source as! EmojiPageViewController
