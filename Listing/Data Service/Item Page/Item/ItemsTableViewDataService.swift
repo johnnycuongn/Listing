@@ -85,7 +85,7 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
         }
         let trashImage =  UIImage(systemName: "trash")!
         deleteAction.image = trashImage.withTintColor(AssetsColor.destructive, renderingMode: .alwaysOriginal)
-        deleteAction.backgroundColor = AssetsColor.lightDarkGrey
+        deleteAction.backgroundColor = AssetsColor.darkGrey2
         
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }

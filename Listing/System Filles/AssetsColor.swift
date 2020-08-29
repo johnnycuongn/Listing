@@ -13,5 +13,7 @@ class AssetsColor {
     
     static let destructive = UIColor(named: "Destructive")!
     static let lightDarkGrey = UIColor(named: "Light-DarkGrey")!
+    static let darkGrey = UIColor(named: "DarkGrey")
+    static let darkGrey2 = UIColor(named: "DarkGrey-2")
     
 }

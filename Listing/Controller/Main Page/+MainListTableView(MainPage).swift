@@ -83,9 +83,9 @@ extension MainPageViewController: UITableViewDelegate {
             performSegue(withIdentifier: Segues.toItemsVC, sender: nil)
 
         } else if indexPath.row == MainListManager.mainLists.count {
-//            addNewMainList()
-            MainListManager.append(title: "New list")
-            tableView.insertRows(at: [IndexPath(row: MainListManager.mainLists.count-1, section: 0)], with: .fade)
+            addNewMainList()
+//            MainListManager.append(title: "New list")
+//            tableView.insertRows(at: [IndexPath(row: MainListManager.mainLists.count-1, section: 0)], with: .fade)
         }
     }
     
