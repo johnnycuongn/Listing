@@ -13,8 +13,10 @@ public enum Segues {
     enum unwind {
         static let saveEmoji = "saveEmoji"
         static let selectedList = "selectedFromListsCollectionView"
+        static let saveItem = "saveItem"
     }
     static let toItemsVC = "toItemsVC"
+    static let toItemInformation = "toItemInformationPage"
 }
 
 
@@ -33,6 +35,10 @@ extension ItemsViewController {
             listsThumbnailCollectionView.reloadData()
         }
         
+        if segue.identifier == Segues.unwind.saveItem {
+            itemsTableView.reloadData()
+        }
+        
         /// When a list from Lists Collection is selected
 //        if segue.identifier == Segues.unwind.selectedList {
 //            let listsVC = segue.source as! ListsViewController
@@ -49,8 +55,14 @@ extension ItemsViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        /// Segue to Lists View Controller
-        if segue.identifier == Segues.toItemsVC {
+        if segue.identifier == Segues.toItemInformation,
+            let informationVC = segue.destination as? ItemInformationVC {
+            
+            guard let selectedIndexPath = itemsTableView.indexPathForSelectedRow else {
+                return
+            }
+            
+            informationVC.selectedItem = currentSubList.itemsArray[selectedIndexPath.row]
         }
     }
 }

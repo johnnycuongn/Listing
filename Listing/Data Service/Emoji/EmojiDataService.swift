@@ -119,7 +119,7 @@ extension EmojiDataService: UISearchBarDelegate {
         searching = searchText != "" ? true : false
         
         NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reload), object: nil)
-        self.perform(#selector(self.reload), with: nil, afterDelay: 0.2)
+        self.perform(#selector(self.reload), with: nil, afterDelay: 0.3)
         
         
     }
