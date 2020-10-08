@@ -40,7 +40,6 @@ class ItemsViewController: UIViewController {
     
     /// - Input Item Outlets
     @IBOutlet weak var inputItemTextView: UITextView!
-    @IBOutlet weak var inputItemView: UIStackView!
     @IBOutlet var inputItemToolbar: UIView!
     @IBOutlet weak var toolbarAddButton: UIButton!
     
@@ -82,6 +81,8 @@ class ItemsViewController: UIViewController {
     var isCreatingList: Bool = false
     var isKeyboardShowing: Bool = false
     
+    var isAddButtonTapped: Bool = false
+    
     var deletedItemIndex: IndexPath?
     var deletedItem: Item?
     var deleteFromDatabase: Bool = false
@@ -116,7 +117,33 @@ class ItemsViewController: UIViewController {
         self.inputItemTextView.delegate = self
         self.listTitleTextField.delegate = self
         
+        self.view.addSubview(inputItemToolbar)
+
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(keyboardWillShow),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+    
+        if isAddButtonTapped, let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            
+            inputItemToolbar.frame.origin.y -= keyboardHeight + inputItemToolbar.frame.height
+            
+            isAddButtonTapped = false
+        }
+    }
+    
+    @objc func keyboardWillHide(_ notification: Notification) {
+        inputItemToolbar.frame.origin.y = UIScreen.main.bounds.height
     }
         
     // MARK: - Helper Methods

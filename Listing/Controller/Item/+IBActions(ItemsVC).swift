@@ -24,7 +24,10 @@ extension ItemsViewController {
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
         resetInputTextView()
-        inputItemView.isHidden = !inputItemView.isHidden
+        
+        isAddButtonTapped = true
+        
+        inputItemToolbar.isHidden = false
         
         inputItemTextView.becomeFirstResponder()
         isKeyboardShowing = true
@@ -37,7 +40,7 @@ extension ItemsViewController {
     // MARK: Input item Toolbar
     @IBAction func closeItemInputView(_ sender: Any) {
         isKeyboardShowing = false
-        inputItemView.isHidden = true
+        
         inputItemTextView.resignFirstResponder()
     }
     

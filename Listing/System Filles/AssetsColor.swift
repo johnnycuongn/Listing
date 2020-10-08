@@ -16,4 +16,7 @@ class AssetsColor {
     static let darkGrey = UIColor(named: "DarkGrey")
     static let darkGrey2 = UIColor(named: "DarkGrey-2")
     
+    static let addMain = UIColor(named: "AddMain")
+    static let addSub = UIColor(named: "AddSub")
+    
 }

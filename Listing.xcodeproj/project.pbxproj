@@ -348,8 +348,8 @@
 			isa = PBXGroup;
 			children = (
 				40D9A44024F6D27500C4145B /* Assets.xcassets */,
-				40D9A44124F6D27500C4145B /* Emojis.json */,
 				40D9A44224F6D27500C4145B /* AssetsColor.swift */,
+				40D9A44124F6D27500C4145B /* Emojis.json */,
 			);
 			path = "System Filles";
 			sourceTree = "<group>";

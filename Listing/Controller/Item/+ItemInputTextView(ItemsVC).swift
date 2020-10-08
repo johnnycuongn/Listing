@@ -28,7 +28,7 @@ extension ItemsViewController: UITextViewDelegate {
                     if (text == "\n") && textView.text == "\n" {
                         textView.resignFirstResponder()
                         isKeyboardShowing = false
-                        inputItemView.isHidden = true
+                        
                         return false
                     }
                 textView.returnKeyType = .default

@@ -21,7 +21,7 @@ extension ItemsViewController {
         addButton.layer.cornerRadius = addButton.frame.size.width / 2
            
         /// Item Input Itew
-        inputItemView.isHidden = true
+        
         setUpItemInputToolbarView()
        }
     
@@ -41,13 +41,16 @@ extension ItemsViewController {
     }
     
     func setUpItemInputToolbarView() {
-        inputItemTextView.inputAccessoryView = inputItemToolbar
         
-        inputItemToolbar.frame.size.width = UIScreen.main.bounds.width
-        inputItemToolbar.frame.size.height = 45
+        inputItemToolbar.frame = CGRect(x: 0,
+                                        y: UIScreen.main.bounds.height,
+                                        width: UIScreen.main.bounds.width,
+                                        height: 45)
         
-        toolbarAddButton.layer.cornerRadius = toolbarAddButton.frame.size.height / 2
-        toolbarAddButton.isHidden = true
+        toolbarAddButton.layer.cornerRadius = 7
+        toolbarAddButton.isHidden = false
+        toolbarAddButton.backgroundColor = AssetsColor.addSub
     }
     
 }
+
