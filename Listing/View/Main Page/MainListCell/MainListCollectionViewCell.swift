@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class MainListCollectionViewCell: UICollectionViewCell {
+class MainListCollectionViewCell: SwipeCollectionViewCell {
     
     static var identifier = String(describing: MainListCollectionViewCell.self)
     

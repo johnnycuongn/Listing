@@ -9,26 +9,6 @@
 import Foundation
 import UIKit
 
-// MARK: Data Source
-extension MainPageViewController {
-    
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        guard indexPath.row < MainListManager.mainLists.count else {
-//            return nil
-//        }
-//        let deleteAction = UIContextualAction(style: .destructive, title: "") { (action, view, bool) in
-//            self.actionSheetForDelete(for: indexPath)
-//        }
-//
-//        let trashImage =  UIImage(systemName: "trash")!
-//        deleteAction.image = trashImage.withTintColor(.lightGray)
-//        deleteAction.backgroundColor = AssetsColor.destructive
-//
-//        return UISwipeActionsConfiguration(actions: [deleteAction])
-//    }
-    
-}
-
 // MARK: Helper
 extension MainPageViewController {
     

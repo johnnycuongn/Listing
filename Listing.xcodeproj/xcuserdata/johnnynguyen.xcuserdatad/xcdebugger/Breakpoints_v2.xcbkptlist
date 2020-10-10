@@ -114,8 +114,8 @@
             filePath = "Listing/Controller/Main Page/+MainListTableView(MainPage).swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "addNewMainList()"
             landmarkType = "7">
          </BreakpointContent>
