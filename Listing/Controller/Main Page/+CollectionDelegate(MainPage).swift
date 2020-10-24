@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SwipeCellKit
 
 
 extension MainPageViewController: UICollectionViewDelegate {
@@ -32,4 +33,38 @@ extension MainPageViewController: UICollectionViewDelegate {
         MainListManager.move(from: sourceIndexPath, to: destinationIndexPath)
     }
 
+}
+
+extension MainPageViewController: SwipeCollectionViewCellDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .default, title: nil) { action, indexPath in
+            
+            action.fulfill(with: .delete)
+            self.actionSheetForDelete(for: indexPath)
+
+        }
+        
+        let trashImage =  UIImage(systemName: "trash")!
+        deleteAction.image = trashImage
+            .withTintColor(AssetsColor.destructive, renderingMode: .alwaysOriginal)
+        
+        deleteAction.backgroundColor = .clear
+
+        return [deleteAction]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, editActionsOptionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeOptions {
+        var options = SwipeOptions()
+        options.expansionStyle = .selection
+        options.transitionStyle = .border
+        
+        options.backgroundColor = .clear
+        
+        return options
+    }
+    
+    
 }

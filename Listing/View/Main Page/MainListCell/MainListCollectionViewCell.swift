@@ -16,14 +16,14 @@ class MainListCollectionViewCell: SwipeCollectionViewCell {
     @IBOutlet weak var title: UILabel!
     
     override func awakeFromNib() {
-        super.awakeFromNib()
+//        super.awakeFromNib()
 
 //        contentView.layer.cornerRadius = 25
         
         layer.cornerRadius = 7
         
-        contentView.layer.masksToBounds = true
-        contentView.clipsToBounds = true
+        layer.masksToBounds = false
+        clipsToBounds = false
     
     }
     
