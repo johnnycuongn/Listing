@@ -49,6 +49,7 @@
 		40D10B762531B1750001CDAE /* +CollectionDelegate(MainPage).swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D10B752531B1750001CDAE /* +CollectionDelegate(MainPage).swift */; };
 		40D10B782531B1970001CDAE /* +CollectionDataSource(MainPage).swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D10B772531B1970001CDAE /* +CollectionDataSource(MainPage).swift */; };
 		40D10B7A2531B1B50001CDAE /* +CollectionFlowLayout(MainPage).swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D10B792531B1B50001CDAE /* +CollectionFlowLayout(MainPage).swift */; };
+		40D602D325E90B050049A0D5 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D602D225E90B050049A0D5 /* CoreDataStorage.swift */; };
 		40D9A43224F6ACC700C4145B /* Item+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9A43024F6ACC700C4145B /* Item+CoreDataProperties.swift */; };
 		40D9A43E24F6D20400C4145B /* StrikeThrough.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D9A43D24F6D20400C4145B /* StrikeThrough.swift */; };
 		40D9A44324F6D27500C4145B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40D9A44024F6D27500C4145B /* Assets.xcassets */; };
@@ -122,6 +123,7 @@
 		40D10B752531B1750001CDAE /* +CollectionDelegate(MainPage).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CollectionDelegate(MainPage).swift"; sourceTree = "<group>"; };
 		40D10B772531B1970001CDAE /* +CollectionDataSource(MainPage).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CollectionDataSource(MainPage).swift"; sourceTree = "<group>"; };
 		40D10B792531B1B50001CDAE /* +CollectionFlowLayout(MainPage).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CollectionFlowLayout(MainPage).swift"; sourceTree = "<group>"; };
+		40D602D225E90B050049A0D5 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		40D9A43024F6ACC700C4145B /* Item+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Item+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		40D9A43D24F6D20400C4145B /* StrikeThrough.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrikeThrough.swift; sourceTree = "<group>"; };
 		40D9A44024F6D27500C4145B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -212,13 +214,13 @@
 			children = (
 				405624252491D8920083B800 /* AppDelegate.swift */,
 				405624272491D8920083B800 /* SceneDelegate.swift */,
-				404F2C1424F3FA5F00FC471A /* PersistenceService.swift */,
 				4056244F2491E4930083B800 /* View */,
 				405624472491DD820083B800 /* Model */,
 				4056244A2491E1390083B800 /* Data Service */,
 				405624502491E4990083B800 /* Controller */,
 				40D9A43A24F6D1AB00C4145B /* Extensions */,
 				40D9A43F24F6D27500C4145B /* System Filles */,
+				40D602D125E90A9A0049A0D5 /* Infrastructure */,
 				4056242B2491D8920083B800 /* Main.storyboard */,
 				405624302491D8950083B800 /* LaunchScreen.storyboard */,
 				405624332491D8950083B800 /* Info.plist */,
@@ -338,6 +340,15 @@
 				40AA4E6424C041CF00D8B215 /* SectionHeaderView.swift */,
 			);
 			path = Emoji;
+			sourceTree = "<group>";
+		};
+		40D602D125E90A9A0049A0D5 /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				404F2C1424F3FA5F00FC471A /* PersistenceService.swift */,
+				40D602D225E90B050049A0D5 /* CoreDataStorage.swift */,
+			);
+			path = Infrastructure;
 			sourceTree = "<group>";
 		};
 		40D9A43A24F6D1AB00C4145B /* Extensions */ = {
@@ -622,6 +633,7 @@
 				40AA4E6524C041CF00D8B215 /* SectionHeaderView.swift in Sources */,
 				40D10B782531B1970001CDAE /* +CollectionDataSource(MainPage).swift in Sources */,
 				4053872524C87F8000647756 /* EmojiExtension.swift in Sources */,
+				40D602D325E90B050049A0D5 /* CoreDataStorage.swift in Sources */,
 				404F2C0D24F3F97500FC471A /* Item+CoreDataClass.swift in Sources */,
 				40A0DFE824ED175C0039F19C /* +Drag.swift in Sources */,
 				4036E44424CB282E00F88D96 /* MainPageViewController.swift in Sources */,
