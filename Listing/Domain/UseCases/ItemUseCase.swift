@@ -7,3 +7,13 @@
 //
 
 import Foundation
+
+protocol ItemUseCase {
+    
+    func loadItem(completion: @escaping (Result<DomainItem, Error>) -> Void)
+    
+    func addItem(name: String, emoji: String?)
+    func deleteItem(at pos: Int)
+    
+    func moveItem(from startPos: Int, to endPos: Int)
+}

@@ -7,3 +7,11 @@
 //
 
 import Foundation
+
+struct DomainItem {
+    
+    var title: String
+    var index: Int
+    var isCompleted: Bool
+    
+}

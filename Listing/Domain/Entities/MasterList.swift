@@ -7,3 +7,9 @@
 //
 
 import Foundation
+
+struct DomainMasterList {
+    var title: String
+    var emoji: String?
+    var index: Int
+}

@@ -7,3 +7,14 @@
 //
 
 import Foundation
+
+protocol MasterListUseCase {
+    
+    func loadMasterList(completion: @escaping (Result<DomainMasterList, Error>) -> Void)
+    
+    func addMasterList(name: String)
+    func deleteMasterList(at pos: Int)
+    
+    func moveMasterList(from startPos: Int, to endPos: Int)
+    
+}
