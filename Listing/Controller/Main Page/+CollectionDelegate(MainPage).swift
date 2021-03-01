@@ -16,6 +16,8 @@ extension MainPageViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row < MainListManager.mainLists.count {
             print("MainList Selected: \(MainListManager.mainLists[indexPath.row].title)")
+            let vc = ItemsViewController.initialize(with: indexPath)
+            navigationController?.pushViewController(vc, animated: true)
         } else if indexPath.row == MainListManager.mainLists.count {
             addNewMainList()
         }
