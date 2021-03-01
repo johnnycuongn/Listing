@@ -15,6 +15,15 @@ enum ListVCError: Error {
 }
 
 class ItemsViewController: UIViewController {
+    
+    static func initialize(with indexPath: IndexPath) -> ItemsViewController {
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "ItemsViewController") as! ItemsViewController
+        
+        vc.mainListIndexPath = indexPath
+        
+        return vc
+    }
 
     /// - Systems
     @IBOutlet weak var itemsTableView: UITableView!
