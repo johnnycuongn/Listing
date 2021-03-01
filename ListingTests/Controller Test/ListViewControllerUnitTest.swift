@@ -14,7 +14,7 @@ class ListViewControllerUnitTest: XCTestCase {
     var sut: ItemsViewController!
 
     override func setUpWithError() throws {
-        sut = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ListViewControllerID") as? ItemsViewController
+        sut = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "ItemsViewController") as? ItemsViewController
         _ = sut.view
     }
 
