@@ -15,16 +15,11 @@ extension MainPageViewController {
     func actionSheetForDelete(for indexPath: IndexPath) {
         let actionSheet = UIAlertController(title: nil, message: "\(MainListManager.mainLists[indexPath.row].title!)", preferredStyle: .actionSheet)
            
-        let deleteAction = UIAlertAction(
-            title: "Delete",
-            style: .destructive) {
-            (action) in
-
+        let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
             self.viewModel.removeMasterList(at: indexPath.row)
-
-            }
+        }
            
-           // Cancel Delete
+        // Cancel Delete
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             self.mainListCollectionView.reloadData()
         })
@@ -44,16 +39,15 @@ extension MainPageViewController {
         
         alertView.addAction(
             UIAlertAction(title: "Add", style: .default, handler: { (action) in
-                guard let title = alertView.textFields?.first else {
+                guard let title = alertView.textFields?.first, let titleText = title.text else {
                     return
                 }
                 
-                self.viewModel.addMasterList(title: title.text!)
+                self.viewModel.addMasterList(title: titleText)
 
             }))
         
-        alertView.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         self.present(alertView, animated: true, completion: nil)
     }

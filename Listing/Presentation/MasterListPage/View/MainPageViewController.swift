@@ -16,9 +16,6 @@ import UIKit
 //}
 
 class MainPageViewController: UIViewController {
-    
-
-    var selectedIndexPath: IndexPath?
 
     @IBOutlet weak var mainListCollectionView: UICollectionView!
     
@@ -42,7 +39,6 @@ class MainPageViewController: UIViewController {
     private func bind(to viewModel: MasterListPageViewModel) {
         viewModel.masterList.observe(on: self) { [weak self] _ in
             self?.mainListCollectionView.reloadData()
-            print("MasterListtttt: \(viewModel.masterList.value)")
         }
     }
 }

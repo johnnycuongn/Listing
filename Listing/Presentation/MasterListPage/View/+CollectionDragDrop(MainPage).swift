@@ -44,9 +44,11 @@ extension MainPageViewController: UICollectionViewDropDelegate {
                 guard destinationIndexPath.row < viewModel.masterListCount else {
                     return
                 }
+                
                 viewModel.moveMasterList(from: sourceIndexPath.row, to: destinationIndexPath.row)
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationIndexPath])
+                
             }, completion: nil)
 
             coordinator.drop(item.dragItem, toItemAt: destinationIndexPath)
@@ -59,7 +61,7 @@ extension MainPageViewController: UICollectionViewDropDelegate {
 extension MainPageViewController: UICollectionViewDragDelegate {
     func collectionView(_ collectionView: UICollectionView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         
-        guard indexPath.row < MainListManager.mainLists.count else {
+        guard indexPath.row < viewModel.masterListCount else {
             return []
         }
         

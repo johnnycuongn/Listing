@@ -36,14 +36,14 @@ extension MainPageViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
+        // 'Add' button at the end
         if indexPath.row == viewModel.masterListCount {
             cell.config(with: "+")
         }
         else {
             
-            
             let mainList = viewModel.masterList.value[indexPath.row]
-            cell.config(with: mainList.title ?? "No Value")
+            cell.config(with: mainList.title)
             cell.delegate = self
         }
         
@@ -56,12 +56,13 @@ extension MainPageViewController: UICollectionViewDataSource {
 extension MainPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row < viewModel.masterListCount {
-            print("MainList Selected: \(MainListManager.mainLists[indexPath.row].title)")
+        
+        if indexPath.row == viewModel.masterListCount {
+            addNewMainList()
+        }
+        else if indexPath.row < viewModel.masterListCount {
             let vc = ItemsViewController.initialize(with: indexPath)
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == viewModel.masterListCount {
-            addNewMainList()
         }
 
     }
@@ -74,11 +75,14 @@ extension MainPageViewController: UICollectionViewDelegate {
         guard sourceIndexPath != destinationIndexPath else {
             return
         }
+        
         viewModel.moveMasterList(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
 
 }
 
+
+// MARK: - SWIPE CELL KIT
 extension MainPageViewController: SwipeCollectionViewCellDelegate {
     
     func collectionView(_ collectionView: UICollectionView, editActionsForItemAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
@@ -92,8 +96,7 @@ extension MainPageViewController: SwipeCollectionViewCellDelegate {
         }
         
         let trashImage =  UIImage(systemName: "trash")!
-        deleteAction.image = trashImage
-            .withTintColor(AssetsColor.destructive, renderingMode: .alwaysOriginal)
+        deleteAction.image = trashImage.withTintColor(AssetsColor.destructive, renderingMode: .alwaysOriginal)
         
         deleteAction.backgroundColor = .clear
 
