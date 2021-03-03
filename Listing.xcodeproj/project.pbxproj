@@ -10,6 +10,8 @@
 		40369530250919810088D989 /* ItemInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036952F250919810088D989 /* ItemInformationVC.swift */; };
 		4036E44424CB282E00F88D96 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4036E44324CB282E00F88D96 /* MainPageViewController.swift */; };
 		404DFD5425EF3FB30033ECD7 /* +CollectionView(MasterListPage).swift in Sources */ = {isa = PBXBuildFile; fileRef = 404DFD5325EF3FB30033ECD7 /* +CollectionView(MasterListPage).swift */; };
+		404DFD6225EF55D50033ECD7 /* MasterListPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404DFD6125EF55D50033ECD7 /* MasterListPageViewModel.swift */; };
+		404DFD6825EF57D50033ECD7 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404DFD6725EF57D50033ECD7 /* Observable.swift */; };
 		404F2C0424F3F7F200FC471A /* Listing.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C0224F3F7F200FC471A /* Listing.xcdatamodeld */; };
 		404F2C0B24F3F97500FC471A /* MainList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C0524F3F97500FC471A /* MainList+CoreDataClass.swift */; };
 		404F2C0C24F3F97500FC471A /* MainList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C0624F3F97500FC471A /* MainList+CoreDataProperties.swift */; };
@@ -88,6 +90,8 @@
 		4036952F250919810088D989 /* ItemInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInformationVC.swift; sourceTree = "<group>"; };
 		4036E44324CB282E00F88D96 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		404DFD5325EF3FB30033ECD7 /* +CollectionView(MasterListPage).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+CollectionView(MasterListPage).swift"; sourceTree = "<group>"; };
+		404DFD6125EF55D50033ECD7 /* MasterListPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterListPageViewModel.swift; sourceTree = "<group>"; };
+		404DFD6725EF57D50033ECD7 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		404F2C0324F3F7F200FC471A /* Listing.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Listing.xcdatamodel; sourceTree = "<group>"; };
 		404F2C0524F3F97500FC471A /* MainList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		404F2C0624F3F97500FC471A /* MainList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MainList+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -199,6 +203,22 @@
 			path = DataService;
 			sourceTree = "<group>";
 		};
+		404DFD6525EF579B0033ECD7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				404DFD6625EF57AF0033ECD7 /* Global Helpers */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		404DFD6625EF57AF0033ECD7 /* Global Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				404DFD6725EF57D50033ECD7 /* Observable.swift */,
+			);
+			path = "Global Helpers";
+			sourceTree = "<group>";
+		};
 		404F2C1124F3F99500FC471A /* MainList */ = {
 			isa = PBXGroup;
 			children = (
@@ -252,6 +272,7 @@
 				40D602D625E90D1C0049A0D5 /* Domain */,
 				40D602F025E90F2F0049A0D5 /* Data */,
 				40D602D125E90A9A0049A0D5 /* Infrastructure */,
+				404DFD6525EF579B0033ECD7 /* Resources */,
 				4056242B2491D8920083B800 /* Main.storyboard */,
 				405624302491D8950083B800 /* LaunchScreen.storyboard */,
 				405624332491D8950083B800 /* Info.plist */,
@@ -531,6 +552,7 @@
 		40E992D925ECD473008863C7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				404DFD6125EF55D50033ECD7 /* MasterListPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -699,6 +721,7 @@
 				40D9A44524F6D27500C4145B /* AssetsColor.swift in Sources */,
 				40D10B6F2531809A0001CDAE /* MainListCollectionViewCell.swift in Sources */,
 				404F2C0F24F3F97500FC471A /* SubList+CoreDataClass.swift in Sources */,
+				404DFD6825EF57D50033ECD7 /* Observable.swift in Sources */,
 				40D6030725E913270049A0D5 /* ItemUseCase.swift in Sources */,
 				4064A63324C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift in Sources */,
 				40D6030325E9131A0049A0D5 /* SubListUseCase.swift in Sources */,
@@ -713,6 +736,7 @@
 				405624522491E4CC0083B800 /* ItemCell.swift in Sources */,
 				404F2C0424F3F7F200FC471A /* Listing.xcdatamodeld in Sources */,
 				40D10B742531B1310001CDAE /* +CollectionDragDrop(MainPage).swift in Sources */,
+				404DFD6225EF55D50033ECD7 /* MasterListPageViewModel.swift in Sources */,
 				40D9A48F24F8E1CA00C4145B /* +SetUpData(ItemsVC).swift in Sources */,
 				405624282491D8920083B800 /* SceneDelegate.swift in Sources */,
 				40369530250919810088D989 /* ItemInformationVC.swift in Sources */,
