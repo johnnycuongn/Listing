@@ -189,6 +189,24 @@
 			path = "Information Page";
 			sourceTree = "<group>";
 		};
+		404DFD4F25EF3DC60033ECD7 /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				40AA4E5B24C0401500D8B215 /* EmojiPageViewController.swift */,
+				40AA4E5F24C0405900D8B215 /* EmojiDataService.swift */,
+			);
+			path = Emoji;
+			sourceTree = "<group>";
+		};
+		404DFD5025EF3E3A0033ECD7 /* DataService */ = {
+			isa = PBXGroup;
+			children = (
+				40E0FD7724CEE62E00A674D1 /* Item */,
+				40E0FD7924CF017400A674D1 /* List Thumbnail */,
+			);
+			path = DataService;
+			sourceTree = "<group>";
+		};
 		404F2C1124F3F99500FC471A /* MainList */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,8 +254,6 @@
 				405624272491D8920083B800 /* SceneDelegate.swift */,
 				4056244F2491E4930083B800 /* View */,
 				405624472491DD820083B800 /* Model */,
-				4056244A2491E1390083B800 /* Data Service */,
-				405624502491E4990083B800 /* Controller */,
 				40D9A43A24F6D1AB00C4145B /* Extensions */,
 				40D9A43F24F6D27500C4145B /* System Filles */,
 				40D6030A25EBA6D20049A0D5 /* Presentation */,
@@ -273,15 +289,6 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		4056244A2491E1390083B800 /* Data Service */ = {
-			isa = PBXGroup;
-			children = (
-				40AA4E5D24C0402F00D8B215 /* Emoji */,
-				40E0FD7C24CF01EF00A674D1 /* Item Page */,
-			);
-			path = "Data Service";
-			sourceTree = "<group>";
-		};
 		4056244F2491E4930083B800 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -290,16 +297,6 @@
 				40E0FD7D24CF021B00A674D1 /* Item Page */,
 			);
 			path = View;
-			sourceTree = "<group>";
-		};
-		405624502491E4990083B800 /* Controller */ = {
-			isa = PBXGroup;
-			children = (
-				40AA4E5E24C0403600D8B215 /* Emoji */,
-				40E0FD7A24CF019A00A674D1 /* Main Page */,
-				40E0FD7B24CF01A100A674D1 /* Item */,
-			);
-			path = Controller;
 			sourceTree = "<group>";
 		};
 		406BDDE0249A372E00E9B99C /* Model Test */ = {
@@ -338,22 +335,6 @@
 				40D9A43024F6ACC700C4145B /* Item+CoreDataProperties.swift */,
 			);
 			path = Item;
-			sourceTree = "<group>";
-		};
-		40AA4E5D24C0402F00D8B215 /* Emoji */ = {
-			isa = PBXGroup;
-			children = (
-				40AA4E5F24C0405900D8B215 /* EmojiDataService.swift */,
-			);
-			path = Emoji;
-			sourceTree = "<group>";
-		};
-		40AA4E5E24C0403600D8B215 /* Emoji */ = {
-			isa = PBXGroup;
-			children = (
-				40AA4E5B24C0401500D8B215 /* EmojiPageViewController.swift */,
-			);
-			path = Emoji;
 			sourceTree = "<group>";
 		};
 		40AA4E6124C0413E00D8B215 /* Emoji */ = {
@@ -433,6 +414,9 @@
 		40D6030A25EBA6D20049A0D5 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				404DFD4F25EF3DC60033ECD7 /* Emoji */,
+				40E992D625ECD45B008863C7 /* MasterListPage */,
+				40E992D725ECD464008863C7 /* ItemsPage */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -514,7 +498,34 @@
 			path = "List Thumbnail";
 			sourceTree = "<group>";
 		};
-		40E0FD7A24CF019A00A674D1 /* Main Page */ = {
+		40E0FD7D24CF021B00A674D1 /* Item Page */ = {
+			isa = PBXGroup;
+			children = (
+				40E0FD7324CEE21A00A674D1 /* Item */,
+				40E0FD7524CEE24200A674D1 /* List Thumbnail */,
+			);
+			path = "Item Page";
+			sourceTree = "<group>";
+		};
+		40E992D625ECD45B008863C7 /* MasterListPage */ = {
+			isa = PBXGroup;
+			children = (
+				40E992D925ECD473008863C7 /* ViewModel */,
+				40E992D825ECD46F008863C7 /* View */,
+			);
+			path = MasterListPage;
+			sourceTree = "<group>";
+		};
+		40E992D725ECD464008863C7 /* ItemsPage */ = {
+			isa = PBXGroup;
+			children = (
+				40E992DA25ECD49E008863C7 /* ViewModel */,
+				40E992DB25ECD4A5008863C7 /* View */,
+			);
+			path = ItemsPage;
+			sourceTree = "<group>";
+		};
+		40E992D825ECD46F008863C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
 				4036E44324CB282E00F88D96 /* MainPageViewController.swift */,
@@ -526,12 +537,27 @@
 				40D9A49B24F9364700C4145B /* +Segues(MainPage).swift */,
 				40D9A49D24F9366800C4145B /* +Delegates(MainPage).swift */,
 			);
-			path = "Main Page";
+			path = View;
 			sourceTree = "<group>";
 		};
-		40E0FD7B24CF01A100A674D1 /* Item */ = {
+		40E992D925ECD473008863C7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		40E992DA25ECD49E008863C7 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		40E992DB25ECD4A5008863C7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				404DFD5025EF3E3A0033ECD7 /* DataService */,
 				405624292491D8920083B800 /* ItemsViewController.swift */,
 				40D9A49124F8E56400C4145B /* +IBActions(ItemsVC).swift */,
 				40E0FD8324CF071200A674D1 /* +ItemInputTextView(ItemsVC).swift */,
@@ -541,25 +567,7 @@
 				40D9A49024F8E51C00C4145B /* Set Up */,
 				40369531250924680088D989 /* Information Page */,
 			);
-			path = Item;
-			sourceTree = "<group>";
-		};
-		40E0FD7C24CF01EF00A674D1 /* Item Page */ = {
-			isa = PBXGroup;
-			children = (
-				40E0FD7724CEE62E00A674D1 /* Item */,
-				40E0FD7924CF017400A674D1 /* List Thumbnail */,
-			);
-			path = "Item Page";
-			sourceTree = "<group>";
-		};
-		40E0FD7D24CF021B00A674D1 /* Item Page */ = {
-			isa = PBXGroup;
-			children = (
-				40E0FD7324CEE21A00A674D1 /* Item */,
-				40E0FD7524CEE24200A674D1 /* List Thumbnail */,
-			);
-			path = "Item Page";
+			path = View;
 			sourceTree = "<group>";
 		};
 		40FB2C82249B7963001CC036 /* Data Service Test */ = {
