@@ -52,4 +52,12 @@ public class MainList: NSManagedObject {
         return subLists!.toArray().sorted {$0.index < $1.index}
     }
     
+    func toDomain() -> DomainMasterList {
+        guard title != nil else {
+            fatalError("Fix title to be not optional")
+        }
+        
+        return .init(title: title!, emoji: emoji, index: Int(index))
+    }
+    
 }
