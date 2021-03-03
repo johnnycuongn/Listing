@@ -27,7 +27,7 @@ extension MainPageViewController: UICollectionViewDelegateFlowLayout {
 
 extension MainPageViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-          return MainListManager.mainLists.count + 1
+        return viewModel.masterListCount + 1
       }
       
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -36,13 +36,13 @@ extension MainPageViewController: UICollectionViewDataSource {
             return UICollectionViewCell()
         }
         
-        if indexPath.row == MainListManager.mainLists.count {
+        if indexPath.row == viewModel.masterListCount {
             cell.config(with: "+")
         }
         else {
             
             
-            let mainList = MainListManager.mainLists[indexPath.row]
+            let mainList = viewModel.masterList.value[indexPath.row]
             cell.config(with: mainList.title ?? "No Value")
             cell.delegate = self
         }
@@ -56,11 +56,11 @@ extension MainPageViewController: UICollectionViewDataSource {
 extension MainPageViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row < MainListManager.mainLists.count {
+        if indexPath.row < viewModel.masterListCount {
             print("MainList Selected: \(MainListManager.mainLists[indexPath.row].title)")
             let vc = ItemsViewController.initialize(with: indexPath)
             navigationController?.pushViewController(vc, animated: true)
-        } else if indexPath.row == MainListManager.mainLists.count {
+        } else if indexPath.row == viewModel.masterListCount {
             addNewMainList()
         }
 
@@ -74,7 +74,7 @@ extension MainPageViewController: UICollectionViewDelegate {
         guard sourceIndexPath != destinationIndexPath else {
             return
         }
-        MainListManager.move(from: sourceIndexPath, to: destinationIndexPath)
+        viewModel.moveMasterList(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
 
 }

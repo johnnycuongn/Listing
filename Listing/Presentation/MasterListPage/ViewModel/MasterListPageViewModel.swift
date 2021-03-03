@@ -11,14 +11,21 @@ import Foundation
 protocol MasterListPageViewModel {
     
     var masterList: Observable<[DomainMasterList]> { get }
+    var masterListCount: Int { get }
+    
     func loadMasterList()
     
-    
+    func addMasterList(title: String)
+    func moveMasterList(from startIndex: Int, to endIndex: Int)
+    func removeMasterList(at index: Int)
 }
 
 class DefaultMasterListPageViewModel: MasterListPageViewModel {
     
     var masterList: Observable<[DomainMasterList]> = Observable([])
+    var masterListCount: Int {
+        return masterList.value.count
+    }
     
     private var useCase: MasterListUseCase
     
@@ -41,9 +48,26 @@ class DefaultMasterListPageViewModel: MasterListPageViewModel {
         }
     }
     
+    func addMasterList(title: String) {
+        useCase.addMasterList(title: title)
+        
+        loadMasterList()
+    }
+    
+    func moveMasterList(from startIndex: Int, to endIndex: Int) {
+        useCase.moveMasterList(from: startIndex, to: endIndex)
+        
+        loadMasterList()
+    }
+    
+    func removeMasterList(at index: Int) {
+        useCase.deleteMasterList(at: index)
+        
+        loadMasterList()
+    }
     
     
-    
+    // MARK: HELPER
     private func handleError(_ error: Error) {
         print("!!MasterListPage Error: \(error.localizedDescription)")
     }

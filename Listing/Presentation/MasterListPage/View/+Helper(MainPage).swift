@@ -19,8 +19,9 @@ extension MainPageViewController {
             title: "Delete",
             style: .destructive) {
             (action) in
-                MainListManager.remove(at: indexPath.row)
-                self.mainListCollectionView.deleteItems(at: [indexPath])
+
+            self.viewModel.removeMasterList(at: indexPath.row)
+
             }
            
            // Cancel Delete
@@ -47,9 +48,8 @@ extension MainPageViewController {
                     return
                 }
                 
-                MainListManager.append(title: title.text!)
-                
-                self.mainListCollectionView.insertItems(at: [IndexPath(row: MainListManager.mainLists.count-1, section: 0)])
+                self.viewModel.addMasterList(title: title.text!)
+
             }))
         
         alertView.addAction(

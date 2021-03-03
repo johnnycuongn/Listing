@@ -41,10 +41,10 @@ extension MainPageViewController: UICollectionViewDropDelegate {
         if let item = coordinator.items.first
             , let sourceIndexPath = item.sourceIndexPath {
             collectionView.performBatchUpdates({
-                guard destinationIndexPath.row < MainListManager.mainLists.count else {
+                guard destinationIndexPath.row < viewModel.masterListCount else {
                     return
                 }
-                MainListManager.move(from: sourceIndexPath, to: destinationIndexPath)
+                viewModel.moveMasterList(from: sourceIndexPath.row, to: destinationIndexPath.row)
                 collectionView.deleteItems(at: [sourceIndexPath])
                 collectionView.insertItems(at: [destinationIndexPath])
             }, completion: nil)
@@ -63,8 +63,8 @@ extension MainPageViewController: UICollectionViewDragDelegate {
             return []
         }
         
-        let list = MainListManager.mainLists[indexPath.row].title
-        let itemProvider = NSItemProvider(object: list! as NSString)
+        let list = viewModel.masterList.value[indexPath.row].title
+        let itemProvider = NSItemProvider(object: list as NSString)
         let dragItem = UIDragItem(itemProvider: itemProvider)
         
         dragItem.localObject = list

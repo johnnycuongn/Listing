@@ -22,9 +22,14 @@ class MainPageViewController: UIViewController {
 
     @IBOutlet weak var mainListCollectionView: UICollectionView!
     
+    var viewModel: MasterListPageViewModel = DefaultMasterListPageViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bind(to: self.viewModel)
+        viewModel.loadMasterList()
+        
         
         mainListCollectionView.delegate = self
         mainListCollectionView.dataSource = self
@@ -32,6 +37,13 @@ class MainPageViewController: UIViewController {
         mainListCollectionView.dropDelegate = self
         mainListCollectionView.dragDelegate = self
         mainListCollectionView.dragInteractionEnabled = true
+    }
+    
+    private func bind(to viewModel: MasterListPageViewModel) {
+        viewModel.masterList.observe(on: self) { [weak self] _ in
+            self?.mainListCollectionView.reloadData()
+            print("MasterListtttt: \(viewModel.masterList.value)")
+        }
     }
 }
 
