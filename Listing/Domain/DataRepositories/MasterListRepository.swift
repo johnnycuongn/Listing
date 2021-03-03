@@ -7,3 +7,10 @@
 //
 
 import Foundation
+
+protocol MasterListRepository {
+    func createMasterList()
+    func getMasterLists()
+    
+    func deleteMasterList()
+}
