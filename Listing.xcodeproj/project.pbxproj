@@ -190,6 +190,8 @@
 			children = (
 				40AA4E5B24C0401500D8B215 /* EmojiPageViewController.swift */,
 				40AA4E5F24C0405900D8B215 /* EmojiDataService.swift */,
+				40AA4E6224C0414F00D8B215 /* EmojiCollectionViewCell.swift */,
+				40AA4E6424C041CF00D8B215 /* SectionHeaderView.swift */,
 			);
 			path = Emoji;
 			sourceTree = "<group>";
@@ -264,7 +266,6 @@
 			children = (
 				405624252491D8920083B800 /* AppDelegate.swift */,
 				405624272491D8920083B800 /* SceneDelegate.swift */,
-				4056244F2491E4930083B800 /* View */,
 				405624472491DD820083B800 /* Model */,
 				40D9A43A24F6D1AB00C4145B /* Extensions */,
 				40D9A43F24F6D27500C4145B /* System Filles */,
@@ -300,16 +301,6 @@
 				40AA4E5224C03DA700D8B215 /* Item */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		4056244F2491E4930083B800 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				40AA4E6124C0413E00D8B215 /* Emoji */,
-				40E0FD7424CEE22F00A674D1 /* Main Page */,
-				40E0FD7D24CF021B00A674D1 /* Item Page */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		406BDDE0249A372E00E9B99C /* Model Test */ = {
@@ -348,15 +339,6 @@
 				40D9A43024F6ACC700C4145B /* Item+CoreDataProperties.swift */,
 			);
 			path = Item;
-			sourceTree = "<group>";
-		};
-		40AA4E6124C0413E00D8B215 /* Emoji */ = {
-			isa = PBXGroup;
-			children = (
-				40AA4E6224C0414F00D8B215 /* EmojiCollectionViewCell.swift */,
-				40AA4E6424C041CF00D8B215 /* SectionHeaderView.swift */,
-			);
-			path = Emoji;
 			sourceTree = "<group>";
 		};
 		40D602D125E90A9A0049A0D5 /* Infrastructure */ = {
@@ -477,14 +459,6 @@
 			path = Item;
 			sourceTree = "<group>";
 		};
-		40E0FD7424CEE22F00A674D1 /* Main Page */ = {
-			isa = PBXGroup;
-			children = (
-				40D9A49F24F93AAA00C4145B /* MainListCell */,
-			);
-			path = "Main Page";
-			sourceTree = "<group>";
-		};
 		40E0FD7524CEE24200A674D1 /* List Thumbnail */ = {
 			isa = PBXGroup;
 			children = (
@@ -509,15 +483,6 @@
 				4064A63424C1A0EF00C1BE21 /* ListsThumbnailCollectionViewDataService.swift */,
 			);
 			path = "List Thumbnail";
-			sourceTree = "<group>";
-		};
-		40E0FD7D24CF021B00A674D1 /* Item Page */ = {
-			isa = PBXGroup;
-			children = (
-				40E0FD7324CEE21A00A674D1 /* Item */,
-				40E0FD7524CEE24200A674D1 /* List Thumbnail */,
-			);
-			path = "Item Page";
 			sourceTree = "<group>";
 		};
 		40E992D625ECD45B008863C7 /* MasterListPage */ = {
@@ -545,6 +510,7 @@
 				404DFD5325EF3FB30033ECD7 /* +CollectionView(MasterListPage).swift */,
 				40D10B732531B1310001CDAE /* +CollectionDragDrop(MainPage).swift */,
 				40D9A4A524F93DE600C4145B /* +Helper(MainPage).swift */,
+				40D9A49F24F93AAA00C4145B /* MainListCell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -567,6 +533,8 @@
 		40E992DB25ECD4A5008863C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				40E0FD7324CEE21A00A674D1 /* Item */,
+				40E0FD7524CEE24200A674D1 /* List Thumbnail */,
 				404DFD5025EF3E3A0033ECD7 /* DataService */,
 				405624292491D8920083B800 /* ItemsViewController.swift */,
 				40D9A49124F8E56400C4145B /* +IBActions(ItemsVC).swift */,
