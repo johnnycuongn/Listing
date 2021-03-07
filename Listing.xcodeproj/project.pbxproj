@@ -74,6 +74,8 @@
 		40E0FD8624CF082800A674D1 /* +ListTitleTextField(ItemsVC).swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8524CF082800A674D1 /* +ListTitleTextField(ItemsVC).swift */; };
 		40E0FD8824CF088100A674D1 /* +Delegate(ItemsVC).swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8724CF088100A674D1 /* +Delegate(ItemsVC).swift */; };
 		40F3648225F4AE0300CF4AB9 /* SubListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3648125F4AE0300CF4AB9 /* SubListViewModel.swift */; };
+		40F3648A25F4F21000CF4AB9 /* ItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3648925F4F21000CF4AB9 /* ItemRepository.swift */; };
+		40F3648E25F4F2C600CF4AB9 /* ItemCoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3648D25F4F2C600CF4AB9 /* ItemCoreDataRepository.swift */; };
 		40FB2C84249B7B2D001CC036 /* ListTableViewDataServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -157,6 +159,8 @@
 		40E0FD8524CF082800A674D1 /* +ListTitleTextField(ItemsVC).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ListTitleTextField(ItemsVC).swift"; sourceTree = "<group>"; };
 		40E0FD8724CF088100A674D1 /* +Delegate(ItemsVC).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Delegate(ItemsVC).swift"; sourceTree = "<group>"; };
 		40F3648125F4AE0300CF4AB9 /* SubListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubListViewModel.swift; sourceTree = "<group>"; };
+		40F3648925F4F21000CF4AB9 /* ItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRepository.swift; sourceTree = "<group>"; };
+		40F3648D25F4F2C600CF4AB9 /* ItemCoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCoreDataRepository.swift; sourceTree = "<group>"; };
 		40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewDataServiceTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -387,6 +391,7 @@
 			children = (
 				40D602E625E90EDB0049A0D5 /* MasterListRepository.swift */,
 				40D602EC25E90EFB0049A0D5 /* SubListRepository.swift */,
+				40F3648925F4F21000CF4AB9 /* ItemRepository.swift */,
 			);
 			path = DataRepositories;
 			sourceTree = "<group>";
@@ -397,6 +402,7 @@
 				40D602F525E90F780049A0D5 /* CoreDataEntities */,
 				40D602F125E90F560049A0D5 /* MasterListCoreDataRepository.swift */,
 				40D602F625E90F8D0049A0D5 /* SubListCoreDataRepository.swift */,
+				40F3648D25F4F2C600CF4AB9 /* ItemCoreDataRepository.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -677,6 +683,7 @@
 				404F2C0C24F3F97500FC471A /* MainList+CoreDataProperties.swift in Sources */,
 				404F2C1B24F40A4C00FC471A /* MainListManager.swift in Sources */,
 				40D9A4A624F93DE600C4145B /* +Helper(MainPage).swift in Sources */,
+				40F3648E25F4F2C600CF4AB9 /* ItemCoreDataRepository.swift in Sources */,
 				40D602F725E90F8D0049A0D5 /* SubListCoreDataRepository.swift in Sources */,
 				40D602DC25E90D7B0049A0D5 /* SubList.swift in Sources */,
 				4056242A2491D8920083B800 /* ItemsViewController.swift in Sources */,
@@ -722,6 +729,7 @@
 				40A0DFE824ED175C0039F19C /* +Drag.swift in Sources */,
 				4036E44424CB282E00F88D96 /* MainPageViewController.swift in Sources */,
 				404F2C1F24F4232E00FC471A /* ItemManager.swift in Sources */,
+				40F3648A25F4F21000CF4AB9 /* ItemRepository.swift in Sources */,
 				40A0DFEA24ED17810039F19C /* +Drop.swift in Sources */,
 				40AA4E6324C0414F00D8B215 /* EmojiCollectionViewCell.swift in Sources */,
 				40D9A43E24F6D20400C4145B /* StrikeThrough.swift in Sources */,

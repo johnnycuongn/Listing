@@ -10,6 +10,8 @@ import Foundation
 
 struct DomainItem {
     
+    var storageID: String
+    
     var title: String
     var index: Int
     var isCompleted: Bool

@@ -46,4 +46,14 @@ public class Item: NSManagedObject {
         PersistenceService.saveContext()
     }
     
+    func toDomain() -> DomainItem {
+        guard title != nil else {
+            fatalError("Fix title to be not optional")
+        }
+        
+        let id = objectID.uriRepresentation().absoluteString
+        
+        return .init(storageID: id, title: title!, index: Int(index), isCompleted: isCompleted)
+    }
+    
 }
