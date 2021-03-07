@@ -20,7 +20,7 @@ final class CoreDataStorage {
     private lazy var persistentContainer: NSPersistentContainer = {
         print(NSPersistentContainer.defaultDirectoryURL())
         
-        let container = NSPersistentContainer(name: "AnimeList")
+        let container = NSPersistentContainer(name: "Listing")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
                 assertionFailure("CoreDataStorage: Unresolved error \(error), \(error.userInfo)")
@@ -29,7 +29,29 @@ final class CoreDataStorage {
         return container
     }()
     
-    lazy var context = persistentContainer.viewContext
+    private var managedOM: NSManagedObjectModel {
+        guard let modelURL = Bundle.main.url(forResource: "Listing",
+                                             withExtension: "momd") else {
+            fatalError("Failed to find data model")
+        }
+        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+            fatalError("Failed to create model from file: \(modelURL)")
+        }
+        
+        return mom
+    }
+    
+    lazy var coordinatoor: NSPersistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedOM)
+    
+    var context: NSManagedObjectContext {
+        
+        let context = persistentContainer.viewContext
+        context.persistentStoreCoordinator = coordinatoor
+        
+        return context
+    }
+    
+    
     
     // MARK: - Core Data Saving support
     
