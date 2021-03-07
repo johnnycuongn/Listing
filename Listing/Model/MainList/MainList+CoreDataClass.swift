@@ -57,7 +57,9 @@ public class MainList: NSManagedObject {
             fatalError("Fix title to be not optional")
         }
         
-        return .init(title: title!, emoji: emoji, index: Int(index))
+        let id = objectID.uriRepresentation().absoluteString
+        
+        return .init(storageID: id, title: title!, emoji: emoji, index: Int(index))
     }
     
 }

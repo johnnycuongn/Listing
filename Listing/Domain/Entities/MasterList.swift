@@ -9,6 +9,8 @@
 import Foundation
 
 struct DomainMasterList {
+    var storageID: String
+    
     var title: String
     var emoji: String?
     var index: Int

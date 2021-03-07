@@ -13,7 +13,25 @@ class PersistenceService {
     
     private init() {}
     
-    static var context = persistentContainer.viewContext
+    static var managedOM: NSManagedObjectModel {
+        guard let modelURL = Bundle.main.url(forResource: "Listing",
+                                             withExtension: "momd") else {
+            fatalError("Failed to find data model")
+        }
+        guard let mom = NSManagedObjectModel(contentsOf: modelURL) else {
+            fatalError("Failed to create model from file: \(modelURL)")
+        }
+        
+        return mom
+    }
+    
+    static var coordinatoor: NSPersistentStoreCoordinator = NSPersistentStoreCoordinator(managedObjectModel: managedOM)
+    
+    static var context: NSManagedObjectContext {
+        let context = persistentContainer.viewContext
+//        context.persistentStoreCoordinator = coordinatoor
+        return context
+    }
     
     // MARK: - Core Data stack
 

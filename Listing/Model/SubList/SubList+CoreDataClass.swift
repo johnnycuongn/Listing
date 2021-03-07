@@ -52,6 +52,16 @@ public class SubList: NSManagedObject {
         return items!.toArray().sorted(by: {$0.index < $1.index})
     }
     
+    func toDomain() -> DomainSubList {
+        guard title != nil else {
+            fatalError("Fix title to be not optional")
+        }
+        
+        let id = objectID.uriRepresentation().absoluteString
+        
+        return .init(storageID: id, title: title!, emoji: emoji, index: Int(index))
+    }
+    
 }
 
 
