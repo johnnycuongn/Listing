@@ -42,7 +42,6 @@ final class SubListCoreDataRepository: SubListRepository {
         
         self.subLists = subListLoadResult.list
         let domainSubLists = subLists.map { $0.toDomain() }
-        print("SubListCoreDataRepository: subListsLoad - \(domainSubLists)")
         
         completion(.success(domainSubLists))
         
