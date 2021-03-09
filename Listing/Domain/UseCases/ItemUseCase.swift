@@ -43,8 +43,8 @@ class DefaultItemUseCase: ItemUseCase {
         }
     }
     
-    func addItem(title: String, from addedPos: Direction) {
-        repository.addItem(title: title, from: self.defaultAddPostion)
+    func addItem(title: String, from addedPos: Direction = .top) {
+        repository.addItem(title: title, from: addedPos)
     }
     
     func completeItem(at position: Int) {

@@ -73,7 +73,7 @@
 		40E0FD8424CF071200A674D1 /* +ItemInputTextView(ItemsVC).swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8324CF071200A674D1 /* +ItemInputTextView(ItemsVC).swift */; };
 		40E0FD8624CF082800A674D1 /* +ListTitleTextField(ItemsVC).swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8524CF082800A674D1 /* +ListTitleTextField(ItemsVC).swift */; };
 		40E0FD8824CF088100A674D1 /* +Delegate(ItemsVC).swift in Sources */ = {isa = PBXBuildFile; fileRef = 40E0FD8724CF088100A674D1 /* +Delegate(ItemsVC).swift */; };
-		40F3648225F4AE0300CF4AB9 /* SubListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3648125F4AE0300CF4AB9 /* SubListViewModel.swift */; };
+		40F3648225F4AE0300CF4AB9 /* ItemPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3648125F4AE0300CF4AB9 /* ItemPageViewModel.swift */; };
 		40F3648A25F4F21000CF4AB9 /* ItemRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3648925F4F21000CF4AB9 /* ItemRepository.swift */; };
 		40F3648E25F4F2C600CF4AB9 /* ItemCoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3648D25F4F2C600CF4AB9 /* ItemCoreDataRepository.swift */; };
 		40FB2C84249B7B2D001CC036 /* ListTableViewDataServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */; };
@@ -158,7 +158,7 @@
 		40E0FD8324CF071200A674D1 /* +ItemInputTextView(ItemsVC).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ItemInputTextView(ItemsVC).swift"; sourceTree = "<group>"; };
 		40E0FD8524CF082800A674D1 /* +ListTitleTextField(ItemsVC).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+ListTitleTextField(ItemsVC).swift"; sourceTree = "<group>"; };
 		40E0FD8724CF088100A674D1 /* +Delegate(ItemsVC).swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+Delegate(ItemsVC).swift"; sourceTree = "<group>"; };
-		40F3648125F4AE0300CF4AB9 /* SubListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubListViewModel.swift; sourceTree = "<group>"; };
+		40F3648125F4AE0300CF4AB9 /* ItemPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPageViewModel.swift; sourceTree = "<group>"; };
 		40F3648925F4F21000CF4AB9 /* ItemRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRepository.swift; sourceTree = "<group>"; };
 		40F3648D25F4F2C600CF4AB9 /* ItemCoreDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCoreDataRepository.swift; sourceTree = "<group>"; };
 		40FB2C83249B7B2D001CC036 /* ListTableViewDataServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewDataServiceTest.swift; sourceTree = "<group>"; };
@@ -534,7 +534,7 @@
 		40E992DA25ECD49E008863C7 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				40F3648125F4AE0300CF4AB9 /* SubListViewModel.swift */,
+				40F3648125F4AE0300CF4AB9 /* ItemPageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -722,7 +722,7 @@
 				40D9A49224F8E56400C4145B /* +IBActions(ItemsVC).swift in Sources */,
 				40D602D825E90D350049A0D5 /* MasterList.swift in Sources */,
 				40AA4E6524C041CF00D8B215 /* SectionHeaderView.swift in Sources */,
-				40F3648225F4AE0300CF4AB9 /* SubListViewModel.swift in Sources */,
+				40F3648225F4AE0300CF4AB9 /* ItemPageViewModel.swift in Sources */,
 				4053872524C87F8000647756 /* EmojiExtension.swift in Sources */,
 				40D602D325E90B050049A0D5 /* CoreDataStorage.swift in Sources */,
 				404F2C0D24F3F97500FC471A /* Item+CoreDataClass.swift in Sources */,
