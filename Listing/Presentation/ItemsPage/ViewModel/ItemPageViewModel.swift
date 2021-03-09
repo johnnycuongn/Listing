@@ -21,7 +21,7 @@ protocol SubListViewModel {
 protocol ItemListViewModel {
     var items: Observable<[DomainItem]> { get }
     
-    func loadItems(of subListID: String)
+    func loadItems(atList subListIndex: Int)
     func addItem(title: String)
     func completeItem(at pos: Int)
     func uncompleteItem(at pos: Int)
@@ -31,10 +31,18 @@ protocol ItemListViewModel {
 }
 
 protocol ItemPageViewModel: SubListViewModel, ItemListViewModel {
+    var subListCurrentIndex: Int { get set }
+    
     func initiateLoadPage()
 }
 
 class DefaultItemPageViewModel: ItemPageViewModel {
+    
+    var subListCurrentIndex: Int = 0 {
+        didSet {
+            loadItems(atList: subListCurrentIndex)
+        }
+    }
     
     var items: Observable<[DomainItem]> = Observable([])
     var subLists: Observable<[DomainSubList]> = Observable([])
@@ -51,15 +59,21 @@ class DefaultItemPageViewModel: ItemPageViewModel {
     /// Load SubList ands correspondent Items for 1 SubList
     func initiateLoadPage() {
         loadSubLists()
-        loadItems(of: subLists.value[0].storageID)
+        loadItems(atList: subListCurrentIndex)
     }
     
     // MARK: - SUBLIST
     func loadSubLists() {
         subListUseCase.loadSubList { [weak self] (result) in
             switch result {
-            case .success(let sublists):
-                self?.subLists.value = sublists
+            case .success(let loadedsSublists):
+                if loadedsSublists.count == 0 {
+                    self?.addSubList(title: "Untitled", emoji: "📄")
+                }
+                self?.subLists.value = loadedsSublists
+                
+                print("ItemViewModel: SubLists: \(self?.subLists.value)")
+                
             case .failure(let error):
                 self?.handleError(error)
             }
@@ -80,13 +94,18 @@ class DefaultItemPageViewModel: ItemPageViewModel {
     
     // MARK: - ITEM
     
-    func loadItems(of subListID: String) {
-        itemUseCase = DefaultItemUseCase(subListID: subListID)
+    func loadItems(atList subListIndex: Int) {
+        let currentSubListID = subLists.value[subListIndex].storageID
+        
+        itemUseCase = DefaultItemUseCase(subListID: currentSubListID)
         
         itemUseCase.loadItem { [weak self] (result) in
             switch result {
             case .success(let items):
                 self?.items.value = items
+                
+                print("ItemViewModel: Items: \(self?.items.value)")
+                
             case .failure(let error):
                 self?.handleError(error)
             }
