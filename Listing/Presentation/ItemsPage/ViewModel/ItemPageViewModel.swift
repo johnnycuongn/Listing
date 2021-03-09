@@ -13,6 +13,9 @@ protocol SubListViewModel {
     
     func loadSubLists()
     func addSubList(title: String, emoji: String)
+    
+    func deleteSubList(at pos: Int)
+    func moveSubList(from startPos: Int, to endPos: Int)
 }
 
 protocol ItemListViewModel {
@@ -65,6 +68,14 @@ class DefaultItemPageViewModel: ItemPageViewModel {
     
     func addSubList(title: String, emoji: String) {
         subListUseCase.addSubList(title: title, emoji: emoji)
+    }
+    
+    func deleteSubList(at pos: Int) {
+        subListUseCase.deleteSubList(at: pos)
+    }
+    
+    func moveSubList(from startPos: Int, to endPos: Int) {
+        subListUseCase.moveSubList(from: startPos, to: endPos)
     }
     
     // MARK: - ITEM
