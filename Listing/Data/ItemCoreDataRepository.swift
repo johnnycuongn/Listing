@@ -61,7 +61,7 @@ class ItemCoreDataRepository: ItemRepository {
         
         switch pos {
         case .top:
-            self.insertItem(title, at: 0)
+            self.insertItem(title: title, at: 0)
         case .bottom:
             Item.create(title: title, index: items.count, ofSubList: currentSubList)
         }
@@ -120,23 +120,23 @@ class ItemCoreDataRepository: ItemRepository {
     
     // MARK: - CONVENIENCE
     
-    private func insertItem(_ title: String, at insertedIndex: Int) {
+    func insertItem(title: String, at insertedPos: Int) {
         guard let currentSubList = currentSubList else {
             return
         }
         
-        if insertedIndex == items.count {
+        if insertedPos == items.count {
             addItem(title: title, from: .bottom)
         }
         
         else {
             for i in stride(from: items.count-1, through: 0, by: -1) {
-            if items[i].index >= insertedIndex {
+            if items[i].index >= insertedPos {
                 items[i].updateIndex(with: i+1)
                 }
             }
             
-            Item.create(title: title, index: insertedIndex, ofSubList: currentSubList)
+            Item.create(title: title, index: insertedPos, ofSubList: currentSubList)
         }
     }
     

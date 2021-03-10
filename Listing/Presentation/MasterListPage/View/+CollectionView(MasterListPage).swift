@@ -61,7 +61,7 @@ extension MainPageViewController: UICollectionViewDelegate {
             addNewMainList()
         }
         else if indexPath.row < viewModel.masterListCount {
-            let vc = ItemsViewController.initialize(with: indexPath)
+            let vc = ItemsViewController.initialize(with: indexPath, masterListID: viewModel.masterList.value[indexPath.row].storageID)
             navigationController?.pushViewController(vc, animated: true)
         }
 

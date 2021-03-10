@@ -15,6 +15,8 @@ protocol ItemRepository {
     func addItem(title: String, from pos: Direction)
     
     func setItemCompletion(at index: Int, _ value: Bool)
+    
+    func insertItem(title: String, at insertedPos: Int)
 
     func deleteItem(at index: Int)
 

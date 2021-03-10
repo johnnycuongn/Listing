@@ -17,6 +17,8 @@ protocol ItemUseCase {
     func completeItem(at position: Int)
     func uncompleteItem(at postion: Int)
     
+    func insertItem(title: String, at insertedPos: Int)
+    
     func deleteItem(at pos: Int)
     
     func moveItem(from startPos: Int, to endPos: Int)
@@ -53,6 +55,10 @@ class DefaultItemUseCase: ItemUseCase {
     
     func uncompleteItem(at position: Int) {
         repository.setItemCompletion(at: position, false)
+    }
+    
+    func insertItem(title: String, at insertedPos: Int) {
+        repository.insertItem(title: title, at: insertedPos)
     }
     
     func deleteItem(at pos: Int) {

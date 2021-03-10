@@ -26,6 +26,8 @@ protocol ItemListViewModel {
     func completeItem(at pos: Int)
     func uncompleteItem(at pos: Int)
     
+    func insertItem(_ title: String, at pos: Int)
+    
     func deleteItem(at pos: Int)
     func moveItem(from startPos: Int, to endPos: Int)
 }
@@ -123,6 +125,11 @@ class DefaultItemPageViewModel: ItemPageViewModel {
     func uncompleteItem(at pos: Int) {
         itemUseCase.uncompleteItem(at: pos)
     }
+    
+    func insertItem(_ title: String, at pos: Int) {
+        itemUseCase.insertItem(title: title, at: pos)
+    }
+    
     
     func deleteItem(at pos: Int) {
         itemUseCase.deleteItem(at: pos)
