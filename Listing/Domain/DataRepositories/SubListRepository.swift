@@ -12,6 +12,9 @@ protocol SubListRepository {
     
     func loadSubList(completion: @escaping (Result<[DomainSubList], Error>) -> Void)
     
+    func updateSubList(title: String, at index: Int)
+    func updateSubList(emoji: String, at index: Int)
+    
     func addSubList(title: String, emoji: String)
     
     func deleteSubList(at index: Int)

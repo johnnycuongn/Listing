@@ -16,6 +16,9 @@ protocol SubListUseCase {
     func deleteSubList(at pos: Int)
     
     func moveSubList(from startPos: Int, to endPos: Int)
+    
+    func updateSubList(title: String, at position: Int)
+    func updateSubList(emoji: String, at position: Int)
 }
 
 class DefaultSubListUseCase: SubListUseCase {
@@ -50,5 +53,12 @@ class DefaultSubListUseCase: SubListUseCase {
         repository.moveSubList(from: startPos, to: endPos)
     }
     
+    func updateSubList(title: String, at position: Int) {
+        
+    }
+    
+    func updateSubList(emoji: String, at position: Int) {
+        
+    }
     
 }
