@@ -54,11 +54,11 @@ class DefaultSubListUseCase: SubListUseCase {
     }
     
     func updateSubList(title: String, at position: Int) {
-        
+        repository.updateSubList(title: title, at: position)
     }
     
     func updateSubList(emoji: String, at position: Int) {
-        
+        repository.updateSubList(emoji: emoji, at: position)
     }
     
 }

@@ -67,6 +67,20 @@ final class SubListCoreDataRepository: SubListRepository {
         SubList.create(title: title, emoji: emoji, index: subLists.count, ofMainList: currentMasterList)
     }
     
+    // MARK: - UPDATE
+    func updateSubList(title: String, at index: Int) {
+        subLists[index].title = title
+        
+        PersistenceService.saveContext()
+        
+    }
+    
+    func updateSubList(emoji: String, at index: Int) {
+        subLists[index].emoji = emoji
+        
+        PersistenceService.saveContext()
+    }
+    
     // MARK: - DELETE
     
     func deleteSubList(at index: Int) {
