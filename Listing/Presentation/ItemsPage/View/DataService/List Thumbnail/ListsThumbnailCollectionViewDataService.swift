@@ -16,11 +16,7 @@ public protocol ListUpdatable {
 
 class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
     
-    var currentMainListIndex: Int!
-    var currentMainList: MainList {
-        return MainListManager.mainLists[currentMainListIndex]
-    }
-    var listIndex: Int?
+    var subListViewModel: SubListViewModel!
         
     var listUpdateService: ListUpdatable?
 
@@ -41,17 +37,18 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
-        return currentMainList.subListsArray.count+1
+        return subListViewModel.subLists.value.count+1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ListsThumbnailCollectionViewCell.identifier, for: indexPath) as! ListsThumbnailCollectionViewCell
   
-        if indexPath.row == currentMainList.subListsArray.count {
+        
+        if indexPath.row == subListViewModel.subLists.value.count {
             cell.configure(with: "+")
         }
-        else if indexPath.row < currentMainList.subListsArray.count {
-            cell.configure(with: currentMainList.subListsArray[indexPath.row].emoji!)
+        else if indexPath.row < subListViewModel.subLists.value.count {
+            cell.configure(with: subListViewModel.subLists.value[indexPath.row].emoji!)
         }
         cell.configureView(of: frame)
         
@@ -66,7 +63,7 @@ class ListsThumbnailCollectionViewDataService: NSObject, UICollectionViewDelegat
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.row == currentMainList.subListsArray.count {
+        if indexPath.row == subListViewModel.subLists.value.count {
             listUpdateService?.addNewList()
         } else {
             self.collectionView.contentOffset.x = frame.size.height*CGFloat(indexPath.row)+layout.minimumLineSpacing*CGFloat(indexPath.row)

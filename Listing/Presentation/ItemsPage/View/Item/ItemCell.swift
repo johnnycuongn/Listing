@@ -41,13 +41,11 @@ class ItemCell: UITableViewCell {
         return true
     }
     
-    func config(item: Item) {
-        
-        self.titleLabel.attributedText = item.title!.strikeThrough(.remove)
-        
+    func fill(with item: DomainItem) {
+        self.titleLabel.attributedText = item.title.strikeThrough(.remove)
         
         if item.isCompleted == true {
-            self.titleLabel.attributedText = item.title!.strikeThrough(.add)
+            self.titleLabel.attributedText = item.title.strikeThrough(.add)
         }
         
         setUpPanRight()

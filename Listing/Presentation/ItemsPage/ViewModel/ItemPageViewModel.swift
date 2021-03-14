@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+import MobileCoreServices
 
 protocol SubListViewModel {
     var subLists: Observable<[DomainSubList]> { get }
@@ -16,6 +18,9 @@ protocol SubListViewModel {
     
     func deleteSubList(at pos: Int)
     func moveSubList(from startPos: Int, to endPos: Int)
+    
+    func updateSublist(title: String, at position: Int)
+    func updateSublist(emoji: String, at position: Int)
 }
 
 protocol ItemListViewModel {
@@ -30,6 +35,9 @@ protocol ItemListViewModel {
     
     func deleteItem(at pos: Int)
     func moveItem(from startPos: Int, to endPos: Int)
+    
+    func canHandle(_ session: UIDropSession) -> Bool
+    func dragItems(for indexPath: IndexPath) -> [UIDragItem]
 }
 
 protocol ItemPageViewModel: SubListViewModel, ItemListViewModel {
@@ -74,8 +82,6 @@ class DefaultItemPageViewModel: ItemPageViewModel {
                 }
                 self?.subLists.value = loadedsSublists
                 
-                print("ItemViewModel: SubLists: \(self?.subLists.value)")
-                
             case .failure(let error):
                 self?.handleError(error)
             }
@@ -94,6 +100,18 @@ class DefaultItemPageViewModel: ItemPageViewModel {
         subListUseCase.moveSubList(from: startPos, to: endPos)
     }
     
+    func updateSublist(title: String, at position: Int) {
+        subListUseCase.updateSubList(title: title, at: position)
+        
+        loadSubLists()
+    }
+    
+    func updateSublist(emoji: String, at position: Int) {
+        subListUseCase.updateSubList(emoji: emoji, at: position)
+        
+        loadSubLists()
+    }
+    
     // MARK: - ITEM
     
     func loadItems(atList subListIndex: Int) {
@@ -106,8 +124,6 @@ class DefaultItemPageViewModel: ItemPageViewModel {
             case .success(let items):
                 self?.items.value = items
                 
-                print("ItemViewModel: Items: \(self?.items.value)")
-                
             case .failure(let error):
                 self?.handleError(error)
             }
@@ -116,27 +132,59 @@ class DefaultItemPageViewModel: ItemPageViewModel {
     
     func addItem(title: String) {
         itemUseCase.addItem(title: title, from: .top)
+        
+        loadItems(atList: subListCurrentIndex)
     }
     
     func completeItem(at pos: Int) {
         itemUseCase.completeItem(at: pos)
+        
+        loadItems(atList: subListCurrentIndex)
     }
     
     func uncompleteItem(at pos: Int) {
         itemUseCase.uncompleteItem(at: pos)
+        
+        loadItems(atList: subListCurrentIndex)
     }
     
     func insertItem(_ title: String, at pos: Int) {
         itemUseCase.insertItem(title: title, at: pos)
+        
+        loadItems(atList: subListCurrentIndex)
     }
     
     
     func deleteItem(at pos: Int) {
         itemUseCase.deleteItem(at: pos)
+        
+        loadItems(atList: subListCurrentIndex)
     }
     
     func moveItem(from startPos: Int, to endPos: Int) {
         itemUseCase.moveItem(from: startPos, to: endPos)
+        
+        loadItems(atList: subListCurrentIndex)
+    }
+    
+    func canHandle(_ session: UIDropSession) -> Bool {
+           return session.canLoadObjects(ofClass: NSString.self)
+    }
+    
+    func dragItems(for indexPath: IndexPath) -> [UIDragItem] {
+        let placeItem = items.value[indexPath.row].title
+
+        let data = placeItem.data(using: .utf8)
+           let itemProvider = NSItemProvider()
+           
+           itemProvider.registerDataRepresentation(forTypeIdentifier: kUTTypePlainText as String, visibility: .all) { completion in
+               completion(data, nil)
+               return nil
+           }
+
+           return [
+               UIDragItem(itemProvider: itemProvider)
+           ]
     }
     
     

@@ -15,12 +15,12 @@ extension ItemsViewController: ListUpdatable {
         let cellWidth = Double(listsThumbnailWidth + listsThumbnailCollectionViewLayout.minimumLineSpacing)
         let index = Int((offset/cellWidth).rounded())
         
-        if index <= currentMainList.subListsArray.count-1 && offset > 0 {
-            listIndex = index
-        } else if index >= currentMainList.subListsArray.count {
-            listIndex = currentMainList.subListsArray.count-1
+        if index <= pageViewModel.subLists.value.count-1 && offset > 0 {
+            self.subListCurrentIndex = index
+        } else if index >= pageViewModel.subLists.value.count {
+            self.subListCurrentIndex = pageViewModel.subLists.value.count-1
         } else if index <= 0 {
-            listIndex = 0
+            self.subListCurrentIndex = 0
         }
            
     }
@@ -28,9 +28,9 @@ extension ItemsViewController: ListUpdatable {
     func addNewList() {
         isCreatingList = true
 
-        currentMainList.addSubList(title: "New List", emoji: "📝")
+        pageViewModel.addSubList(title: "New List", emoji: "📝")
 
-           listIndex = currentMainList.subListsArray.count-1
+        self.subListCurrentIndex = pageViewModel.subLists.value.count-1
            
            listTitleTextField.text = ""
            listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
@@ -60,12 +60,12 @@ extension ItemsViewController: DataServiceActionSheetDelegate {
             self.itemsTableView.reloadRows(at: [indexPath], with: .automatic)
         }
         
-        let deletedItem = currentSubList.itemsArray[indexPath.row]
+        let deletedItem = pageViewModel.items.value[indexPath.row]
         
         // Action Sheet
         let actionSheet = UIAlertController(
             title: nil,
-            message: "'\(deletedItem.title!)' will be deleted permanently",
+            message: "'\(deletedItem.title)' will be deleted permanently",
             preferredStyle: .actionSheet)
         
         // Delete
@@ -73,8 +73,9 @@ extension ItemsViewController: DataServiceActionSheetDelegate {
             title: "Delete Task",
             style: .destructive) {
             (action) in
-                self.currentSubList.deleteItem(at: indexPath.row)
-                self.itemsTableView.deleteRows(at: [indexPath], with: .automatic)
+
+            self.pageViewModel.deleteItem(at: indexPath.row)
+//            self.itemsTableView.deleteRows(at: [indexPath], with: .automatic)
             }
         
         // Cancel Delete

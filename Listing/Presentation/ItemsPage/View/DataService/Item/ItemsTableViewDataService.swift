@@ -19,20 +19,11 @@ protocol DataServiceActionSheetDelegate {
 class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     var tableView: UITableView!
-    
-    var currentMainListIndex: Int!
-    var currentMainList: MainList {
-        return MainListManager.mainLists[currentMainListIndex]
-    }
-    var listIndex: Int?
+
     var pullDownService: PullDownToAddable!
     var actionSheet: DataServiceActionSheetDelegate!
     
-    var currentSubList: SubList {
-        guard listIndex != nil else { fatalError() }
-        
-        return currentMainList.subListsArray[listIndex!]
-    }
+    var itemViewModel: ItemListViewModel!
 
     // MARK: - Data Source
     
@@ -41,7 +32,7 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentSubList.itemsArray.count
+        return itemViewModel.items.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -50,8 +41,8 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
         
         cell.swipeToDeleteDelegate = self
         
-        let item = currentSubList.itemsArray[indexPath.row]
-        cell.config(item: item)
+        let item = itemViewModel.items.value[indexPath.row]
+        cell.fill(with: item)
         
         return cell
     }
@@ -67,7 +58,7 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
         guard sourceIndexPath != destinationIndexPath else {
             return
         }
-        currentSubList.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
+        itemViewModel.moveItem(from: sourceIndexPath.row, to: destinationIndexPath.row)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -106,7 +97,7 @@ extension ItemsTableViewDataService: SwipeItemToDeleteDelegate {
             return false
         }
         
-        let selectedItem = currentSubList.itemsArray[indexPath.row]
+        let selectedItem = itemViewModel.items.value[indexPath.row]
         
         return selectedItem.isCompleted
         
@@ -116,9 +107,13 @@ extension ItemsTableViewDataService: SwipeItemToDeleteDelegate {
         guard let indexPath = tableView.indexPath(for: item) else {
             return
         }
-        
-        let selectedItem = currentSubList.itemsArray[indexPath.row]
-        selectedItem.updateComplete(with: isComplete)
+
+        switch isComplete {
+        case true:
+            itemViewModel.completeItem(at: indexPath.row)
+        case false:
+            itemViewModel.uncompleteItem(at: indexPath.row)
+        }
         
         tableView.reloadData()
     }

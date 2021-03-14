@@ -10,10 +10,6 @@ import Foundation
 import UIKit
 
 extension ItemsViewController {
-    func loadListIndex() {
-        listTableViewDataUpdate()
-        listsThumbnailCollectionViewDataUpdate()
-    }
     
     func setUpListsThumbnailCollectionViewData() {
         
@@ -22,7 +18,6 @@ extension ItemsViewController {
         
         listsThumbnailCollectionViewDataService.collectionView = listsThumbnailCollectionView
         
-        listsThumbnailCollectionViewDataService.currentMainListIndex = mainListIndexPath.row
         
         // Delegation
         listsThumbnailCollectionViewDataService.listUpdateService = self
@@ -36,7 +31,6 @@ extension ItemsViewController {
         itemsTableView.dropDelegate = itemsTableViewDataService
         
         itemsTableViewDataService.tableView = itemsTableView
-        itemsTableViewDataService.currentMainListIndex = mainListIndexPath.row
          
         // Delegation
         itemsTableViewDataService.pullDownService = self

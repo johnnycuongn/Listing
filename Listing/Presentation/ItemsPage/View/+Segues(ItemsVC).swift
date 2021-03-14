@@ -29,7 +29,8 @@ extension ItemsViewController {
      
             guard emojiPageVC.selectedEmoji != nil else { return }
             
-            self.currentSubList.updateEmoji(with: emojiPageVC.selectedEmoji!)
+            
+            pageViewModel.updateSublist(emoji: emojiPageVC.selectedEmoji!, at: subListCurrentIndex)
             emojiButton.setTitle(emojiPageVC.selectedEmoji, for: .normal)
             
             listsThumbnailCollectionView.reloadData()
@@ -58,11 +59,11 @@ extension ItemsViewController {
         if segue.identifier == Segues.toItemInformation,
             let informationVC = segue.destination as? ItemInformationVC {
             
-            guard let selectedIndexPath = itemsTableView.indexPathForSelectedRow else {
-                return
-            }
+//            guard let selectedIndexPath = itemsTableView.indexPathForSelectedRow else {
+//                return
+//            }
             
-            informationVC.selectedItem = currentSubList.itemsArray[selectedIndexPath.row]
+//            informationVC.selectedItem = currentSubList.itemsArray[selectedIndexPath.row]
         }
     }
 }

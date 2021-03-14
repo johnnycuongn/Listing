@@ -30,7 +30,7 @@ extension ItemsViewController: UITextFieldDelegate {
                 return false
             }
             
-            currentSubList.updateTitle(with: listTitleTextField.text!)
+            pageViewModel.updateSublist(title: listTitleTextField.text!, at: subListCurrentIndex)
             
             listTitleViewUpdate(title: listTitleTextField.text)
             setHidden(listTitleTextField: true)
@@ -43,7 +43,7 @@ extension ItemsViewController: UITextFieldDelegate {
                        return self.listsThumbnailCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
                    }
                 
-                listsThumbnailCollectionView.contentOffset.x = listsThumbnailCollectionView.frame.size.height*CGFloat(currentMainList.subListsArray.count-1)+layout.minimumLineSpacing*CGFloat(currentMainList.subListsArray.count-1)
+                listsThumbnailCollectionView.contentOffset.x = listsThumbnailCollectionView.frame.size.height*CGFloat(pageViewModel.subLists.value.count-1)+layout.minimumLineSpacing*CGFloat(pageViewModel.subLists.value.count-1)
             }
             
             isCreatingList = false
