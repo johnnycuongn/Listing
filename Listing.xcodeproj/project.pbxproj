@@ -261,7 +261,6 @@
 			children = (
 				405624252491D8920083B800 /* AppDelegate.swift */,
 				405624272491D8920083B800 /* SceneDelegate.swift */,
-				405624472491DD820083B800 /* Model */,
 				40D9A43F24F6D27500C4145B /* System Filles */,
 				40D6030A25EBA6D20049A0D5 /* Presentation */,
 				40D602D625E90D1C0049A0D5 /* Domain */,
@@ -284,17 +283,6 @@
 				406BDDE0249A372E00E9B99C /* Model Test */,
 			);
 			path = ListingTests;
-			sourceTree = "<group>";
-		};
-		405624472491DD820083B800 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				40AA4E5124C03D9900D8B215 /* Emoji */,
-				404F2C1124F3F99500FC471A /* MainList */,
-				404F2C1224F3F99B00FC471A /* SubList */,
-				40AA4E5224C03DA700D8B215 /* Item */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		406BDDE0249A372E00E9B99C /* Model Test */ = {
@@ -387,6 +375,7 @@
 		40D602F025E90F2F0049A0D5 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				40AA4E5124C03D9900D8B215 /* Emoji */,
 				40D602F525E90F780049A0D5 /* CoreDataEntities */,
 				40D602F125E90F560049A0D5 /* MasterListCoreDataRepository.swift */,
 				40D602F625E90F8D0049A0D5 /* SubListCoreDataRepository.swift */,
@@ -398,6 +387,9 @@
 		40D602F525E90F780049A0D5 /* CoreDataEntities */ = {
 			isa = PBXGroup;
 			children = (
+				404F2C1124F3F99500FC471A /* MainList */,
+				404F2C1224F3F99B00FC471A /* SubList */,
+				40AA4E5224C03DA700D8B215 /* Item */,
 			);
 			path = CoreDataEntities;
 			sourceTree = "<group>";
