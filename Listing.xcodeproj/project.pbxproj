@@ -19,8 +19,6 @@
 		404F2C0F24F3F97500FC471A /* SubList+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C0924F3F97500FC471A /* SubList+CoreDataClass.swift */; };
 		404F2C1024F3F97500FC471A /* SubList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C0A24F3F97500FC471A /* SubList+CoreDataProperties.swift */; };
 		404F2C1524F3FA5F00FC471A /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1424F3FA5F00FC471A /* PersistenceService.swift */; };
-		404F2C1D24F412A500FC471A /* +DragDrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1C24F412A500FC471A /* +DragDrop.swift */; };
-		404F2C1F24F4232E00FC471A /* ItemManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404F2C1E24F4232E00FC471A /* ItemManager.swift */; };
 		4053872524C87F8000647756 /* EmojiExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4053872424C87F8000647756 /* EmojiExtension.swift */; };
 		4053872724C8806A00647756 /* EmojiSuggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4053872624C8806A00647756 /* EmojiSuggestion.swift */; };
 		405624262491D8920083B800 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405624252491D8920083B800 /* AppDelegate.swift */; };
@@ -100,8 +98,6 @@
 		404F2C0924F3F97500FC471A /* SubList+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubList+CoreDataClass.swift"; sourceTree = "<group>"; };
 		404F2C0A24F3F97500FC471A /* SubList+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubList+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		404F2C1424F3FA5F00FC471A /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
-		404F2C1C24F412A500FC471A /* +DragDrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "+DragDrop.swift"; sourceTree = "<group>"; };
-		404F2C1E24F4232E00FC471A /* ItemManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemManager.swift; sourceTree = "<group>"; };
 		4053872424C87F8000647756 /* EmojiExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiExtension.swift; sourceTree = "<group>"; };
 		4053872624C8806A00647756 /* EmojiSuggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSuggestion.swift; sourceTree = "<group>"; };
 		405624222491D8920083B800 /* Listing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Listing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,8 +234,6 @@
 			children = (
 				404F2C0924F3F97500FC471A /* SubList+CoreDataClass.swift */,
 				404F2C0A24F3F97500FC471A /* SubList+CoreDataProperties.swift */,
-				404F2C1E24F4232E00FC471A /* ItemManager.swift */,
-				404F2C1C24F412A500FC471A /* +DragDrop.swift */,
 			);
 			path = SubList;
 			sourceTree = "<group>";
@@ -678,7 +672,6 @@
 				40E0FD8224CF053000A674D1 /* +Segues(ItemsVC).swift in Sources */,
 				40AA4E5C24C0401500D8B215 /* EmojiPageViewController.swift in Sources */,
 				404F2C1024F3F97500FC471A /* SubList+CoreDataProperties.swift in Sources */,
-				404F2C1D24F412A500FC471A /* +DragDrop.swift in Sources */,
 				40D602E025E90D840049A0D5 /* Item.swift in Sources */,
 				40E0FD8824CF088100A674D1 /* +Delegate(ItemsVC).swift in Sources */,
 				40D9A44524F6D27500C4145B /* AssetsColor.swift in Sources */,
@@ -712,7 +705,6 @@
 				404F2C0D24F3F97500FC471A /* Item+CoreDataClass.swift in Sources */,
 				40A0DFE824ED175C0039F19C /* +Drag.swift in Sources */,
 				4036E44424CB282E00F88D96 /* MainPageViewController.swift in Sources */,
-				404F2C1F24F4232E00FC471A /* ItemManager.swift in Sources */,
 				40F3648A25F4F21000CF4AB9 /* ItemRepository.swift in Sources */,
 				40A0DFEA24ED17810039F19C /* +Drop.swift in Sources */,
 				40AA4E6324C0414F00D8B215 /* EmojiCollectionViewCell.swift in Sources */,

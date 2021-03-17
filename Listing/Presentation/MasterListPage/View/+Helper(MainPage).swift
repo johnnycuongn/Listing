@@ -13,7 +13,7 @@ import UIKit
 extension MainPageViewController {
     
     func actionSheetForDelete(for indexPath: IndexPath) {
-        let actionSheet = UIAlertController(title: nil, message: "\(MainListManager.mainLists[indexPath.row].title!)", preferredStyle: .actionSheet)
+        let actionSheet = UIAlertController(title: nil, message: "\(viewModel.masterList.value[indexPath.row].title)", preferredStyle: .actionSheet)
            
         let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { (action) in
             self.viewModel.removeMasterList(at: indexPath.row)

@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum Direction {
+    case top
+    case bottom
+}
+
 protocol ItemUseCase {
     
     func loadItem(completion: @escaping (Result<[DomainItem], Error>) -> Void)
