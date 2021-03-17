@@ -183,6 +183,15 @@
 			path = "Information Page";
 			sourceTree = "<group>";
 		};
+		404CD72D2601B72E00956FEB /* ViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				405624512491E4CC0083B800 /* ItemCell.swift */,
+				4064A63224C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift */,
+			);
+			path = ViewCells;
+			sourceTree = "<group>";
+		};
 		404DFD4F25EF3DC60033ECD7 /* Emoji */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,22 +440,6 @@
 			path = MainListCell;
 			sourceTree = "<group>";
 		};
-		40E0FD7324CEE21A00A674D1 /* Item */ = {
-			isa = PBXGroup;
-			children = (
-				405624512491E4CC0083B800 /* ItemCell.swift */,
-			);
-			path = Item;
-			sourceTree = "<group>";
-		};
-		40E0FD7524CEE24200A674D1 /* List Thumbnail */ = {
-			isa = PBXGroup;
-			children = (
-				4064A63224C170CF00C1BE21 /* ListsThumbnailCollectionViewCell.swift */,
-			);
-			path = "List Thumbnail";
-			sourceTree = "<group>";
-		};
 		40E0FD7724CEE62E00A674D1 /* Item */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,8 +507,7 @@
 		40E992DB25ECD4A5008863C7 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				40E0FD7324CEE21A00A674D1 /* Item */,
-				40E0FD7524CEE24200A674D1 /* List Thumbnail */,
+				404CD72D2601B72E00956FEB /* ViewCells */,
 				404DFD5025EF3E3A0033ECD7 /* DataService */,
 				405624292491D8920083B800 /* ItemsViewController.swift */,
 				40D9A49124F8E56400C4145B /* +IBActions(ItemsVC).swift */,
