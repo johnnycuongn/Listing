@@ -16,16 +16,22 @@ enum ListVCError: Error {
 
 class ItemsViewController: UIViewController {
     
-    static func initialize(with indexPath: IndexPath, masterListID: String) -> ItemsViewController {
+    static var storyboardID: String {
+        return String(describing: ItemsViewController.self)
+    }
+    
+    static func initialize(masterListID: String) -> ItemsViewController {
         let storyBoard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyBoard.instantiateViewController(withIdentifier: "ItemsViewController") as! ItemsViewController
+        let vc = storyBoard.instantiateViewController(withIdentifier: ItemsViewController.storyboardID ) as! ItemsViewController
         
         vc.masterListID = masterListID
         
         return vc
     }
-
-    /// - Systems
+    
+    // MARK: - OUTLETS
+    
+    /// - Page Data Service
     @IBOutlet weak var itemsTableView: UITableView!
     @IBOutlet var itemsTableViewDataService: ItemsTableViewDataService!
     
@@ -67,10 +73,13 @@ class ItemsViewController: UIViewController {
     var deletedItem: Item?
     var deleteFromDatabase: Bool = false
     
-    
+    /// - Item's Page View Model
     lazy var pageViewModel: ItemPageViewModel = DefaultItemPageViewModel(masterListID: masterListID)
     
     var masterListID: String = ""
+    
+    /// - Controller's SubList Index
+    /// - Connect to ViewModel's SubList Index (If it changes, ViewModel's SubList Index followingly changes
     var subListCurrentIndex: Int = 0 {
         didSet {
             pageViewModel.subListCurrentIndex = subListCurrentIndex
@@ -99,7 +108,7 @@ class ItemsViewController: UIViewController {
     
 
 
-    //MARK: -
+    //MARK: - VIEWDIDLOAD
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -114,8 +123,6 @@ class ItemsViewController: UIViewController {
         
         //View
         setUpView()
-            
-        listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
         
         inputItemTextView.autocapitalizationType = .none
         

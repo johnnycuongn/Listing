@@ -268,18 +268,13 @@
 		405624242491D8920083B800 /* Listing */ = {
 			isa = PBXGroup;
 			children = (
-				405624252491D8920083B800 /* AppDelegate.swift */,
-				405624272491D8920083B800 /* SceneDelegate.swift */,
+				408E17DA2609F14F006E9480 /* Application */,
 				40D9A43F24F6D27500C4145B /* System Filles */,
 				40D6030A25EBA6D20049A0D5 /* Presentation */,
 				40D602D625E90D1C0049A0D5 /* Domain */,
 				40D602F025E90F2F0049A0D5 /* Data */,
 				40D602D125E90A9A0049A0D5 /* Infrastructure */,
 				404DFD6525EF579B0033ECD7 /* Resources */,
-				4056242B2491D8920083B800 /* Main.storyboard */,
-				405624302491D8950083B800 /* LaunchScreen.storyboard */,
-				405624332491D8950083B800 /* Info.plist */,
-				404F2C0224F3F7F200FC471A /* Listing.xcdatamodeld */,
 			);
 			path = Listing;
 			sourceTree = "<group>";
@@ -309,6 +304,18 @@
 				406BDDE7249A530500E9B99C /* ListViewControllerUnitTest.swift */,
 			);
 			path = "Controller Test";
+			sourceTree = "<group>";
+		};
+		408E17DA2609F14F006E9480 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				405624252491D8920083B800 /* AppDelegate.swift */,
+				405624272491D8920083B800 /* SceneDelegate.swift */,
+				4056242B2491D8920083B800 /* Main.storyboard */,
+				405624302491D8950083B800 /* LaunchScreen.storyboard */,
+				405624332491D8950083B800 /* Info.plist */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 		40AA4E5124C03D9900D8B215 /* Emoji */ = {
@@ -389,6 +396,7 @@
 				40D602F125E90F560049A0D5 /* MasterListCoreDataRepository.swift */,
 				40D602F625E90F8D0049A0D5 /* SubListCoreDataRepository.swift */,
 				40F3648D25F4F2C600CF4AB9 /* ItemCoreDataRepository.swift */,
+				404F2C0224F3F7F200FC471A /* Listing.xcdatamodeld */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -577,7 +585,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = Johnny;
 				TargetAttributes = {
 					405624212491D8920083B800 = {
@@ -765,6 +773,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -825,6 +834,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -859,7 +869,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 57Q787Q853;
-				INFOPLIST_FILE = Listing/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Listing/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -877,7 +887,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 57Q787Q853;
-				INFOPLIST_FILE = Listing/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Listing/Application/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
