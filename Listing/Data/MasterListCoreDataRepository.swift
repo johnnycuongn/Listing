@@ -16,7 +16,7 @@ final class MasterListCoreDataRepository: MasterListRepository {
 //        coreDataStorage.context
         PersistenceService.context
     
-    private var mainLists: [MainList] {
+    private var mainLists: [MainListEntity] {
         get {
             return loadCoreDataMasterList().list
         }
@@ -41,12 +41,12 @@ final class MasterListCoreDataRepository: MasterListRepository {
         completion(.success(domainMasterList))
     }
     
-    func loadCoreDataMasterList() -> (list: [MainList], error: Error?) {
-        var tempMainLists = [MainList]()
+    func loadCoreDataMasterList() -> (list: [MainListEntity], error: Error?) {
+        var tempMainLists = [MainListEntity]()
         var coredataError: Error?
         
         do {
-            let request = MainList.fetchRequest() as NSFetchRequest<MainList>
+            let request = MainListEntity.fetchRequest() as NSFetchRequest<MainListEntity>
             request.sortDescriptors = [NSSortDescriptor(key: "index", ascending: true)]
                    
             tempMainLists = try context.fetch(request)
@@ -62,9 +62,9 @@ final class MasterListCoreDataRepository: MasterListRepository {
     // MARK: ADD
     func addMasterList(title: String, emoji: String?) {
         if emoji != nil {
-            MainList.create(title: title, emoji: emoji!, index: mainLists.count)
+            MainListEntity.create(title: title, emoji: emoji!, index: mainLists.count)
         } else {
-            MainList.create(title: title, index: mainLists.count)
+            MainListEntity.create(title: title, index: mainLists.count)
         }
     }
     

@@ -15,9 +15,9 @@ class ItemCoreDataRepository: ItemRepository {
         PersistenceService.context
     
     var subListID: String
-    var currentSubList: SubList? = nil
+    var currentSubList: SubListEntity? = nil
     
-    private var items: [Item] = []
+    private var items: [ItemEntity] = []
     
     init(subListID: String, storage: CoreDataStorage = CoreDataStorage.shared) {
         self.coreDataStorage = storage
@@ -44,7 +44,7 @@ class ItemCoreDataRepository: ItemRepository {
         completion(.success(domainItems))
     }
     
-    private func loadCoreDataItems() -> (list: [Item], error: Error?) {
+    private func loadCoreDataItems() -> (list: [ItemEntity], error: Error?) {
         guard let currentSubList = self.currentSubList else {
             // FIXME: Error Fixation
             return ([], nil)
@@ -63,7 +63,7 @@ class ItemCoreDataRepository: ItemRepository {
         case .top:
             self.insertItem(title: title, at: 0)
         case .bottom:
-            Item.create(title: title, index: items.count, ofSubList: currentSubList)
+            ItemEntity.create(title: title, index: items.count, ofSubList: currentSubList)
         }
     }
     
@@ -136,12 +136,12 @@ class ItemCoreDataRepository: ItemRepository {
                 }
             }
             
-            Item.create(title: title, index: insertedPos, ofSubList: currentSubList)
+            ItemEntity.create(title: title, index: insertedPos, ofSubList: currentSubList)
         }
     }
     
     
-    private func convertToSubList(_ idString: String) -> SubList? {
+    private func convertToSubList(_ idString: String) -> SubListEntity? {
         
         guard let objectIDURL = URL(string: idString) else {
             print("ConverToMasterList - Unable to convert to URL: \(idString)")
@@ -158,7 +158,7 @@ class ItemCoreDataRepository: ItemRepository {
             return nil
         }
        
-        let subList = PersistenceService.context.object(with: managedObjectID) as? SubList
+        let subList = PersistenceService.context.object(with: managedObjectID) as? SubListEntity
         
         return subList
     }

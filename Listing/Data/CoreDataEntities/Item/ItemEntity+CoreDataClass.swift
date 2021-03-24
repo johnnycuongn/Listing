@@ -1,20 +1,19 @@
 //
-//  Item+CoreDataClass.swift
+//  ItemEntity+CoreDataClass.swift
 //  Listing
 //
-//  Created by Johnny on 24/8/20.
-//  Copyright © 2020 Johnny. All rights reserved.
+//  Created by Johnny on 24/3/21.
+//  Copyright © 2021 Johnny. All rights reserved.
 //
 //
 
 import Foundation
 import CoreData
 
-@objc(Item)
-public class Item: NSManagedObject {
-    
-    static func create(title: String, index: Int, ofSubList subList: SubList) {
-        let createdItem = Item(context: PersistenceService.context)
+@objc(ItemEntity)
+public class ItemEntity: NSManagedObject {
+    static func create(title: String, index: Int, ofSubList subList: SubListEntity) {
+        let createdItem = ItemEntity(context: PersistenceService.context)
         createdItem.title = title
         createdItem.index = Int64(index)
         createdItem.ofSubList = subList
@@ -55,5 +54,4 @@ public class Item: NSManagedObject {
         
         return .init(storageID: id, title: title!, index: Int(index), isCompleted: isCompleted)
     }
-    
 }

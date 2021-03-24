@@ -15,9 +15,9 @@ class ListTableViewDataServiceTest: XCTestCase {
     var listTableView: UITableView!
     var listViewController: ItemsViewController!
     
-    let swift = Item(title: "Swift", index: 0, itemIdentifier: UUID())
-    let python = Item(title: "Python", index: 0, itemIdentifier: UUID())
-    let java = Item(title: "Java", index: 0, itemIdentifier: UUID())
+    let swift = ItemEntity(title: "Swift", index: 0, itemIdentifier: UUID())
+    let python = ItemEntity(title: "Python", index: 0, itemIdentifier: UUID())
+    let java = ItemEntity(title: "Java", index: 0, itemIdentifier: UUID())
     
     var listTableViewMock: TableViewMock!
 
@@ -102,8 +102,8 @@ class ListTableViewDataServiceTest: XCTestCase {
     
     // MARK: - Mock
     class ItemCellMock: ItemCell {
-        var itemData: Item?
-        override func config(item: Item)  {
+        var itemData: ItemEntity?
+        override func config(item: ItemEntity)  {
             itemData = item
         }
     }

@@ -16,9 +16,9 @@ final class SubListCoreDataRepository: SubListRepository {
         PersistenceService.context
     
     var masterListID: String
-    var currentMasterList: MainList? = nil
+    var currentMasterList: MainListEntity? = nil
     
-    private var subLists: [SubList] = []
+    private var subLists: [SubListEntity] = []
     
     init(masterListID: String, storage: CoreDataStorage = CoreDataStorage.shared) {
         self.coreDataStorage = storage
@@ -47,7 +47,7 @@ final class SubListCoreDataRepository: SubListRepository {
         
     }
     
-    private func loadCoreDataSubList() -> (list: [SubList], error: Error?) {
+    private func loadCoreDataSubList() -> (list: [SubListEntity], error: Error?) {
         guard let currentMasterList = self.currentMasterList else {
             // FIXME: Error Fixation
             return ([], nil)
@@ -64,7 +64,7 @@ final class SubListCoreDataRepository: SubListRepository {
             return
         }
         
-        SubList.create(title: title, emoji: emoji, index: subLists.count, ofMainList: currentMasterList)
+        SubListEntity.create(title: title, emoji: emoji, index: subLists.count, ofMainList: currentMasterList)
     }
     
     // MARK: - UPDATE
@@ -134,7 +134,7 @@ final class SubListCoreDataRepository: SubListRepository {
     
     // MARK: - CONVENIENCE
     
-    private func convertToMasterList(_ idString: String) -> MainList? {
+    private func convertToMasterList(_ idString: String) -> MainListEntity? {
         
         guard let objectIDURL = URL(string: idString) else {
             print("ConverToMasterList - Unable to convert to URL: \(idString)")
@@ -151,7 +151,7 @@ final class SubListCoreDataRepository: SubListRepository {
             return nil
         }
        
-        let masterList = PersistenceService.context.object(with: managedObjectID) as? MainList
+        let masterList = PersistenceService.context.object(with: managedObjectID) as? MainListEntity
         
         return masterList
     }

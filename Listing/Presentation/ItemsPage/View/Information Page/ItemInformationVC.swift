@@ -10,7 +10,7 @@ import UIKit
 
 class ItemInformationVC: UIViewController, UITextViewDelegate {
     
-    var selectedItem: Item!
+    var selectedItem: ItemEntity!
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     

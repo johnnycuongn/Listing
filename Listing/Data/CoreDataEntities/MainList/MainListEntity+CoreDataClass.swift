@@ -1,20 +1,19 @@
 //
-//  MainList+CoreDataClass.swift
+//  MainListEntity+CoreDataClass.swift
 //  Listing
 //
-//  Created by Johnny on 24/8/20.
-//  Copyright © 2020 Johnny. All rights reserved.
+//  Created by Johnny on 24/3/21.
+//  Copyright © 2021 Johnny. All rights reserved.
 //
 //
 
 import Foundation
 import CoreData
 
-@objc(MainList)
-public class MainList: NSManagedObject {
-    
+@objc(MainListEntity)
+public class MainListEntity: NSManagedObject {
     static func create(title: String, emoji: String, index: Int) {
-        let createdMainList = MainList(context: PersistenceService.context)
+        let createdMainList = MainListEntity(context: PersistenceService.context)
         createdMainList.title = title
         createdMainList.emoji = emoji
             createdMainList.index = Int64(index)
@@ -23,7 +22,7 @@ public class MainList: NSManagedObject {
     }
     
     static func create(title: String, index: Int) {
-        let createdMainList = MainList(context: PersistenceService.context)
+        let createdMainList = MainListEntity(context: PersistenceService.context)
         createdMainList.title = title
         createdMainList.index = Int64(index)
         
@@ -48,7 +47,7 @@ public class MainList: NSManagedObject {
         PersistenceService.saveContext()
     }
     
-    var subListsArray: [SubList] {
+    var subListsArray: [SubListEntity] {
         return subLists!.toArray().sorted {$0.index < $1.index}
     }
     
@@ -61,5 +60,5 @@ public class MainList: NSManagedObject {
         
         return .init(storageID: id, title: title!, emoji: emoji, index: Int(index))
     }
-    
+
 }

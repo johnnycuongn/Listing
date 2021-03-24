@@ -22,7 +22,7 @@ class ItemStructTest: XCTestCase {
     // MARK: - Initialization
     
     func testInit_ItemWithProperties() {
-        let newItem = Item(title: "Sample 1", index: 0, itemIdentifier: UUID())
+        let newItem = ItemEntity(title: "Sample 1", index: 0, itemIdentifier: UUID())
         
         XCTAssertNotNil(newItem)
         
@@ -34,7 +34,7 @@ class ItemStructTest: XCTestCase {
     // MARK: - Method
     
     func testMethod_ItemCanChangeIndex() {
-        var newItem = Item(title: "Sample 1", index: 0, itemIdentifier: UUID())
+        var newItem = ItemEntity(title: "Sample 1", index: 0, itemIdentifier: UUID())
         newItem.changeIndex(by: 1)
         
         XCTAssertEqual(newItem.index, 1)

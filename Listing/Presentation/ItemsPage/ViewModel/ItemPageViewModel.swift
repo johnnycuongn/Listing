@@ -115,6 +115,9 @@ class DefaultItemPageViewModel: ItemPageViewModel {
     // MARK: - ITEM
     
     func loadItems(atList subListIndex: Int) {
+        if subLists.value.count == 0 {
+            addSubList(title: "Untitled", emoji: "📑")
+        }
         let currentSubListID = subLists.value[subListIndex].storageID
         
         itemUseCase = DefaultItemUseCase(subListID: currentSubListID)

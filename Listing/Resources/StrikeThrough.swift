@@ -43,3 +43,9 @@ extension String {
         return attributedString
     }
 }
+
+extension NSSet {
+    func toArray<T>() -> [T] {
+        return self.map { $0 as! T }
+    }
+}

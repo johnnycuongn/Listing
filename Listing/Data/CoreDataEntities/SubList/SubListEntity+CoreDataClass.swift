@@ -1,26 +1,19 @@
 //
-//  SubList+CoreDataClass.swift
+//  SubListEntity+CoreDataClass.swift
 //  Listing
 //
-//  Created by Johnny on 24/8/20.
-//  Copyright © 2020 Johnny. All rights reserved.
+//  Created by Johnny on 24/3/21.
+//  Copyright © 2021 Johnny. All rights reserved.
 //
 //
 
 import Foundation
 import CoreData
 
-extension NSSet {
-    func toArray<T>() -> [T] {
-        return self.map { $0 as! T }
-    }
-}
-
-@objc(SubList)
-public class SubList: NSManagedObject {
-    
-    static func create(title: String, emoji: String, index: Int, ofMainList mainList: MainList) {
-        let createdSubList = SubList(context: PersistenceService.context)
+@objc(SubListEntity)
+public class SubListEntity: NSManagedObject {
+    static func create(title: String, emoji: String, index: Int, ofMainList mainList: MainListEntity) {
+        let createdSubList = SubListEntity(context: PersistenceService.context)
         createdSubList.title = title
         createdSubList.emoji = emoji
         createdSubList.index = Int64(index)
@@ -48,7 +41,7 @@ public class SubList: NSManagedObject {
         PersistenceService.saveContext()
     }
     
-    var itemsArray: [Item] {
+    var itemsArray: [ItemEntity] {
         return items!.toArray().sorted(by: {$0.index < $1.index})
     }
     
@@ -61,9 +54,4 @@ public class SubList: NSManagedObject {
         
         return .init(storageID: id, title: title!, emoji: emoji, index: Int(index))
     }
-    
 }
-
-
-
-

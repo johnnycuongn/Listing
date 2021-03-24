@@ -70,7 +70,7 @@ class ItemsViewController: UIViewController {
     var isAddButtonTapped: Bool = false
     
     var deletedItemIndex: IndexPath?
-    var deletedItem: Item?
+    var deletedItem: ItemEntity?
     var deleteFromDatabase: Bool = false
     
     /// - Item's Page View Model
@@ -100,9 +100,6 @@ class ItemsViewController: UIViewController {
     }
     
     var currentSubList: DomainSubList {
-        if pageViewModel.subLists.value.count == 0 {
-            pageViewModel.addSubList(title: "Empty List", emoji: "📝")
-        }
         return pageViewModel.subLists.value[subListCurrentIndex]
     }
     

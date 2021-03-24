@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19G2021" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Item" representedClassName="Item" syncable="YES">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20D91" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ItemEntity" representedClassName="ItemEntity" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isCompleted" optional="YES" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="ofSubList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubList" inverseName="items" inverseEntity="SubList"/>
+        <relationship name="ofSubList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SubListEntity" inverseName="items" inverseEntity="SubListEntity"/>
     </entity>
-    <entity name="MainList" representedClassName="MainList" syncable="YES">
+    <entity name="MainListEntity" representedClassName="MainListEntity" syncable="YES">
         <attribute name="emoji" optional="YES" attributeType="String"/>
         <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="subLists" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SubList" inverseName="ofMainList" inverseEntity="SubList"/>
+        <relationship name="subLists" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="SubListEntity" inverseName="ofMainList" inverseEntity="SubListEntity"/>
     </entity>
-    <entity name="SubList" representedClassName="SubList" syncable="YES">
+    <entity name="SubListEntity" representedClassName="SubListEntity" syncable="YES">
         <attribute name="emoji" optional="YES" attributeType="String"/>
         <attribute name="index" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Item" inverseName="ofSubList" inverseEntity="Item"/>
-        <relationship name="ofMainList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainList" inverseName="subLists" inverseEntity="MainList"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ItemEntity" inverseName="ofSubList" inverseEntity="ItemEntity"/>
+        <relationship name="ofMainList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MainListEntity" inverseName="subLists" inverseEntity="MainListEntity"/>
     </entity>
     <elements>
-        <element name="Item" positionX="-36" positionY="9" width="128" height="103"/>
-        <element name="MainList" positionX="-63" positionY="-18" width="128" height="103"/>
-        <element name="SubList" positionX="-54" positionY="-9" width="128" height="118"/>
+        <element name="ItemEntity" positionX="160" positionY="192" width="128" height="89"/>
+        <element name="MainListEntity" positionX="160" positionY="192" width="128" height="89"/>
+        <element name="SubListEntity" positionX="160" positionY="192" width="128" height="104"/>
     </elements>
 </model>
