@@ -33,7 +33,6 @@ extension ItemsViewController {
         itemsTableViewDataService.tableView = itemsTableView
          
         // Delegation
-        itemsTableViewDataService.pullDownService = self
-        itemsTableViewDataService.actionSheet = self
+        itemsTableViewDataService.delegate = self
     }
 }

@@ -43,7 +43,7 @@ extension ItemsViewController: ListUpdatable {
        
 }
 
-extension ItemsViewController: PullDownToAddable {
+extension ItemsViewController: ItemsTableViewDelegate {
     func isTablePullDowned(_ value: Bool) {
              if value == true {
                  if itemsTableView.contentOffset.y < -40 && !isKeyboardShowing {
@@ -51,9 +51,7 @@ extension ItemsViewController: PullDownToAddable {
                  }
              }
          }
-}
 
-extension ItemsViewController: DataServiceActionSheetDelegate {
     func deleteAction(for indexPath: IndexPath) {
         // Reason: Animation might appear too fast
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {

@@ -12,16 +12,24 @@ public protocol PullDownToAddable {
     func isTablePullDowned(_ value: Bool)
 }
 
-protocol DataServiceActionSheetDelegate {
+public protocol DataServiceActionSheetDelegate {
     func deleteAction(for indexPath: IndexPath)
 }
+
+public protocol ItemsTableViewDelegate: PullDownToAddable, DataServiceActionSheetDelegate {}
 
 class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
     var tableView: UITableView!
+    
+    var delegate: ItemsTableViewDelegate!
 
-    var pullDownService: PullDownToAddable!
-    var actionSheet: DataServiceActionSheetDelegate!
+    fileprivate var pullDownService: PullDownToAddable {
+        return delegate
+    }
+    fileprivate var actionSheet: DataServiceActionSheetDelegate {
+        return delegate
+    }
     
     var itemViewModel: ItemListViewModel!
 
