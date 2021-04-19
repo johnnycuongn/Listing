@@ -201,7 +201,7 @@ class ItemsViewController: UIViewController {
     
     // MARK: Model Update
     func addNewItem(from textView: UITextView) throws {
-        guard textView.text != "" else {
+        guard textView.text != "Enter your item" && textView.textColor != UIColor.lightGray else {
             throw ListVCError.emptyText
         }
         
@@ -213,7 +213,7 @@ class ItemsViewController: UIViewController {
     }
     
     func updateItem(from textView: UITextView, at index: Int) throws {
-        guard textView.text != "" else {
+        guard textView.text != "Enter your item" && textView.textColor != UIColor.lightGray else {
             throw ListVCError.emptyText
         }
         
