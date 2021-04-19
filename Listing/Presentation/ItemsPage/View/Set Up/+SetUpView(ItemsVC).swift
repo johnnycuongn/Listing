@@ -47,6 +47,8 @@ extension ItemsViewController {
                                         width: UIScreen.main.bounds.width,
                                         height: 45)
         
+        inputItemToolbar.backgroundColor = view.backgroundColor
+        
         toolbarAddButton.layer.cornerRadius = 7
         toolbarAddButton.isHidden = false
         toolbarAddButton.backgroundColor = AssetsColor.addSub
