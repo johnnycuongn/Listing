@@ -26,7 +26,7 @@ extension ItemsViewController: ListUpdatable {
     }
        
     func addNewList() {
-        isCreatingList = true
+        controllerState.isCreatingList = true
 
         pageViewModel.addSubList(title: "New List", emoji: "📝")
 
@@ -46,7 +46,7 @@ extension ItemsViewController: ListUpdatable {
 extension ItemsViewController: ItemsTableViewDelegate {
     func isTablePullDowned(_ value: Bool) {
              if value == true {
-                 if itemsTableView.contentOffset.y < -40 && !isKeyboardShowing {
+                if itemsTableView.contentOffset.y < -40 && !controllerState.isKeyboardShowing {
                      self.addButtonTapped(addButton)
                  }
              }
@@ -89,5 +89,19 @@ extension ItemsViewController: ItemsTableViewDelegate {
         present(actionSheet, animated: true, completion: nil)
     }
     
+    func editItem(at index: Int) {
+        inputItemTextView.text = pageViewModel.items.value[index].title
+        resetInputTextView(isEditing: true)
+        
+        controllerState.isUpdatingItem = (true, index)
+        
+        inputItemToolbar.isHidden = false
+        
+        inputItemTextView.becomeFirstResponder()
+        controllerState.isKeyboardShowing = true
+        
+        
+       
+    }
     
 }

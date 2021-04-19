@@ -27,7 +27,7 @@ extension ItemsViewController: UITextViewDelegate {
                     // When user tapped done (no text)
                     if (text == "\n") && textView.text == "\n" {
                         textView.resignFirstResponder()
-                        isKeyboardShowing = false
+                        controllerState.isKeyboardShowing = false
                         
                         return false
                     }
@@ -38,7 +38,13 @@ extension ItemsViewController: UITextViewDelegate {
             else {
                 if text == "\n" && textView.text != "" {
                     do {
-                        try addNewItem(from: textView)
+                        if controllerState.isUpdatingItem.value {
+                            try updateItem(from: inputItemTextView, at: controllerState.isUpdatingItem.index)
+                            controllerState.isUpdatingItem = (false, -1)
+                        }
+                        else {
+                            try addNewItem(from: inputItemTextView)
+                        }
                             resetInputTextView()
                     } catch {
                     }
@@ -55,17 +61,31 @@ extension ItemsViewController: UITextViewDelegate {
                 textView.selectedTextRange = textView.textRange(
                     from: textView.beginningOfDocument,
                     to: textView.beginningOfDocument)
+        } else {
+            textView.selectedTextRange = textView.textRange(
+                from: textView.endOfDocument,
+                to: textView.endOfDocument)
         }
     }
     
-    func resetInputTextView() {
-        // Set placeholder
-        inputItemTextView.text = "Enter your item"
-        inputItemTextView.textColor = UIColor.lightGray
+    func resetInputTextView(isEditing: Bool = false) {
+        if isEditing {
+            // Set for editting item
+            inputItemTextView.textColor = UIColor.white
+            inputItemTextView.selectedTextRange = inputItemTextView.textRange(
+                from: inputItemTextView.endOfDocument,
+                to: inputItemTextView.endOfDocument)
+        } else {
+            // Set placeholder
+            inputItemTextView.text = "Enter your item"
+            inputItemTextView.textColor = UIColor.lightGray
+            
+            inputItemTextView.selectedTextRange = inputItemTextView.textRange(
+                from: inputItemTextView.beginningOfDocument,
+                to: inputItemTextView.beginningOfDocument)
+        }
     
-        inputItemTextView.selectedTextRange = inputItemTextView.textRange(
-            from: inputItemTextView.beginningOfDocument,
-            to: inputItemTextView.beginningOfDocument)
+        
         
         // Set keyboard attributes
         inputItemTextView.returnKeyType = .done

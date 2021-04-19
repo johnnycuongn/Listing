@@ -64,14 +64,15 @@ class ItemsViewController: UIViewController {
     
     /// - Model Variables
     
-    var isCreatingList: Bool = false
-    var isKeyboardShowing: Bool = false
-    
-    var isAddButtonTapped: Bool = false
-    
-    var deletedItemIndex: IndexPath?
-    var deletedItem: ItemEntity?
-    var deleteFromDatabase: Bool = false
+    class State {
+         var isCreatingList: Bool = false
+        
+         var isKeyboardShowing: Bool = false
+         var isAddButtonTapped: Bool = false
+        
+         var isUpdatingItem: (value: Bool, index: Int) = (false, -1)
+    }
+    var controllerState = State()
     
     /// - Item's Page View Model
     lazy var pageViewModel: ItemPageViewModel = DefaultItemPageViewModel(masterListID: masterListID)
@@ -165,13 +166,13 @@ class ItemsViewController: UIViewController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
     
-        if isAddButtonTapped, let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+        if controllerState.isAddButtonTapped || controllerState.isUpdatingItem.value, let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
-            inputItemToolbar.frame.origin.y -= keyboardHeight + inputItemToolbar.frame.height
+                inputItemToolbar.frame.origin.y -= keyboardHeight + inputItemToolbar.frame.height
             
-            isAddButtonTapped = false
+            controllerState.isAddButtonTapped = false
         }
     }
     
@@ -207,6 +208,17 @@ class ItemsViewController: UIViewController {
         itemsTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .top)
         
         
+    }
+    
+    func updateItem(from textView: UITextView, at index: Int) throws {
+        guard textView.text != "" else {
+            throw ListVCError.emptyText
+        }
+        
+        pageViewModel.deleteItem(at: index)
+        pageViewModel.insertItem(textView.text!, at: index)
+        
+        itemsTableView.reloadData()
     }
     
     // MARK: View Update

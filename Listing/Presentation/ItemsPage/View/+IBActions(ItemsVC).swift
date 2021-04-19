@@ -25,12 +25,12 @@ extension ItemsViewController {
         
         resetInputTextView()
         
-        isAddButtonTapped = true
+        controllerState.isAddButtonTapped = true
         
         inputItemToolbar.isHidden = false
         
         inputItemTextView.becomeFirstResponder()
-        isKeyboardShowing = true
+        controllerState.isKeyboardShowing = true
     }
     
     @IBAction func navigateBackToMain(_ sender: UIButton) {
@@ -39,14 +39,21 @@ extension ItemsViewController {
     
     // MARK: Input item Toolbar
     @IBAction func closeItemInputView(_ sender: Any) {
-        isKeyboardShowing = false
+        controllerState.isKeyboardShowing = false
+        controllerState.isUpdatingItem = (false, -1)
         
         inputItemTextView.resignFirstResponder()
     }
     
     @IBAction func toolbarAddButtonTapped(_ sender: UIButton) {
         do {
-            try addNewItem(from: inputItemTextView)
+            if controllerState.isUpdatingItem.value {
+                try updateItem(from: inputItemTextView, at: controllerState.isUpdatingItem.index)
+                controllerState.isUpdatingItem = (false, -1)
+            }
+            else {
+                try addNewItem(from: inputItemTextView)
+            }
                 resetInputTextView()
         } catch {
         }

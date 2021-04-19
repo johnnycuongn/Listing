@@ -16,7 +16,11 @@ public protocol DataServiceActionSheetDelegate {
     func deleteAction(for indexPath: IndexPath)
 }
 
-public protocol ItemsTableViewDelegate: PullDownToAddable, DataServiceActionSheetDelegate {}
+public protocol ItemsTableViewDelegate: PullDownToAddable, DataServiceActionSheetDelegate {
+    
+    func editItem(at index: Int)
+    
+}
 
 class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDelegate {
     
@@ -70,6 +74,7 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        delegate.editItem(at: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

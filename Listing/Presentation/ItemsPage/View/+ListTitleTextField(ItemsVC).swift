@@ -13,7 +13,7 @@ extension ItemsViewController: UITextFieldDelegate {
     
     @IBAction func textFieldEdittingDidBegin(_ sender: UITextField) {
         if sender == listTitleTextField {
-            isKeyboardShowing = true
+            controllerState.isKeyboardShowing = true
             listTitleTextField.returnKeyType = .default
         }
     }
@@ -37,7 +37,7 @@ extension ItemsViewController: UITextFieldDelegate {
             
             listsThumbnailCollectionViewDataUpdate()
             
-            if isCreatingList == true {
+            if controllerState.isCreatingList == true {
                 
                  var layout: UICollectionViewFlowLayout {
                        return self.listsThumbnailCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
@@ -46,8 +46,8 @@ extension ItemsViewController: UITextFieldDelegate {
                 listsThumbnailCollectionView.contentOffset.x = listsThumbnailCollectionView.frame.size.height*CGFloat(pageViewModel.subLists.value.count-1)+layout.minimumLineSpacing*CGFloat(pageViewModel.subLists.value.count-1)
             }
             
-            isCreatingList = false
-            isKeyboardShowing = false
+            controllerState.isCreatingList = false
+            controllerState.isKeyboardShowing = false
             textField.resignFirstResponder()
         }
         
