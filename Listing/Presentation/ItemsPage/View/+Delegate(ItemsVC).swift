@@ -97,7 +97,20 @@ extension ItemsViewController: ItemsTableViewDelegate {
         
         inputItemToolbar.isHidden = false
         
+        // If selecting multiple item while presenting keyboard
+        // This will prevent executing becomeFirstResponder() multiple time
         if !inputItemTextView.isFirstResponder {
+            
+            // Resign titleTextField First Responder if it's currently assigned
+            if listTitleTextField.isFirstResponder {
+                setHidden(listTitleTextField: true)
+                let subList = pageViewModel.subLists.value[subListCurrentIndex]
+                listTitleViewUpdate(emoji: subList.emoji, title: subList.title)
+                
+                controllerState.isCreatingList = false
+                listTitleTextField.resignFirstResponder()
+            }
+            
             inputItemTextView.becomeFirstResponder()
         }
        

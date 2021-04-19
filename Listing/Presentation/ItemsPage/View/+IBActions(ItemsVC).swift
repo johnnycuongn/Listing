@@ -17,6 +17,13 @@ extension ItemsViewController {
         
         listTitleButton.setTitle("", for: .normal)
         
+        // Resign ItemTextView First Responder if it's currently assigned
+        if inputItemTextView.isFirstResponder {
+            controllerState.isAddButtonTapped = false
+            controllerState.isEditingItem.value = false
+            inputItemTextView.resignFirstResponder()
+        }
+        
         listTitleTextField.becomeFirstResponder()
         listTitleTextField.returnKeyType = .default
     }
