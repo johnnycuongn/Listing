@@ -38,9 +38,9 @@ extension ItemsViewController: UITextViewDelegate {
             else {
                 if text == "\n" && textView.text != "" {
                     do {
-                        if controllerState.isUpdatingItem.value {
-                            try updateItem(from: inputItemTextView, at: controllerState.isUpdatingItem.index)
-                            controllerState.isUpdatingItem = (false, -1)
+                        if controllerState.isEditingItem.value {
+                            try updateItem(from: inputItemTextView, at: controllerState.isEditingItem.index)
+                            controllerState.isEditingItem = (false, -1)
                         }
                         else {
                             try addNewItem(from: inputItemTextView)

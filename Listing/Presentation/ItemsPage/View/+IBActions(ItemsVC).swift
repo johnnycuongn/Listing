@@ -39,17 +39,16 @@ extension ItemsViewController {
     
     // MARK: Input item Toolbar
     @IBAction func closeItemInputView(_ sender: Any) {
-        controllerState.isKeyboardShowing = false
-        controllerState.isUpdatingItem = (false, -1)
+        controllerState.isEditingItem = (false, -1)
         
         inputItemTextView.resignFirstResponder()
     }
     
     @IBAction func toolbarAddButtonTapped(_ sender: UIButton) {
         do {
-            if controllerState.isUpdatingItem.value {
-                try updateItem(from: inputItemTextView, at: controllerState.isUpdatingItem.index)
-                controllerState.isUpdatingItem = (false, -1)
+            if controllerState.isEditingItem.value {
+                try updateItem(from: inputItemTextView, at: controllerState.isEditingItem.index)
+                controllerState.isEditingItem = (false, -1)
             }
             else {
                 try addNewItem(from: inputItemTextView)

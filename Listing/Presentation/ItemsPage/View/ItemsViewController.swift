@@ -70,7 +70,7 @@ class ItemsViewController: UIViewController {
          var isKeyboardShowing: Bool = false
          var isAddButtonTapped: Bool = false
         
-         var isUpdatingItem: (value: Bool, index: Int) = (false, -1)
+         var isEditingItem: (value: Bool, index: Int) = (false, -1)
     }
     var controllerState = State()
     
@@ -166,18 +166,20 @@ class ItemsViewController: UIViewController {
     
     @objc func keyboardWillShow(_ notification: Notification) {
     
-        if controllerState.isAddButtonTapped || controllerState.isUpdatingItem.value, let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+        if controllerState.isAddButtonTapped || controllerState.isEditingItem.value, let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
-                inputItemToolbar.frame.origin.y -= keyboardHeight + inputItemToolbar.frame.height
+                inputItemToolbar.frame.origin.y = UIScreen.main.bounds.height - (keyboardHeight + inputItemToolbar.frame.height)
             
             controllerState.isAddButtonTapped = false
+            controllerState.isKeyboardShowing = true
         }
     }
     
     @objc func keyboardWillHide(_ notification: Notification) {
         inputItemToolbar.frame.origin.y = UIScreen.main.bounds.height
+        controllerState.isKeyboardShowing = false
     }
         
     // MARK: - Helper Methods

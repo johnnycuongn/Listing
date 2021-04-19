@@ -93,14 +93,13 @@ extension ItemsViewController: ItemsTableViewDelegate {
         inputItemTextView.text = pageViewModel.items.value[index].title
         resetInputTextView(isEditing: true)
         
-        controllerState.isUpdatingItem = (true, index)
+        controllerState.isEditingItem = (true, index)
         
         inputItemToolbar.isHidden = false
         
-        inputItemTextView.becomeFirstResponder()
-        controllerState.isKeyboardShowing = true
-        
-        
+        if !inputItemTextView.isFirstResponder {
+            inputItemTextView.becomeFirstResponder()
+        }
        
     }
     
