@@ -33,9 +33,9 @@ extension ItemsViewController: UITextFieldDelegate {
             pageViewModel.updateSublist(title: listTitleTextField.text!, at: subListCurrentIndex)
             
             listTitleViewUpdate(title: listTitleTextField.text)
-            setHidden(listTitleTextField: true)
+            editSubListTitle(false)
             
-            listsThumbnailCollectionViewDataUpdate()
+            listsThumbnailCollectionView.reloadData()
             
             if controllerState.isCreatingList == true {
                 

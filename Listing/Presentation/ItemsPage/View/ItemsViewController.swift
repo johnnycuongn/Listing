@@ -68,7 +68,6 @@ class ItemsViewController: UIViewController {
          var isCreatingList: Bool = false
         
          var isKeyboardShowing: Bool = false
-         var isAddButtonTapped: Bool = false
         
          var isEditingItem: (value: Bool, index: Int) = (false, -1)
     }
@@ -150,6 +149,7 @@ class ItemsViewController: UIViewController {
     
     }
     
+    // MARK: - View Model
     private func bind(to viewModel: ItemPageViewModel) {
         viewModel.items.observe(on: self) { [weak self] (_) in
             DispatchQueue.main.async {
@@ -164,15 +164,15 @@ class ItemsViewController: UIViewController {
         }
     }
     
+    // MARK: - Keyboard Methods
     @objc func keyboardWillShow(_ notification: Notification) {
     
-        if controllerState.isAddButtonTapped || controllerState.isEditingItem.value, let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
                 inputItemToolbar.frame.origin.y = UIScreen.main.bounds.height - (keyboardHeight + inputItemToolbar.frame.height)
             
-            controllerState.isAddButtonTapped = false
             controllerState.isKeyboardShowing = true
         }
     }
@@ -181,25 +181,10 @@ class ItemsViewController: UIViewController {
         inputItemToolbar.frame.origin.y = UIScreen.main.bounds.height
         controllerState.isKeyboardShowing = false
     }
-        
-    // MARK: - Helper Methods
-    
-    // MARK: Reload Index
-    func listsThumbnailCollectionViewDataUpdate() {
-          
-           listsThumbnailCollectionView.reloadData()
-       }
-       
-       func listTableViewDataUpdate() {
-//            itemsTableViewDataService.listIndex = self.listIndex
-    
-            DispatchQueue.main.async {
-                self.itemsTableView.reloadData()
-            }
-           
-       }
     
     // MARK: Model Update
+    
+    /// Add new item taken from textView to database
     func addNewItem(from textView: UITextView) throws {
         guard textView.text != "Enter your item" && textView.textColor != UIColor.lightGray else {
             throw ListVCError.emptyText
@@ -212,6 +197,9 @@ class ItemsViewController: UIViewController {
         
     }
     
+    /// Update/Edit item taken from Text View
+    /// - Parameter index: Position of item that needs update
+    /// - Throws: Text View Error
     func updateItem(from textView: UITextView, at index: Int) throws {
         guard textView.text != "Enter your item" && textView.textColor != UIColor.lightGray else {
             throw ListVCError.emptyText
@@ -222,6 +210,7 @@ class ItemsViewController: UIViewController {
         
         itemsTableView.reloadData()
     }
+    
     
     // MARK: View Update
 
@@ -235,9 +224,10 @@ class ItemsViewController: UIViewController {
 
     }
     
-    func setHidden(listTitleTextField: Bool) {
-        self.listTitleButton.isHidden = !listTitleTextField
-            self.listTitleTextField.isHidden = listTitleTextField
+    /// Turn sublist title into a textfield for editing
+    func editSubListTitle(_ value: Bool) {
+        self.listTitleButton.isHidden = value
+        self.listTitleTextField.isHidden = !value
     }
 
 

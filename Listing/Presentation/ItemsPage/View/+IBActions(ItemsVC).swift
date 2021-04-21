@@ -13,13 +13,12 @@ extension ItemsViewController {
     // MARK: Main
     @IBAction func listTitleButtonTapped(_ sender: Any) {
         listTitleTextField.text = listTitleButton.titleLabel!.text
-        setHidden(listTitleTextField: false)
+        editSubListTitle(true)
         
         listTitleButton.setTitle("", for: .normal)
         
         // Resign ItemTextView First Responder if it's currently assigned
         if inputItemTextView.isFirstResponder {
-            controllerState.isAddButtonTapped = false
             controllerState.isEditingItem.value = false
             inputItemTextView.resignFirstResponder()
         }
@@ -31,8 +30,6 @@ extension ItemsViewController {
     @IBAction func addButtonTapped(_ sender: UIButton) {
         
         resetInputTextView()
-        
-        controllerState.isAddButtonTapped = true
         
         inputItemToolbar.isHidden = false
         

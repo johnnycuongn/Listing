@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 extension ItemsViewController: ListUpdatable {
+    
+    /// Update corresponding sublist based on scrolling offset
+    /// - Parameter offset: Sublist's collection view offset
     func updateList(from offset: Double) {
            
         let cellWidth = Double(listsThumbnailWidth + listsThumbnailCollectionViewLayout.minimumLineSpacing)
@@ -28,14 +31,14 @@ extension ItemsViewController: ListUpdatable {
     func addNewList() {
         controllerState.isCreatingList = true
 
-        pageViewModel.addSubList(title: "New List", emoji: "📝")
+        pageViewModel.addSubList(title: "Untitled", emoji: "📝")
 
         self.subListCurrentIndex = pageViewModel.subLists.value.count-1
            
            listTitleTextField.text = ""
            listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
 
-           setHidden(listTitleTextField: false)
+           editSubListTitle(true)
 
            listTitleTextField.becomeFirstResponder()
            listTitleTextField.returnKeyType = .default
@@ -91,7 +94,10 @@ extension ItemsViewController: ItemsTableViewDelegate {
     
     func editItem(at index: Int) {
         inputItemTextView.text = pageViewModel.items.value[index].title
-        resetInputTextView(isEditing: true)
+        inputItemTextView.textColor = UIColor.white
+        inputItemTextView.selectedTextRange = inputItemTextView.textRange(
+            from: inputItemTextView.endOfDocument,
+            to: inputItemTextView.endOfDocument)
         
         controllerState.isEditingItem = (true, index)
         
@@ -103,7 +109,7 @@ extension ItemsViewController: ItemsTableViewDelegate {
             
             // Resign titleTextField First Responder if it's currently assigned
             if listTitleTextField.isFirstResponder {
-                setHidden(listTitleTextField: true)
+                editSubListTitle(false)
                 let subList = pageViewModel.subLists.value[subListCurrentIndex]
                 listTitleViewUpdate(emoji: subList.emoji, title: subList.title)
                 

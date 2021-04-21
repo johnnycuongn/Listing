@@ -19,8 +19,9 @@ extension ItemsViewController: UITextViewDelegate {
             if updatedText.isEmpty {
                 resetInputTextView()
             }
-        // When user start to type
-             else if textView.textColor == UIColor.lightGray && !text.isEmpty {
+            
+            // When user start to type
+            else if textView.textColor == UIColor.lightGray && !text.isEmpty {
                 
                 textView.textColor = UIColor.white
                 textView.text = text
@@ -34,20 +35,13 @@ extension ItemsViewController: UITextViewDelegate {
                 textView.returnKeyType = .default
                 textView.reloadInputViews()
             }
-                
+            // When user have typed texts and enter
             else {
                 if text == "\n" && textView.text != "" {
-                    do {
-                        if controllerState.isEditingItem.value {
-                            try updateItem(from: inputItemTextView, at: controllerState.isEditingItem.index)
-                            controllerState.isEditingItem = (false, -1)
-                        }
-                        else {
-                            try addNewItem(from: inputItemTextView)
-                        }
-                            resetInputTextView()
-                    } catch {
-                    }
+                    
+                    /// Same operation
+                    toolbarAddButtonTapped(self.addButton)
+                    
                     return false
                 }
                 return true
@@ -68,24 +62,17 @@ extension ItemsViewController: UITextViewDelegate {
         }
     }
     
-    func resetInputTextView(isEditing: Bool = false) {
-        if isEditing {
-            // Set for editting item
-            inputItemTextView.textColor = UIColor.white
-            inputItemTextView.selectedTextRange = inputItemTextView.textRange(
-                from: inputItemTextView.endOfDocument,
-                to: inputItemTextView.endOfDocument)
-        } else {
-            // Set placeholder
-            inputItemTextView.text = "Enter your item"
-            inputItemTextView.textColor = UIColor.lightGray
+    /// Put input item text view to placeholder state
+    func resetInputTextView() {
+        
+        // Set placeholder
+        inputItemTextView.text = "Enter your item"
+        inputItemTextView.textColor = UIColor.lightGray
             
-            inputItemTextView.selectedTextRange = inputItemTextView.textRange(
+        inputItemTextView.selectedTextRange = inputItemTextView.textRange(
                 from: inputItemTextView.beginningOfDocument,
                 to: inputItemTextView.beginningOfDocument)
-        }
     
-        
         
         // Set keyboard attributes
         inputItemTextView.returnKeyType = .done
