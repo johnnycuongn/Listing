@@ -49,9 +49,15 @@ class DefaultMasterListPageViewModel: MasterListPageViewModel {
     }
     
     func addMasterList(title: String) {
-        useCase.addMasterList(title: title)
+        useCase.addMasterList(title: title) { [weak self] error in
+            guard error != nil else {
+                return
+            }
+            
+            self?.loadMasterList()
+        }
         
-        loadMasterList()
+        
     }
     
     func moveMasterList(from startIndex: Int, to endIndex: Int) {

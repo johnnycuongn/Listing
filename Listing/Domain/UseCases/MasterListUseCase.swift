@@ -12,7 +12,7 @@ protocol MasterListUseCase {
     
     func loadMasterList(completion: @escaping (Result<[DomainMasterList], Error>) -> Void)
     
-    func addMasterList(title: String)
+    func addMasterList(title: String, completion: @escaping (Error?) -> Void)
     func deleteMasterList(at pos: Int)
     
     func moveMasterList(from startPos: Int, to endPos: Int)
@@ -22,6 +22,7 @@ protocol MasterListUseCase {
 class DefaultMasterListUseCase: MasterListUseCase {
     
     private var repository: MasterListRepository
+    private var sublistRepository: SubListRepository?
     
     init(repository: MasterListRepository = MasterListCoreDataRepository()) {
         self.repository = repository
@@ -38,9 +39,29 @@ class DefaultMasterListUseCase: MasterListUseCase {
         }
     }
     
-    func addMasterList(title: String) {
+    func addMasterList(title: String, completion: @escaping (Error?) -> Void) {
         
         repository.addMasterList(title: title, emoji: nil)
+        
+        loadMasterList { [weak self] (result) in
+            switch result {
+            case .success(let domainMasterList):
+                let addedList = domainMasterList[domainMasterList.count-1]
+    
+                self?.sublistRepository = SubListCoreDataRepository(masterListID: addedList.storageID)
+                
+                guard let sublistRepository = self?.sublistRepository else {
+                    // Error Handling
+                    return
+                }
+                
+                sublistRepository.addSubList(title: "Untitled", emoji: "📄")
+                
+                completion(nil)
+            case .failure(let error):
+                completion(error)
+            }
+        }
         
     }
     
