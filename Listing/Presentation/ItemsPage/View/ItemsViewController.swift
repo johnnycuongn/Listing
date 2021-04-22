@@ -89,12 +89,12 @@ class ItemsViewController: UIViewController {
                 if subListCurrentIndex != oldValue {
                     
                     let subList = pageViewModel.subLists.value[subListCurrentIndex]
-                    listTitleViewUpdate(emoji: subList.emoji, title: subList.title)
+                    setSubListView(emoji: subList.emoji, title: subList.title)
                 }
             }
             else {
                 let subList = pageViewModel.subLists.value[subListCurrentIndex]
-                listTitleViewUpdate(emoji: subList.emoji, title: subList.title)
+                setSubListView(emoji: subList.emoji, title: subList.title)
             }
         }
     }
@@ -166,8 +166,8 @@ class ItemsViewController: UIViewController {
     
     // MARK: - Keyboard Methods
     @objc func keyboardWillShow(_ notification: Notification) {
-    
-        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+        if controllerState.isEditingItem.value || addButton.isTouchInside,
+           let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
             
@@ -214,7 +214,7 @@ class ItemsViewController: UIViewController {
     
     // MARK: View Update
 
-    func listTitleViewUpdate(emoji: String? = nil, title: String? = nil) {
+    func setSubListView(emoji: String? = nil, title: String? = nil) {
         if emoji != nil {
             emojiButton.setTitle(emoji, for: .normal) }
         if title != nil {
@@ -224,7 +224,8 @@ class ItemsViewController: UIViewController {
 
     }
     
-    /// Turn sublist title into a textfield for editing
+    /// - **True:** Turn sublist title into a textfield for editing
+    /// - **False:** Turn sublist title back into button
     func editSubListTitle(_ value: Bool) {
         self.listTitleButton.isHidden = value
         self.listTitleTextField.isHidden = !value

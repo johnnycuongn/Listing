@@ -26,13 +26,13 @@ extension ItemsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == listTitleTextField {
             guard listTitleTextField.text != "" else {
-                listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Enter your title", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+                listTitleTextField.attributedPlaceholder = NSAttributedString(string: "Untitled", attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
                 return false
             }
             
             pageViewModel.updateSublist(title: listTitleTextField.text!, at: subListCurrentIndex)
             
-            listTitleViewUpdate(title: listTitleTextField.text)
+            setSubListView(title: listTitleTextField.text)
             editSubListTitle(false)
             
             listsThumbnailCollectionView.reloadData()

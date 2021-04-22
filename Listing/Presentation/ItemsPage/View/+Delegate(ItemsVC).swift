@@ -107,11 +107,11 @@ extension ItemsViewController: ItemsTableViewDelegate {
         // This will prevent executing becomeFirstResponder() multiple time
         if !inputItemTextView.isFirstResponder {
             
-            // Resign titleTextField First Responder if it's currently assigned
+            /// Resign Subllst Title TextField first responder if it's currently assigned
             if listTitleTextField.isFirstResponder {
                 editSubListTitle(false)
                 let subList = pageViewModel.subLists.value[subListCurrentIndex]
-                listTitleViewUpdate(emoji: subList.emoji, title: subList.title)
+                setSubListView(title: subList.title)
                 
                 controllerState.isCreatingList = false
                 listTitleTextField.resignFirstResponder()

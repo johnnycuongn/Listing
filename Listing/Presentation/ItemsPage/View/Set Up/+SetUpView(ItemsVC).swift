@@ -12,7 +12,7 @@ import UIKit
 extension ItemsViewController {
     
     func setUpView() {
-        listTitleViewUpdate(emoji: currentSubList.emoji, title: currentSubList.title)
+        setSubListView(emoji: currentSubList.emoji, title: currentSubList.title)
         
         // List Thumbnail Collection View
         setUpListThumbnailCollectionView()
