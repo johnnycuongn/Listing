@@ -90,14 +90,20 @@ class DefaultItemPageViewModel: ItemPageViewModel {
     
     func addSubList(title: String, emoji: String) {
         subListUseCase.addSubList(title: title, emoji: emoji)
+        
+        loadSubLists()
     }
     
     func deleteSubList(at pos: Int) {
         subListUseCase.deleteSubList(at: pos)
+        
+        loadSubLists()
     }
     
     func moveSubList(from startPos: Int, to endPos: Int) {
         subListUseCase.moveSubList(from: startPos, to: endPos)
+        
+        loadSubLists()
     }
     
     func updateSublist(title: String, at position: Int) {

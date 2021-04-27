@@ -137,17 +137,17 @@ final class SubListCoreDataRepository: SubListRepository {
     private func convertToMasterList(_ idString: String) -> MainListEntity? {
         
         guard let objectIDURL = URL(string: idString) else {
-            print("ConverToMasterList - Unable to convert to URL: \(idString)")
+            print("SubListCoreDataRepository: ConverToMasterList - Unable to convert to URL: \(idString)")
             return nil
         }
         
         guard let coordinatoor = PersistenceService.context.persistentStoreCoordinator else {
-            print("ConvertToMasterList - Unable to find coordinator in context")
+            print("SubListCoreDataRepository: ConvertToMasterList - Unable to find coordinator in context")
             return nil
         }
 
         guard let managedObjectID = coordinatoor.managedObjectID(forURIRepresentation: objectIDURL) else {
-            print("ConvertToMasterList - Unable to find objectID: \(idString)")
+            print("SubListCoreDataRepository: ConvertToMasterList - Unable to find objectID: \(idString)")
             return nil
         }
        
