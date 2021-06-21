@@ -46,6 +46,7 @@ extension ItemsViewController: ListUpdatable {
        
 }
 
+// MARK: Items Table View
 extension ItemsViewController: ItemsTableViewDelegate {
     func isTablePullDowned(_ value: Bool) {
              if value == true {
@@ -120,6 +121,22 @@ extension ItemsViewController: ItemsTableViewDelegate {
             inputItemTextView.becomeFirstResponder()
         }
        
+    }
+    
+    @objc func tableTapped(tap:UITapGestureRecognizer) {
+        let location = tap.location(in: self.itemsTableView)
+        let path = self.itemsTableView.indexPathForRow(at: location)
+        
+        // handle tap on empty space below existing rows however you want
+        if path == nil {
+            resetInputTextView()
+            
+            inputItemToolbar.isHidden = false
+            controllerState.isAddingItem = true
+            
+            inputItemTextView.becomeFirstResponder()
+            controllerState.isKeyboardShowing = true
+        }
     }
     
 }

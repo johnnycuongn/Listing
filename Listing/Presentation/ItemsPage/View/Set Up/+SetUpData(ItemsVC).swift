@@ -34,5 +34,11 @@ extension ItemsViewController {
          
         // Delegation
         itemsTableViewDataService.delegate = self
+        
+        // Recognizers
+        let tap = UITapGestureRecognizer(target: self, action: #selector(tableTapped))
+        
+        self.itemsTableView.backgroundView = UIView()
+        self.itemsTableView.backgroundView?.addGestureRecognizer(tap)
     }
 }

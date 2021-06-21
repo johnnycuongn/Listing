@@ -70,6 +70,7 @@ class ItemsViewController: UIViewController {
          var isKeyboardShowing: Bool = false
         
          var isEditingItem: (value: Bool, index: Int) = (false, -1)
+        var isAddingItem: Bool = false
     }
     var controllerState = State()
     
@@ -166,7 +167,7 @@ class ItemsViewController: UIViewController {
     
     // MARK: - Keyboard Methods
     @objc func keyboardWillShow(_ notification: Notification) {
-        if controllerState.isEditingItem.value || addButton.isTouchInside,
+        if controllerState.isEditingItem.value || controllerState.isAddingItem || addButton.isTouchInside,
            let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height
