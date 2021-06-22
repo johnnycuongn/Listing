@@ -48,13 +48,19 @@ extension ItemsViewController: ListUpdatable {
 
 // MARK: Items Table View
 extension ItemsViewController: ItemsTableViewDelegate {
-    func isTablePullDowned(_ value: Bool) {
-             if value == true {
-                if itemsTableView.contentOffset.y < -40 && !controllerState.isKeyboardShowing {
-                    self.activateItemInputToolbar(type: .addNewItem)
-                 }
-             }
-         }
+    func pullTable(_ value: Bool) {
+        if value == true {
+            let yOffset = itemsTableView.contentOffset.y
+            let tableHeight = itemsTableView.bounds.height
+            let contentHeight = itemsTableView.contentSize.height
+                
+            if  /* Pull up */ (yOffset < -40) ||
+                /* Pull down when n.o items are within 1 view */ (contentHeight < tableHeight && yOffset > 40) ||
+                /* Pull down when n.o items are large */ (contentHeight > tableHeight && (yOffset + tableHeight) - contentHeight > 40) {
+                self.activateItemInputToolbar(type: .addNewItem)
+            }
+        }
+    }
 
     func deleteAction(for indexPath: IndexPath) {
         // Reason: Animation might appear too fast

@@ -8,15 +8,15 @@
 
 import UIKit
 
-public protocol PullDownToAddable {
-    func isTablePullDowned(_ value: Bool)
+public protocol ScrollActionDelegate {
+    func pullTable(_ value: Bool)
 }
 
 public protocol DataServiceActionSheetDelegate {
     func deleteAction(for indexPath: IndexPath)
 }
 
-public protocol ItemsTableViewDelegate: PullDownToAddable, DataServiceActionSheetDelegate {
+public protocol ItemsTableViewDelegate: ScrollActionDelegate, DataServiceActionSheetDelegate {
     
     func editItem(at index: Int)
     
@@ -28,7 +28,7 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     
     var delegate: ItemsTableViewDelegate!
 
-    fileprivate var pullDownService: PullDownToAddable {
+    fileprivate var scollAction: ScrollActionDelegate {
         return delegate
     }
     fileprivate var actionSheet: DataServiceActionSheetDelegate {
@@ -95,7 +95,7 @@ class ItemsTableViewDataService: NSObject, UITableViewDataSource, UITableViewDel
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        pullDownService.isTablePullDowned(true)
+        scollAction.pullTable(true)
     }
 }
 
