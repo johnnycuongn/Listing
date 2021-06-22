@@ -252,6 +252,7 @@ class ItemsViewController: UIViewController {
         
         switch type {
             case .addNewItem:
+                resetInputTextView()
                 controllerState.isAddingItem = true
             case .updateCurrentItem(let index):
                 controllerState.isEditingItem = (true, index)

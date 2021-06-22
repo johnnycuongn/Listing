@@ -116,7 +116,6 @@ extension ItemsViewController: ItemsTableViewDelegate {
         
         // handle tap on empty space below existing rows however you want
         if path == nil {
-            resetInputTextView()
             activateItemInputToolbar(type: .addNewItem)
         }
     }
