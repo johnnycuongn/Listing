@@ -60,7 +60,6 @@ class ItemsViewController: UIViewController {
     
     
     /// - View's Buttons Outlets
-    @IBOutlet weak var addButton: UIButton!
     
     /// - Model Variables
     
@@ -173,7 +172,7 @@ class ItemsViewController: UIViewController {
     
     // MARK: - Keyboard Methods
     @objc func keyboardWillShow(_ notification: Notification) {
-        if controllerState.isEditingItem.value || controllerState.isAddingItem || addButton.isTouchInside,
+        if controllerState.isEditingItem.value || controllerState.isAddingItem,
            let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
             let keyboardRectangle = keyboardFrame.cgRectValue
             let keyboardHeight = keyboardRectangle.height

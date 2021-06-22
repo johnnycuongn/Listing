@@ -40,7 +40,7 @@ extension ItemsViewController: UITextViewDelegate {
                 if text == "\n" && textView.text != "" {
                     
                     /// Same operation
-                    toolbarAddButtonTapped(self.addButton)
+                    toolbarAddButtonTapped(self.toolbarAddButton)
                     
                     return false
                 }

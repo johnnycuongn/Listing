@@ -16,9 +16,6 @@ extension ItemsViewController {
         
         // List Thumbnail Collection View
         setUpListThumbnailCollectionView()
-        
-        // Add Button
-        addButton.layer.cornerRadius = addButton.frame.size.width / 2
            
         /// Item Input Itew
         
