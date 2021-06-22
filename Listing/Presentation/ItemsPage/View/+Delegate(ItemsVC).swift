@@ -51,7 +51,7 @@ extension ItemsViewController: ItemsTableViewDelegate {
     func isTablePullDowned(_ value: Bool) {
              if value == true {
                 if itemsTableView.contentOffset.y < -40 && !controllerState.isKeyboardShowing {
-                     self.addButtonTapped(addButton)
+                    self.activateItemInputToolbar(type: .addNewItem)
                  }
              }
          }
@@ -100,26 +100,7 @@ extension ItemsViewController: ItemsTableViewDelegate {
             from: inputItemTextView.endOfDocument,
             to: inputItemTextView.endOfDocument)
         
-        controllerState.isEditingItem = (true, index)
-        
-        inputItemToolbar.isHidden = false
-        
-        // If selecting multiple item while presenting keyboard
-        // This will prevent executing becomeFirstResponder() multiple time
-        if !inputItemTextView.isFirstResponder {
-            
-            /// Resign Subllst Title TextField first responder if it's currently assigned
-            if listTitleTextField.isFirstResponder {
-                editSubListTitle(false)
-                let subList = pageViewModel.subLists.value[subListCurrentIndex]
-                setSubListView(title: subList.title)
-                
-                controllerState.isCreatingList = false
-                listTitleTextField.resignFirstResponder()
-            }
-            
-            inputItemTextView.becomeFirstResponder()
-        }
+        activateItemInputToolbar(type: .updateCurrentItem(index: index))
        
     }
     
@@ -130,12 +111,7 @@ extension ItemsViewController: ItemsTableViewDelegate {
         // handle tap on empty space below existing rows however you want
         if path == nil {
             resetInputTextView()
-            
-            inputItemToolbar.isHidden = false
-            controllerState.isAddingItem = true
-            
-            inputItemTextView.becomeFirstResponder()
-            controllerState.isKeyboardShowing = true
+            activateItemInputToolbar(type: .addNewItem)
         }
     }
     

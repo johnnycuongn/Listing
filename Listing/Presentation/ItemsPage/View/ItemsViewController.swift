@@ -71,6 +71,12 @@ class ItemsViewController: UIViewController {
         
          var isEditingItem: (value: Bool, index: Int) = (false, -1)
         var isAddingItem: Bool = false
+        
+        /// Put item input states to false
+        func resetItemInput() {
+            isEditingItem = (false, -1)
+            isAddingItem = false
+        }
     }
     var controllerState = State()
     
@@ -231,7 +237,44 @@ class ItemsViewController: UIViewController {
         self.listTitleButton.isHidden = value
         self.listTitleTextField.isHidden = !value
     }
-
+    
+    
+    // MARK: Convenience
+    
+    enum ItemInputType {
+        case addNewItem
+        case updateCurrentItem(index: Int)
+    }
+    
+    func activateItemInputToolbar(type: ItemInputType) {
+        
+        inputItemToolbar.isHidden = false
+        
+        switch type {
+            case .addNewItem:
+                controllerState.isAddingItem = true
+            case .updateCurrentItem(let index):
+                controllerState.isEditingItem = (true, index)
+        }
+        
+        /// IF-CASE: user can select multiple item while presenting keyboard & resign other first responder
+        /// This will prevent executing becomeFirstResponder() multiple time
+        if !inputItemTextView.isFirstResponder {
+            /// Resign sublist's title textField first responder if it's currently assigned
+            if listTitleTextField.isFirstResponder {
+                editSubListTitle(false)
+                let subList = pageViewModel.subLists.value[subListCurrentIndex]
+                setSubListView(title: subList.title)
+                
+                controllerState.isCreatingList = false
+                listTitleTextField.resignFirstResponder()
+            }
+            
+            inputItemTextView.becomeFirstResponder()
+        }
+        
+        controllerState.isKeyboardShowing = true
+    }
 
 }
 

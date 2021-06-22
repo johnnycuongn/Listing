@@ -19,7 +19,7 @@ extension ItemsViewController {
         
         // Resign ItemTextView First Responder if it's currently assigned
         if inputItemTextView.isFirstResponder {
-            controllerState.isEditingItem.value = false
+            controllerState.resetItemInput()
             inputItemTextView.resignFirstResponder()
         }
         
@@ -43,7 +43,7 @@ extension ItemsViewController {
     
     // MARK: Input item Toolbar
     @IBAction func closeItemInputView(_ sender: Any) {
-        controllerState.isEditingItem = (false, -1)
+        controllerState.resetItemInput()
         
         inputItemTextView.resignFirstResponder()
     }
@@ -52,7 +52,7 @@ extension ItemsViewController {
         do {
             if controllerState.isEditingItem.value {
                 try updateItem(from: inputItemTextView, at: controllerState.isEditingItem.index)
-                controllerState.isEditingItem = (false, -1)
+                controllerState.resetItemInput()
             }
             else {
                 try addNewItem(from: inputItemTextView)
