@@ -37,6 +37,8 @@ class ItemsViewController: UIViewController {
     
     
     @IBOutlet weak var listIndicator: UILabel!
+    @IBOutlet weak var listIndicatorWidth: NSLayoutConstraint!
+    
     @IBOutlet weak var listsThumbnailCollectionView: UICollectionView!
     var listsThumbnailCollectionViewLayout: UICollectionViewFlowLayout {
         return listsThumbnailCollectionView.collectionViewLayout as! UICollectionViewFlowLayout

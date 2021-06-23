@@ -14,6 +14,9 @@ extension ItemsViewController {
     func setUpView() {
         setSubListView(emoji: currentSubList.emoji, title: currentSubList.title)
         
+        
+        listIndicatorWidth.constant = listsThumbnailWidth
+        
         // List Thumbnail Collection View
         setUpListThumbnailCollectionView()
            
