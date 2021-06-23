@@ -34,7 +34,7 @@ extension ItemsViewController {
         inputItemToolbar.isHidden = false
         
         inputItemTextView.becomeFirstResponder()
-        controllerState.isKeyboardShowing = true
+
     }
     
     @IBAction func navigateBackToMain(_ sender: UIButton) {

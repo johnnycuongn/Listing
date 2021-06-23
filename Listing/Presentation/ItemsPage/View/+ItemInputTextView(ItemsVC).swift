@@ -28,7 +28,6 @@ extension ItemsViewController: UITextViewDelegate {
                     // When user tapped done (no text)
                     if (text == "\n") && textView.text == "\n" {
                         textView.resignFirstResponder()
-                        controllerState.isKeyboardShowing = false
                         
                         return false
                     }

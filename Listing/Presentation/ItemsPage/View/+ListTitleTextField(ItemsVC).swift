@@ -13,7 +13,7 @@ extension ItemsViewController: UITextFieldDelegate {
     
     @IBAction func textFieldEdittingDidBegin(_ sender: UITextField) {
         if sender == listTitleTextField {
-            controllerState.isKeyboardShowing = true
+//            controllerState.isKeyboardShowing = true
             listTitleTextField.returnKeyType = .default
         }
     }
@@ -47,7 +47,7 @@ extension ItemsViewController: UITextFieldDelegate {
             }
             
             controllerState.isCreatingList = false
-            controllerState.isKeyboardShowing = false
+
             textField.resignFirstResponder()
         }
         
