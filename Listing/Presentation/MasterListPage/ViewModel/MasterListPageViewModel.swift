@@ -49,8 +49,8 @@ class DefaultMasterListPageViewModel: MasterListPageViewModel {
     }
     
     func addMasterList(title: String) {
-        useCase.addMasterList(title: title) { [weak self] error in
-            guard error == nil else {
+        useCase.addMasterList(title: title) { [weak self] success, error in
+            guard success, error == nil else {
                 return
             }
             
@@ -61,15 +61,23 @@ class DefaultMasterListPageViewModel: MasterListPageViewModel {
     }
     
     func moveMasterList(from startIndex: Int, to endIndex: Int) {
-        useCase.moveMasterList(from: startIndex, to: endIndex)
-        
-        loadMasterList()
+        useCase.moveMasterList(from: startIndex, to: endIndex) { [weak self] success, error in
+            guard success, error == nil else {
+                return
+            }
+            
+            self?.loadMasterList()
+        }
     }
     
     func removeMasterList(at index: Int) {
-        useCase.deleteMasterList(at: index)
-        
-        loadMasterList()
+        useCase.deleteMasterList(at: index){ [weak self] success, error in
+            guard success, error == nil else {
+                return
+            }
+            
+            self?.loadMasterList()
+        }
     }
     
     

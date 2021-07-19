@@ -12,10 +12,10 @@ protocol MasterListUseCase {
     
     func loadMasterList(completion: @escaping (Result<[DomainMasterList], Error>) -> Void)
     
-    func addMasterList(title: String, completion: @escaping (Error?) -> Void)
-    func deleteMasterList(at pos: Int)
+    func addMasterList(title: String, completion: @escaping (Bool, Error?) -> Void)
+    func deleteMasterList(at pos: Int, completion: @escaping (Bool, Error?) -> Void)
     
-    func moveMasterList(from startPos: Int, to endPos: Int)
+    func moveMasterList(from startPos: Int, to endPos: Int, completion: @escaping (Bool, Error?) -> Void)
     
 }
 
@@ -39,38 +39,68 @@ class DefaultMasterListUseCase: MasterListUseCase {
         }
     }
     
-    func addMasterList(title: String, completion: @escaping (Error?) -> Void) {
+    func addMasterList(title: String, completion: @escaping (Bool, Error?) -> Void) {
         
-        repository.addMasterList(title: title, emoji: nil)
-        
-        loadMasterList { [weak self] (result) in
-            switch result {
-            case .success(let domainMasterList):
-                let addedList = domainMasterList[domainMasterList.count-1]
-    
-                self?.sublistRepository = SubListCoreDataRepository(masterListID: addedList.storageID)
-                
-                guard let sublistRepository = self?.sublistRepository else {
-                    // Error Handling
-                    return
-                }
-                
-                sublistRepository.addSubList(title: "Untitled", emoji: "📄")
-                
-                completion(nil)
-            case .failure(let error):
-                completion(error)
+        repository.addMasterList(title: title, emoji: nil) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
             }
+            
+            self?.loadMasterList { [weak self] (result) in
+                switch result {
+                case .success(let domainMasterList):
+                    let addedList = domainMasterList[domainMasterList.count-1]
+        
+                    // FIXME: Data Module should not be in code of domain
+                    self?.sublistRepository = SubListCoreDataRepository(masterListID: addedList.storageID)
+                    
+                    guard let sublistRepository = self?.sublistRepository else {
+                        // Error Handling
+                        return
+                    }
+                    
+                    sublistRepository.addSubList(title: "Untitled", emoji: "📄")
+                    { [weak self] success, error in
+                        guard success, error == nil else {
+                            completion(false, error)
+                            return
+                        }
+                        
+                        completion(true, nil)
+                        
+                    }
+                case .failure(let error):
+                    completion(false, error)
+                }
+            }
+            
         }
         
     }
     
-    func deleteMasterList(at pos: Int) {
-        repository.deleteMasterList(at: pos)
+    func deleteMasterList(at pos: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.deleteMasterList(at: pos) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+            
+        }
     }
     
-    func moveMasterList(from startPos: Int, to endPos: Int) {
-        repository.moveMasterList(from: startPos, to: endPos)
+    func moveMasterList(from startPos: Int, to endPos: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.moveMasterList(from: startPos, to: endPos) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+            
+        }
     }
     
     

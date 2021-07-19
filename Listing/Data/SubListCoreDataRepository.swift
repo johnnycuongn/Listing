@@ -59,31 +59,34 @@ final class SubListCoreDataRepository: SubListRepository {
     
     // MARK: - ADD
     
-    func addSubList(title: String, emoji: String) {
+    func addSubList(title: String, emoji: String, completion: @escaping (Bool, Error?) -> Void) {
         guard let currentMasterList = self.currentMasterList else {
+            completion(false, nil)
             return
         }
         
         SubListEntity.create(title: title, emoji: emoji, index: subLists.count, ofMainList: currentMasterList)
+        completion(true, nil)
     }
     
     // MARK: - UPDATE
-    func updateSubList(title: String, at index: Int) {
+    func updateSubList(title: String, at index: Int, completion: @escaping (Bool, Error?) -> Void) {
         subLists[index].title = title
         
         PersistenceService.saveContext()
-        
+        completion(true, nil)
     }
     
-    func updateSubList(emoji: String, at index: Int) {
+    func updateSubList(emoji: String, at index: Int, completion: @escaping (Bool, Error?) -> Void) {
         subLists[index].emoji = emoji
         
         PersistenceService.saveContext()
+        completion(true, nil)
     }
     
     // MARK: - DELETE
     
-    func deleteSubList(at index: Int) {
+    func deleteSubList(at index: Int, completion: @escaping (Bool, Error?) -> Void) {
         // Identify removed Main List
         let removedSubList = self.subLists[index]
         // Update index for others
@@ -97,17 +100,19 @@ final class SubListCoreDataRepository: SubListRepository {
         }
         // Delete from database
         guard let currentMasterList = self.currentMasterList else {
+            completion(false, nil)
             return
         }
         currentMasterList.removeFromSubLists(removedSubList)
         PersistenceService.context.delete(removedSubList)
         
         PersistenceService.saveContext()
+        completion(true, nil)
     }
     
     // MARK: - MOVE
     
-    func moveSubList(from startIndex: Int, to endIndex: Int) {
+    func moveSubList(from startIndex: Int, to endIndex: Int, completion: @escaping (Bool, Error?) -> Void) {
         let movedSubList = subLists[startIndex]
         
         // When move up frop bottom -> top
@@ -130,6 +135,7 @@ final class SubListCoreDataRepository: SubListRepository {
         
         movedSubList.updateIndex(with: endIndex)
         PersistenceService.saveContext()
+        completion(true, nil)
     }
     
     // MARK: - CONVENIENCE

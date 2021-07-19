@@ -54,25 +54,35 @@ class ItemCoreDataRepository: ItemRepository {
         
     }
     
-    func addItem(title: String, from pos: Direction) {
+    func addItem(title: String, from pos: Direction, completion: @escaping (Bool, Error?) -> Void) {
         guard let currentSubList = currentSubList else {
+            completion(false, nil)
             return
         }
         
         switch pos {
         case .top:
-            self.insertItem(title: title, at: 0)
+            self.insertItem(title: title, at: 0) { [weak self] success, error in
+                guard success, error == nil else {
+                    completion(false, error)
+                    return
+                }
+                
+                completion(true, nil)
+            }
         case .bottom:
             ItemEntity.create(title: title, index: items.count, ofSubList: currentSubList)
+            completion(true, nil)
         }
     }
     
-    func setItemCompletion(at index: Int, _ value: Bool) {
+    func setItemCompletion(at index: Int, _ value: Bool, completion: @escaping (Bool, Error?) -> Void) {
         items[index].updateComplete(with: value)
     }
     
-    func deleteItem(at index: Int) {
+    func deleteItem(at index: Int, completion: @escaping (Bool, Error?) -> Void) {
         guard let currentSubList = currentSubList else {
+            completion(false, nil)
             return
         }
         
@@ -91,9 +101,10 @@ class ItemCoreDataRepository: ItemRepository {
         PersistenceService.context.delete(removedItem)
 
         PersistenceService.saveContext()
+        completion(true, nil)
     }
     
-    func moveItem(from startIndex: Int, to endIndex: Int) {
+    func moveItem(from startIndex: Int, to endIndex: Int, completion: @escaping (Bool, Error?) -> Void) {
         let movedItem = self.items[startIndex]
         
         // When move up frop bottom -> top
@@ -116,17 +127,27 @@ class ItemCoreDataRepository: ItemRepository {
         
         movedItem.updateIndex(with: endIndex)
         PersistenceService.saveContext()
+        
+        completion(true, nil)
     }
     
     // MARK: - CONVENIENCE
     
-    func insertItem(title: String, at insertedPos: Int) {
+    func insertItem(title: String, at insertedPos: Int, completion: @escaping (Bool, Error?) -> Void) {
         guard let currentSubList = currentSubList else {
+            completion(false, nil)
             return
         }
         
         if insertedPos == items.count {
-            addItem(title: title, from: .bottom)
+            addItem(title: title, from: .bottom) { [weak self] success, error in
+                guard success, error == nil else {
+                    completion(false, error)
+                    return
+                }
+                
+                completion(true, nil)
+            }
         }
         
         else {
@@ -137,6 +158,7 @@ class ItemCoreDataRepository: ItemRepository {
             }
             
             ItemEntity.create(title: title, index: insertedPos, ofSubList: currentSubList)
+            completion(true, nil)
         }
     }
     

@@ -12,13 +12,13 @@ protocol SubListUseCase {
     
     func loadSubList(completion: @escaping (Result<[DomainSubList], Error>) -> Void)
     
-    func addSubList(title: String, emoji: String)
-    func deleteSubList(at pos: Int)
+    func addSubList(title: String, emoji: String, completion: @escaping (Bool, Error?) -> Void)
+    func deleteSubList(at pos: Int, completion: @escaping (Bool, Error?) -> Void)
     
-    func moveSubList(from startPos: Int, to endPos: Int)
+    func moveSubList(from startPos: Int, to endPos: Int, completion: @escaping (Bool, Error?) -> Void)
     
-    func updateSubList(title: String, at position: Int)
-    func updateSubList(emoji: String, at position: Int)
+    func updateSubList(title: String, at position: Int, completion: @escaping (Bool, Error?) -> Void)
+    func updateSubList(emoji: String, at position: Int, completion: @escaping (Bool, Error?) -> Void)
 }
 
 class DefaultSubListUseCase: SubListUseCase {
@@ -41,24 +41,64 @@ class DefaultSubListUseCase: SubListUseCase {
         }
     }
     
-    func addSubList(title: String, emoji: String) {
-        repository.addSubList(title: title, emoji: emoji)
+    func addSubList(title: String, emoji: String, completion: @escaping (Bool, Error?) -> Void) {
+        repository.addSubList(title: title, emoji: emoji) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+            
+        }
     }
     
-    func deleteSubList(at pos: Int) {
-        repository.deleteSubList(at: pos)
+    func deleteSubList(at pos: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.deleteSubList(at: pos) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+            
+        }
     }
     
-    func moveSubList(from startPos: Int, to endPos: Int) {
-        repository.moveSubList(from: startPos, to: endPos)
+    func moveSubList(from startPos: Int, to endPos: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.moveSubList(from: startPos, to: endPos) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+            
+        }
     }
     
-    func updateSubList(title: String, at position: Int) {
-        repository.updateSubList(title: title, at: position)
+    func updateSubList(title: String, at position: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.updateSubList(title: title, at: position) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+            
+        }
     }
     
-    func updateSubList(emoji: String, at position: Int) {
-        repository.updateSubList(emoji: emoji, at: position)
+    func updateSubList(emoji: String, at position: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.updateSubList(emoji: emoji, at: position) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+            
+        }
     }
     
 }

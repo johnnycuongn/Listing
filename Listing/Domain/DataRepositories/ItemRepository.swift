@@ -12,14 +12,14 @@ protocol ItemRepository {
     
     func loadItem(completion: @escaping (Result<[DomainItem], Error>) -> Void)
 
-    func addItem(title: String, from pos: Direction)
+    func addItem(title: String, from pos: Direction, completion: @escaping (Bool, Error?) -> Void)
     
-    func setItemCompletion(at index: Int, _ value: Bool)
+    func setItemCompletion(at index: Int, _ value: Bool, completion: @escaping (Bool, Error?) -> Void)
     
-    func insertItem(title: String, at insertedPos: Int)
+    func insertItem(title: String, at insertedPos: Int, completion: @escaping (Bool, Error?) -> Void)
 
-    func deleteItem(at index: Int)
+    func deleteItem(at index: Int, completion: @escaping (Bool, Error?) -> Void)
 
-    func moveItem(from startIndex: Int, to endIndex: Int)
+    func moveItem(from startIndex: Int, to endIndex: Int, completion: @escaping (Bool, Error?) -> Void)
 }
 

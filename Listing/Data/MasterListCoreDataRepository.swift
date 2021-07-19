@@ -60,17 +60,19 @@ final class MasterListCoreDataRepository: MasterListRepository {
     
     
     // MARK: ADD
-    func addMasterList(title: String, emoji: String?) {
+    func addMasterList(title: String, emoji: String?, completion: @escaping (Bool, Error?) -> Void) {
         if emoji != nil {
             MainListEntity.create(title: title, emoji: emoji!, index: mainLists.count)
         } else {
             MainListEntity.create(title: title, index: mainLists.count)
         }
+        
+        completion(true, nil)
     }
     
     // MARK: DELETE
     
-    func deleteMasterList(at index: Int) {
+    func deleteMasterList(at index: Int, completion: @escaping (Bool, Error?) -> Void) {
         // Identify removed Main List
         let removedMainList = self.mainLists[index]
         // Update index for others
@@ -85,9 +87,10 @@ final class MasterListCoreDataRepository: MasterListRepository {
         self.context.delete(removedMainList)
 
         saveMainList()
+        completion(true, nil)
     }
     
-    func moveMasterList(from startIndex: Int, to endIndex: Int) {
+    func moveMasterList(from startIndex: Int, to endIndex: Int, completion: @escaping (Bool, Error?) -> Void) {
         let movedMainList = mainLists[startIndex]
         
         // When move up frop bottom -> top
@@ -110,6 +113,8 @@ final class MasterListCoreDataRepository: MasterListRepository {
         
         movedMainList.updateIndex(with: endIndex)
         PersistenceService.saveContext()
+        
+        completion(true, nil)
     }
     
     private func saveMainList() {

@@ -128,6 +128,5 @@ extension ItemsTableViewDataService: SwipeItemToDeleteDelegate {
             itemViewModel.uncompleteItem(at: indexPath.row)
         }
         
-        tableView.reloadData()
     }
 }

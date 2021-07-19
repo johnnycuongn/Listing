@@ -89,33 +89,60 @@ class DefaultItemPageViewModel: ItemPageViewModel {
     }
     
     func addSubList(title: String, emoji: String) {
-        subListUseCase.addSubList(title: title, emoji: emoji)
-        
-        loadSubLists()
+        subListUseCase.addSubList(title: title, emoji: emoji) { [weak self] success, error in
+            guard success, error == nil else {
+                return
+            }
+            
+            self?.loadSubLists()
+            
+        }
     }
     
     func deleteSubList(at pos: Int) {
-        subListUseCase.deleteSubList(at: pos)
-        
-        loadSubLists()
+        subListUseCase.deleteSubList(at: pos) { [weak self] success, error in
+            guard success, error == nil else {
+                return
+            }
+            
+            self?.loadSubLists()
+            
+        }
     }
     
     func moveSubList(from startPos: Int, to endPos: Int) {
-        subListUseCase.moveSubList(from: startPos, to: endPos)
+        subListUseCase.moveSubList(from: startPos, to: endPos) { [weak self] success, error in
+            guard success, error == nil else {
+                return
+            }
+            
+            self?.loadSubLists()
+            
+        }
         
-        loadSubLists()
     }
     
     func updateSublist(title: String, at position: Int) {
-        subListUseCase.updateSubList(title: title, at: position)
-        
-        loadSubLists()
+        subListUseCase.updateSubList(title: title, at: position) { [weak self] success, error in
+            guard success, error == nil else {
+                return
+            }
+            
+            self?.loadSubLists()
+            
+        }
     }
     
     func updateSublist(emoji: String, at position: Int) {
-        subListUseCase.updateSubList(emoji: emoji, at: position)
-        
-        loadSubLists()
+        subListUseCase.updateSubList(emoji: emoji, at: position) { [weak self] success, error in
+            guard success, error == nil else {
+                return
+            }
+            
+            self?.loadSubLists()
+            
+        }
+    
     }
     
     // MARK: - ITEM
@@ -137,38 +164,96 @@ class DefaultItemPageViewModel: ItemPageViewModel {
     }
     
     func addItem(title: String) {
-        itemUseCase.addItem(title: title, from: .top)
-        
-        loadItems(atList: subListCurrentIndex)
+        itemUseCase.addItem(title: title, from: .top) { [weak self] success, error in
+            guard success, error == nil else {
+                
+                return
+            }
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.loadItems(atList: strongSelf.subListCurrentIndex)
+        }
     }
     
     func completeItem(at pos: Int) {
-        itemUseCase.completeItem(at: pos)
-        
-        loadItems(atList: subListCurrentIndex)
+        itemUseCase.completeItem(at: pos) { [weak self] success, error in
+            guard success, error == nil else {
+                
+                return
+            }
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.loadItems(atList: strongSelf.subListCurrentIndex)
+        }
     }
     
     func uncompleteItem(at pos: Int) {
-        itemUseCase.uncompleteItem(at: pos)
-        
-        loadItems(atList: subListCurrentIndex)
+        itemUseCase.uncompleteItem(at: pos) { [weak self] success, error in
+            guard success, error == nil else {
+                
+                return
+            }
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.loadItems(atList: strongSelf.subListCurrentIndex)
+        }
     }
     
     func insertItem(_ title: String, at pos: Int) {
-        itemUseCase.insertItem(title: title, at: pos)
-        
-        loadItems(atList: subListCurrentIndex)
+        itemUseCase.insertItem(title: title, at: pos) { [weak self] success, error in
+            guard success, error == nil else {
+                
+                return
+            }
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.loadItems(atList: strongSelf.subListCurrentIndex)
+        }
     }
     
     
     func deleteItem(at pos: Int) {
-        itemUseCase.deleteItem(at: pos)
+        itemUseCase.deleteItem(at: pos) { [weak self] success, error in
+            guard success, error == nil else {
+                
+                return
+            }
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.loadItems(atList: strongSelf.subListCurrentIndex)
+        }
         
         loadItems(atList: subListCurrentIndex)
     }
     
     func moveItem(from startPos: Int, to endPos: Int) {
-        itemUseCase.moveItem(from: startPos, to: endPos)
+        itemUseCase.moveItem(from: startPos, to: endPos) { [weak self] success, error in
+            guard success, error == nil else {
+                
+                return
+            }
+            
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.loadItems(atList: strongSelf.subListCurrentIndex)
+        }
         
         loadItems(atList: subListCurrentIndex)
     }

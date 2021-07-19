@@ -12,12 +12,12 @@ protocol SubListRepository {
     
     func loadSubList(completion: @escaping (Result<[DomainSubList], Error>) -> Void)
     
-    func updateSubList(title: String, at index: Int)
-    func updateSubList(emoji: String, at index: Int)
+    func updateSubList(title: String, at index: Int, completion: @escaping (Bool, Error?) -> Void)
+    func updateSubList(emoji: String, at index: Int, completion: @escaping (Bool, Error?) -> Void)
     
-    func addSubList(title: String, emoji: String)
+    func addSubList(title: String, emoji: String, completion: @escaping (Bool, Error?) -> Void)
     
-    func deleteSubList(at index: Int)
+    func deleteSubList(at index: Int, completion: @escaping (Bool, Error?) -> Void)
     
-    func moveSubList(from startIndex: Int, to endIndex: Int)
+    func moveSubList(from startIndex: Int, to endIndex: Int, completion: @escaping (Bool, Error?) -> Void)
 }

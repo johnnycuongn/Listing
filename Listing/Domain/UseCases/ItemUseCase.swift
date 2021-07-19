@@ -17,16 +17,16 @@ protocol ItemUseCase {
     
     func loadItem(completion: @escaping (Result<[DomainItem], Error>) -> Void)
     
-    func addItem(title: String, from addedPos: Direction)
+    func addItem(title: String, from addedPos: Direction, completion: @escaping (Bool, Error?) -> Void)
     
-    func completeItem(at position: Int)
-    func uncompleteItem(at postion: Int)
+    func completeItem(at position: Int, completion: @escaping (Bool, Error?) -> Void)
+    func uncompleteItem(at postion: Int, completion: @escaping (Bool, Error?) -> Void)
     
-    func insertItem(title: String, at insertedPos: Int)
+    func insertItem(title: String, at insertedPos: Int, completion: @escaping (Bool, Error?) -> Void)
     
-    func deleteItem(at pos: Int)
+    func deleteItem(at pos: Int, completion: @escaping (Bool, Error?) -> Void)
     
-    func moveItem(from startPos: Int, to endPos: Int)
+    func moveItem(from startPos: Int, to endPos: Int, completion: @escaping (Bool, Error?) -> Void)
 }
 
 class DefaultItemUseCase: ItemUseCase {
@@ -50,28 +50,70 @@ class DefaultItemUseCase: ItemUseCase {
         }
     }
     
-    func addItem(title: String, from addedPos: Direction = .top) {
-        repository.addItem(title: title, from: addedPos)
+    func addItem(title: String, from addedPos: Direction = .top, completion: @escaping (Bool, Error?) -> Void) {
+        repository.addItem(title: title, from: addedPos) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+        }
     }
     
-    func completeItem(at position: Int) {
-        repository.setItemCompletion(at: position, true)
+    func completeItem(at position: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.setItemCompletion(at: position, true) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+        }
     }
     
-    func uncompleteItem(at position: Int) {
-        repository.setItemCompletion(at: position, false)
+    func uncompleteItem(at position: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.setItemCompletion(at: position, false) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+        }
     }
     
-    func insertItem(title: String, at insertedPos: Int) {
-        repository.insertItem(title: title, at: insertedPos)
+    func insertItem(title: String, at insertedPos: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.insertItem(title: title, at: insertedPos) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+        }
     }
     
-    func deleteItem(at pos: Int) {
-        repository.deleteItem(at: pos)
+    func deleteItem(at pos: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.deleteItem(at: pos) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+        }
     }
     
-    func moveItem(from startPos: Int, to endPos: Int) {
-        repository.moveItem(from: startPos, to: endPos)
+    func moveItem(from startPos: Int, to endPos: Int, completion: @escaping (Bool, Error?) -> Void) {
+        repository.moveItem(from: startPos, to: endPos) { [weak self] success, error in
+            guard success, error == nil else {
+                completion(false, error)
+                return
+            }
+            
+            completion(true, nil)
+        }
     }
     
     
